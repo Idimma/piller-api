@@ -20,7 +20,7 @@ class CreateTripsTable extends Migration
             $table->bigInteger('destination')->unsigned();
             $table->foreign('destination')->references('id')->on('user_locations')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('driver_id')->unsigned()->nullable();
-            $table->foreign('dirver_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('coupon')->nullable();
             $table->timestamp('trip_start');
             $table->timestamp('trip_end')->nullable();
