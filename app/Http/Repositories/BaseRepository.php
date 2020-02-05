@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Repositories;
+
+
+class BaseRepository{
+
+    public function __construct($model)
+    {
+        $this->model = $model;
+    }
+
+    public function create(array $data):object
+    {
+        return $this->model->create($data);
+    }
+
+    /**
+     * Update  Model
+     * @return Model object
+     */
+    public function update(object $modelObject, array $data)
+    {
+        $modelObject->update($data);
+        return $modelObject;
+    }
+
+    /**
+     * Returns object by id
+     * @return Model object
+     */
+    public function get(int $id){
+        return $this->model::findorFail($id);
+    }
+
+
+
+
+
+}

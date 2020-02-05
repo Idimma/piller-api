@@ -2,81 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\UserRole;
+use App\Http\Requests\{AvatarRequest, UserPhoneRequest, UserRegistrationRequest};
+use App\Services\UserService;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\{JWTException, TokenExpiredException, TokenInvalidException};
 
 class UserController extends Controller
 {
     //
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
-        try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+        $token = $this->userService->authenticate($credentials);
+        if (is_array($token)) {
+            return $this->respondWithError(['error' => $token['error'], $token['status']]);
         }
 
-        return response()->json(compact('token'));
+        return $this->respondWithSuccess(['data' => compact('token')], 201);
     }
 
-    public function register(Request $request)
+
+    /**
+     * 
+     * User Registration
+     * @return JsonResponse
+     */
+    public function register(UserRegistrationRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'user_type' => 'sometimes|integer'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
-
-        $user = User::create([
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-        ]);
-
-        $user_role = UserRole::create([
-            'user_id' => $user->id,
-            'role_id' => $request->user_type ?? 3,
-        ]);
-
+        $data = $request->validated();
+        $data['password'] = Hash::make($request->get('password'));
+        $user = $this->userService->register($data);
         $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('user', 'token'), 201);
+        return $this->respondWithSuccess(['data' => compact('user', 'token')], 201);
     }
 
+
+    /**
+     * Gets Authenticated User
+     * @return JsonResponse
+     */
     public function getAuthenticatedUser()
     {
-        try {
-
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['error' => 'user_not_found'], 404);
-            }
-        } catch (TokenExpiredException $e) {
-
-            return response()->json(['error' => 'token_expired'], $e->getStatusCode());
-        } catch (TokenInvalidException $e) {
-
-            return response()->json(['error' => 'token_invalid'], $e->getStatusCode());
-        } catch (JWTException $e) {
-
-            return response()->json(['error' => 'token_absent'], $e->getStatusCode());
+        if (!$user = getUser()) {
+            return response()->json(['error' => 'user_not_found'], 404);
         }
 
-        return response()->json(compact('user'));
+        return $this->respondWithSuccess($user);
+    }
+
+
+
+    /**
+     * 
+     * Update the User phone number
+     * @return JsonResponse
+     */
+
+    public function addPhone(UserPhoneRequest $request)
+    {
+        $request = $request->validated();
+        $user = $this->userService->update(['phone' => $request['phone']]);
+        return $this->respondWithSuccess($user);
+    }
+
+    public function uploadAvatar(AvatarRequest $request)
+    {
+        $data = $request->validated();
+        $image = $this->userService->avatarUpload($data);
+        return $this->respondWithSuccess($image);
     }
 }
