@@ -43,7 +43,7 @@ class AdminController extends Controller
         }
 
         $user = JWTAuth::user();
-        if ($user->userrole->id != 1){
+        if ($user->userrole->role_id !== 1){
             return $this->respondWithError(['error' => 'Not Authorised', 401]);
         }
 

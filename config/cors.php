@@ -22,6 +22,7 @@ return [
         'allow_origins' => [
             // '*',
             'http://*.joolaoilandgas.com',
+            'http://localhost:*',
         ],
 
         'allow_methods' => [
