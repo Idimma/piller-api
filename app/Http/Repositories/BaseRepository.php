@@ -30,7 +30,17 @@ class BaseRepository{
      * @return Model object
      */
     public function get(int $id){
-        return $this->model::findorFail($id);
+        return $this->model->findOrFail($id);
+    }
+
+
+    /**
+     * Returns all object data
+     * @return Collection
+     */
+    public function all()
+    {
+        return $this->model::get();
     }
 
 

@@ -12,5 +12,6 @@ class UserLocation extends Model
 
     protected $fillable = ['user_id', 'address', 'lat', 'lon'];
 
+    protected $hidden = ['user_id'];
     use SoftDeletes;
 }

@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\UserRepository;
-use App\Repositories\UserRoleRepository;
+use App\Repositories\{UserRepository,UserRoleRepository};
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -68,14 +67,14 @@ class UserService
         return $this->user_role->getCountByRole(2);
     }
 
-    public function getUsers()
+    public function getUsers($count)
     {
-        return $this->user_role->getUsersByRole(3);
+        return $this->user_role->getUsersByRole(3, $count);
     }
 
-    public function getDrivers()
+    public function getDrivers($count)
     {
-        return $this->user_role->getUsersByRole(2);
+        return $this->user_role->getUsersByRole(2, $count);
     }
 
     public function reportSummary()
@@ -93,5 +92,17 @@ class UserService
         $user = $this->register($input, 2);
         $user->userdetail()->create($input);
         return $user;
+    }
+
+    public function addLocation(array $input)
+    {
+        $user = getUser();
+        return $user->destination()->firstOrCreate($input);
+    }
+
+    public function getLocations()
+    {
+        $user = getUser();
+        return $user->destination;
     }
 }

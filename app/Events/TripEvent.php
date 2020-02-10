@@ -9,19 +9,21 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Trip;
 
-class Trip extends ShouldBroadcast
+class TripEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $trip;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($trip)
     {
         //
+        $this->trip = $trip;
     }
 
     /**
@@ -31,6 +33,16 @@ class Trip extends ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('new-trip');
+    }
+
+    public function broadcastWith()
+    {
+        return ['data' => $this->trip];
+    }
+
+    public function broadcastAs()
+    {
+        return 'trip.created';
     }
 }

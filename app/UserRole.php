@@ -25,8 +25,8 @@ class UserRole extends Model
         return $this->belongsTo('App\User', 'role_id', 'id');
     }
 
-    public function usersByRole(int $id){
-        return $this->queryByRole($id)->with('user')->get()->pluck('user');
+    public function usersByRole(int $id, int $count){
+        return $this->queryByRole($id)->with('user')->paginate($count)->pluck('user');
     }
 
 }

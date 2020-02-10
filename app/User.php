@@ -59,11 +59,11 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function userTrip(){
-        return $this->hasMany('App\Trip', 'id', 'user_id');
+        return $this->hasMany('App\Trip', 'user_id', 'id');
     }
 
     public function driverTrip(){
-        return $this->hasMany('App\Trip', 'id', 'driver_id');
+        return $this->hasMany('App\Trip', 'driver_id', 'id');
     }
 
     public function role(){
@@ -79,11 +79,13 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function destination(){
-        return $this->hasMany('App\UserLocation', 'id', 'user_id');
+        return $this->hasMany('App\UserLocation', 'user_id', 'id');
     }
 
     public function getUserByUuid(string $uuid){
         return $this->where('uuid', $uuid)->first();
     }
+
+    
 
 }

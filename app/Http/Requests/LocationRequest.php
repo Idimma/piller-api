@@ -3,13 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequest;
-use Illuminate\Validation\Rule;
 
-
-class TripRequest extends BaseRequest
+class LocationRequest extends BaseRequest
 {
-
-
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +19,6 @@ class TripRequest extends BaseRequest
             'address' => 'required|string',
             'lat' => 'required|numeric',
             'lon' => 'required|numeric',
-            'coupon'   => 'sometimes|string'
         ];
     }
 }

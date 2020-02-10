@@ -19,7 +19,7 @@ class UserTripController extends Controller
      * Persist message to database
      *
      * @param  Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function createTrip(TripRequest $request)
     {
@@ -27,4 +27,17 @@ class UserTripController extends Controller
         $response = $this->tripService->requestTrip($data);
         return $this->respondWithSuccess($response, 201);
     }
+
+    /**
+     * Gets Only Authenticated User Trips data
+     * @return JsonResponse
+     */
+    public function getUserTrips()
+    {
+        return $this->respondWithSuccess($this->tripService->userTrips());
+    }
+
+
+
+    
 }

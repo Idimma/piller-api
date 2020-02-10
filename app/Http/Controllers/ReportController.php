@@ -36,17 +36,18 @@ class ReportController extends Controller
      * Retrieve all Drivers
      * @return JsonResponse
      */
-    public function getDrivers(){
-
-        return $this->respondWithSuccess($this->userService->getDrivers());
+    public function getDrivers(Request $request){
+        $per_page = $request->get('perPage');
+        return $this->respondWithSuccess($this->userService->getDrivers($per_page));
     }
 
     /**
      * Retrieve all Users
      * @return JsonResponse
      */
-    public function getUsers(){
-        return $this->respondWithSuccess($this->userService->getUsers());
+    public function getUsers(Request $request){
+        $per_page = $request->get('perPage');
+        return $this->respondWithSuccess($this->userService->getUsers($per_page));
     }
 
     /**

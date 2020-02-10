@@ -20,9 +20,10 @@ class UserRoleRepository extends BaseRepository
         return $this->userrole->queryByRole($role_id)->count();
     }
 
-    public function getUsersByRole(int $role_id)
+    public function getUsersByRole(int $role_id, $count)
     {
-        return $this->userrole->usersByRole($role_id);
+        $count = $count ?? 15;
+        return $this->userrole->usersByRole($role_id, $count);
 
     }
 }

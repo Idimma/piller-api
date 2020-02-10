@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{AvatarRequest, UserPhoneRequest, UserRegistrationRequest};
+use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
 use App\Services\UserService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -56,7 +56,6 @@ class UserController extends Controller
         if (!$user = getUser()) {
             return response()->json(['error' => 'user_not_found'], 404);
         }
-
         return $this->respondWithSuccess($user);
     }
 
@@ -72,13 +71,33 @@ class UserController extends Controller
     {
         $request = $request->validated();
         $user = $this->userService->update(['phone' => $request['phone']]);
-        return $this->respondWithSuccess($user);
+        return $this->respondWithSuccess($user, 201);
     }
 
+    /**
+     * Upload User Avatar
+     * @return JsonResponse
+     */
     public function uploadAvatar(AvatarRequest $request)
     {
         $data = $request->validated();
         $image = $this->userService->avatarUpload($data);
-        return $this->respondWithSuccess($image);
+        return $this->respondWithSuccess($image, 201);
+    }
+
+    /**
+     * Add Location to User
+     * @return JsonResponse
+     */
+    public function addLocation(LocationRequest $request)
+    {
+        $data = $request->validated();
+        $location = $this->userService->addLocation($data);
+        return $this->respondWithSuccess($location, 201);
+    }
+
+    public function getLocations()
+    {
+        return $this->respondWithSuccess($this->userService->getLocations());
     }
 }

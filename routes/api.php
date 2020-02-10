@@ -25,12 +25,24 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::post('phone/add', 'UserController@addPhone');
     Route::post('avatar/add', 'UserController@uploadAvatar');
+
     // Route::get('closed', 'DataController@closed');
+
+    /**
+     * Trip Request Group
+     */
+    Route::group(['prefix' => 'trip'], function () {
+        Route::post('request', 'UserTripController@createTrip');
+        Route::get('/', 'UserTripController@getUserTrips');
+    });
+
+    Route::group(['prefix' => 'location'], function () {
+        Route::get('/', 'UserController@getLocations');
+        Route::post('/add', 'UserController@addLocation');
+    });
 });
 
-Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'trip'], function () {
-    Route::post('request', 'UserTripController@createTrip');
-});
+
 
 
 /**
@@ -67,5 +79,11 @@ Route::group(['middleware' => ['jwt.verify', 'admin'], 'prefix' => 'admin'], fun
     Route::group(['prefix' => 'count'], function () {
         Route::get('customer', 'ReportController@getUsersCount');
         Route::get('driver', 'ReportController@getDriversCount');
+    });
+
+    Route::group(['prefix' => 'trip'], function(){
+        Route::get('/', 'AdminController@getTrips');
+        Route::get('/pending', 'AdminController@getTripRequests');
+        Route::get('{id}', 'AdminController@getSingleTrip');
     });
 });
