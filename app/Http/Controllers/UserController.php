@@ -40,7 +40,6 @@ class UserController extends Controller
     public function register(UserRegistrationRequest $request)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($request->get('password'));
         $user = $this->userService->register($data);
         $token = JWTAuth::fromUser($user);
         return $this->respondWithSuccess(['data' => compact('user', 'token')], 201);
