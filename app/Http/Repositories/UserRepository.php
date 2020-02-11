@@ -14,5 +14,9 @@ class UserRepository extends BaseRepository
         $this->user = $user;
     }
 
+    public function getUserByUuid(string $uuid)
+    {
+        return $this->user->getUserByUuid($uuid);
+    }
     
 }

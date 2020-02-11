@@ -85,5 +85,7 @@ Route::group(['middleware' => ['jwt.verify', 'admin'], 'prefix' => 'admin'], fun
         Route::get('/', 'AdminController@getTrips');
         Route::get('/pending', 'AdminController@getTripRequests');
         Route::get('{id}', 'AdminController@getSingleTrip');
+        Route::patch('{id}', 'AdminController@assignDriver');
+        Route::delete('{id}', 'AdminController@deleteTrip');
     });
 });

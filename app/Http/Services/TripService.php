@@ -52,4 +52,12 @@ class TripService
     {
         return $this->trip->get($id);
     }
+
+
+    public function assignDriver(int $id, string $uuid)
+    {
+        $driver = $this->user->getUserByUuid($uuid);
+        $trip = $this->getTrip($id);
+        return $this->trip->update($trip, ['driver_id', $driver->id]);
+    }
 }

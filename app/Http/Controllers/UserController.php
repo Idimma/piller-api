@@ -99,4 +99,13 @@ class UserController extends Controller
     {
         return $this->respondWithSuccess($this->userService->getLocations());
     }
+
+    public function getProfileImage(string $url){
+        try {
+            return response()->file(storage_path('app/public/avatar/'.$url));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->respondWithError();
+        }
+    }
 }

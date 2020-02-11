@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('avatar/{url}', 'UserController@getProfileImage');

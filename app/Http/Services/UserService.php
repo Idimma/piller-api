@@ -105,4 +105,10 @@ class UserService
         $user = getUser();
         return $user->destination;
     }
+
+    public function getUserByUuid(string $uuid)
+    {
+        $driver = $this->user->getUserByUuid($uuid);
+
+    }
 }

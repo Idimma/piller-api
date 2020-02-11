@@ -77,4 +77,11 @@ class AdminController extends Controller
     {
         return $this->respondWithSuccess($this->tripService->getTrip($id));
     }
+
+
+    public function assignDriver(int $id, Request $request)
+    {
+        $uuid = $request->only('driver');
+        return $this->respondWithSuccess($this->tripService->assignDriver($id, $uuid));
+    }
 }
