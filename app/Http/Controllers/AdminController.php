@@ -79,9 +79,17 @@ class AdminController extends Controller
     }
 
 
-    public function assignDriver(int $id, Request $request)
+    /**
+     * Assigns a driver to a trip
+     * @return JsonResponse
+     */
+    public function assignDriver(int $id, string $uuid)
     {
-        $uuid = $request->only('driver');
         return $this->respondWithSuccess($this->tripService->assignDriver($id, $uuid));
+    }
+
+    public function deleteTrip(int $id)
+    {
+        return $this->respondWithSuccess($this->tripService->delete($id));
     }
 }

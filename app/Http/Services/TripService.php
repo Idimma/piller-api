@@ -58,6 +58,15 @@ class TripService
     {
         $driver = $this->user->getUserByUuid($uuid);
         $trip = $this->getTrip($id);
-        return $this->trip->update($trip, ['driver_id', $driver->id]);
+        $data = $this->trip->update($trip, [
+            'driver_id' => $driver->id,
+            'status_id' => 1
+        ]);
+        return $data;
+    }
+
+    public function delete(int $id)
+    {
+        return $this->trip->delete($id);
     }
 }

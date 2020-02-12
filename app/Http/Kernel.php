@@ -42,6 +42,8 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \Spatie\Cors\Cors::class,
+
         ],
     ];
 
@@ -65,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'cors' => \Spatie\Cors\Cors::class,
     ];
 
     /**
@@ -82,5 +85,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
+        \Spatie\Cors\Cors::class,
+
     ];
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
 use App\Services\UserService;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{Hash, Validator};
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\{JWTException, TokenExpiredException, TokenInvalidException};
@@ -85,6 +85,47 @@ class UserController extends Controller
     }
 
     /**
+     * Update User firstname & Last Name
+     * @return JsonResponse
+     */
+    public function updateName(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+        $user = $this->userService->update([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name')
+        ]);
+        return $this->respondWithSuccess($user, 201);
+    }
+
+    /**
+     * Update User Email
+     * @return JsonResponse
+     */
+    public function updateEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+
+        $user = $this->userService->update([
+            'email' => $request->get('email'),
+        ]);
+        return $this->respondWithSuccess($user, 201);
+    }
+
+    /**
      * Add Location to User
      * @return JsonResponse
      */
@@ -100,9 +141,10 @@ class UserController extends Controller
         return $this->respondWithSuccess($this->userService->getLocations());
     }
 
-    public function getProfileImage(string $url){
+    public function getProfileImage(string $url)
+    {
         try {
-            return response()->file(storage_path('app/public/avatar/'.$url));
+            return response()->file(storage_path('app/public/avatar/' . $url));
         } catch (\Throwable $th) {
             //throw $th;
             return $this->respondWithError();

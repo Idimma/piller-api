@@ -44,6 +44,14 @@ class BaseRepository{
     }
 
 
+    /**
+     * Deletes object from collection
+     * @return null
+     */
+
+     public function delete(int $id){
+         return $this->get($id)->delete();
+     }
 
 
 

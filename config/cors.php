@@ -20,7 +20,7 @@ return [
         'allow_credentials' => false,
 
         'allow_origins' => [
-            // '*',
+            '*',
             'http://*.joolaoilandgas.com',
             'http://localhost:*',
         ],
@@ -39,6 +39,7 @@ return [
             'X-Auth-Token',
             'Origin',
             'Authorization',
+            ''
         ],
 
         'expose_headers' => [

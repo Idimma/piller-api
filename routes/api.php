@@ -25,6 +25,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::post('phone/add', 'UserController@addPhone');
     Route::post('avatar/add', 'UserController@uploadAvatar');
+    Route::post('update/email', 'UserController@updateEmail');
+    Route::post('update/name', 'UserController@updateName');
 
     // Route::get('closed', 'DataController@closed');
 
@@ -53,7 +55,6 @@ Route::group(['prefix' => 'driver'], function () {
     Route::post('login', 'DriverController@authenticate');
 
     Route::group(['middleware' => ['jwt.verify']], function () {
-        
     });
 });
 
@@ -65,10 +66,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('login', 'AdminController@authenticate');
 });
 
-Route::group(['middleware' => ['jwt.verify', 'admin'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['cors','jwt.verify', 'admin'], 'prefix' => 'admin'], function () {
 
     Route::get('customer', 'ReportController@getUsers');
     Route::get('driver', 'ReportController@getDrivers');
+    Route::get('driver/active', 'DriverController@getAvailable');
 
     Route::post('driver/create', 'AdminController@createDriver');
 
@@ -81,11 +83,11 @@ Route::group(['middleware' => ['jwt.verify', 'admin'], 'prefix' => 'admin'], fun
         Route::get('driver', 'ReportController@getDriversCount');
     });
 
-    Route::group(['prefix' => 'trip'], function(){
+    Route::group(['prefix' => 'trip'], function () {
         Route::get('/', 'AdminController@getTrips');
         Route::get('/pending', 'AdminController@getTripRequests');
         Route::get('{id}', 'AdminController@getSingleTrip');
-        Route::patch('{id}', 'AdminController@assignDriver');
+        Route::post('{id}/{driver}', 'AdminController@assignDriver');
         Route::delete('{id}', 'AdminController@deleteTrip');
     });
 });

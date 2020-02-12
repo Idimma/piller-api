@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','image_url', 'phone', 'uuid'
+        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid'
     ];
 
     /**
@@ -43,10 +43,10 @@ class User extends Authenticatable implements JWTSubject
 
     public static function boot()
     {
-         parent::boot();
-         self::creating(function($model){
-             $model->uuid = Str::uuid()->toString();
-         });
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = Str::uuid()->toString();
+        });
     }
 
     public function getJWTIdentifier()
@@ -58,34 +58,49 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function userTrip(){
+    public function userTrip()
+    {
         return $this->hasMany('App\Trip', 'user_id', 'id');
     }
 
-    public function driverTrip(){
+    public function driverTrip()
+    {
         return $this->hasMany('App\Trip', 'driver_id', 'id');
     }
 
-    public function role(){
+    public function availableDriver(){
+        return $this->whereHas('userrole', function($q){
+            return $q->where('role_id',2);
+        })->whereDoesntHave('driverTrip', function($q){
+            return $q->whereIn('status_id', ['1', '2', '3']);
+        })->get();
+    }
+
+    public function role()
+    {
         return $this->hasOneThrough('App\Role', 'App\UserRole', 'user_id', 'id', 'id', 'role_id');
     }
 
-    public function userrole(){
+    public function userrole()
+    {
         return $this->hasOne('App\UserRole');
     }
 
-    public function userdetail(){
+    public function userdetail()
+    {
         return $this->hasOne('App\UserDetail');
     }
 
-    public function destination(){
+    public function destination()
+    {
         return $this->hasMany('App\UserLocation', 'user_id', 'id');
     }
 
-    public function getUserByUuid(string $uuid){
+    public function getUserByUuid(string $uuid)
+    {
         return $this->where('uuid', $uuid)->first();
     }
 
-    
 
+    
 }

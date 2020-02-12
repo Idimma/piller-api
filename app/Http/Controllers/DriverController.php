@@ -46,4 +46,9 @@ class DriverController extends Controller
 
         return $this->respondWithSuccess(['data' => compact('token')], 201);
     }
+
+    public function getAvailable()
+    {
+        return $this->respondWithSuccess($this->userService->getAvailableDrivers());
+    }
 }

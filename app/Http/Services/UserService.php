@@ -108,7 +108,13 @@ class UserService
 
     public function getUserByUuid(string $uuid)
     {
-        $driver = $this->user->getUserByUuid($uuid);
+        return $this->user->getUserByUuid($uuid);
 
+    }
+    
+
+    public function getAvailableDrivers()
+    {
+        return $this->user->availableDrivers();
     }
 }

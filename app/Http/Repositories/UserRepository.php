@@ -19,4 +19,7 @@ class UserRepository extends BaseRepository
         return $this->user->getUserByUuid($uuid);
     }
     
+    public function availableDrivers(){
+        return $this->user->availableDriver();
+    }
 }
