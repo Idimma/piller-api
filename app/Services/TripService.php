@@ -5,19 +5,22 @@ namespace App\Services;
 use App\Repositories\TripRepository;
 use App\Services\UserService;
 use App\Events\TripEvent;
+use App\Notifications\NewTruckRequest;
+use Notification;
 
 class TripService
 {
 
-    public function __construct(TripRepository $trip, UserService $user)
+    public function __construct(TripRepository $trip, UserService $user, LocationService $location)
     {
         $this->trip = $trip;
         $this->user = $user;
+        $this->userLocation = $location;
     }
 
     public function requestTrip(array $input)
     {
-        $location = $this->user->addLocation($input);
+        $location = $this->userLocation->addLocation($input);
         $basefare = 1000;
         $data = [
             'user_id' => getUser()->id,
@@ -28,8 +31,9 @@ class TripService
         ];
         $trip = $this->trip->create($data);
         broadcast(new TripEvent($trip));
+        $admins = $this->user->getAdmins();
+        Notification::send($admins, new NewTruckRequest($trip));
         return $trip;
-        // $trip = $this->trip->create($input);
     }
 
     public function getAllRequests()
@@ -42,6 +46,7 @@ class TripService
         $user = getUser();
         return $user->userTrip;
     }
+
 
     public function getTripByStatus(int $id, $page)
     {

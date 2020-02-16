@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
-use App\Services\UserService;
+use App\Services\{UserService, LocationService};
 use Illuminate\Support\Facades\{Hash, Validator};
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -12,9 +12,10 @@ use Tymon\JWTAuth\Exceptions\{JWTException, TokenExpiredException, TokenInvalidE
 class UserController extends Controller
 {
     //
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, LocationService $location)
     {
         $this->userService = $userService;
+        $this->locationService = $location;
     }
 
 
@@ -132,13 +133,13 @@ class UserController extends Controller
     public function addLocation(LocationRequest $request)
     {
         $data = $request->validated();
-        $location = $this->userService->addLocation($data);
+        $location = $this->locationService->addLocation($data);
         return $this->respondWithSuccess($location, 201);
     }
 
     public function getLocations()
     {
-        return $this->respondWithSuccess($this->userService->getLocations());
+        return $this->respondWithSuccess($this->locationService->getLocations());
     }
 
     public function getProfileImage(string $url)
@@ -149,5 +150,11 @@ class UserController extends Controller
             //throw $th;
             return $this->respondWithError();
         }
+    }
+
+    public function editLocation(int $id, LocationRequest $request)
+    {
+        $data= $request->validated();
+        return $this->respondWithSuccess($this->locationService->editLocation($id, $data));
     }
 }

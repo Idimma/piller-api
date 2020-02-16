@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\{UserRepository,UserRoleRepository};
+use App\Services\LocationService;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -13,10 +14,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class UserService
 {
 
-    public function __construct(UserRepository $user, UserRoleRepository $user_role)
+    public function __construct(UserRepository $user, UserRoleRepository $user_role, LocationService $locationService)
     {
         $this->user = $user;
         $this->user_role = $user_role;
+        $this->locationService = $locationService;
     }
 
     public function register(array $input, $role_id = 3)
@@ -27,6 +29,10 @@ class UserService
         return $user;
     }
 
+    public function getUserNotifications(){
+        $user = getUser();
+        return $user->notifications;
+    }
 
     public function authenticate(array $credentials)
     {
@@ -42,9 +48,11 @@ class UserService
     }
 
 
-    public function update(array $data)
+    public function update(array $data, object $user=null)
     {
-        $user = getUser();
+        if (null == $user){
+            $user = getUser();
+        }
         return $this->user->update($user, $data);
     }
 
@@ -66,15 +74,18 @@ class UserService
     {
         return $this->user_role->getCountByRole(2);
     }
-
-    public function getUsers($count)
-    {
-        return $this->user_role->getUsersByRole(3, $count);
+    public function getAdmins(){
+        return $this->user_role->getUsersByRole(1);
     }
 
-    public function getDrivers($count)
+    public function getUsers(int $per_page)
     {
-        return $this->user_role->getUsersByRole(2, $count);
+        return $this->user_role->getUsersByRole(3, $per_page);
+    }
+
+    public function getDrivers(int $per_page)
+    {
+        return $this->user_role->getUsersByRole(2, $per_page);
     }
 
     public function reportSummary()
@@ -94,17 +105,7 @@ class UserService
         return $user;
     }
 
-    public function addLocation(array $input)
-    {
-        $user = getUser();
-        return $user->destination()->firstOrCreate($input);
-    }
-
-    public function getLocations()
-    {
-        $user = getUser();
-        return $user->destination;
-    }
+    
 
     public function getUserByUuid(string $uuid)
     {
@@ -117,4 +118,19 @@ class UserService
     {
         return $this->user->availableDrivers();
     }
+
+    public function toggleUserStatus(string $uuid)
+    {
+        $user = $this->getUserByUuid($uuid);
+        $status = 1 === $user->status ? 0 : 1;
+        return $this->update(['status' => $status], $user);
+    }
+
+    public function getUserLocation(string $uuid)
+    {
+        $user = $this->getUserByUuid($uuid);
+        return $this->locationService->getLocations($user);
+
+    }
+
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegistrationRequest;
-use App\Services\{UserService, TripService};
+use App\Services\{UserService, TripService, LocationService};
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
@@ -13,10 +13,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AdminController extends Controller
 {
     //
-    public function __construct(UserService $userService, TripService $trip)
+    public function __construct(UserService $userService, TripService $trip, LocationService $location)
     {
         $this->userService = $userService;
         $this->tripService = $trip;
+        $this->locationService = $location;
     }
 
     /**
@@ -88,8 +89,31 @@ class AdminController extends Controller
         return $this->respondWithSuccess($this->tripService->assignDriver($id, $uuid));
     }
 
+    /**
+     * Deletes Trip
+     * @return JsonResponse
+     */
     public function deleteTrip(int $id)
     {
         return $this->respondWithSuccess($this->tripService->delete($id));
+    }
+
+    public function getUser(string $uuid)
+    {
+        return $this->respondWithSuccess($this->userService->getUserByUuid($uuid));
+    }
+
+    public function toggleUserStatus(string $uuid)
+    {
+        return $this->respondWithSuccess($this->userService->toggleUserStatus($uuid));
+    }
+
+    public function getUserLocation(string $uuid)
+    {
+        return $this->respondWithSuccess($this->userService->getUserLocation($uuid));
+    }
+
+    public function getNotification(){
+        return $this->respondWithSuccess($this->userService->getUserNotifications());
     }
 }
