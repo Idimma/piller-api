@@ -157,4 +157,6 @@ class UserController extends Controller
         $data= $request->validated();
         return $this->respondWithSuccess($this->locationService->editLocation($id, $data));
     }
+
+    
 }

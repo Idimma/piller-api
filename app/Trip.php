@@ -48,4 +48,10 @@ class Trip extends Model
     {
         return $this->where('status_id', $id)->with('destinations', 'user', 'driver')->latest();
     }
+
+    public function getBulkTripByStatus(array $ids)
+    {
+        return $this->whereIn('status_id', $ids)->with('destinations', 'user', 'driver')->latest();
+
+    }
 }

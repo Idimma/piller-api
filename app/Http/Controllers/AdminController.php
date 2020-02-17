@@ -70,6 +70,12 @@ class AdminController extends Controller
         return $this->respondWithSuccess($this->tripService->getTripByStatus(2, $per_page));
     }
 
+    public function getInProgressTrips(Request $request)
+    {
+        $per_page = $request->get('perPage');
+        return $this->respondWithSuccess($this->tripService->getBulkTripByStatus([1,3], $per_page));
+    }
+
     /**
      * Gets Single Trip Infomation
      * @return JsonResponse

@@ -53,6 +53,11 @@ class TripService
         return $this->trip->getTripByStatus($id, $page);
     }
 
+    public function getBulkTripByStatus(array $ids, $page)
+    {
+        return $this->trip->getBulkTripByStatus($ids, $page);
+    }
+
     public function getTrip(Int $id)
     {
         return $this->trip->get($id);
@@ -73,5 +78,16 @@ class TripService
     public function delete(int $id)
     {
         return $this->trip->delete($id);
+    }
+
+    public function acceptTrip(int $id)
+    {
+        $driver = getUser();
+        $trip = $this->getTrip($id);
+        if($trip->driver_id !== $driver->id){
+            return ['error' => 'Unauthorized to accept trip request']
+        };
+        $data = $this->trip->update($trip, ['status_id' => 3]);
+        return $data;
     }
 }

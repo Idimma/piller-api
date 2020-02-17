@@ -100,6 +100,7 @@ Route::group(['middleware' => ['cors','jwt.verify', 'admin'], 'prefix' => 'admin
     Route::group(['prefix' => 'trip'], function () {
         Route::get('/', 'AdminController@getTrips');
         Route::get('/pending', 'AdminController@getTripRequests');
+        Route::get('/progress', 'AdminController@getInProgressTrips');
         Route::get('{id}', 'AdminController@getSingleTrip');
         Route::post('{id}/{driver}', 'AdminController@assignDriver');
         Route::delete('{id}', 'AdminController@deleteTrip');

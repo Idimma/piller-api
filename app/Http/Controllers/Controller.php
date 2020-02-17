@@ -43,4 +43,9 @@ class Controller extends BaseController
     {
         return $this->jsonResponse(is_array($data) ? $data : ['error' => $data], $code);
     }
+
+
+    public function formatResponse($response){
+        
+    }
 }
