@@ -85,7 +85,7 @@ class TripService
         $driver = getUser();
         $trip = $this->getTrip($id);
         if($trip->driver_id !== $driver->id){
-            return ['error' => 'Unauthorized to accept trip request']
+            return ['error' => 'Unauthorized to accept trip request'];
         };
         $data = $this->trip->update($trip, ['status_id' => 3]);
         return $data;
