@@ -82,12 +82,36 @@ class TripService
 
     public function acceptTrip(int $id)
     {
-        $driver = getUser();
-        $trip = $this->getTrip($id);
-        if($trip->driver_id !== $driver->id){
+        return $this->changeTripStatus($id, 3);
+    }
+
+    public function completeTrip(int $id)
+    {
+        return $this->changeTripStatus($id, 4);
+    }
+
+
+    private function changeTripStatus(int $id, int $status)
+    {
+        if (!$this->validateTripUser($id)) {
             return ['error' => 'Unauthorized to accept trip request'];
         };
-        $data = $this->trip->update($trip, ['status_id' => 3]);
+        $trip = $this->getTrip($id);
+        $data = $this->trip->update($trip, ['status_id' => $status]);
         return $data;
+    }
+
+    /**
+     * Validate the user can modify trip
+     * @return bool
+     */
+    private function validateTripUser(int $trip_id): bool
+    {
+        $driver = getUser();
+        $trip = $this->getTrip($trip_id);
+        if ($trip->driver_id !== $driver->id) {
+            return false;
+        };
+        return True;
     }
 }
