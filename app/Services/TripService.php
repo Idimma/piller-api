@@ -10,6 +10,8 @@ use Notification;
 
 class TripService
 {
+    
+    private $location, $trip, $user; 
 
     public function __construct(TripRepository $trip, UserService $user, LocationService $location)
     {
@@ -44,7 +46,7 @@ class TripService
     public function userTrips()
     {
         $user = getUser();
-        return $user->userTrip;
+        return $user->userTrip()->latest()->get();
     }
 
 
@@ -89,7 +91,6 @@ class TripService
     {
         return $this->changeTripStatus($id, 4);
     }
-
 
     private function changeTripStatus(int $id, int $status)
     {

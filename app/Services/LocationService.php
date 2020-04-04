@@ -22,7 +22,7 @@ class LocationService{
         if(null === $user){
             $user = getUser();
         }
-        return $user->destination;
+        return $user->destination()->latest()->get();
     }
 
     public function editLocation(int $id, array $input)

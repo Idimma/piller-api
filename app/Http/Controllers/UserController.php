@@ -26,9 +26,8 @@ class UserController extends Controller
 
         $token = $this->userService->authenticate($credentials);
         if (is_array($token)) {
-            return $this->respondWithError(['error' => $token['error'], $token['status']]);
+            return $this->respondWithError(['error' => $token['error']], $token['status']);
         }
-
         return $this->respondWithSuccess(['data' => compact('token')], 201);
     }
 

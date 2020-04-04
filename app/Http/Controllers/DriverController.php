@@ -35,15 +35,10 @@ class DriverController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        $token = $this->userService->authenticate($credentials);
+        $token = $this->userService->authenticate($credentials, 2);
         if (is_array($token)) {
-            return $this->respondWithError(['error' => $token['error'], $token['status']]);
+            return $this->respondWithError(['error' => $token['error']], $token['status']);
         }
-        $user = JWTAuth::user();
-        if ($user->userrole->id != 2) {
-            return $this->respondWithError(['error' => 'Not Authorised', 401]);
-        }
-
         return $this->respondWithSuccess(['data' => compact('token')], 201);
     }
 

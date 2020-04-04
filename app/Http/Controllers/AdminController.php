@@ -38,16 +38,10 @@ class AdminController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        $token = $this->userService->authenticate($credentials);
+        $token = $this->userService->authenticate($credentials, 1);
         if (is_array($token)) {
-            return $this->respondWithError(['error' => $token['error'], $token['status']]);
+            return $this->respondWithError(['error' => $token['error']], $token['status']);
         }
-
-        $user = JWTAuth::user();
-        if ($user->userrole->role_id !== 1) {
-            return $this->respondWithError(['error' => 'Not Authorised', 401]);
-        }
-
         return $this->respondWithSuccess(['data' => compact('token')], 201);
     }
 

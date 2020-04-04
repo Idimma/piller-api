@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\{UserRepository,UserRoleRepository};
+use App\Repositories\{UserRepository, UserRoleRepository};
 use App\Services\LocationService;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Mail\VerifyUser;
+use Mail;
 
 
 
@@ -26,34 +28,73 @@ class UserService
         $input['password'] = Hash::make($input['password']);
         $user = $this->user->create($input);
         $user->userrole()->create(['role_id' => $role_id]);
+        $token = $this->generateVerificationToken($user);
+        Mail::to($input['email'])->send(new VerifyUser($user, $token));
         return $user;
     }
 
-    public function getUserNotifications(){
+    public function getUserNotifications()
+    {
         $user = getUser();
         return $user->notifications;
     }
 
-    public function authenticate(array $credentials)
+    public function authenticate(array $credentials, int $role_id = null)
     {
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-            
                 return ['error' => 'invalid credentials', 'status' => 400];
             }
         } catch (JWTException $e) {
             return ['error' => 'could not create token', 'status' => 500];
         }
+        $isValid = $this->isValidUser($role_id);
+        if(is_array($isValid)){
+            return $isValid;
+        }
         return $token;
     }
 
-
-    public function update(array $data, object $user=null)
+    public function generateVerificationToken(object $user)
     {
-        if (null == $user){
+        return $user->verificationToken()->firstOrCreate(['token' => md5(uniqid(rand(), true))]);
+    }
+
+    public function update(array $data, object $user = null)
+    {
+        if (null == $user) {
             $user = getUser();
         }
         return $this->user->update($user, $data);
+    }
+
+    private function isValidUser(int $role_id = null){
+        $user = JWTAuth::user();
+
+        if (!$user->is_verified) {
+            $this->getUserVerificationToken($user);
+            return ['error' => 'Account not Activated. Check your mail', 'status' => 401];
+        }
+        if (!$user->status) {
+            return ['error' => 'Account Disabled. Contact customer case', 'status' => 401];
+        }
+        if (isset($role_id)) {
+            if ($user->userrole->role_id !== $role_id) {
+                return ['error' => 'Not Authorised', 'status' => 401];
+            }
+        }
+        return True;
+    }
+
+    private function getUserVerificationToken(Object $user)
+    {
+        $token = $user->verificationToken;
+
+        if (!isset($token)) {
+            $token = $this->generateVerificationToken($user);
+            Mail::to($user->email)->send(new VerifyUser($user, $token));
+        }
+        return $token;
     }
 
 
@@ -74,7 +115,8 @@ class UserService
     {
         return $this->user_role->getCountByRole(2);
     }
-    public function getAdmins(){
+    public function getAdmins()
+    {
         return $this->user_role->getUsersByRole(1);
     }
 
@@ -105,14 +147,13 @@ class UserService
         return $user;
     }
 
-    
+
 
     public function getUserByUuid(string $uuid)
     {
         return $this->user->getUserByUuid($uuid);
-
     }
-    
+
 
     public function getAvailableDrivers()
     {
@@ -130,7 +171,5 @@ class UserService
     {
         $user = $this->getUserByUuid($uuid);
         return $this->locationService->getLocations($user);
-
     }
-
 }

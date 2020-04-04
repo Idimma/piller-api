@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status'
+        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified', 'customer_code', 'authorization_code','customer_id'
     ];
 
     /**
@@ -56,6 +56,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function verificationToken(){
+        return $this->hasOne('App\UserVerification', 'user_id', 'id');
     }
 
     public function userTrip()

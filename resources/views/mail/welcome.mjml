@@ -1,0 +1,56 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text padding="4px" color="#828282" font-family="lato, arial" font-size="16px" />
+      
+      <mj-all font-family="lato, arial" />
+      <mj-divider padding="0px" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="white">
+    <mj-section padding="10px 0px">
+       <mj-column>
+      	<mj-text color="#4F4F4F"  font-size="10px" text-decoration="underline" align="right" padding="0px 20px 0px 0px">view in browser</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 0 10px 0">
+      <mj-group>
+      <mj-column>
+        <mj-image width="116px" src="https://res.cloudinary.com/maaj/image/upload/v1585996814/jooola.png" align="center"/>
+      </mj-column>
+     
+        </mj-group>
+    </mj-section>
+    <mj-section padding="">
+      <mj-column>
+        <mj-text font-size="20px" font-weight="bold"  color="#333333" padding="0px  0px 0px 30px" line-height="24px">Welcome to Joola Oil & Gas</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="16px"  font-weight="bold" color="#7C888D" padding="0px  30px 0px 30px" line-height="24px">Hello {{user->name}},</mj-text>
+        <mj-text color="#7C888D" line-height="20px"   letter-spacing="0.03rem" padding="0px 30px 0px 30px">
+          Thanks for join our platform. To proceed you need to verify your account. Please click on the button below to do that</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0px">
+      <mj-column>
+        <mj-button width="220px" background-color="#F64B13" color="white" font-size="14px" line-height="17px"  font-weight="bold" border-radius="3px"><a href="{{token}}" style="color: #fff; text-decoration:none;">Confirm Your Account</a></mj-button>
+      </mj-column>
+    </mj-section>
+    
+      
+      
+    
+      
+     <mj-section></mj-section>
+     
+      
+      
+    <mj-section padding-top="21px" background-color="#090C4F">
+      <mj-column>
+        <mj-text align="center" color="#fff">© JoolaOilandGas</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
