@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified', 'customer_code', 'authorization_code','customer_id'
+        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified'
     ];
 
     /**
@@ -29,7 +29,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'id', 'customer_code', 'authorization_code','customer_id'
+        'password', 'remember_token', 'id'
     ];
 
     /**
@@ -105,6 +105,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->where('uuid', $uuid)->first();
     }
 
-
+    public function cards()
+    {
+        return $this->hasMany('App\Card', 'user_id', 'id');
+    }
     
 }

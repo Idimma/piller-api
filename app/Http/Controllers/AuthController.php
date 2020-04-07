@@ -14,22 +14,14 @@ class AuthController extends Controller
         $check = UserVerification::where('token', $verification_code)->first();
 
         if (is_null($check)) {
-            return response()->json(['success' => false, 'error' => "Verification code is invalid."]);
+            return $this->respondWithError(['error' => "Verification code is invalid."]);
         }
         $user = $check->user;
         if ($user->is_verified == 1) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Account already verified..'
-            ]);
+            return $this->respondWithSuccess(['message' => 'Account already verified..']);
         }
-
         $user->update(['is_verified' => 1]);
         $check->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'You have successfully verified your email address.'
-        ]);
+        return $this->respondWithSuccess(['message' => 'You have successfully verified your email address.']);
     }
 }

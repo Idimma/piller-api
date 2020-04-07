@@ -157,5 +157,11 @@ class UserController extends Controller
         return $this->respondWithSuccess($this->locationService->editLocation($id, $data));
     }
 
+    public function getCards()
+    {
+        $user = getUser();
+        return $this->respondWithSuccess($user->cards);
+    }
+
     
 }
