@@ -27,7 +27,6 @@ class TripService
         $data = [
             'user_id' => getUser()->id,
             'destination' => $location->id,
-            'trip_start' => now()->addhours(1),
             'status_id' => 2,
             'price' => $basefare,
         ];
@@ -48,7 +47,6 @@ class TripService
         $user = getUser();
         return $user->userTrip()->latest()->get();
     }
-
 
     public function getTripByStatus(int $id, $page)
     {
@@ -72,6 +70,7 @@ class TripService
         $trip = $this->getTrip($id);
         $data = $this->trip->update($trip, [
             'driver_id' => $driver->id,
+            'trip_started' => now()->addHour(1),
             'status_id' => 1
         ]);
         return $data;
@@ -95,7 +94,7 @@ class TripService
     private function changeTripStatus(int $id, int $status)
     {
         if (!$this->validateTripUser($id)) {
-            return ['error' => 'Unauthorized to accept trip request'];
+            return ['error' => 'Unauthorized to access trip request'];
         };
         $trip = $this->getTrip($id);
         $data = $this->trip->update($trip, ['status_id' => $status]);
@@ -108,9 +107,9 @@ class TripService
      */
     private function validateTripUser(int $trip_id): bool
     {
-        $driver = getUser();
+        $user = getUser();
         $trip = $this->getTrip($trip_id);
-        if ($trip->driver_id !== $driver->id) {
+        if ($trip->driver_id !== $user->id || $trip->user_id !== $user->id) {
             return false;
         };
         return True;

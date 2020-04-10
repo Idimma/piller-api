@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class UserTripController extends Controller
 {
+    private $tripService;
     //
     public function __construct(TripService $tripService)
     {
@@ -24,6 +25,9 @@ class UserTripController extends Controller
     public function createTrip(TripRequest $request)
     {
         $data = $request->validated();
+        if (getUser()->hasActiveTrip()){
+            return $this->respondWithError('You have an active trip, please cancel that or complete');
+        }
         $response = $this->tripService->requestTrip($data);
         return $this->respondWithSuccess($response, 201);
     }
