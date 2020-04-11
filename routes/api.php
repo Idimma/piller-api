@@ -37,8 +37,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'trip'], function () {
         Route::post('request', 'UserTripController@createTrip');
         Route::get('/', 'UserTripController@getUserTrips');
-        Route::post('cancel', 'UserTripController@cancelTrip');
-        Route::post('review', 'DriverController@reviewTrip');
+        Route::get('{id}/cancel', 'UserTripController@cancelTrip');
+        Route::post('{id}/review', 'UserTripController@reviewTrip');
     });
 
     Route::group(['prefix' => 'location'], function () {
@@ -66,9 +66,11 @@ Route::group(['prefix' => 'driver'], function () {
 
     Route::group(['middleware' => ['jwt.verify', 'driver']], function () {
         Route::group(['prefix' => 'trip'], function () {
-            Route::post('accept', 'DriverController@acceptTrip');
-            Route::post('complete', 'DriverController@completeTrip');
-            Route::post('cancel', 'DriverController@cancelTrip');
+            Route::get('{id}/accept', 'DriverController@acceptTrip');
+            Route::get('{id}/cancel', 'UserTripController@cancelTrip');
+            Route::post('{id}/complete', 'DriverController@completeTrip');
+            Route::post('{id}/review', 'UserTripController@reviewTrip');
+
         });
     });
 });

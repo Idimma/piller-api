@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TripRequest;
+use App\Http\Requests\{TripRequest,TripReviewRequest};
 use App\Services\TripService;
 use Illuminate\Http\Request;
 
@@ -41,7 +41,29 @@ class UserTripController extends Controller
         return $this->respondWithSuccess($this->tripService->userTrips());
     }
 
+    /**
+     * Cancel's user trips
+     * @param Int $id
+     * @return JsonResponse
+     */
+    public function cancelTrip(Int $id)
+    {
+        $trip = $this->tripService->cancelTrip($id);
+        if (isset($trip['error'])){
+            return $this->respondWithError($trip);
+        }
+        return $this->respondWithSuccess($trip);
+    }
 
+    public function reviewTrip(Int $id, TripReviewRequest $request)
+    {
+        $data = $request->validated();
+        $trip = $this->tripService->setTripReview($id, $data);
+        if (isset($trip['error'])){
+            return $this->respondWithError($trip);
+        }
+        return $this->respondWithSuccess($trip);
+    }
 
     
 }

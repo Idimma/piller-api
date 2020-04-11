@@ -10,5 +10,5 @@ class TripDetail extends Model
     //
     protected $table = 'trip_details';
 
-    protected $fillable = ['trip_id', 'rating', 'review'];
+    protected $fillable = ['reviewer_id','trip_id', 'rating', 'review'];
 }

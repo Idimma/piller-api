@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            'jsonify',
             'throttle:60,1',
             'bindings',
             \Spatie\Cors\Cors::class,
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'driver' => \App\Http\Middleware\DriverMiddleware::class,
         'cors' => \Spatie\Cors\Cors::class,
+        'jsonify' => \App\Http\Middleware\Jsonify::class,
     ];
 
     /**

@@ -54,4 +54,9 @@ class Trip extends Model
         return $this->whereIn('status_id', $ids)->with('destinations', 'user', 'driver')->latest();
 
     }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\TripDetail','id','trip_id');
+    }
 }

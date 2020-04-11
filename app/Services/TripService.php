@@ -6,18 +6,20 @@ use App\Repositories\TripRepository;
 use App\Services\UserService;
 use App\Events\TripEvent;
 use App\Notifications\NewTruckRequest;
+use App\TripDetail;
 use Notification;
 
 class TripService
 {
-    
-    private $location, $trip, $user; 
 
-    public function __construct(TripRepository $trip, UserService $user, LocationService $location)
+    private $location, $trip, $user, $tripDetail;
+
+    public function __construct(TripRepository $trip, UserService $user, LocationService $location, TripDetail $tripDetail)
     {
         $this->trip = $trip;
         $this->user = $user;
         $this->userLocation = $location;
+        $this->tripDetail = $tripDetail;
     }
 
     public function requestTrip(array $input)
@@ -91,14 +93,32 @@ class TripService
         return $this->changeTripStatus($id, 4);
     }
 
+    public function cancelTrip(int $id)
+    {
+        return $this->changeTripStatus($id, 5);
+    }
+
     private function changeTripStatus(int $id, int $status)
     {
         if (!$this->validateTripUser($id)) {
             return ['error' => 'Unauthorized to access trip request'];
         };
         $trip = $this->getTrip($id);
-        $data = $this->trip->update($trip, ['status_id' => $status]);
-        return $data;
+        $this->trip->update($trip, ['status_id' => $status]);
+
+        return $this->getTrip($id);
+    }
+
+    public function setTripReview(int $id, array $data)
+    {
+        if (!$this->validateTripUser($id)) {
+            return ['error' => 'Unauthorized to access trip request'];
+        };
+        $review = $this->tripDetail->updateOrCreate([
+            'trip_id' => $id,
+            'reviewer_id' => getUser()->id,
+        ], $data);
+        return $review;
     }
 
     /**
@@ -109,9 +129,9 @@ class TripService
     {
         $user = getUser();
         $trip = $this->getTrip($trip_id);
-        if ($trip->driver_id !== $user->id || $trip->user_id !== $user->id) {
-            return false;
+        if ($trip->user_id === $user->id || $trip->driver_id === $user->id) {
+            return True;
         };
-        return True;
+        return false;
     }
 }
