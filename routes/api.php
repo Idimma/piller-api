@@ -37,6 +37,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'trip'], function () {
         Route::post('request', 'UserTripController@createTrip');
         Route::get('/', 'UserTripController@getUserTrips');
+        Route::get('/pending', 'UserTripController@getPendingTrip');
         Route::get('{id}/cancel', 'UserTripController@cancelTrip');
         Route::post('{id}/review', 'UserTripController@reviewTrip');
     });

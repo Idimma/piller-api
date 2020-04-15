@@ -78,6 +78,7 @@ class TripService
         return $data;
     }
 
+
     public function delete(int $id)
     {
         return $this->trip->delete($id);

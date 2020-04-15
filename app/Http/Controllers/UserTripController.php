@@ -42,6 +42,15 @@ class UserTripController extends Controller
     }
 
     /**
+     * Get Latest Pending Trip
+     * @return JsonResponse
+     */
+    public function getPendingTrip()
+    {
+        return $this->respondWithSuccess(getUser()->getPendingTrip());
+    }
+
+    /**
      * Cancel's user trips
      * @param Int $id
      * @return JsonResponse

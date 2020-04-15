@@ -77,6 +77,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->userTrip->whereIn('status_id', ['1', '2', '3'])->isNotEmpty();
     }
 
+    public function getPendingTrip()
+    {
+        return $this->userTrip->whereIn('status_id', ['1', '2', '3'])->first();
+    }
+
     public function availableDriver(){
         return $this->whereHas('userrole', function($q){
             return $q->where('role_id',2);
