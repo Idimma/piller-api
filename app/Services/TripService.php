@@ -72,7 +72,7 @@ class TripService
         $trip = $this->getTrip($id);
         $data = $this->trip->update($trip, [
             'driver_id' => $driver->id,
-            'trip_started' => now()->addHour(1),
+            'trip_started' => now(),
             'status_id' => 1
         ]);
         return $data;
