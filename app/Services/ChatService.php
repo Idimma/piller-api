@@ -26,7 +26,7 @@ class ChatService
         broadcast(new NewUserChatEvent($user, $message));
         $admins = $this->user->getAdmins();
         Notification::send($admins, new NewMessage($message));
-        // ExpoNotification::sendNotification("ExponentPushToken[$user->expo_token]", 'New Message', $message->message, $message->toArray());
+        ExpoNotification::sendNotification("ExponentPushToken[$user->expo_token]", 'New Message', $message->message, $message->toArray());
         return $message;
     }
 
