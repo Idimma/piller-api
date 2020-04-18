@@ -105,7 +105,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function chatMessages(){
-        return $this->hasManyThrough('App\ChatMessage', 'App\Chat', 'user_id', 'id', 'chat_id', 'id');
+        return $this->hasManyThrough('App\ChatMessage', 'App\Chat', 'user_id', 'chat_id', 'id', 'id');
     }
 
     public function userdetail()

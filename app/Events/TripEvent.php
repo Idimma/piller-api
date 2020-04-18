@@ -9,9 +9,9 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Trip;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class TripEvent implements ShouldBroadcast
+class TripEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $trip;
@@ -33,7 +33,7 @@ class TripEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('new-trip');
+        return new PrivateChannel('private-admin-chat');
     }
 
     public function broadcastWith()
@@ -41,8 +41,4 @@ class TripEvent implements ShouldBroadcast
         return ['data' => $this->trip];
     }
 
-    public function broadcastAs()
-    {
-        return 'trip.created';
-    }
 }
