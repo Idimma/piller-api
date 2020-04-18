@@ -28,6 +28,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('avatar/add', 'UserController@uploadAvatar');
     Route::post('update/email', 'UserController@updateEmail');
     Route::post('update/name', 'UserController@updateName');
+    Route::post('update/expo', 'UserController@setExpoToken');
 
     // Route::get('closed', 'DataController@closed');
 
@@ -48,10 +49,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::post('{id}', 'UserController@editLocation');
     });
 
-    Route::group(['prefix' => 'payment'], function (){
+    Route::group(['prefix' => 'payment'], function () {
         Route::get('initialize', 'PaymentController@initiateCardTransaction');
         Route::post('verify', 'PaymentController@verifyCardTransaction');
         Route::get('cards', 'UserController@getCards');
+    });
+
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('/', 'ChatController@getMessages');
+        Route::post('/', 'ChatController@sendMessage');
     });
 });
 
@@ -71,7 +77,6 @@ Route::group(['prefix' => 'driver'], function () {
             Route::get('{id}/cancel', 'UserTripController@cancelTrip');
             Route::post('{id}/complete', 'DriverController@completeTrip');
             Route::post('{id}/review', 'UserTripController@reviewTrip');
-
         });
     });
 });

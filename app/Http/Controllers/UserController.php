@@ -153,7 +153,7 @@ class UserController extends Controller
 
     public function editLocation(int $id, LocationRequest $request)
     {
-        $data= $request->validated();
+        $data = $request->validated();
         return $this->respondWithSuccess($this->locationService->editLocation($id, $data));
     }
 
@@ -163,5 +163,18 @@ class UserController extends Controller
         return $this->respondWithSuccess($user->cards);
     }
 
-    
+    public function setExpoToken(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'expo_token' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+        $user = $this->userService->update([
+            'expo_token' => $request->get('expo_token'),
+        ]);
+        return $this->respondWithSuccess($user, 201);
+    }
 }

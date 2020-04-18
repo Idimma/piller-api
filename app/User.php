@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified'
+        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified', 'expo_token'
     ];
 
     /**
@@ -98,6 +98,14 @@ class User extends Authenticatable implements JWTSubject
     public function userrole()
     {
         return $this->hasOne('App\UserRole');
+    }
+
+    public function chats(){
+        return $this->hasOne('App\Chat');
+    }
+
+    public function chatMessages(){
+        return $this->hasManyThrough('App\ChatMessage', 'App\Chat', 'user_id', 'id', 'chat_id', 'id');
     }
 
     public function userdetail()

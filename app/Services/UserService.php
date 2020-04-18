@@ -49,7 +49,7 @@ class UserService
             return ['error' => 'could not create token', 'status' => 500];
         }
         $isValid = $this->isValidUser($role_id);
-        if(is_array($isValid)){
+        if (is_array($isValid)) {
             return $isValid;
         }
         return $token;
@@ -68,7 +68,8 @@ class UserService
         return $this->user->update($user, $data);
     }
 
-    private function isValidUser(int $role_id = null){
+    private function isValidUser(int $role_id = null)
+    {
         $user = JWTAuth::user();
 
         if (!$user->is_verified) {
