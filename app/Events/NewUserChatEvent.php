@@ -34,7 +34,7 @@ class NewUserChatEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('private-user-chat-'.$this->user->id);
+        return new PrivateChannel('private-user-chat-'.$this->user->uuid);
     }
 
     public function broadcastWith()

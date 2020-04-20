@@ -34,6 +34,8 @@ class ExpoNotification
             //throw $th;
             $response = $e->getResponse();
         }    
+
+        Log::info($response->getBody(), true);
         return json_decode($response->getBody(), true);
     }
 }
