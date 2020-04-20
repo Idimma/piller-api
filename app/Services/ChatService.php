@@ -49,7 +49,7 @@ class ChatService
     public function getChatMessages(int $id, Int $per_page = 20)
     {
         $chat = $this->chat->get($id);
-        return $chat->messages()->latest()->paginate($per_page)->groupBy(function ($item) {
+        return $chat->messages()->latest()->paginate($per_page)->sortBy('created_at')->groupBy(function ($item) {
             return $item->created_at->format('d-M-Y');
         });
     }

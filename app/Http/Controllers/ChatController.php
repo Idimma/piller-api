@@ -20,7 +20,7 @@ class ChatController extends Controller
     public function getMessages()
     {
         $user = getUser();
-        $chat_messages = $user->chatMessages()->latest()->paginate(20)->groupBy(function ($item) {
+        $chat_messages = $user->chatMessages()->latest()->paginate(20)->sortBy('created_at')->groupBy(function ($item) {
             return $item->created_at->format('d-M-Y');
         });
         return $this->respondWithSuccess($chat_messages, 200);
