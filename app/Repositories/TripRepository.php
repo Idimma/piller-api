@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 
 class TripRepository extends BaseRepository
 {
-
+    private $trip;
     public function __construct(Trip $trip)
     {
         $this->trip = $trip;

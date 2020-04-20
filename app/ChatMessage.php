@@ -11,12 +11,15 @@ class ChatMessage extends Model
 
     protected $fillable = ['sender_id', 'chat_id', 'message'];
 
+    protected $with = ['author'];
+
+    protected $hidden = ['sender_id'];
 
     public function author(){
-        return $this->hasOne('App\User', 'sender_id', 'id');
+        return $this->hasOne('App\User', 'id', 'sender_id');
     }
 
     public function chat(){
-        return $this->hasOne('App\Chat', 'chat_id', 'id');
+        return $this->hasOne('App\Chat', 'id', 'chat_id');
     }
 }

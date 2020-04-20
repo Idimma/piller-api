@@ -32,6 +32,8 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token', 'id'
     ];
 
+    protected $appends = ['avatar_url'];
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -40,6 +42,10 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function getAvatarUrlAttribute(){
+        return config('app.url').'/avatar/'.$this->image_url;
+    }
 
     public static function boot()
     {

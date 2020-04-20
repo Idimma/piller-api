@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegistrationRequest;
-use App\Services\{UserService, TripService, LocationService};
+use App\Services\{UserService, TripService, LocationService, ChatService};
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
@@ -12,12 +12,14 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AdminController extends Controller
 {
+    private $userService, $tripService, $chat, $locationService;
     //
-    public function __construct(UserService $userService, TripService $trip, LocationService $location)
+    public function __construct(UserService $userService, TripService $trip, LocationService $location, ChatService $chat)
     {
         $this->userService = $userService;
         $this->tripService = $trip;
         $this->locationService = $location;
+        $this->chat = $chat;
     }
 
     /**
@@ -53,20 +55,21 @@ class AdminController extends Controller
         return $this->respondWithSuccess(['data' => compact('user')], 201);
     }
 
-    public function getTrips()
+    public function getTrips(Request $request)
     {
-        return $this->respondWithSuccess($this->tripService->getAllRequests());
+        $per_page = $request->get('perPage') ?? 15;
+        return $this->respondWithSuccess($this->tripService->getAllRequests($per_page));
     }
 
     public function getTripRequests(Request $request)
     {
-        $per_page = $request->get('perPage');
+        $per_page = $request->get('perPage') ?? 15;
         return $this->respondWithSuccess($this->tripService->getTripByStatus(2, $per_page));
     }
 
     public function getInProgressTrips(Request $request)
     {
-        $per_page = $request->get('perPage');
+        $per_page = $request->get('perPage') ?? 15;
         return $this->respondWithSuccess($this->tripService->getBulkTripByStatus([1,3], $per_page));
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Chat;
+use App\Repositories\ChatRepository;
 use App\Notifications\NewMessage;
 use App\Events\{NewMessage as MessageEvent, NewUserChatEvent};
 use App\Services\{UserService, ExpoNotification};
@@ -12,7 +12,7 @@ class ChatService
 {
     private $chat;
 
-    public function __construct(Chat $chat, UserService $user)
+    public function __construct(ChatRepository $chat, UserService $user)
     {
         $this->chat = $chat;
         $this->user = $user;
@@ -21,27 +21,46 @@ class ChatService
     public function sendChatMessage(array $data)
     {
         $user = getUser();
-        $message = $this->saveMessage($user->id, $user->id, $data['message']);
+        $chat = $this->getUserChat($user->id);
+        $message = $this->saveMessage($chat, $user->id, $data['message']);
         broadcast(new MessageEvent($message));
         broadcast(new NewUserChatEvent($user, $message));
         $admins = $this->user->getAdmins();
         Notification::send($admins, new NewMessage($message));
-        ExpoNotification::sendNotification("ExponentPushToken[$user->expo_token]", 'New Message', $message->message, $message->toArray());
         return $message;
     }
 
-    public function replyChatMessage()
+    public function replyChatMessage($data)
     {
+        $chat = $this->chat->get($data['id']);
+        $user = getUser();
+        $receiver = $chat->user;
+        $message = $this->saveMessage($chat, $user->id, $data['message']);
+        broadcast(new NewUserChatEvent($receiver, $message));
+        ExpoNotification::sendNotification("ExponentPushToken[$receiver->expo_token]", 'New Message', $message->message, $message->toArray());
+        return $message;
+    }
+
+    public function getAllChat($per_page = 20)
+    {
+        return $this->chat->getLatestChat($per_page);
+    }
+
+    public function getChatMessages(int $id, Int $per_page = 20)
+    {
+        $chat = $this->chat->get($id);
+        return $chat->messages()->latest()->paginate($per_page)->groupBy(function ($item) {
+            return $item->created_at->format('d-M-y');
+        });
     }
 
     private function getUserChat(Int $user_id)
     {
-        return Chat::firstOrCreate(['user_id' => $user_id]);
+        return $this->chat->firstOrCreate(['user_id' => $user_id]);
     }
 
-    private function saveMessage(Int $user_id, Int $sender_id, $message)
+    private function saveMessage(Object $chat, Int $sender_id, $message)
     {
-        $chat = $this->getUserChat($user_id);
         return $chat->messages()->create([
             'sender_id' => $sender_id,
             'message' => $message,

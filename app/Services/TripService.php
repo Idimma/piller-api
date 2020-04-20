@@ -39,9 +39,9 @@ class TripService
         return $trip;
     }
 
-    public function getAllRequests()
+    public function getAllRequests($per_page = 15)
     {
-        return $this->trip->all();
+        return $this->trip->paginate($per_page);
     }
 
     public function userTrips()

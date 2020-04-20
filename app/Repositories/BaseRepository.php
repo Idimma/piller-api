@@ -53,6 +53,17 @@ class BaseRepository{
          return $this->get($id)->delete();
      }
 
+     /**
+      * returns paginated value
+      * @return Collection
+      */
+     public function paginate(int $count){
+        return $this->model::paginate($count);
+     }
 
+     public function firstOrCreate(array $unique, array $other = [])
+     {
+        return $this->model->firstOrCreate($unique, $other);
+     }
 
 }

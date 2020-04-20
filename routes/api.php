@@ -119,6 +119,12 @@ Route::group(['middleware' => ['cors', 'jwt.verify', 'admin'], 'prefix' => 'admi
         Route::get('driver', 'ReportController@getDriversCount');
     });
 
+    Route::group(['prefix' => 'chat'], function(){
+        Route::get('/', 'ChatController@getAllChat');
+        Route::get('{id}', 'ChatController@getSingleChatMessages');
+        Route::post('/', 'ChatController@sendReply');
+    });
+
     Route::group(['prefix' => 'trip'], function () {
         Route::get('/', 'AdminController@getTrips');
         Route::get('/pending', 'AdminController@getTripRequests');
