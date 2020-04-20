@@ -44,7 +44,8 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     function getAvatarUrlAttribute(){
-        return config('app.url').'/avatar/'.$this->image_url;
+        $url = $this->image_url ?? '6.jpg';
+        return config('app.url').'/avatar/'.$url;
     }
 
     public static function boot()

@@ -37,7 +37,9 @@ class ChatService
         $receiver = $chat->user;
         $message = $this->saveMessage($chat, $user->id, $data['message']);
         broadcast(new NewUserChatEvent($receiver, $message));
-        ExpoNotification::sendNotification($receiver->expo_token, 'New Message', $message->message, $message->toArray());
+        if ($receiver->expo_token) {
+            ExpoNotification::sendNotification($receiver->expo_token, 'New Message', $message->message, $message->toArray());
+        }
         return $message;
     }
 
