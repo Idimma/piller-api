@@ -21,7 +21,7 @@ class ChatController extends Controller
     {
         $user = getUser();
         $chat_messages = $user->chatMessages()->latest()->paginate(20)->groupBy(function ($item) {
-            return $item->created_at->format('d-M-y');
+            return $item->created_at->format('d-M-Y');
         });
         return $this->respondWithSuccess($chat_messages, 200);
     }

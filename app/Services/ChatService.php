@@ -50,7 +50,7 @@ class ChatService
     {
         $chat = $this->chat->get($id);
         return $chat->messages()->latest()->paginate($per_page)->groupBy(function ($item) {
-            return $item->created_at->format('d-M-y');
+            return $item->created_at->format('d-M-Y');
         });
     }
 

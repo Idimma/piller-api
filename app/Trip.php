@@ -16,7 +16,7 @@ class Trip extends Model
 
     protected $with = [
         'status:id,status',
-        'destinations:id,address',
+        'destinations:id,address,lat,lon',
         'user:id,uuid,first_name,last_name',
         'driver:id,uuid,first_name,last_name'
     ];
