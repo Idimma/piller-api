@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('avatar/{url}', 'UserController@getProfileImage');
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

@@ -19,6 +19,7 @@ Broadcast::channel('new-trip', function(){
     return true;
 });
 Broadcast::channel('private-admin-chat', function($user){
+    Log::info(getUser());
     return (int) getUser()->userrole->role_id === (int) 1;
 });
 
