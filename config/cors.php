@@ -22,6 +22,7 @@ return [
         'allow_origins' => [
             // '*',
             'http://*.joolaoilandgas.com',
+            'https://*.joolaoilandgas.com',
             'http://localhost:*',
         ],
 
