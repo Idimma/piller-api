@@ -30,8 +30,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('update/name', 'UserController@updateName');
     Route::post('update/expo', 'UserController@setExpoToken');
 
-    // Route::get('closed', 'DataController@closed');
-
+    Route::get('company/faq', 'UserController@getFaqs');
+    Route::get('company/{type}', 'UserController@getCompanyInfo')->where(['type' => '\privacy\b|\bterms\b|\babout\b']);
     /**
      * Trip Request Group
      */
@@ -41,6 +41,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/pending', 'UserTripController@getPendingTrip');
         Route::get('{id}/cancel', 'UserTripController@cancelTrip');
         Route::post('{id}/review', 'UserTripController@reviewTrip');
+        Route::get('{id}/track', 'UserTripController@trackTrip');
+
     });
 
     Route::group(['prefix' => 'location'], function () {

@@ -74,5 +74,7 @@ class UserTripController extends Controller
         return $this->respondWithSuccess($trip);
     }
 
-    
+    public function trackTrip(int $id){
+        return $this->respondWithSuccess($this->tripService->trackTrip($id));
+    }
 }

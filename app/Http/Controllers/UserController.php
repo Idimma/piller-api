@@ -6,6 +6,7 @@ use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserReg
 use App\Services\{UserService, LocationService};
 use Illuminate\Support\Facades\{Hash, Validator};
 use Illuminate\Http\Request;
+use App\{CompanyInfo, FAQ};
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\{JWTException, TokenExpiredException, TokenInvalidException};
 
@@ -176,5 +177,14 @@ class UserController extends Controller
             'expo_token' => $request->get('expo_token'),
         ]);
         return $this->respondWithSuccess($user, 201);
+    }
+
+    public function getFaqs(){
+        return $this->respondWithSuccess(FAQ::get());
+    }
+
+    public function getCompanyInfo(String $type)
+    {
+        return $this->respondWithSuccess(CompanyInfo::where('title', $type)->first());
     }
 }

@@ -57,6 +57,10 @@ class Trip extends Model
 
     public function reviews()
     {
-        return $this->hasMany('App\TripDetail','id','trip_id');
+        return $this->hasMany('App\TripDetail','trip_id','id');
+    }
+
+    public function stages(){
+        return $this->hasMany('App\TripStage', 'trip_id', 'id');
     }
 }

@@ -24,7 +24,6 @@ class ChatService
         $chat = $this->getUserChat($user->id);
         $message = $this->saveMessage($chat, $user->id, $data['message']);
         broadcast(new MessageEvent($message));
-        broadcast(new NewUserChatEvent($user, $message));
         $admins = $this->user->getAdmins();
         Notification::send($admins, new NewMessage($message));
         return $message;

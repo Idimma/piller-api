@@ -6,20 +6,21 @@ use App\Repositories\TripRepository;
 use App\Services\UserService;
 use App\Events\TripEvent;
 use App\Notifications\NewTruckRequest;
-use App\TripDetail;
+use App\{TripDetail, TripStage};
 use Notification;
 
 class TripService
 {
 
-    private $location, $trip, $user, $tripDetail;
+    private $location, $trip, $user, $tripDetail, $trip_stage;
 
-    public function __construct(TripRepository $trip, UserService $user, LocationService $location, TripDetail $tripDetail)
+    public function __construct(TripRepository $trip, UserService $user, LocationService $location, TripDetail $tripDetail, TripStage $trip_stage)
     {
         $this->trip = $trip;
         $this->user = $user;
         $this->userLocation = $location;
         $this->tripDetail = $tripDetail;
+        $this->trip_stage = $trip_stage;
     }
 
     public function requestTrip(array $input)
@@ -33,6 +34,7 @@ class TripService
             'price' => $basefare,
         ];
         $trip = $this->trip->create($data);
+        $this->updateStage($trip->id, 2);
         broadcast(new TripEvent($trip));
         $admins = $this->user->getAdmins();
         Notification::send($admins, new NewTruckRequest($trip));
@@ -72,9 +74,9 @@ class TripService
         $trip = $this->getTrip($id);
         $data = $this->trip->update($trip, [
             'driver_id' => $driver->id,
-            'trip_started' => now(),
             'status_id' => 1
         ]);
+        $this->updateStage($trip->id, 1);
         return $data;
     }
 
@@ -106,8 +108,32 @@ class TripService
         };
         $trip = $this->getTrip($id);
         $this->trip->update($trip, ['status_id' => $status]);
-
+        $this->updateStage($id, $status);
         return $this->getTrip($id);
+    }
+
+    public function trackTrip(int $id)
+    {
+        $trip = $this->getTrip($id);
+        $resource = [
+            'Order Placed' => '2',
+            'Order confirmed' => '1',
+            'On the way' => '3',
+            'Delivered' => '4',
+            'Canceled' => '5'
+        ];
+
+        $track = [];
+        foreach ($resource as $key => $stage) {
+            $l = $trip->stages->where('status_id', $stage)->first();
+            $track[$key] = [
+                'status_name' => $key,
+                'isCompleted' => isset($l),
+                'isActive'    => $trip->stages->last() === $l,
+                'timestamp'   => isset($l) ? $l->toArray()['created_at']: false
+            ];
+        }
+        return $track;
     }
 
     public function setTripReview(int $id, array $data)
@@ -122,6 +148,10 @@ class TripService
         return $review;
     }
 
+    private function updateStage(Int $trip_id, int $status)
+    {
+        return $this->trip_stage->create(['status_id' => $status, 'trip_id' => $trip_id]);
+    }
     /**
      * Validate the user can modify trip
      * @return bool
