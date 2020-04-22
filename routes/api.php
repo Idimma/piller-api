@@ -31,7 +31,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('update/expo', 'UserController@setExpoToken');
 
     Route::get('company/faq', 'UserController@getFaqs');
-    Route::get('company/{type}', 'UserController@getCompanyInfo')->where(['type' => '\privacy\b|\bterms\b|\babout\b']);
+    Route::get('company/{type}', 'UserController@getCompanyInfo');
     /**
      * Trip Request Group
      */
