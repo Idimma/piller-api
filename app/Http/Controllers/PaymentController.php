@@ -32,6 +32,7 @@ class PaymentController extends Controller
             'reference' => (new Paystack)->genTranxRef(),
             "amount" => 5000,
             "email" => $user->email,
+            'callback_url' => url('/payment/successful'),
         ];
         $response = (object) $this->makeRequest('/transaction/initialize', 'post', $body);
         if (!$response->status) {
