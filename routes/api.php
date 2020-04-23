@@ -53,7 +53,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::group(['prefix' => 'payment'], function () {
         Route::get('initialize', 'PaymentController@initiateCardTransaction');
-        Route::post('verify', 'PaymentController@verifyCardTransaction');
+        Route::get('verify', 'PaymentController@verifyCardTransaction');
         Route::get('cards', 'UserController@getCards');
     });
 
