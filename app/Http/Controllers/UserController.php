@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
-use App\Services\{UserService, LocationService};
-use Illuminate\Support\Facades\{Hash, Validator};
+use App\Services\{UserService, LocationService, SettingService};
+use Illuminate\Support\Facades\{Validator};
 use Illuminate\Http\Request;
-use App\{CompanyInfo, FAQ};
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\{JWTException, TokenExpiredException, TokenInvalidException};
 
 class UserController extends Controller
 {
     //
-    public function __construct(UserService $userService, LocationService $location)
+    private $settings;
+    public function __construct(UserService $userService, LocationService $location, SettingService $settings)
     {
         $this->userService = $userService;
         $this->locationService = $location;
+        $this->settings = $settings;
     }
 
 
@@ -180,11 +181,11 @@ class UserController extends Controller
     }
 
     public function getFaqs(){
-        return $this->respondWithSuccess(FAQ::get());
+        return $this->respondWithSuccess($this->settings->getAllFaqs());
     }
 
     public function getCompanyInfo(String $type)
     {
-        return $this->respondWithSuccess(CompanyInfo::where('title', $type)->first());
+        return $this->respondWithSuccess($this->settings->getCompanyInfo($type));
     }
 }

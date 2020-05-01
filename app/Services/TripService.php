@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\TripRepository;
-use App\Services\UserService;
+use App\Services\{UserService, ExpoNotification};
 use App\Events\TripEvent;
 use App\Notifications\NewTruckRequest;
 use App\{TripDetail, TripStage};
@@ -18,14 +18,14 @@ class TripService
     {
         $this->trip = $trip;
         $this->user = $user;
-        $this->userLocation = $location;
+        $this->location = $location;
         $this->tripDetail = $tripDetail;
         $this->trip_stage = $trip_stage;
     }
 
     public function requestTrip(array $input)
     {
-        $location = $this->userLocation->addLocation($input);
+        $location = $this->location->addLocation($input);
         $basefare = 1000;
         $data = [
             'user_id' => getUser()->id,
@@ -68,14 +68,18 @@ class TripService
     }
 
 
-    public function assignDriver(int $id, string $uuid)
+    public function assignDriver(int $id, string $uuid, int $amount)
     {
         $driver = $this->user->getUserByUuid($uuid);
         $trip = $this->getTrip($id);
         $data = $this->trip->update($trip, [
             'driver_id' => $driver->id,
-            'status_id' => 1
+            'status_id' => 1,
+            'price' => $amount,
         ]);
+        if ($trip->user->expo_token) {
+            ExpoNotification::sendNotification($trip->user->expo_token, 'Order Confirmed', 'Trip Request has been confirmed', []);
+        }
         $this->updateStage($trip->id, 1);
         return $data;
     }

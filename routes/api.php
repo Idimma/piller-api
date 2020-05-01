@@ -74,6 +74,8 @@ Route::group(['prefix' => 'driver'], function () {
     Route::post('login', 'DriverController@authenticate');
 
     Route::group(['middleware' => ['jwt.verify', 'driver']], function () {
+        Route::post('password/change', 'DriverController@changePassword');
+
         Route::group(['prefix' => 'trip'], function () {
             Route::get('{id}/accept', 'DriverController@acceptTrip');
             Route::get('{id}/cancel', 'UserTripController@cancelTrip');
@@ -133,7 +135,12 @@ Route::group(['middleware' => ['cors', 'jwt.verify', 'admin'], 'prefix' => 'admi
         Route::get('/progress', 'AdminController@getInProgressTrips');
         Route::get('/completed', 'AdminController@getInProgressTrips');
         Route::get('{id}', 'AdminController@getSingleTrip');
-        Route::post('{id}/{driver}', 'AdminController@assignDriver');
+        Route::post('{id}', 'AdminController@assignDriver');
         Route::delete('{id}', 'AdminController@deleteTrip');
+    });
+
+    Route::group(['prefix' => 'setting'], function(){
+        Route::get('/location', 'AdminController@getBaseLocation');
+        Route::post('/location', 'AdminController@setBaseLocation');
     });
 });

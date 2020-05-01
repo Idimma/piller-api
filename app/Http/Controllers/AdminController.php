@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRegistrationRequest;
-use App\Services\{UserService, TripService, LocationService, ChatService};
+use App\Http\Requests\{UserRegistrationRequest, LocationRequest};
+use Illuminate\Support\Facades\{Validator};
+use App\Services\{UserService, TripService, LocationService, ChatService, SettingService};
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
@@ -12,14 +13,15 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AdminController extends Controller
 {
-    private $userService, $tripService, $chat, $locationService;
+    private $userService, $tripService, $chat, $locationService, $setting;
     //
-    public function __construct(UserService $userService, TripService $trip, LocationService $location, ChatService $chat)
+    public function __construct(UserService $userService, TripService $trip, LocationService $location, ChatService $chat, SettingService $setting)
     {
         $this->userService = $userService;
         $this->tripService = $trip;
         $this->locationService = $location;
         $this->chat = $chat;
+        $this->setting = $setting;
     }
 
     /**
@@ -87,9 +89,17 @@ class AdminController extends Controller
      * Assigns a driver to a trip
      * @return JsonResponse
      */
-    public function assignDriver(int $id, string $uuid)
+    public function assignDriver(int $id, Request $request)
     {
-        return $this->respondWithSuccess($this->tripService->assignDriver($id, $uuid));
+        $validator = Validator::make($request->all(), [
+            'uuid' => 'required|string',
+            'amount' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+        return $this->respondWithSuccess($this->tripService->assignDriver($id, $request->get('uuid'), $request->get('amount')));
     }
 
     /**
@@ -118,5 +128,15 @@ class AdminController extends Controller
 
     public function getNotification(){
         return $this->respondWithSuccess($this->userService->getUserNotifications());
+    }
+
+    public function getBaseLocation(){
+        return $this->respondWithSuccess($this->setting->getBaseLocation());
+    }
+
+    public function setBaseLocation(LocationRequest $request)
+    {
+        $data = $request->validated();
+        return $this->respondWithSuccess($this->setting->setBaseLocation($data));
     }
 }

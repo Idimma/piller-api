@@ -173,4 +173,12 @@ class UserService
         $user = $this->getUserByUuid($uuid);
         return $this->locationService->getLocations($user);
     }
+
+    public function passwordChange($old_password, $new_password){
+        $user = getUser();
+        if(!password_verify($old_password, $user->password)){
+            return ['error' => 'Password doesnt match old password'];
+        }
+        return $this->update(['password' => Hash::make($new_password)]);
+    }
 }

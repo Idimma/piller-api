@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Str;
 
 
+
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -135,4 +136,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Card', 'user_id', 'id');
     }
     
+    public function activeCard()
+    {
+        if($this->cards->where('default', 1)->isNotEmpty()){
+            return $this->cards()->where('default', 1)->first();
+        }
+        return $this->cards()->first();
+    }
 }
