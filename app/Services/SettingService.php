@@ -36,7 +36,7 @@ class SettingService
         $location = [];
         foreach ($this->location_arr as $key) {
             $det = $this->getCompanyInfo($key);
-            $location[$key] =  $det['details'] ?: 0;
+            $location[$key] =  $det['details'] ?: "0";
         }
         return (object) $location;
     }
