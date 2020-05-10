@@ -29,4 +29,9 @@ class UserRole extends Model
         return $this->queryByRole($id)->with('user')->paginate($count)->pluck('user');
     }
 
+    public function newUsers()
+    {
+        return $this->user()->dateBetween();
+    }
+
 }

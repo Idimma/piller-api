@@ -66,4 +66,8 @@ class BaseRepository{
         return $this->model->firstOrCreate($unique, $other);
      }
 
+     public function count()
+     {
+         return $this->model->count();
+     }
 }

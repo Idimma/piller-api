@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\UserService;
+use App\Services\{UserService, TripService};
 
 class ReportController extends Controller
 {
     //
-    public function __construct(UserService $userService)
+    private $userService;
+    private $tripService;
+    public function __construct(UserService $userService, TripService $tripService)
     {
         $this->userService = $userService;
+        $this->tripService = $tripService;
     }
 
 
@@ -55,6 +58,7 @@ class ReportController extends Controller
      * @return JsonResponse
      */
     public function reportSummary(){
-        return $this->respondWithSuccess(['data' => $this->userService->reportSummary()]);
+        $data = $this->userService->reportDriversAndCustomers();
+        return $this->respondWithSuccess(['data' => array_merge($data, $this->tripService->tripReportSummary())]);
     }
 }

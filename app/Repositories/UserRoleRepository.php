@@ -25,4 +25,16 @@ class UserRoleRepository extends BaseRepository
         return $this->userrole->usersByRole($role_id, $count);
 
     }
+
+    public function getCountNewRoleUser(int $role_id)
+    {
+        return $this->userrole->queryByRole($role_id)->has('newUsers')->count();
+    }
+
+    public function getCountActive(int $role_id, int $status)
+    {
+        return $this->userrole->queryByRole($role_id)->whereHas('user', function($q) use($status){
+            return $q->active($status);
+        })->count();
+    }
 }

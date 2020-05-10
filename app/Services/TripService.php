@@ -116,6 +116,14 @@ class TripService
         return $this->getTrip($id);
     }
 
+    public function tripReportSummary() 
+    {
+        return [
+            'all_trips' => $this->trip->count(),
+            'pending_trips' => $this->trip->getTripByStatusCount(2),
+            'completed_trips' => $this->trip->getTripByStatusCount(4),
+        ];
+    }
     public function trackTrip(int $id)
     {
         $trip = $this->getTrip($id);

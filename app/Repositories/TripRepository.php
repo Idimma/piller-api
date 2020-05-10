@@ -23,8 +23,10 @@ class TripRepository extends BaseRepository
     public function getBulkTripByStatus(array $ids, $count=15)
     {
         return $this->trip->getBulkTripByStatus($ids)->paginate($count);
-
     }
 
-    
+    public function getTripByStatusCount(int $id)
+    {
+        return $this->trip->getTripByStatus($id)->count();
+    }
 }

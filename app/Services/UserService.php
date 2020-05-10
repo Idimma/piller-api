@@ -16,6 +16,8 @@ use Mail;
 class UserService
 {
 
+    private $user;
+    private $user_role;
     public function __construct(UserRepository $user, UserRoleRepository $user_role, LocationService $locationService)
     {
         $this->user = $user;
@@ -116,6 +118,7 @@ class UserService
     {
         return $this->user_role->getCountByRole(2);
     }
+
     public function getAdmins()
     {
         return $this->user_role->getUsersByRole(1);
@@ -131,12 +134,16 @@ class UserService
         return $this->user_role->getUsersByRole(2, $per_page);
     }
 
-    public function reportSummary()
+    public function reportDriversAndCustomers()
     {
         $data = [
-            'users' => $this->getUsersCount(),
-            'drivers' => $this->getDriversCount(),
-            'trucks'  => 0
+            'users' => $user_count = $this->getUsersCount(),
+            'drivers' => $driver_count =  $this->getDriversCount(),
+            'new_users' => $this->user_role->getCountNewRoleUser(3),
+            'active_users' => $active_users =  $this->user_role->getCountActive(3, 1),
+            'active_drivers' => $active_driver = $this->user_role->getCountActive(2, 1),
+            'in_active_drivers' => $driver_count - $active_driver,
+            'in_active_users' => $user_count - $active_users,
         ];
         return $data;
     }

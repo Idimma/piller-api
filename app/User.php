@@ -135,7 +135,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Card', 'user_id', 'id');
     }
+
+    public function scopeActive($query, $status=1){
+        return $query->where('is_verified', $status)->where('status', $status);
+    }
     
+    public function scopeDateBetween($query, $within = 1)
+    {
+        return $query->where('created_at', '>=', now()->subDays($within));
+    }
+
     public function activeCard()
     {
         if($this->cards->where('default', 1)->isNotEmpty()){
