@@ -22,7 +22,7 @@ class UserRegistrationRequest extends BaseRequest
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'phone'   => 'sometimes|numeric',
+            'phone'   => 'required|numeric',
             'bank_name' => 'sometimes|string',
             'account_name' => 'sometimes|string',
             'account_number' =>'sometimes|numeric',

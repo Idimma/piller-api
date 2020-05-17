@@ -22,6 +22,9 @@ class TripRequest extends BaseRequest
             'address' => 'required|string',
             'lat' => 'required|numeric',
             'lon' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'due_date' => 'required|date|after:now',
+            'comment'  => 'sometimes|string',
             'coupon'   => 'sometimes|string'
         ];
     }

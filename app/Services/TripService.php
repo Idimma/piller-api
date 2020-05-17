@@ -8,6 +8,7 @@ use App\Events\TripEvent;
 use App\Notifications\NewTruckRequest;
 use App\{TripDetail, TripStage};
 use Notification;
+use Illuminate\Support\Arr;
 
 class TripService
 {
@@ -25,17 +26,24 @@ class TripService
 
     public function requestTrip(array $input)
     {
-        $location = $this->location->addLocation($input);
+        $location = $this->location->addLocation(Arr::only($input, ['lat', 'lon', 'address']));
+
         $basefare = 1000;
-        $data = [
+        $trip_arr = Arr::except($input, ['lat', 'lon', 'address']);
+
+        $data = array_merge($trip_arr, [
             'user_id' => getUser()->id,
             'destination' => $location->id,
             'status_id' => 2,
             'price' => $basefare,
-        ];
+        ]);
+
         $trip = $this->trip->create($data);
+
         $this->updateStage($trip->id, 2);
+
         broadcast(new TripEvent($trip));
+
         $admins = $this->user->getAdmins();
         Notification::send($admins, new NewTruckRequest($trip));
         return $trip;
@@ -72,14 +80,17 @@ class TripService
     {
         $driver = $this->user->getUserByUuid($uuid);
         $trip = $this->getTrip($id);
+
         $data = $this->trip->update($trip, [
             'driver_id' => $driver->id,
             'status_id' => 1,
             'price' => $amount,
         ]);
+
         if ($trip->user->expo_token) {
             ExpoNotification::sendNotification($trip->user->expo_token, 'Order Confirmed', 'Trip Request has been confirmed', []);
         }
+
         $this->updateStage($trip->id, 1);
         return $data;
     }
@@ -110,13 +121,16 @@ class TripService
         if (!$this->validateTripUser($id)) {
             return ['error' => 'Unauthorized to access trip request'];
         };
+
         $trip = $this->getTrip($id);
+
         $this->trip->update($trip, ['status_id' => $status]);
+
         $this->updateStage($id, $status);
         return $this->getTrip($id);
     }
 
-    public function tripReportSummary() 
+    public function tripReportSummary()
     {
         return [
             'all_trips' => $this->trip->count(),
@@ -136,13 +150,14 @@ class TripService
         ];
 
         $track = [];
+        
         foreach ($resource as $key => $stage) {
             $l = $trip->stages->where('status_id', $stage)->first();
             $track[$key] = [
                 'status_name' => $key,
                 'isCompleted' => isset($l),
                 'isActive'    => $trip->stages->last() === $l,
-                'timestamp'   => isset($l) ? $l->toArray()['created_at']: false
+                'timestamp'   => isset($l) ? $l->toArray()['created_at'] : false
             ];
         }
         return $track;

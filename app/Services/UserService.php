@@ -74,10 +74,13 @@ class UserService
     {
         $user = JWTAuth::user();
 
+        // i was asked to remove the authentication validation
+        /*
         if (!$user->is_verified) {
             $this->getUserVerificationToken($user);
             return ['error' => 'Account not Activated. Check your mail', 'status' => 401];
         }
+        */
         if (!$user->status) {
             return ['error' => 'Account Disabled. Contact customer case', 'status' => 401];
         }
