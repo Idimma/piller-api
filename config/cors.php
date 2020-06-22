@@ -20,7 +20,7 @@ return [
         'allow_credentials' => false,
 
         'allow_origins' => [
-            // '*',
+             '*',
             'http://*.joolaoilandgas.com',
             'https://*.joolaoilandgas.com',
             'http://localhost:*',

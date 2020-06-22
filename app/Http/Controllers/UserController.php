@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
-use App\Services\{UserService, LocationService, SettingService};
-use Illuminate\Support\Facades\{Validator};
+use App\Services\{LocationService, SettingService, UserService};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{Validator};
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\{JWTException, TokenExpiredException, TokenInvalidException};
 
 class UserController extends Controller
 {
     //
     private $settings;
+
     public function __construct(UserService $userService, LocationService $location, SettingService $settings)
     {
         $this->userService = $userService;
@@ -21,10 +21,9 @@ class UserController extends Controller
     }
 
 
-
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('phone', 'password');
 
         $token = $this->userService->authenticate($credentials);
         if (is_array($token)) {
@@ -35,8 +34,9 @@ class UserController extends Controller
 
 
     /**
-     * 
+     *
      * User Registration
+     * @param UserRegistrationRequest $request
      * @return JsonResponse
      */
     public function register(UserRegistrationRequest $request)
@@ -61,10 +61,10 @@ class UserController extends Controller
     }
 
 
-
     /**
-     * 
+     *
      * Update the User phone number
+     * @param UserPhoneRequest $request
      * @return JsonResponse
      */
 
@@ -180,7 +180,8 @@ class UserController extends Controller
         return $this->respondWithSuccess($user, 201);
     }
 
-    public function getFaqs(){
+    public function getFaqs()
+    {
         return $this->respondWithSuccess($this->settings->getAllFaqs());
     }
 

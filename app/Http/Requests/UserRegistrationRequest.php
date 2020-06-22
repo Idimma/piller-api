@@ -7,7 +7,7 @@ use App\Http\Requests\BaseRequest;
 
 class UserRegistrationRequest extends BaseRequest
 {
-    
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +22,7 @@ class UserRegistrationRequest extends BaseRequest
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'phone'   => 'required|numeric',
+            'phone'   => 'required|numeric|unique:users',
             'bank_name' => 'sometimes|string',
             'account_name' => 'sometimes|string',
             'account_number' =>'sometimes|numeric',
