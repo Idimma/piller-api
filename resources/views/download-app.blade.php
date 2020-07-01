@@ -71,9 +71,8 @@
                     <div class="container">
                         <div class="row justify-content-center align-items-center">
                             <div class="col-lg-6" data-aos="fade-right">
-                                <h1 class="page-header-title">Build a landing page for your mobile app</h1>
-                                <p class="page-header-text mb-5">Marketing pages for your mobile app have never been
-                                    easier. Get started now!</p>
+                                <h1 class="page-header-title">Joola Gas mobile app</h1>
+                                <p class="page-header-text mb-5">Get started now!</p>
                                 <div class="mb-5 mb-lg-0">
                                     <a class="mr-3" href="javascript:void(0);">
                                         <img src="{{asset('images/app-store-badge.svg')}}"
