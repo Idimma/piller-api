@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content/>
     <meta name="author" content/>
-    <title>Mobile App - SB Admin Pro</title>
+    <title>Mobile App - Joola Oil and Gas</title>
     <link href="{{asset('css/index.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/lity.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/aos.css')}}" rel="stylesheet"/>
@@ -382,7 +382,7 @@
                 <img src="{{asset('images/Featured Graphics.jpg')}}" style="height: 500px; "/>
                 <hr class="my-5"/>
                 <div class="row align-items-center">
-                    <div class="col-md-6 small">Copyright &#xA9; Your Website 2020</div>
+                    <div class="col-md-6 small">Copyright &#xA9; Joola Oil and Gas 2020</div>
                     <div class="col-md-6 text-md-right small">
                         <a href="javascript:void(0);">Privacy Policy</a>
                         &#xB7;
