@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('download-app');
 });
 
 Route::get('avatar/{url}', 'UserController@getProfileImage');
