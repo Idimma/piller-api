@@ -87,13 +87,16 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 z-1" data-aos="fade-left">
-                                <div class="device-wrapper mx-auto mb-n15">
-                                    <div class="device" data-device="iPhoneX" data-orientation="portrait"
-                                         data-color="black">
-                                        <div class="screen">
+                                <div class="device-wrapper ml-auto mb-n15 ">
+                                    <img src="{{asset('images/IphoneV.png')}}"
+                                         style="width: 100%;height: 93.49030471%;border: 0px;z-index: 0;">
 
-                                        </div>
-                                    </div>
+{{--                                    <div class="device" data-device="iPhoneX" data-orientation="portrait"--}}
+{{--                                         data-color="black">--}}
+{{--                                        <div class="screen">--}}
+
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -379,7 +382,7 @@
     <div id="layoutDefault_footer">
         <footer class="footer pt-10 pb-5 mt-auto bg-primary footer-dark">
             <div class="container">
-                <img src="{{asset('images/Featured Graphics.jpg')}}" style="height: 500px; "/>
+                <img src="{{asset('images/Featured Graphics.jpg')}}" style="width: 100%; "/>
                 <hr class="my-5"/>
                 <div class="row align-items-center">
                     <div class="col-md-6 small">Copyright &#xA9; Joola Oil and Gas 2020</div>
