@@ -18,7 +18,7 @@ class Trip extends Model
         'status:id,status',
         'destinations:id,address,lat,lon',
         'user:id,uuid,first_name,last_name',
-        'driver:id,uuid,first_name,last_name'
+        'driver:id,uuid,first_name,last_name,phone'
     ];
 
     protected $hidden = ['user_id', 'driver_id'];

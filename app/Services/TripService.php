@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Repositories\TripRepository;
-use App\Services\{UserService, ExpoNotification};
+use App\{TripDetail, TripStage};
 use App\Events\TripEvent;
 use App\Notifications\NewTruckRequest;
-use App\{TripDetail, TripStage};
-use Notification;
+use App\Repositories\TripRepository;
 use Illuminate\Support\Arr;
+use Notification;
 
 class TripService
 {
@@ -138,6 +137,7 @@ class TripService
             'completed_trips' => $this->trip->getTripByStatusCount(4),
         ];
     }
+
     public function trackTrip(int $id)
     {
         $trip = $this->getTrip($id);
@@ -155,15 +155,12 @@ class TripService
             $track[$key] = [
                 'status_name' => $key,
                 'isCompleted' => isset($l),
-                'isActive'    => $trip->stages->last() === $l,
-                'timestamp'   => isset($l) ? $l->toArray()['created_at'] : false
+                'isActive' => $trip->stages->last() === $l,
+                'timestamp' => isset($l) ? $l->toArray()['created_at'] : false
             ];
         }
 
         //  add driver
-
-//        $driver =
-
         $track['driver'] = $trip->driver();
         return $track;
     }
@@ -184,6 +181,7 @@ class TripService
     {
         return $this->trip_stage->create(['status_id' => $status, 'trip_id' => $trip_id]);
     }
+
     /**
      * Validate the user can modify trip
      * @return bool
