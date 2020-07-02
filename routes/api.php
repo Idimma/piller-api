@@ -42,7 +42,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('{id}/cancel', 'UserTripController@cancelTrip');
         Route::post('{id}/review', 'UserTripController@reviewTrip');
         Route::get('{id}/track', 'UserTripController@trackTrip');
-
     });
 
     Route::group(['prefix' => 'location'], function () {

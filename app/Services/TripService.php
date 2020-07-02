@@ -150,7 +150,6 @@ class TripService
         ];
 
         $track = [];
-        
         foreach ($resource as $key => $stage) {
             $l = $trip->stages->where('status_id', $stage)->first();
             $track[$key] = [
@@ -160,6 +159,12 @@ class TripService
                 'timestamp'   => isset($l) ? $l->toArray()['created_at'] : false
             ];
         }
+
+        //  add driver
+
+//        $driver =
+
+        $track['driver'] = $trip->driver();
         return $track;
     }
 
