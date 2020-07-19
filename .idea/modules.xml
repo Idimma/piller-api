@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/joola-api.iml" filepath="$PROJECT_DIR$/.idea/joola-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/piller-api.iml" filepath="$PROJECT_DIR$/.idea/piller-api.iml" />
     </modules>
   </component>
 </project>
