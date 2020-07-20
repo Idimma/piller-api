@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\{TripDetail, TripStage};
-use App\Events\TripEvent;
+use App\Events\PlanEvent;
 use App\Notifications\NewWithdrawalRequest;
 use App\Repositories\PlanRepository;
 use Illuminate\Support\Arr;
@@ -41,7 +41,7 @@ class PlanService
 
         $this->updateStage($trip->id, 2);
 
-        broadcast(new TripEvent($trip));
+        broadcast(new PlanEvent($trip));
 
         $admins = $this->user->getAdmins();
         Notification::send($admins, new NewWithdrawalRequest($trip));

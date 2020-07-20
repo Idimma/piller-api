@@ -7,7 +7,7 @@ use App\Services\PlanService;
 use Illuminate\Http\Request;
 
 
-class UserTripController extends Controller
+class UserPlanController extends Controller
 {
     private $tripService;
     //
