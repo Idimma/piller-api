@@ -16,7 +16,9 @@ class CreateUserLocationsTable extends Migration
         Schema::create('user_locations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('address');
             $table->string('lat');
             $table->string('lon');

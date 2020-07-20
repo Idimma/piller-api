@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\{TripRequest,TripReviewRequest};
-use App\Services\TripService;
+use App\Services\PlanService;
 use Illuminate\Http\Request;
 
 
@@ -11,7 +11,7 @@ class UserTripController extends Controller
 {
     private $tripService;
     //
-    public function __construct(TripService $tripService)
+    public function __construct(PlanService $tripService)
     {
         $this->tripService = $tripService;
     }

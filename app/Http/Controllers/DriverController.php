@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegistrationRequest;
-use App\Services\{UserService, TripService, PaystackService};
+use App\Services\{UserService, PlanService, PaystackService};
 use App\Transactions;
 use Illuminate\Support\Facades\{Validator};
 
@@ -17,7 +17,7 @@ class DriverController extends Controller
 {
     //
     private $tripService, $userService, $payment;
-    public function __construct(UserService $userService, TripService $tripService, PaystackService $payment)
+    public function __construct(UserService $userService, PlanService $tripService, PaystackService $payment)
     {
         $this->userService = $userService;
         $this->tripService = $tripService;
@@ -25,7 +25,7 @@ class DriverController extends Controller
     }
 
     /**
-     * 
+     *
      * User Registration
      * @param UserRegistrationRequest $request
      * @return JsonResponse

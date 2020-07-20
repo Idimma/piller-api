@@ -47,6 +47,11 @@ class ChatService
         return $this->chat->getLatestChat($per_page);
     }
 
+    /**
+     * @param int $id
+     * @param Int $per_page
+     * @return mixed
+     */
     public function getChatMessages(int $id, Int $per_page = 20)
     {
         $chat = $this->chat->get($id);

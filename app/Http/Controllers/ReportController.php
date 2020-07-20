@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\{UserService, TripService};
+use App\Services\{UserService, PlanService};
 
 class ReportController extends Controller
 {
     //
     private $userService;
     private $tripService;
-    public function __construct(UserService $userService, TripService $tripService)
+    public function __construct(UserService $userService, PlanService $tripService)
     {
         $this->userService = $userService;
         $this->tripService = $tripService;

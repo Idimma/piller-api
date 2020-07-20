@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('download-app');
+    return 'HELLO WORLD';
+   // return view('download-app');
 });
 
 Route::get('avatar/{url}', 'UserController@getProfileImage');

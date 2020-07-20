@@ -30,6 +30,6 @@ class VerifyUser extends Mailable
      */
     public function build()
     {
-        return $this->subject('Welcome to JoolaOil&Gas')->view('mail.welcome');
+        return $this->subject('Welcome to Lay Buy')->view('mail.welcome');
     }
 }

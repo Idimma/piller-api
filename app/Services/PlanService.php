@@ -4,17 +4,17 @@ namespace App\Services;
 
 use App\{TripDetail, TripStage};
 use App\Events\TripEvent;
-use App\Notifications\NewTruckRequest;
-use App\Repositories\TripRepository;
+use App\Notifications\NewWithdrawalRequest;
+use App\Repositories\PlanRepository;
 use Illuminate\Support\Arr;
 use Notification;
 
-class TripService
+class PlanService
 {
 
     private $location, $trip, $user, $tripDetail, $trip_stage;
 
-    public function __construct(TripRepository $trip, UserService $user, LocationService $location, TripDetail $tripDetail, TripStage $trip_stage)
+    public function __construct(PlanRepository $trip, UserService $user, LocationService $location, TripDetail $tripDetail, TripStage $trip_stage)
     {
         $this->trip = $trip;
         $this->user = $user;
@@ -44,7 +44,7 @@ class TripService
         broadcast(new TripEvent($trip));
 
         $admins = $this->user->getAdmins();
-        Notification::send($admins, new NewTruckRequest($trip));
+        Notification::send($admins, new NewWithdrawalRequest($trip));
         return $trip;
     }
 

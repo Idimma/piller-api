@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\{UserRegistrationRequest, LocationRequest};
 use Illuminate\Support\Facades\{Validator};
-use App\Services\{UserService, TripService, LocationService, ChatService, SettingService};
+use App\Services\{UserService, PlanService, LocationService, ChatService, SettingService};
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
@@ -15,7 +15,7 @@ class AdminController extends Controller
 {
     private $userService, $tripService, $chat, $locationService, $setting;
     //
-    public function __construct(UserService $userService, TripService $trip, LocationService $location, ChatService $chat, SettingService $setting)
+    public function __construct(UserService $userService, PlanService $trip, LocationService $location, ChatService $chat, SettingService $setting)
     {
         $this->userService = $userService;
         $this->tripService = $trip;
@@ -25,7 +25,7 @@ class AdminController extends Controller
     }
 
     /**
-     * 
+     *
      * User Registration
      * @return JsonResponse
      */

@@ -6,7 +6,7 @@ use App\Trip;
 use App\Repositories\BaseRepository;
 
 
-class TripRepository extends BaseRepository
+class PlanRepository extends BaseRepository
 {
     private $trip;
     public function __construct(Trip $trip)

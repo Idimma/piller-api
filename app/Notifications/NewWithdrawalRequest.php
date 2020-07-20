@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewTruckRequest extends Notification
+class NewWithdrawalRequest extends Notification
 {
     use Queueable;
 
