@@ -16,5 +16,15 @@ Route::get('/', function () {
    // return view('download-app');
 });
 
+Route::get('artisan/{string}', function ($command) {
+
+//    if(str_contains($command,' ')){
+//        $command = str_replace($command, ' ', ':');
+//    }
+    Artisan::call($command);
+    return 'Artisan '. $command.' Completed';
+   // return view('download-app');
+});
+
 Route::get('avatar/{url}', 'UserController@getProfileImage');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

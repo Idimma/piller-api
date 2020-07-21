@@ -13,18 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser')->name('user.verify');
-// Route::get('open', 'DataController@open');
+
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::post('phone/add', 'UserController@addPhone');
+    Route::post('user', 'UserController@update');
     Route::post('avatar/add', 'UserController@uploadAvatar');
     Route::post('update/email', 'UserController@updateEmail');
     Route::post('update/name', 'UserController@updateName');
@@ -33,15 +31,22 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('company/faq', 'UserController@getFaqs');
     Route::get('company/{type}', 'UserController@getCompanyInfo');
     /**
-     * Trip Request Group
+     * Plan Request Group
      */
-    Route::group(['prefix' => 'trip'], function () {
-        Route::post('request', 'UserTripController@createTrip');
-        Route::get('/', 'UserTripController@getUserTrips');
-        Route::get('/pending', 'UserTripController@getPendingTrip');
-        Route::get('{id}/cancel', 'UserTripController@cancelTrip');
-        Route::post('{id}/review', 'UserTripController@reviewTrip');
-        Route::get('{id}/track', 'UserTripController@trackTrip');
+    Route::group(['prefix' => 'plan'], function () {
+        Route::post('request', 'UserPlanController@createPlan');
+        Route::get('/', 'UserPlanController@getUserPlans');
+        Route::get('/{id}', 'UserPlanController@show');
+        Route::post('/', 'UserPlanController@createPlan');
+        Route::put('/', 'UserPlanController@update');
+        Route::post('/update', 'UserPlanController@update');
+        Route::delete('/', 'UserPlanController@delete');
+        Route::delete('/{id}', 'UserPlanController@delete');
+
+        Route::get('/pending', 'UserPlanController@getPendingPlan');
+        Route::get('{id}/cancel', 'UserPlanController@cancelPlan');
+        Route::post('{id}/review', 'UserPlanController@reviewPlan');
+        Route::get('{id}/track', 'UserPlanController@trackPlan');
     });
 
     Route::group(['prefix' => 'location'], function () {
@@ -59,28 +64,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'chat'], function () {
         Route::get('/', 'ChatController@getMessages');
         Route::post('/', 'ChatController@sendMessage');
-    });
-});
-
-
-
-
-/**
- * Driver Routes
- */
-
-Route::group(['prefix' => 'driver'], function () {
-    Route::post('login', 'DriverController@authenticate');
-
-    Route::group(['middleware' => ['jwt.verify', 'driver']], function () {
-        Route::post('password/change', 'DriverController@changePassword');
-
-        Route::group(['prefix' => 'trip'], function () {
-            Route::get('{id}/accept', 'DriverController@acceptTrip');
-            Route::get('{id}/cancel', 'UserTripController@cancelTrip');
-            Route::post('{id}/complete', 'DriverController@completeTrip');
-            Route::post('{id}/review', 'UserTripController@reviewTrip');
-        });
     });
 });
 
@@ -128,14 +111,14 @@ Route::group(['middleware' => ['cors', 'jwt.verify', 'admin'], 'prefix' => 'admi
         Route::post('/', 'ChatController@sendReply');
     });
 
-    Route::group(['prefix' => 'trip'], function () {
-        Route::get('/', 'AdminController@getTrips');
-        Route::get('/pending', 'AdminController@getTripRequests');
-        Route::get('/progress', 'AdminController@getInProgressTrips');
-        Route::get('/completed', 'AdminController@getInProgressTrips');
-        Route::get('{id}', 'AdminController@getSingleTrip');
+    Route::group(['prefix' => 'plan'], function () {
+        Route::get('/', 'AdminController@getPlans');
+        Route::get('/pending', 'AdminController@getPlanRequests');
+        Route::get('/progress', 'AdminController@getInProgressPlans');
+        Route::get('/completed', 'AdminController@getInProgressPlans');
+        Route::get('{id}', 'AdminController@getSinglePlan');
         Route::post('{id}', 'AdminController@assignDriver');
-        Route::delete('{id}', 'AdminController@deleteTrip');
+        Route::delete('{id}', 'AdminController@deletePlan');
     });
 
     Route::group(['prefix' => 'setting'], function(){

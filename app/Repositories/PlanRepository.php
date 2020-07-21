@@ -2,31 +2,31 @@
 
 namespace App\Repositories;
 
-use App\Trip;
+use App\Plan;
 use App\Repositories\BaseRepository;
 
 
 class PlanRepository extends BaseRepository
 {
-    private $trip;
-    public function __construct(Trip $trip)
+    private $plan;
+    public function __construct(Plan $plan)
     {
-        $this->trip = $trip;
-        parent::__construct($trip);
+        $this->plan = $plan;
+        parent::__construct($plan);
     }
 
-    public function getTripByStatus(int $id, $count=15)
+    public function getPlanByStatus(int $id, $count=15)
     {
-        return $this->trip->getTripByStatus($id)->paginate($count);
+        return $this->plan->getPlanByStatus($id)->paginate($count);
     }
 
-    public function getBulkTripByStatus(array $ids, $count=15)
+    public function getBulkPlanByStatus(array $ids, $count=15)
     {
-        return $this->trip->getBulkTripByStatus($ids)->paginate($count);
+        return $this->plan->getBulkPlanByStatus($ids)->paginate($count);
     }
 
-    public function getTripByStatusCount(int $id)
+    public function getPlanByStatusCount(int $id)
     {
-        return $this->trip->getTripByStatus($id)->count();
+        return $this->plan->getPlanByStatus($id)->count();
     }
 }

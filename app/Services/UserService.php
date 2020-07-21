@@ -25,7 +25,7 @@ class UserService
         $this->locationService = $locationService;
     }
 
-    public function register(array $input, $role_id = 3)
+    public function register(array $input, $role_id = 2)
     {
         $input['password'] = Hash::make($input['password']);
         $user = $this->user->create($input);

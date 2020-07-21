@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
+use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest, UserUpdateRequest};
 use App\Services\{LocationService, SettingService, UserService};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Validator};
@@ -75,8 +75,17 @@ class UserController extends Controller
         return $this->respondWithSuccess($user, 201);
     }
 
+//    public function update(UserUpdateRequest $request)
+//    {
+//        $request = $request->validated();
+//        dd($request);
+//        $user = $this->userService->update($request);
+//        return $this->respondWithSuccess($user, 201);
+//    }
+
     /**
      * Upload User Avatar
+     * @param AvatarRequest $request
      * @return JsonResponse
      */
     public function uploadAvatar(AvatarRequest $request)
@@ -88,6 +97,7 @@ class UserController extends Controller
 
     /**
      * Update User firstname & Last Name
+     * @param Request $request
      * @return JsonResponse
      */
     public function updateName(Request $request)
@@ -104,6 +114,26 @@ class UserController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name')
         ]);
+        return $this->respondWithSuccess($user, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'sometimes|min:11|numeric',
+            'first_name' => 'sometimes|string|max:255',
+            'last_name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255',
+            'bank_name' => 'sometimes|string',
+            'account_name' => 'sometimes|string',
+            'account_number' =>'sometimes|numeric',
+            'driving_license' => 'sometimes'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+        $user = $this->userService->update( $request->except(['password',  'image_url', 'uuid']));
         return $this->respondWithSuccess($user, 201);
     }
 

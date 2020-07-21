@@ -21,7 +21,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified', 'expo_token'
+        'first_name', 'last_name', 'email', 'password', 'image_url', 'phone', 'uuid', 'status', 'is_verified',
+        'registration_type', 'country'
     ];
 
     /**
@@ -70,30 +71,30 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne('App\UserVerification', 'user_id', 'id');
     }
 
-    public function userTrip()
+    public function userPlan()
     {
-        return $this->hasMany('App\Trip', 'user_id', 'id');
+        return $this->hasMany('App\Plan', 'user_id', 'id');
     }
 
-    public function driverTrip()
+    public function driverPlan()
     {
-        return $this->hasMany('App\Trip', 'driver_id', 'id');
+        return $this->hasMany('App\Plan', 'driver_id', 'id');
     }
 
-    public function hasActiveTrip()
+    public function hasActivePlan()
     {
-        return $this->userTrip->whereIn('status_id', ['1', '2', '3'])->isNotEmpty();
+        return $this->userPlan->whereIn('status_id', ['1', '2', '3'])->isNotEmpty();
     }
 
-    public function getPendingTrip()
+    public function getPendingPlan()
     {
-        return $this->userTrip->whereIn('status_id', ['1', '2', '3'])->first();
+        return $this->userPlan->whereIn('status_id', ['1', '2', '3'])->first();
     }
 
     public function availableDriver(){
         return $this->whereHas('userrole', function($q){
             return $q->where('role_id',2);
-        })->whereDoesntHave('driverTrip', function($q){
+        })->whereDoesntHave('driverPlan', function($q){
             return $q->whereIn('status_id', ['1', '2', '3']);
         })->get();
     }
@@ -139,7 +140,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopeActive($query, $status=1){
         return $query->where('is_verified', $status)->where('status', $status);
     }
-    
+
     public function scopeDateBetween($query, $within = 1)
     {
         return $query->where('created_at', '>=', now()->subDays($within));

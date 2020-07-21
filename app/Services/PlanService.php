@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\{TripDetail, TripStage};
 use App\Events\PlanEvent;
 use App\Notifications\NewWithdrawalRequest;
 use App\Repositories\PlanRepository;
@@ -12,135 +11,123 @@ use Notification;
 class PlanService
 {
 
-    private $location, $trip, $user, $tripDetail, $trip_stage;
+    private $location, $plan, $user, $planDetail, $plan_stage;
 
-    public function __construct(PlanRepository $trip, UserService $user, LocationService $location, TripDetail $tripDetail, TripStage $trip_stage)
+    public function __construct(PlanRepository $plan, UserService $user, LocationService $location)
     {
-        $this->trip = $trip;
+        $this->plan = $plan;
         $this->user = $user;
         $this->location = $location;
-        $this->tripDetail = $tripDetail;
-        $this->trip_stage = $trip_stage;
     }
 
-    public function requestTrip(array $input)
+    public function requestPlan(array $input)
     {
-        $location = $this->location->addLocation(Arr::only($input, ['lat', 'lon', 'address']));
+        $user = getUser();
+        $plan = $this->plan->create(array_merge($input, [
+            'user_id'=>$user->id]));
 
-        $basefare = 1000;
-        $trip_arr = Arr::except($input, ['lat', 'lon', 'address']);
+//        $this->updateStage($plan->id, 2);
 
-        $data = array_merge($trip_arr, [
-            'user_id' => getUser()->id,
-            'destination' => $location->id,
-            'status_id' => 2,
-            'price' => $basefare,
-        ]);
+       // broadcast(new PlanEvent($plan));
 
-        $trip = $this->trip->create($data);
-
-        $this->updateStage($trip->id, 2);
-
-        broadcast(new PlanEvent($trip));
-
-        $admins = $this->user->getAdmins();
-        Notification::send($admins, new NewWithdrawalRequest($trip));
-        return $trip;
+//        $admins = $this->user->getAdmins();
+//        Notification::send($admins, new NewWithdrawalRequest($plan));
+        return $plan;
     }
 
     public function getAllRequests($per_page = 15)
     {
-        return $this->trip->paginate($per_page);
+        return $this->plan->paginate($per_page);
     }
 
-    public function userTrips()
+    public function userPlans()
     {
         $user = getUser();
-        return $user->userTrip()->latest()->get();
+        return $user->userPlan()->latest()->get();
     }
 
-    public function getTripByStatus(int $id, $page)
+    public function getPlanByStatus(int $id, $page)
     {
-        return $this->trip->getTripByStatus($id, $page);
+        return $this->plan->getPlanByStatus($id, $page);
     }
 
-    public function getBulkTripByStatus(array $ids, $page)
+    public function getBulkPlanByStatus(array $ids, $page)
     {
-        return $this->trip->getBulkTripByStatus($ids, $page);
+        return $this->plan->getBulkPlanByStatus($ids, $page);
     }
 
-    public function getTrip(Int $id)
+    public function getPlan(Int $id)
     {
-        return $this->trip->get($id);
+        return $this->plan->get($id);
     }
 
 
     public function assignDriver(int $id, string $uuid, int $amount)
     {
         $driver = $this->user->getUserByUuid($uuid);
-        $trip = $this->getTrip($id);
+        $plan = $this->getPlan($id);
 
-        $data = $this->trip->update($trip, [
+        $data = $this->plan->update($plan, [
             'driver_id' => $driver->id,
             'status_id' => 1,
             'price' => $amount,
         ]);
 
-        if ($trip->user->expo_token) {
-            ExpoNotification::sendNotification($trip->user->expo_token, 'Order Confirmed', 'Trip Request has been confirmed', []);
+        if ($plan->user->expo_token) {
+            ExpoNotification::sendNotification($plan->user->expo_token, 'Order Confirmed', 'Plan Request has been confirmed', []);
         }
 
-        $this->updateStage($trip->id, 1);
+        $this->updateStage($plan->id, 1);
         return $data;
     }
 
 
     public function delete(int $id)
     {
-        return $this->trip->delete($id);
+        return $this->plan->delete($id);
     }
 
-    public function acceptTrip(int $id)
+    public function acceptPlan(int $id)
     {
-        return $this->changeTripStatus($id, 3);
+        return $this->changePlanStatus($id, 3);
     }
 
-    public function completeTrip(int $id)
+    public function completePlan(int $id)
     {
-        return $this->changeTripStatus($id, 4);
+        return $this->changePlanStatus($id, 4);
     }
 
-    public function cancelTrip(int $id)
+    public function cancelPlan(int $id)
     {
-        return $this->changeTripStatus($id, 5);
+        return $this->changePlanStatus($id, 5);
     }
 
-    private function changeTripStatus(int $id, int $status)
+    private function changePlanStatus(int $id, int $status)
     {
-        if (!$this->validateTripUser($id)) {
-            return ['error' => 'Unauthorized to access trip request'];
+        if (!$this->validatePlanUser($id)) {
+            return ['error' => 'Unauthorized to access plan request'];
         };
 
-        $trip = $this->getTrip($id);
+        $plan = $this->getPlan($id);
 
-        $this->trip->update($trip, ['status_id' => $status]);
+        $this->plan->update($plan, ['status_id' => $status]);
 
         $this->updateStage($id, $status);
-        return $this->getTrip($id);
+        return $this->getPlan($id);
     }
 
-    public function tripReportSummary()
+    public function planReportSummary()
     {
         return [
-            'all_trips' => $this->trip->count(),
-            'pending_trips' => $this->trip->getTripByStatusCount(2),
-            'completed_trips' => $this->trip->getTripByStatusCount(4),
+            'all_plans' => $this->plan->count(),
+            'pending_plans' => $this->plan->getPlanByStatusCount(2),
+            'completed_plans' => $this->plan->getPlanByStatusCount(4),
         ];
     }
 
-    public function trackTrip(int $id)
+    public function trackPlan(int $id)
     {
-        $trip = $this->getTrip($id);
+        $plan = $this->getPlan($id);
         $resource = [
             'Order Placed' => '2',
             'Order confirmed' => '1',
@@ -151,46 +138,46 @@ class PlanService
 
         $track = [];
         foreach ($resource as $key => $stage) {
-            $l = $trip->stages->where('status_id', $stage)->first();
+            $l = $plan->stages->where('status_id', $stage)->first();
             $track[$key] = [
                 'status_name' => $key,
                 'isCompleted' => isset($l),
-                'isActive' => $trip->stages->last() === $l,
+                'isActive' => $plan->stages->last() === $l,
                 'timestamp' => isset($l) ? $l->toArray()['created_at'] : false
             ];
         }
 
         //  add driver
-        $track['driver'] = $trip->driver();
+        $track['driver'] = $plan->driver();
         return $track;
     }
 
-    public function setTripReview(int $id, array $data)
+    public function setPlanReview(int $id, array $data)
     {
-        if (!$this->validateTripUser($id)) {
-            return ['error' => 'Unauthorized to access trip request'];
+        if (!$this->validatePlanUser($id)) {
+            return ['error' => 'Unauthorized to access plan request'];
         };
-        $review = $this->tripDetail->updateOrCreate([
-            'trip_id' => $id,
+        $review = $this->planDetail->updateOrCreate([
+            'plan_id' => $id,
             'reviewer_id' => getUser()->id,
         ], $data);
         return $review;
     }
 
-    private function updateStage(Int $trip_id, int $status)
+    private function updateStage(Int $plan_id, int $status)
     {
-        return $this->trip_stage->create(['status_id' => $status, 'trip_id' => $trip_id]);
+        return $this->plan_stage->create(['status_id' => $status, 'plan_id' => $plan_id]);
     }
 
     /**
-     * Validate the user can modify trip
+     * Validate the user can modify plan
      * @return bool
      */
-    private function validateTripUser(int $trip_id): bool
+    private function validatePlanUser(int $plan_id): bool
     {
         $user = getUser();
-        $trip = $this->getTrip($trip_id);
-        if ($trip->user_id === $user->id || $trip->driver_id === $user->id) {
+        $plan = $this->getPlan($plan_id);
+        if ($plan->user_id === $user->id || $plan->driver_id === $user->id) {
             return True;
         };
         return false;

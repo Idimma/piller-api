@@ -2,79 +2,114 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{TripRequest,TripReviewRequest};
+use App\Http\Requests\{PlanRequest, PlanReviewRequest, UpdatePlanRequest};
 use App\Services\PlanService;
 use Illuminate\Http\Request;
 
 
 class UserPlanController extends Controller
 {
-    private $tripService;
+    private $planService;
+
     //
-    public function __construct(PlanService $tripService)
+    public function __construct(PlanService $planService)
     {
-        $this->tripService = $tripService;
+        $this->planService = $planService;
     }
 
     /**
      * Persist message to database
      *
-     * @param  Request $request
+     * @param Request $request
      * @return JsonResponse
      */
-    public function createTrip(TripRequest $request)
+    public function createPlan(PlanRequest $request)
     {
         $data = $request->validated();
-        if (getUser()->hasActiveTrip()){
-            return $this->respondWithError('You have an active trip, please cancel that or complete');
-        }
-        $response = $this->tripService->requestTrip($data);
+
+        $response = $this->planService->requestPlan($data);
         return $this->respondWithSuccess($response, 201);
     }
 
     /**
-     * Gets Only Authenticated User Trips data
+     * Gets Only Authenticated User Plans data
      * @return JsonResponse
      */
-    public function getUserTrips()
+    public function getUserPlans()
     {
-        return $this->respondWithSuccess($this->tripService->userTrips());
+        return $this->respondWithSuccess($this->planService->userPlans());
+    }
+
+    public function update(UpdatePlanRequest $planRequest)
+    {
+        $plan_id = $planRequest->plan_id;
+        $plan = $this->planService->getPlan($plan_id)->firstOrFail();
+        $plan->update($planRequest->all());
+        return $this->respondWithSuccess($plan);
+    }
+
+    public function delete($id)
+    {
+        $plan_id = \request()->plan_id ?? $id;
+        if ($plan_id) {
+            $plan = $this->planService->delete($plan_id);
+            return $this->respondWithSuccess($plan);
+        }
+        return $this->respondWithError('Plan Id not set');
+
     }
 
     /**
-     * Get Latest Pending Trip
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|mixed
+     */
+    final public function show($id)
+    {
+        $plan_id = \request()->plan_id ?? $id;
+        if ($plan_id) {
+            $plan = $this->planService->getPlan($plan_id);
+            return $this->respondWithSuccess($plan);
+        }
+        return $this->respondWithError('Plan Id not set');
+
+    }
+
+
+    /**
+     * Get Latest Pending Plan
      * @return JsonResponse
      */
-    public function getPendingTrip()
+    public function getPendingPlan()
     {
-        return $this->respondWithSuccess(getUser()->getPendingTrip());
+        return $this->respondWithSuccess(getUser()->getPendingPlan());
     }
 
     /**
-     * Cancel's user trips
+     * Cancel's user plans
      * @param Int $id
      * @return JsonResponse
      */
-    public function cancelTrip(Int $id)
+    public function cancelPlan(Int $id)
     {
-        $trip = $this->tripService->cancelTrip($id);
-        if (isset($trip['error'])){
-            return $this->respondWithError($trip);
+        $plan = $this->planService->cancelPlan($id);
+        if (isset($plan['error'])) {
+            return $this->respondWithError($plan);
         }
-        return $this->respondWithSuccess($trip);
+        return $this->respondWithSuccess($plan);
     }
 
-    public function reviewTrip(Int $id, TripReviewRequest $request)
+    public function reviewPlan(Int $id, PlanReviewRequest $request)
     {
         $data = $request->validated();
-        $trip = $this->tripService->setTripReview($id, $data);
-        if (isset($trip['error'])){
-            return $this->respondWithError($trip);
+        $plan = $this->planService->setPlanReview($id, $data);
+        if (isset($plan['error'])) {
+            return $this->respondWithError($plan);
         }
-        return $this->respondWithSuccess($trip);
+        return $this->respondWithSuccess($plan);
     }
 
-    public function trackTrip(int $id){
-        return $this->respondWithSuccess($this->tripService->trackTrip($id));
+    public function trackPlan(int $id)
+    {
+        return $this->respondWithSuccess($this->planService->trackPlan($id));
     }
 }

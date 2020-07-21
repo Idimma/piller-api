@@ -8,20 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Plan extends Model
 {
-    //
-
-    protected $table = 'trips';
-
-    protected $fillable = ['user_id', 'driver_id', 'destination', 'coupon', 'trip_started', 'trip_end', 'status_id', 'price', 'quantity', 'due_date', 'comment'];
-
-    protected $with = [
-        'status:id,status',
-        'destinations:id,address,lat,lon',
-        'user:id,uuid,first_name,last_name',
-        'driver:id,uuid,first_name,last_name,phone'
+    protected $fillable = [
+        'user_id', 'start_date', 'deposit', 'plan_type', 'plan_name', 'building_type',
+        'material_estimation', 'material_type', 'cement_percentage', 'block_percentage',
+        'block_target', 'cement_target'
     ];
 
-    protected $hidden = ['user_id', 'driver_id'];
+    protected $with = [
+        'user:uuid,first_name,last_name',
+    ];
+
+    protected $hidden = ['user_id'];
     use SoftDeletes;
 
     public function destinations()
@@ -57,10 +54,11 @@ class Plan extends Model
 
     public function reviews()
     {
-        return $this->hasMany('App\TripDetail','trip_id','id');
+        return $this->hasMany('App\TripDetail', 'trip_id', 'id');
     }
 
-    public function stages(){
+    public function stages()
+    {
         return $this->hasMany('App\TripStage', 'trip_id', 'id');
     }
 }
