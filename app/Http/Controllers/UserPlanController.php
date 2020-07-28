@@ -107,6 +107,11 @@ class UserPlanController extends Controller
         }
         return $this->respondWithSuccess($plan);
     }
+    
+    public function verifyPayment(){
+        
+          return $this->respondWithSuccess([]);
+    }
 
     public function trackPlan(int $id)
     {

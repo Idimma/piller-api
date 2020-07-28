@@ -7,7 +7,7 @@ use App\Notifications\NewWithdrawalRequest;
 use App\Repositories\PlanRepository;
 use Illuminate\Support\Arr;
 use Notification;
-
+use Log;
 class PlanService
 {
 
@@ -23,6 +23,7 @@ class PlanService
     public function requestPlan(array $input)
     {
         $user = getUser();
+        Log::info($input);
         $plan = $this->plan->create(array_merge($input, [
             'user_id'=>$user->id]));
 

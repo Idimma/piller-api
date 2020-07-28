@@ -16,6 +16,14 @@ Route::get('/', function () {
    // return view('download-app');
 });
 
+Route::get('test', function(){
+   
+
+  
+
+    
+});
+
 Route::get('artisan/{string}', function ($command) {
 
 //    if(str_contains($command,' ')){

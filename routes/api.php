@@ -18,6 +18,8 @@ Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser')->name('user.verify');
 
+Route::post('payment/verify', 'UserPlanController@verifyPayment');
+
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
@@ -56,6 +58,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     });
 
     Route::group(['prefix' => 'payment'], function () {
+        Route::get('transactions', 'UserController@userTransactions');
         Route::get('initialize', 'PaymentController@initiateCardTransaction');
         Route::get('verify', 'PaymentController@verifyCardTransaction');
         Route::get('cards', 'UserController@getCards');

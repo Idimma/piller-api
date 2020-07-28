@@ -127,7 +127,8 @@ class UserController extends Controller
             'bank_name' => 'sometimes|string',
             'account_name' => 'sometimes|string',
             'account_number' =>'sometimes|numeric',
-            'driving_license' => 'sometimes'
+            'driving_license' => 'sometimes',
+            'country' => 'sometimes'
         ]);
 
         if ($validator->fails()) {

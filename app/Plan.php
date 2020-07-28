@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Plan extends Model
 {
     protected $fillable = [
-        'user_id', 'start_date', 'deposit', 'plan_type', 'plan_name', 'building_type',
-        'material_estimation', 'material_type', 'cement_percentage', 'block_percentage',
-        'block_target', 'cement_target'
+        'user_id', 'start_date', 'deposit', 'plan_type', 'plan_name',
+        'building_type', 'material_estimation', 'material_type',
+        'cement_percentage', 'block_percentage', 'deposit_frequency',
+        'block_target', 'cement_target', 'country',
     ];
 
     protected $with = [
@@ -20,6 +21,16 @@ class Plan extends Model
 
     protected $hidden = ['user_id'];
     use SoftDeletes;
+
+
+    public $appends = ['next_deposit_date'];
+    
+    public function getNextDepositDateAttribute(){
+      
+      
+      return now();
+    }
+
 
     public function destinations()
     {
