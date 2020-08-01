@@ -39,6 +39,14 @@ class UserPlanController extends Controller
     {
         return $this->respondWithSuccess($this->planService->userPlans());
     }
+    /**
+     * Gets Only Authenticated User Plans data
+     * @return JsonResponse
+     */
+    public function getLastPlans()
+    {
+        return $this->respondWithSuccess($this->planService->userLastPlans());
+    }
 
     public function update(UpdatePlanRequest $planRequest)
     {
@@ -107,9 +115,9 @@ class UserPlanController extends Controller
         }
         return $this->respondWithSuccess($plan);
     }
-    
+
     public function verifyPayment(){
-        
+
           return $this->respondWithSuccess([]);
     }
 

@@ -8,6 +8,7 @@ use App\Repositories\PlanRepository;
 use Illuminate\Support\Arr;
 use Notification;
 use Log;
+
 class PlanService
 {
 
@@ -25,14 +26,8 @@ class PlanService
         $user = getUser();
         Log::info($input);
         $plan = $this->plan->create(array_merge($input, [
-            'user_id'=>$user->id]));
-
-//        $this->updateStage($plan->id, 2);
-
-       // broadcast(new PlanEvent($plan));
-
-//        $admins = $this->user->getAdmins();
-//        Notification::send($admins, new NewWithdrawalRequest($plan));
+            'user_id' => $user->id
+        ]));
         return $plan;
     }
 
@@ -45,12 +40,6 @@ class PlanService
     {
         $user = getUser();
         return $user->userPlan()->latest()->get();
-    }
-
-    public function userLastPlans()
-    {
-        $user = getUser();
-        return $user->userPlan()->latest()->take(4)->get();
     }
 
     public function getPlanByStatus(int $id, $page)

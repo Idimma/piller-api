@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest, UserUpdateRequest};
 use App\Services\{LocationService, SettingService, UserService};
+use App\Transactions;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Validator};
+use Illuminate\Support\Facades\{Hash, Validator};
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
     //
     private $settings;
 
-    public function __construct(UserService $userService, LocationService $location, SettingService $settings)
+    public function __construct(UserService $userService, LocationService $location, Transactions $transactions,
+     SettingService $settings)
     {
         $this->userService = $userService;
         $this->locationService = $location;
@@ -60,6 +62,30 @@ class UserController extends Controller
         return $this->respondWithSuccess($user);
     }
 
+    public function userTransactions()
+    {
+        if (!$user = getUser()) {
+            return response()->json(['error' => 'user_not_found'], 404);
+        }
+        return $this->respondWithSuccess($user->transactions);
+    }
+
+    public function userCard()
+    {
+        if (!$user = getUser()) {
+            return response()->json(['error' => 'user_not_found'], 404);
+        }
+        return $this->respondWithSuccess($user->card);
+    }
+
+    public function userActiveCard()
+    {
+        if (!$user = getUser()) {
+            return response()->json(['error' => 'user_not_found'], 404);
+        }
+        return $this->respondWithSuccess($user->activeCard());
+    }
+
 
     /**
      *
@@ -75,13 +101,7 @@ class UserController extends Controller
         return $this->respondWithSuccess($user, 201);
     }
 
-//    public function update(UserUpdateRequest $request)
-//    {
-//        $request = $request->validated();
-//        dd($request);
-//        $user = $this->userService->update($request);
-//        return $this->respondWithSuccess($user, 201);
-//    }
+
 
     /**
      * Upload User Avatar
@@ -220,4 +240,25 @@ class UserController extends Controller
     {
         return $this->respondWithSuccess($this->settings->getCompanyInfo($type));
     }
+
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current' => 'required|string',
+            'password' => 'required|string',
+            'confirm' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+        $user = getUser();
+        if (Hash::check($request->current, $user->password) === false) {
+            return $this->respondWithError( 'Enter your current password correctly ', 400);
+        }
+        $user->update(['password' => Hash::make($request->password)]);
+        return $this->respondWithSuccess('Success', 201);
+    }
+
+
 }

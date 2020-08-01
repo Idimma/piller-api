@@ -9,5 +9,5 @@ class Transactions extends Model
     //
     protected $table = 'transactions';
 
-    protected $fillable = ['user_id', 'trip_id', 'status', 'reference'];
+    protected $fillable = ['user_id', 'plan_id', 'status', 'reference'];
 }

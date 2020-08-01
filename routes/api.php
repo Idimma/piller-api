@@ -24,11 +24,16 @@ Route::post('payment/verify', 'UserPlanController@verifyPayment');
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::post('phone/add', 'UserController@addPhone');
+    Route::get('user/transactions', 'UserController@userTransactions');
+    Route::get('user/cards', 'UserController@userCard');
+    Route::get('user/active-card', 'UserController@userActiveCard');
+
     Route::post('user', 'UserController@update');
     Route::post('avatar/add', 'UserController@uploadAvatar');
     Route::post('update/email', 'UserController@updateEmail');
     Route::post('update/name', 'UserController@updateName');
     Route::post('update/expo', 'UserController@setExpoToken');
+    Route::post('update/password', 'UserController@updatePassword');
 
     Route::get('company/faq', 'UserController@getFaqs');
     Route::get('company/{type}', 'UserController@getCompanyInfo');
@@ -38,6 +43,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'plan'], function () {
         Route::post('request', 'UserPlanController@createPlan');
         Route::get('/', 'UserPlanController@getUserPlans');
+        Route::get('/latest', 'UserPlanController@getLastPlans');
         Route::get('/{id}', 'UserPlanController@show');
         Route::post('/', 'UserPlanController@createPlan');
         Route::put('/', 'UserPlanController@update');
@@ -58,7 +64,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     });
 
     Route::group(['prefix' => 'payment'], function () {
-        Route::get('transactions', 'UserController@userTransactions');
         Route::get('initialize', 'PaymentController@initiateCardTransaction');
         Route::get('verify', 'PaymentController@verifyCardTransaction');
         Route::get('cards', 'UserController@getCards');
