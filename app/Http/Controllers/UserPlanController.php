@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\{PlanRequest, PlanReviewRequest, UpdatePlanRequest};
 use App\Services\PlanService;
+use App\Transactions;
 use Illuminate\Http\Request;
 
 
@@ -124,5 +125,15 @@ class UserPlanController extends Controller
     public function trackPlan(int $id)
     {
         return $this->respondWithSuccess($this->planService->trackPlan($id));
+    }
+
+    public function getMaterialWithdrawnAttribute()
+    {
+        $trans = Transactions::where('type', 'debit')->get();
+
+
+
+
+        return ['blocks' => 0, 'cements' => 0];
     }
 }

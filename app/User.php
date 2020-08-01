@@ -136,9 +136,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Card', 'user_id', 'id');
     }
-    public function transaction()
+    public function transactions()
     {
-        return $this->hasMany('App\Transaction', 'user_id', 'id');
+        return $this->hasMany('App\Transactions', 'user_id', 'id');
     }
 
     public function scopeActive($query, $status=1){

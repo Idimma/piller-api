@@ -3,9 +3,7 @@
 
 <head>
   <title> </title>
-  <!--[if !mso]><!-- -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!--<![endif]-->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style type="text/css">
@@ -96,9 +94,9 @@
             <td style="direction:ltr;font-size:0px;padding:10px 0px;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
             <td
                class="" style="vertical-align:top;width:600px;"
             >
@@ -114,9 +112,9 @@
               </div>
               <!--[if mso | IE]>
             </td>
-          
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
@@ -128,7 +126,7 @@
           </td>
         </tr>
       </table>
-      
+
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
@@ -142,9 +140,9 @@
             <td style="direction:ltr;font-size:0px;padding:0 0 10px 0;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
             <td
                class="" style="width:600px;"
             >
@@ -153,7 +151,7 @@
                 <!--[if mso | IE]>
         <table  role="presentation" border="0" cellpadding="0" cellspacing="0">
           <tr>
-        
+
               <td
                  style="vertical-align:top;width:600px;"
               >
@@ -165,7 +163,10 @@
                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                           <tbody>
                             <tr>
-                              <td style="width:116px;"> <img height="auto" src="https://res.cloudinary.com/maaj/image/upload/v1585996814/jooola.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="116" /> </td>
+                              <td style="width:116px;">
+                                  <h1>LAYBUY</h1>
+{{--                                  <img height="auto" src="https://res.cloudinary.com/maaj/image/upload/v1585996814/jooola.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="116" />--}}
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -175,16 +176,16 @@
                 </div>
                 <!--[if mso | IE]>
               </td>
-              
+
           </tr>
           </table>
         <![endif]-->
               </div>
               <!--[if mso | IE]>
             </td>
-          
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
@@ -196,7 +197,7 @@
           </td>
         </tr>
       </table>
-      
+
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
@@ -210,9 +211,9 @@
             <td style="direction:ltr;font-size:0px;padding:;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
             <td
                class="" style="vertical-align:top;width:600px;"
             >
@@ -221,16 +222,16 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="left" style="font-size:0px;padding:0px  0px 0px 30px;word-break:break-word;">
-                      <div style="font-family:lato, arial;font-size:20px;font-weight:bold;line-height:24px;text-align:left;color:#333333;">Welcome to Joola Oil & Gas</div>
+                      <div style="font-family:lato, arial;font-size:20px;font-weight:bold;line-height:24px;text-align:left;color:#333333;">Welcome to Lay Buy </div>
                     </td>
                   </tr>
                 </table>
               </div>
               <!--[if mso | IE]>
             </td>
-          
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
@@ -242,7 +243,7 @@
           </td>
         </tr>
       </table>
-      
+
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
@@ -256,9 +257,9 @@
             <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
             <td
                class="" style="vertical-align:top;width:600px;"
             >
@@ -279,9 +280,9 @@
               </div>
               <!--[if mso | IE]>
             </td>
-          
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
@@ -293,7 +294,7 @@
           </td>
         </tr>
       </table>
-      
+
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
@@ -307,9 +308,9 @@
             <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
             <td
                class="" style="vertical-align:top;width:600px;"
             >
@@ -332,9 +333,9 @@
               </div>
               <!--[if mso | IE]>
             </td>
-          
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
@@ -346,7 +347,7 @@
           </td>
         </tr>
       </table>
-      
+
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
@@ -360,11 +361,11 @@
             <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
@@ -376,7 +377,7 @@
           </td>
         </tr>
       </table>
-      
+
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
@@ -390,9 +391,9 @@
             <td style="direction:ltr;font-size:0px;padding:20px 0;padding-top:21px;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
+
         <tr>
-      
+
             <td
                class="" style="vertical-align:top;width:600px;"
             >
@@ -401,16 +402,16 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="center" style="font-size:0px;padding:4px;word-break:break-word;">
-                      <div style="font-family:lato, arial;font-size:16px;line-height:1;text-align:center;color:#ffffff;">© JoolaOilandGas</div>
+                      <div style="font-family:lato, arial;font-size:16px;line-height:1;text-align:center;color:#ffffff;">© LayBuy</div>
                     </td>
                   </tr>
                 </table>
               </div>
               <!--[if mso | IE]>
             </td>
-          
+
         </tr>
-      
+
                   </table>
                 <![endif]-->
             </td>
