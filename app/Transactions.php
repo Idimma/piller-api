@@ -9,24 +9,28 @@ class Transactions extends Model
     //
     protected $table = 'transactions';
 
-    protected $fillable = ['user_id', 'plan_id', 'status', 'reference'];
+    protected $fillable = ['user_id', 'plan_id', 'status','amount', 'reference', 'block', 'cement', 'completed'];
 
-    protected $with = ['total_paid', 'material_withdrawn', 'material_deposited'];
+    // protected $with = ['total_paid', 'material_withdrawn', 'material_deposited'];
 
-    public function getTotalPaidAttribute()
+    public function getUserTotalPaid()
     {
-        return self::where('type', 'credit')->sum('amount');
+        $user = getUser();
+        $w = self::where('type', 'credit')->where('user_id', $user->id);
+        return $w->sum('amount');
     }
 
-    public function getMaterialWithdrawnAttribute()
+    public function getMaterialWithdrawn()
     {
-        $w = self::where('type', 'debit');
+        $user = getUser();
+        $w = self::where('type', 'debit')->where('user_id', $user->id);
         return ['blocks' => $w->sum('block'), 'cements' => $w->sum('cement')];
     }
 
-    public function getMaterialDepositedAttribute()
+    public function getMaterialDeposited()
     {
-        $w = self::where('type', 'credit');
+        $user = getUser();
+        $w = self::where('type', 'debit')->where('user_id', $user->id);
         return ['blocks' => $w->sum('block'), 'cements' => $w->sum('cement')];
     }
 

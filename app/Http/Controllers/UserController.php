@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest, UserUpdateRequest};
+use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
+use App\Plan;
 use App\Services\{LocationService, SettingService, UserService};
 use App\Transactions;
+use App\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Hash, Validator};
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -15,7 +17,7 @@ class UserController extends Controller
     private $settings;
 
     public function __construct(UserService $userService, LocationService $location, Transactions $transactions,
-     SettingService $settings)
+                                SettingService $settings)
     {
         $this->userService = $userService;
         $this->locationService = $location;
@@ -67,7 +69,11 @@ class UserController extends Controller
         if (!$user = getUser()) {
             return response()->json(['error' => 'user_not_found'], 404);
         }
-        return $this->respondWithSuccess($user->transactions);
+        return $this->respondWithSuccess([
+            'transactions' => $user->transactions,
+            'total_paid' => (new \App\Transactions)->getUserTotalPaid(),
+
+        ]);
     }
 
     public function userCard()
@@ -100,7 +106,6 @@ class UserController extends Controller
         $user = $this->userService->update(['phone' => $request['phone']]);
         return $this->respondWithSuccess($user, 201);
     }
-
 
 
     /**
@@ -146,7 +151,7 @@ class UserController extends Controller
             'email' => 'sometimes|string|email|max:255',
             'bank_name' => 'sometimes|string',
             'account_name' => 'sometimes|string',
-            'account_number' =>'sometimes|numeric',
+            'account_number' => 'sometimes|numeric',
             'driving_license' => 'sometimes',
             'country' => 'sometimes'
         ]);
@@ -154,7 +159,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $this->respondWithError($validator->errors(), 400);
         }
-        $user = $this->userService->update( $request->except(['password',  'image_url', 'uuid']));
+        $user = $this->userService->update($request->except(['password', 'image_url', 'uuid']));
         return $this->respondWithSuccess($user, 201);
     }
 
@@ -254,11 +259,57 @@ class UserController extends Controller
         }
         $user = getUser();
         if (Hash::check($request->current, $user->password) === false) {
-            return $this->respondWithError( 'Enter your current password correctly ', 400);
+            return $this->respondWithError('Enter your current password correctly ', 400);
         }
         $user->update(['password' => Hash::make($request->password)]);
         return $this->respondWithSuccess('Success', 201);
     }
 
+
+    public function makeWithdrawal(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'location_type' => 'required',
+            'password' => 'required|string',
+            'block_target' => 'required',
+            'cement_target' => 'required',
+            'plan_id' => 'required',
+            'address' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithError($validator->errors(), 400);
+        }
+        $user = getUser();
+        if (Hash::check($request->password, $user->password) === false) {
+            return $this->respondWithError('Enter your current password correctly ', 400);
+        }
+        $plan = Plan::findOrFail($request->plan_id);
+        $plan->cement_target -= $request->block_target;
+        $plan->cement_target -= $request->cement_target;
+
+        $plan->save();
+
+        $withdrawal = Withdrawal::create([
+            'user_id' => $user->id,
+            'plan_id' => $plan->id,
+            'block_unit' => $request->block_target,
+            'cement_unit' => $request->cement_target,
+            'location_type' => $request->location_type,
+            'address' => $request->address]);
+
+        $transaction = Transactions::create([
+            'user_id' => $user->id,
+            'type' => 'debit',
+            'plan_id' => $request->plan_id,
+            'completed' => true,
+            'reference' => uniqid('', true),
+            'block' => $request->block_target,
+            'cement' => $request->cement_target,
+            'amount' => 0,
+        ]);
+        return $this->respondWithSuccess($transaction);
+    }
 
 }

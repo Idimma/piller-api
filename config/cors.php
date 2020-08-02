@@ -21,8 +21,8 @@ return [
 
         'allow_origins' => [
              '*',
-            'http://*.joolaoilandgas.com',
-            'https://*.joolaoilandgas.com',
+            'http://*.laybuy.app',
+            'https://*.laybuy.app',
             'http://localhost:*',
         ],
 
