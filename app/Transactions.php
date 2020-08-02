@@ -30,7 +30,7 @@ class Transactions extends Model
     public function getMaterialDeposited()
     {
         $user = getUser();
-        $w = self::where('type', 'debit')->where('user_id', $user->id);
+        $w = self::where('type', 'credit')->where('user_id', $user->id);
         return ['blocks' => $w->sum('block'), 'cements' => $w->sum('cement')];
     }
 

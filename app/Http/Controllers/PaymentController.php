@@ -45,10 +45,10 @@ class PaymentController extends Controller
             'type' => 'credit',
             'plan_id' => $request->plan_id,
             'completed' => true,
-            'status' => 'Successful',
-            'block' => $response->block_target,
-            'cement' => $response->cement_target,
-            'amount' => $response->data['amount']/100,
+//            'status' => 'Successful',
+            'block' => $request->block_target,
+            'cement' => $request->cement_target,
+            'amount' => $request->amount,
         ]);
 
         $user->cards()->updateOrCreate([
