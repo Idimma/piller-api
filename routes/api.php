@@ -10,8 +10,13 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+Route::get('/', function () {
+    return 'API WORKS';
+});
 Route::group(['namespace' => 'Auth', 'middleware' => 'api', 'prefix' => 'password'], function () {
-    Route::post('create', 'PasswordResetController@create');
+    Route::post('forgot', 'PasswordResetController@create');
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
 });
@@ -19,8 +24,6 @@ Route::group(['namespace' => 'Auth', 'middleware' => 'api', 'prefix' => 'passwor
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
 
-Route::post('forgot/password', 'AuthController@forgot');
-Route::post('reset/password', 'AuthController@reset');
 
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser')->name('user.verify');
 

@@ -43,7 +43,7 @@ class AuthController extends Controller
                 case Password::RESET_LINK_SENT:
                     return $this->respondWithSuccess(trans($response));
                 case Password::INVALID_USER:
-                    return $this->respondWithSuccess(trans($response));
+                    return $this->respondWithError(trans($response));
             }
         } catch (\Swift_TransportException $ex) {
             return $this->respondWithError($ex->getMessage(), 400);

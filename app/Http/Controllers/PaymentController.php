@@ -31,7 +31,7 @@ class PaymentController extends Controller
     {
         $response = $this->payment->verifyCardTransaction($request);
 
-//        Log::info($response);
+        // Log::info($response);
         $user = getUser();
         if (!$response->status) {
             return $this->respondWithError(['error' => $response->message], 422);
@@ -40,12 +40,12 @@ class PaymentController extends Controller
             return $this->respondWithError(['error' => 'Transaction not completed'], 422);
         }
 
-      Transactions::create([
-          'user_id'=> $user->id,
+        Transactions::create([
+            'user_id'=> $user->id,
             'type' => 'credit',
             'plan_id' => $request->plan_id,
             'completed' => true,
-//            'status' => 'Successful',
+            'reference' => $request->reference,
             'block' => $request->block_target,
             'cement' => $request->cement_target,
             'amount' => $request->amount,

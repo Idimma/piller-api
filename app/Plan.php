@@ -24,11 +24,11 @@ class Plan extends Model
 
 
     public $appends = ['next_deposit_date'];
-    
+
     public function getNextDepositDateAttribute(){
-      
-      
-      return now();
+
+
+        return now();
     }
 
 

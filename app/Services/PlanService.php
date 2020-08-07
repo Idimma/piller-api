@@ -23,13 +23,12 @@ class PlanService
     public function requestPlan(array $input)
     {
         $user = getUser();
-        Log::info($input);
         $plan = $this->plan->create(array_merge($input, [
             'user_id'=>$user->id]));
 
 //        $this->updateStage($plan->id, 2);
 
-       // broadcast(new PlanEvent($plan));
+        // broadcast(new PlanEvent($plan));
 
 //        $admins = $this->user->getAdmins();
 //        Notification::send($admins, new NewWithdrawalRequest($plan));

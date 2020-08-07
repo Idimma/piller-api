@@ -9,9 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "devmarketer/easynav": "^1.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.1",
         "predis/predis": "^1.1",
         "rap2hpoutre/laravel-log-viewer": "^1.4",
         "spatie/laravel-cors": "^1.6",
@@ -33,7 +35,18 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "anahkiasen/former",
+                "fideloper/proxy",
+                "intervention/image",
+                "laravel/socialite",
+                "laravel/tinker",
+                "mcamara/laravel-localization",
+                "nunomaduro/collision",
+                "prettus/l5-repository",
+                "spatie/laravel-activitylog",
+                "spatie/laravel-backup"
+            ]
         }
     },
     "autoload": {

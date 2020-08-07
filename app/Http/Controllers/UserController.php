@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
-use App\Plan;
+use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest, UserUpdateRequest};
 use App\Services\{LocationService, SettingService, UserService};
 use App\Transactions;
-use App\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Hash, Validator};
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -71,17 +69,19 @@ class UserController extends Controller
         }
         return $this->respondWithSuccess([
             'transactions' => $user->transactions,
-            'total_paid' => (new \App\Transactions)->getUserTotalPaid(),
-
+            'total_paid' =>(new \App\Transactions)->getUserTotalPaid(),
+            'material_deposited' => (new \App\Transactions)->getMaterialDeposited(),
+            'material_withdrawn' => (new \App\Transactions)->getMaterialWithdrawn(),
         ]);
     }
+
 
     public function userCard()
     {
         if (!$user = getUser()) {
             return response()->json(['error' => 'user_not_found'], 404);
         }
-        return $this->respondWithSuccess($user->card);
+        return $this->respondWithSuccess($user->cards);
     }
 
     public function userActiveCard()
@@ -106,6 +106,7 @@ class UserController extends Controller
         $user = $this->userService->update(['phone' => $request['phone']]);
         return $this->respondWithSuccess($user, 201);
     }
+
 
 
     /**
@@ -151,7 +152,7 @@ class UserController extends Controller
             'email' => 'sometimes|string|email|max:255',
             'bank_name' => 'sometimes|string',
             'account_name' => 'sometimes|string',
-            'account_number' => 'sometimes|numeric',
+            'account_number' =>'sometimes|numeric',
             'driving_license' => 'sometimes',
             'country' => 'sometimes'
         ]);
@@ -159,7 +160,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $this->respondWithError($validator->errors(), 400);
         }
-        $user = $this->userService->update($request->except(['password', 'image_url', 'uuid']));
+        $user = $this->userService->update( $request->except(['password',  'image_url', 'uuid']));
         return $this->respondWithSuccess($user, 201);
     }
 
@@ -259,7 +260,7 @@ class UserController extends Controller
         }
         $user = getUser();
         if (Hash::check($request->current, $user->password) === false) {
-            return $this->respondWithError('Enter your current password correctly ', 400);
+            return $this->respondWithError( 'Enter your current password correctly ', 400);
         }
         $user->update(['password' => Hash::make($request->password)]);
         return $this->respondWithSuccess('Success', 201);
@@ -311,5 +312,4 @@ class UserController extends Controller
         ]);
         return $this->respondWithSuccess($transaction);
     }
-
 }
