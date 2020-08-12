@@ -27,10 +27,7 @@ class HomeController extends Controller
     {
         $users = User::count();
 
-        $widget = [
-            'users' => $users,
-            //...
-        ];
+        $widget = ['users' => $users,];
 
         return view('home', compact('widget'));
     }
@@ -38,14 +35,14 @@ class HomeController extends Controller
     public function users()
     {
         $users = User::get();
-        $type = 'Admins';
+        $type = 'Users';
         return view('users', compact('users', 'type'));
     }
 
-    public function posters()
+    public function admins()
     {
         $users = User::get();
-        $type = 'Posters';
+        $type = 'Admins';
         return view('users', compact('users', 'type'));
     }
 

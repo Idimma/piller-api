@@ -13,8 +13,13 @@ function getUser()
     return JWTAuth::parseToken()->authenticate();
 }
 
+function linkActive($route){
+    return request()->is($route) ? 'active': '';
+}
+
+
 /**
- * 
+ *
  * Gets distance between two points from coordinates in km
  * @param float $lat1
  * @param float $lat2
