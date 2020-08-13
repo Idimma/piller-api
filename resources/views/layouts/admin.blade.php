@@ -108,14 +108,6 @@
                 {{ __('Settings') }}
             </div>
 
-            <!-- Nav Item - Profile -->
-            <li class="nav-item {{ linkActive('profile') }}">
-                <a class="nav-link" href="{{ route('profile') }}">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>{{ __('Profile') }}</span>
-                </a>
-            </li>
-
             <!-- Nav Item - About -->
             <li class="nav-item {{ linkActive('settings') }}">
                 <a class="nav-link" href="{{ route('settings') }}">
