@@ -94,11 +94,11 @@
                     <span>{{ __('Transaction / Payments') }}</span></a>
             </li>
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ linkActive('reports') }}">
-                <a class="nav-link" href="{{ route('reports') }}">
-                    <i class="fas fa-fw fa-reply"></i>
-                    <span>{{ __('Reported / Issues') }}</span></a>
-            </li>
+            {{--- <li class="nav-item {{ linkActive('reports') }}">
+            <a class="nav-link" href="{{ route('reports') }}">
+                <i class="fas fa-fw fa-reply"></i>
+                <span>{{ __('Reported / Issues') }}</span></a>
+            </li> ---}}
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -140,12 +140,12 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-                    @include('partial.topbar-search')
+                    {{--- @include('partial.topbar-search') ---}}
                     <ul class="navbar-nav ml-auto">
 
-                        @include('partial.search-form')
-                        @include('partial.dashboard-alerts')
-                        @include('partial.dashboard-messages')
+                        {{--- @include('partial.search-form') ---}}
+                        {{--- @include('partial.dashboard-alerts') ---}}
+                        {{--- @include('partial.dashboard-messages') ---}}
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -160,10 +160,10 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Profile') }}
                                 </a>
-                                <a class="dropdown-item" href="{{url('notifications')}}">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{ __('Notifications') }}
-                                </a>
+                                {{--- <a class="dropdown-item" href="{{url('notifications')}}">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                {{ __('Notifications') }}
+                                </a> ---}}
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -184,7 +184,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Cititasker 2020</span>
+                        <span>Copyright &copy; StockPiller 2020</span>
                     </div>
                 </div>
             </footer>
