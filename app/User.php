@@ -45,9 +45,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    function getAvatarUrlAttribute(){
+    function getAvatarUrlAttribute()
+    {
         $url = $this->image_url ?? '6.jpg';
-        return config('app.url').'/avatar/'.$url;
+        return config('app.url') . '/avatar/' . $url;
     }
 
     public static function boot()
@@ -67,11 +68,16 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function verificationToken(){
+    public function verificationToken()
+    {
         return $this->hasOne('App\UserVerification', 'user_id', 'id');
     }
 
     public function userPlan()
+    {
+        return $this->hasMany('App\Plan', 'user_id', 'id');
+    }
+    public function plans()
     {
         return $this->hasMany('App\Plan', 'user_id', 'id');
     }
@@ -91,10 +97,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->userPlan->whereIn('status_id', ['1', '2', '3'])->first();
     }
 
-    public function availableDriver(){
-        return $this->whereHas('userrole', function($q){
-            return $q->where('role_id',2);
-        })->whereDoesntHave('driverPlan', function($q){
+    public function availableDriver()
+    {
+        return $this->whereHas('userrole', function ($q) {
+            return $q->where('role_id', 2);
+        })->whereDoesntHave('driverPlan', function ($q) {
             return $q->whereIn('status_id', ['1', '2', '3']);
         })->get();
     }
@@ -109,11 +116,13 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne('App\UserRole');
     }
 
-    public function chats(){
+    public function chats()
+    {
         return $this->hasOne('App\Chat');
     }
 
-    public function chatMessages(){
+    public function chatMessages()
+    {
         return $this->hasManyThrough('App\ChatMessage', 'App\Chat', 'user_id', 'chat_id', 'id', 'id');
     }
 
@@ -141,7 +150,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Transactions', 'user_id', 'id');
     }
 
-    public function scopeActive($query, $status=1){
+    public function scopeActive($query, $status = 1)
+    {
         return $query->where('is_verified', $status)->where('status', $status);
     }
 
@@ -152,7 +162,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function activeCard()
     {
-        if($this->cards->where('default', 1)->isNotEmpty()){
+        if ($this->cards->where('default', 1)->isNotEmpty()) {
             return $this->cards()->where('default', 1)->first();
         }
         return $this->cards()->first();

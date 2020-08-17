@@ -18,16 +18,25 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/transactions', 'HomeController@transactions')->name('transactions');
-Route::get('/reports', 'HomeController@reports')->name('reports');
-Route::get('/admins', 'HomeController@admins')->name('admins');
-Route::get('/users', 'HomeController@users')->name('users');
-Route::get('/taskers', 'HomeController@taskers')->name('taskers');
-Route::get('/tasks', 'HomeController@tasks')->name('tasks');
-Route::get('/settings', 'HomeController@settings')->name('settings');
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/transactions', 'HomeController@transactions')->name('transactions');
+    Route::get('/reports', 'HomeController@reports')->name('reports');
+    Route::get('/admins', 'HomeController@admins')->name('admins');
+    Route::get('/users', 'HomeController@users')->name('users');
+    Route::get('/taskers', 'HomeController@taskers')->name('taskers');
+    Route::get('/tasks', 'HomeController@tasks')->name('tasks');
+    Route::get('/settings', 'HomeController@settings')->name('settings');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::put('/profile', 'ProfileController@update')->name('profile.update');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/{id}', 'UserController@singleUser');
+        Route::get('delete/{id}', 'UserController@deleteUser');
+    });
+});
+
+
 
 Route::get('/about', function () {
     return view('about');

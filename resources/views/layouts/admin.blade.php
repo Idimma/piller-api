@@ -82,10 +82,10 @@
             </div>
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ linkActive('tasks') }}">
-                <a class="nav-link" href="{{ route('tasks') }}">
+            <li class="nav-item {{ linkActive('plans') }}">
+                <a class="nav-link" href="{{ route('plans') }}">
                     <i class="fas fa-fw fa-tasks"></i>
-                    <span>{{ __('Tasks') }}</span></a>
+                    <span>{{ __('Plans') }}</span></a>
             </li>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ linkActive('transactions') }}">
