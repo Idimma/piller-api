@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="558.23" height="415" viewBox="0 0 558.23 415">
+  <g id="Group_82" data-name="Group 82" transform="translate(-373 -102)">
+    <rect id="Rectangle_227" data-name="Rectangle 227" width="558.23" height="415" rx="10" transform="translate(373 102)" fill="#fff"/>
+    <text id="Your_phone_number_ha" data-name="Your phone number ha" transform="translate(649.903 204.611)" fill="#1b1f3b" font-size="13" font-family="Montserrat-SemiBold, Montserrat" font-weight="600" letter-spacing="0.001em"><tspan x="-73.855" y="0">Withdrawal Complete</tspan></text>
+    <g id="Group_50" data-name="Group 50" transform="translate(597.027 267.265)">
+      <circle id="Oval" cx="55.088" cy="55.088" r="55.088" transform="translate(0 0)" fill="#76e36a"/>
+      <g id="ios-checkmark" transform="translate(36.75 40.441)">
+        <path id="Path" d="M34.79.063c-.123-.142-.456,0-.633,0a.638.638,0,0,0-.493.212L12.191,22.028,4.376,14.169a.693.693,0,0,0-.493-.212c-.176,0,.523-.458-.493,0a4.833,4.833,0,0,0-2.026,1.136,3.066,3.066,0,0,0-1.22,2.233c-.24,1.047-.169.72.112,1l9.857,9.912a3.11,3.11,0,0,0,2.059,1.009,3.26,3.26,0,0,0,2.042-.973h.018L37.766,4.488a.907.907,0,0,0,.093-1.107A2.848,2.848,0,0,0,36.9,1.463,5.535,5.535,0,0,0,34.79.063Z" transform="translate(0 0)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

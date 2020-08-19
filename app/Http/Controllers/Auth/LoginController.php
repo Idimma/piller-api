@@ -38,6 +38,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        return view('pages.login');
+    }
+
     protected function redirectTo()
     {
         session()->flash('success', 'You are logged in!');

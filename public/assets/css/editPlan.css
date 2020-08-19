@@ -1,0 +1,867 @@
+:root{
+    --sliderContainerWidth: 100%;
+    --thumbColor: #502274; 
+    --thumbBorderRadius: 50%;
+    --sliderBorderRadius: 4px;
+    --colorMax: 0%;
+}
+
+
+
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf');
+}
+
+
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf');
+}
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf');
+}
+
+@font-face{
+    font-family: 'Segoe UI-Regular';
+    src: url('../fonts/Segoe UI/Segoe UI.woff')
+}
+
+
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    color: #4A4A4A;
+}
+
+.container{
+    width: 100%;
+    height: 100%;      
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+}
+
+input{
+    font-family: "Montserrat-Regular";
+    font-size: 1.2rem;
+}
+
+
+
+.empty-div{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    /* position: absolute; */
+    height: 50rem;
+}
+
+
+.Add-plan{
+    margin-top: 7rem;
+    margin-bottom: 15rem;
+    cursor: pointer;
+}
+
+.bottom-text-anchor{
+    font-family: 'Montserrat-Regular';
+    font-size: 1.2rem;
+}
+
+
+/* Form style */
+
+.NewPlanForm{
+    width: 45%;
+}
+
+.form-group-full{
+    width: 100%;
+    margin-bottom: 4rem;
+}
+
+.form-group-header{
+    margin-bottom: 0.3rem;
+    display: flex;
+}
+
+.form-group-header h2{
+    font-size: 1.2rem;
+    font-family: 'Montserrat-Medium';
+    margin-bottom: 1rem;
+    color: #000000;
+}
+
+.form-group-full label{
+    font-family: 'Montserrat-medium';
+    color: #4A4A4A;
+}
+
+.form-input-full{
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+}
+
+.select-group{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.units-of{
+    width: 90%;
+    display: flex;
+    margin-bottom: 2rem;
+
+}
+
+.half-input{
+    padding: 0.8rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+    width: 60%;
+}
+
+.half-groups{
+    display: flex;
+    flex-direction: column;
+}
+
+.half-groups label{
+    margin-bottom: 0.6rem;
+}
+
+.add-location{
+    float: right;
+    text-decoration: none;
+    margin-top: 1rem;
+    color: #6C63FF;
+    font-family: 'Montserrat-Medium';
+    text-transform: capitalize;
+}
+
+.btn{
+    background-color: #502274;
+    border: none;
+    color: #FFFFFF;
+    padding: 1rem 3.5rem; 
+    border-radius: 3px;
+    font-size: 1rem;
+    font-family: 'Montserrat-Medium';
+
+}
+
+
+/* Form Edits */
+
+.check-box{
+    margin-top: 1.2rem;
+}
+
+#check{
+    transform: translateY(0.2rem);
+    margin-right: 0.7rem;
+}
+
+
+
+
+
+/* Styling special drop down*/
+
+.special-dropdown{
+    width: 100%;
+    /* padding: 2rem 0; */
+    font-family: 'Montserrat-Regular';
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.value-holder{
+    width: 100%;
+    padding: 1rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+}
+
+.value-holder img{
+    float: right;
+    transform: translateY(0.5rem);
+}
+
+.special-dropdown:hover > .options-holder {
+    display: block;
+    animation: dropShow 0.7s ease 0.02s 1 forwards;
+}
+
+@keyframes dropShow{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.options-holder{
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    width: 227.5px;
+    z-index: 1000px;
+    /*transform: translateY(-1.5rem);*/
+    /*float: right;*/
+    /*margin-right: 1.5rem;*/
+    box-shadow: 0.3rem 0.7rem 0.5rem #70707021;
+    overflow: hidden;
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+.options-holder ul{
+    list-style: none;
+}
+
+.drop-down-option{
+    padding: 1rem 1.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.drop-down-option:hover{
+    background-color: rgba(155, 155, 155, 0.5);
+}
+
+.addCardLink{
+    text-decoration: none;
+    color: inherit;
+}
+
+.currencySymbol{
+    width: 4rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    border-right: 1px solid #D8D8D8;
+    font-family: 'Montserrat-Regular';
+    font-size: 1.1rem;
+    transform: translateY(-100%);
+}
+
+
+/*overlay */
+.overlay{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.57);
+    z-index: 9999;
+    display: none;
+    margin-left: 17%;
+    width: 83%;
+}
+
+
+.Add-Card-box{
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 85%;
+    padding: 3rem 6rem;
+}
+
+.Add-Card-box .form-group-full{
+    margin-bottom: 1.5rem;
+}
+
+.Add-Card-box .form-group-full .form-group-header{
+    margin-bottom: 0.7rem;
+}
+
+.Add-Card-box .form-group-full .form-group-header h2{
+    margin-bottom: 0;
+}
+
+
+.Add-card-box-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+.Add-card-box-header h2{
+    color: #000;
+    font-family:"Montserrat-SemiBold"; 
+}
+
+.Add-Card-box button{
+    margin-top: 2rem;
+}
+
+.additional-info{
+    color: #9B9B9B;
+    font-family: 'Montserrat-Regular';
+    margin-top: 0.75rem;
+}
+
+.form-group-half{
+    width: 45%;
+    display: inline-block;
+}
+
+.margin-right{
+    margin-right: 9.1%;
+}
+
+
+
+
+
+
+
+
+
+
+/*Action classes*/
+.invalid{
+    font-family: 'Montserrat-Regular';
+    margin: 1rem 0 3rem 0;
+    color: #B21F1E;
+    display: none;
+}
+
+.hidden-input{
+    display: none;
+}
+.x-button{
+    cursor: pointer;
+}
+
+.show-form{
+    display: block;
+    opacity: 0;
+    animation: showForm 1s ease 0.2s 1 forwards;
+}
+.show-form-flex{
+    display: flex;
+    opacity: 0;
+    animation: showForm 1s ease 0.2s 1 forwards;
+}
+
+
+
+
+
+
+
+
+
+
+.open{
+    padding: 1rem 1.5rem 1rem 0;
+    border-radius: 3px;
+    display: none;
+}
+
+.open .bar{
+    width: 100%;
+    background-color: #502274;
+}
+
+.open .bar:not(:last-child){
+    margin-bottom: 0.5rem;
+}
+
+/* Action classes */
+
+.openOverlay{
+    opacity: 0;
+    display: block;
+    animation: openOverlay 1s ease 1 forwards;
+
+}
+
+
+
+
+
+/* Animations */
+
+.slidein{
+    animation: slideIn 0.4s 1 forwards;
+}
+
+.slideout{
+    animation: slideOut 0.4s 1 forwards;
+}
+
+
+.footer{
+    padding: 0rem 5rem 1rem;
+    background-color: #50227410;
+    display: none;
+}
+
+h2.footer-heading{
+    font-size: 1.75rem;
+    margin-bottom: 3rem;
+    font-family: 'Montserrat-SemiBold';
+}
+
+
+.footer .stocks{
+    width: 100%;
+    display: block;
+}
+
+
+.footer .stocks tr{
+    width: fit-content;
+    /* background-color: #502274; */
+}
+
+
+.footer .stocks td{
+    text-align: left;
+    font-size: 1rem;
+    /* padding: 1rem 2rem; */
+    border-spacing: 0 5px;
+    border-collapse: separate;
+}
+
+
+
+
+
+@keyframes openOverlay{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+@keyframes slideIn{
+    from{
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut{
+    from{
+        opacity: 1;
+        transform: translateX(0%)
+    }
+    to{
+        opacity: 1;
+        transform: translateX(-100%)
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Action classes */
+
+.show-form{
+    display: block;
+    opacity: 0;
+    animation: showForm 1s ease 0.2s 1 forwards;
+}
+
+@keyframes showForm{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+/* Styling for the slider */
+
+.slideContainer{
+    width: var(--sliderContainerWidth);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.2rem;
+}
+
+.top-slider{
+    width: 100%;
+    margin-bottom: 0.8rem;
+}
+
+.slider{
+    background-color: #502274;
+    width: 100%;
+    -webkit-appearance: none;
+    height: 3px;
+    width: 100%;
+    border-radius: var(--sliderBorderRadius);
+    background: linear-gradient(to right, var(--thumbColor) var(--colorMax), transparent var(--colorMax));
+    transition: all 0.2s ease;
+    outline: none;
+    z-index: 20;
+    /* opacity: 0.5; */
+    /* #82828246 */
+}
+
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: var(--thumbBorderRadius) ;
+    border: 2px solid white;
+    background-color: var(--thumbColor);
+}
+
+.sliderContainerInner{
+    position: relative;
+    /* background-color: black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 0;
+    margin-bottom: 0.6rem;
+}
+
+.sliderBackground{
+    position: absolute;
+    height: 3px;
+    width: 98%;
+    background-color: #828282;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.negative{
+    float: right;
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.2rem;
+}
+
+.right{
+    float: right;
+    font-family: 'Montserrat-Regular';
+    font-size: 1rem;
+}
+
+.left{
+    font-family: 'Montserrat-Regular';
+    font-size: 1rem;
+}
+
+
+/* plans page addition */
+
+.header-bar{
+    width: 100%;
+    padding: 1.3rem 1.5rem;
+    background-color: #FFFFFF; 
+    border-radius: 3px;
+    padding-bottom: 1.7rem;
+    box-shadow: 0.2rem 0.4rem 0.4rem #70707013
+}
+
+.header-bar h2{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.2rem;
+}
+
+.underline{
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #502274;
+}
+
+.plans-body{
+    padding: 2rem 1.5rem;
+    background-color: #FFFFFF;
+    margin-top: 2rem;
+    box-shadow: 0.2rem 0.4rem 0.4rem #70707013;
+    height: 100%;
+}
+
+.tableList{
+    width: 100%;
+    height: 100%;
+}
+
+h1.planName{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    color: #000000;
+}
+
+span.Important{
+    margin-left: 1rem;
+}
+
+.paddingLeft{
+    padding-left: 6rem;
+}
+
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background-image: url("/assets/images/calendar.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 2000;
+    padding: 0.3rem;
+}
+
+
+/*Advanced plans styling */
+
+
+
+@media (max-width: 1300px) {
+     .Add-Card-box{
+        width: 80%;
+        padding: 3rem 4rem;
+    }
+    .plans{
+        width: 60%;
+    }
+
+    .main-body{
+        padding: 8rem 6rem;
+    }
+
+    .NewPlanForm{
+        width: 60%;
+    }
+    
+}
+
+@media (max-width: 1000px){
+    .plans{
+        width: 80%;
+    }
+    .logoutNav{
+        display: none;
+    }
+    .stocks{
+        flex-basis: 50%;
+    }
+    .personalize{
+        flex-basis: 13%;
+    }
+    a.backlink{
+        flex-basis: 10%;
+    }
+
+    .withdrawal-confirmation{
+        width: 90%;
+        height: 85%;
+    }
+
+    .notify-img{
+        width: 80%;
+    }
+
+    .NewPlanForm{
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px){
+   
+
+    .plans{
+        width: 90%;
+    }
+
+    a.backlink{
+        display: none;
+    }
+
+    .open{
+        display: block;
+    }
+
+    .withdrawal-confirmation{
+        width: 90%;
+        height: 85%;
+        padding: 3rem 2rem;
+    }
+
+    .notify-img{
+        width: 80%;
+    }
+
+    .NewPlanForm{
+        width: 100%;
+    }
+    .main-header{
+        position: fixed;
+        top: 0;
+        background-color: #DDDBF1;
+        z-index: 800;
+    }
+    .main-body{
+        margin-top: 5rem;
+    }
+    .visible{
+        visibility: visible;
+    }
+    .half-groups{
+        width: 49%;
+    }
+    .half-input{
+        width: 90%;
+    }
+
+}
+
+
+
+
+@media (max-width: 575px){
+  
+    .form-group-half{
+        width: 100%;
+        display: block;
+        margin-bottom: 2rem;
+    }
+     .Add-Card-box{
+        width: 85%;
+        height: 95%
+    }
+
+    .center-me{
+        width: 100%;
+        padding-left: 2.5rem;
+    }
+    .plans{
+        width: 100%;
+    }
+
+    .main-body{
+        padding: 8rem 3rem 0;
+    }
+
+    .stocks{
+        display: none;
+    }
+
+    .personalize{
+        flex-basis: 20%;
+    }
+
+    .withdrawal-confirmation{
+        width: 95%;
+    }
+
+    .notify-img{
+        width: 90%;
+    }
+
+    .footer{
+        display: block;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-top: 10px;
+        /* padding: 2rem 2rem; */
+    }
+
+    h2.footer-heading{
+        position: absolute;
+        top: 2.5rem;
+        /* left: 4.5rem; */
+    }
+
+    .footer .stocks{
+        margin-top: 3rem;
+    }
+
+    /* half inputs */
+
+    .units-of{
+        width: 100%;
+    }
+
+    .half-groups{
+        width: 49%;
+        margin-left: 1%;
+    }
+
+    .half-input{
+        width: 100%;
+    }
+
+
+}
+
+
+@media(max-width: 425px){
+    .units-of{
+        flex-direction: column;
+    }
+
+    .half-groups{
+        width: 100%;
+        margin-top: 1rem;
+        /* margin-left: 1%; */
+    }
+}
+

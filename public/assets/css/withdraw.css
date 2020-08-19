@@ -1,0 +1,742 @@
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf');
+}
+
+
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf');
+}
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf');
+}
+
+@font-face{
+    font-family: 'Segoe UI-Regular';
+    src: url('../fonts/Segoe UI/Segoe UI.woff')
+}
+
+
+
+
+
+
+
+
+/* Action classes */
+
+
+
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    color: #4A4A4A;
+}
+
+.container{
+    width: 100%;
+    height: 100%;      
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+}
+
+
+
+.overlayer{
+    position: fixed;
+    display: none;
+    z-index: 2008;
+    height: 100vh;
+    min-height: 100%;
+    width: 83%;
+    background-color: rgba(0, 0, 0, 0.57);
+    /* background-color: red; */
+}
+
+.withdrawal-confirmation{
+    background-color: #FFFFFF;
+    position: absolute;
+    border-radius: 10px;
+    height: 70%;
+    width: 70%;
+    left: 50%;
+    top: 50%;
+    /* left: 50%; */
+    transform: translate(-50%, -50%);
+    padding: 3rem 5rem;
+    overflow: hidden;
+}
+
+.confirmation-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirmation-header h2{
+    color: #000;
+    font-family:"Montserrat-SemiBold"; 
+}
+
+.underline{
+    border-bottom: 2px solid #502274;
+    padding-bottom: 0.5rem;
+}
+.confirmation-body{
+    height: 80%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+table.popup{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+table.popup tbody.rows{
+    display: block;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    padding: 5rem 1rem;
+    padding-top: 0;
+}
+
+tbody.rows::-webkit-scrollbar{
+    background-color: #fff;
+    width:  6px;
+    cursor: pointer;
+}
+
+tbody.rows::-webkit-scrollbar-thumb{
+    background-color: #9b9b9b;
+    border-radius:  5px;
+    cursor: pointer;
+}
+
+
+table.popup tr{
+    height: 6rem;
+    padding: 0.8rem 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+table.popup tr:nth-child(2n){
+    background-color: #f7f7f7;
+}
+
+th{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 1.2rem;
+}
+
+td{
+    font-family: 'Montserrat-Regular';
+}
+
+.popup td{
+    font-size: 1rem;
+    flex-basis: 33.3%;
+    color: #4A4A4A;
+}
+.popup th{
+    flex-basis: 33.3%;
+    text-align: left;   
+}
+
+
+.bottom-cell{
+    border: 1x solid #f0f0f0;
+    border-bottom: none;
+}
+
+.right-cell{
+    border: 1x solid #f0f0f0;
+    border-right: none;
+}
+
+.left-cell{
+    border: 1x solid #f0f0f0;
+    border-left: none;
+}
+
+.confirm{
+    float: right;
+    text-decoration: none;
+    padding: 0.7rem 3rem;
+    color: #FFFFFF;
+    font-family: 'Montserrat-Regular';
+    font-size: 1rem;
+    background-color: #502274;
+    border: none;
+    border-radius: 4px;
+}
+
+.notify-img-container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-img{
+    position: absolute;
+    z-index: 10;
+    right: 2rem;
+    top: 2rem;
+    display: none;
+}
+
+
+.success-img{
+    display: none;
+}
+
+.failed-img{
+    display: none;
+}
+
+
+
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.main-header{
+    height: 7rem;
+    background-color: #DDDBF1;
+    width: 100%;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.main-body{
+    padding: 6rem 5rem;
+    width: 100%;
+    
+}
+
+.plans{
+    width: 50%;
+}
+
+.checkbox-div{
+    margin: 1.2rem 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.checkbox-div input{
+    margin-right: 0.5rem;
+}
+
+form input{
+    font-family: 'Montserrat-Medium';
+    font-size: 10px;
+}
+
+.form-group-full{
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.form-group-header{
+    margin-bottom: 0.3rem;
+    display: flex;
+}
+
+.form-group-header h2{
+    font-size: 1.2rem;
+    font-family: 'Montserrat-Medium';
+    margin-bottom: 0.75rem;
+}
+
+.form-group-full label{
+    font-family: 'Montserrat-medium';
+    color: #4A4A4A;
+}
+
+.form-input-full{
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+}
+
+.select-group{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.radio-group input[type=radio]{
+    vertical-align: bottom;
+}
+
+.units-of{
+    width: 90%;
+    display: flex;
+    margin-bottom: 2rem;
+
+}
+
+.half-input{
+    padding: 0.8rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+    width: 60%;
+}
+
+.half-groups{
+    display: flex;
+    flex-direction: column;
+}
+
+.half-groups label{
+    margin-bottom: 0.6rem;
+}
+
+.add-location{
+    float: right;
+    text-decoration: none;
+    margin-top: 1rem;
+    color: #6C63FF;
+    font-family: 'Montserrat-Medium';
+    text-transform: capitalize;
+}
+
+.btn{
+    background-color: #502274;
+    border: none;
+    color: #FFFFFF;
+    padding: 1rem 3.5rem; 
+    border-radius: 3px;
+    font-size: 1rem;
+    font-family: 'Montserrat-Medium';
+
+}
+
+
+.block-international{
+    transform: translateX(-2rem);
+}
+
+
+/*update*/
+.show-form{
+    display: block;
+    opacity: 0;
+    animation: showForm 1s ease 0.2s 1 forwards;
+}
+.show-form-flex{
+    display: flex;
+    opacity: 0;
+    animation: showForm 1s ease 0.2s 1 forwards;
+}
+
+.x-button{
+    cursor: pointer;
+}
+
+
+
+
+
+@keyframes showForm{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+
+
+
+.open{
+    padding: 1rem 1.5rem 1rem 0;
+    background-color: transparent;
+    border-radius: 3px;
+    display: none;
+}
+
+.open .bar{
+    width: 100%;
+    background-color: #502274;
+}
+
+.open .bar:not(:last-child){
+    margin-bottom: 0.5rem;
+}
+
+/* Action classes */
+
+.openOverlay{
+    opacity: 0;
+    display: block;
+    animation: openOverlay 1s ease 1 forwards;
+
+}
+
+.hideConfirmation{
+    opacity: 0;
+    display: none;
+}
+
+
+.showSuccess{
+    opacity: 0;
+    display: block;
+    animation: displayImage 1s ease 1s 1 forwards;
+}
+
+.showFailed{
+    opacity: 0;
+    display: block;  
+    animation: displayImage 1s ease 1s 1 forwards;
+}
+
+
+
+
+
+/* Animations */
+
+.slidein{
+    animation: slideIn 0.4s 1 forwards;
+}
+
+.slideout{
+    animation: slideOut 0.4s  1 forwards;
+}
+
+
+.footer{
+    padding: 0rem 5rem 1rem;
+    background-color: #50227410;
+    display: none;
+    margin-top: 10px;
+}
+
+h2.footer-heading{
+    font-size: 1.75rem;
+    margin-bottom: 3rem;
+    font-family: 'Montserrat-SemiBold';
+}
+
+
+.footer .stocks{
+    width: 100%;
+    display: block;
+    border-spacing: 0 5px;
+    border-collapse: separate;
+}
+
+
+.footer .stocks tr{
+    width: fit-content;
+    /* background-color: #502274; */
+}
+
+
+.footer .stocks td{
+    text-align: left;
+    font-size: 1rem;
+    /* padding: 1rem 2rem; */
+}
+
+
+
+
+
+@keyframes displayImage{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+@keyframes openOverlay{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+@keyframes slideIn{
+    from{
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut{
+    from{
+        opacity: 1;
+        transform: translateX(0%)
+    }
+    to{
+        opacity: 1;
+        transform: translateX(-100%)
+    }
+
+}
+
+
+
+/* Responsiveness design */
+
+@media (max-width: 1300px) {
+    .sidebar {
+        width: 24%;
+    }
+
+    .center-me{
+        width: 100%;
+        text-align: center;
+        padding: 0 0.5rem;
+    }
+
+    main{
+        margin-left: 24%;
+        width: 76%;
+    }
+    .overlayer{
+        width: 75%;
+    }
+    .plans{
+        width: 60%;
+    }
+
+    .main-body{
+        padding: 8rem 6rem;
+    }
+    
+}
+
+@media (max-width: 1000px){
+    .sidebar {
+        width: 30%;
+    }
+
+    main{
+        margin-left: 30%;
+        width: 70%;
+    }
+    .overlayer{
+        width: 70%;
+        height: 70%;
+    }
+    .plans{
+        width: 100%;
+    }
+    .logoutNav{
+        display: none;
+    }
+    .stocks{
+        flex-basis: 50%;
+    }
+    .personalize{
+        flex-basis: 13%;
+    }
+    a.backlink{
+        flex-basis: 10%;
+    }
+
+    .withdrawal-confirmation{
+        width: 90%;
+        height: 85%;
+    }
+
+    .notify-img-container{
+        width: 80%;
+    }
+    .notify-img{
+        width: 100%;
+    }
+}
+
+
+
+@media (max-width: 768px){
+    .cover-overlay{
+        position: absolute;
+        display: none;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        background-color: rgba(155, 155, 155, 0.57);
+    }
+
+    .main-container{
+        min-height: 86vh;
+    }
+
+
+    .sidebar.sidenav.active{
+        width: 50%;
+        box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+    .sidenav__container.active{
+        display: block;
+    }
+    .sidebar{
+        display: none;
+    }
+    .sidenav-btn{
+        display: inline-block;
+    }
+
+
+    main{
+        margin-left: 0;
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+    }
+
+    .overlayer{
+        width: 100%;
+        min-height: 100vh;
+    }
+
+
+
+    .plans{
+        width: 90%;
+    }
+
+    a.backlink{
+        display: none;
+    }
+
+    .open{
+        display: block;
+    }
+
+    .withdrawal-confirmation{
+        width: 90%;
+        height: 85%;
+        padding: 3rem 2rem;
+    }
+
+    .notify-img-container{
+        width: 80%;
+    }
+    .visible{
+        visibility: visible;
+    }
+}
+
+
+
+
+@media (max-width: 575px){
+  .sidebar.sidenav.active{
+        width: 70%;
+    }
+
+    
+    .plans{
+        width: 100%;
+    }
+
+    .main-body{
+        padding: 8rem 3rem 0;
+    }
+
+    .stocks{
+        display: none;
+    }
+
+    .personalize{
+        flex-basis: 20%;
+    }
+
+    .withdrawal-confirmation{
+        width: 95%;
+    }
+
+    .notify-img-container{
+        width: 90%;
+    }
+
+    .footer{
+        display: block;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    h2.footer-heading{
+        position: absolute;
+        top: 2.5rem;
+        /* left: 4.5rem; */
+    }
+
+    .footer .stocks{
+        margin-top: 3rem;
+    }
+}
+
+
+@media(max-width: 575px){
+    .sidebar.sidenav.active{
+        width: 80%;
+    }
+
+    .main-body{
+        padding: 8rem 2rem;
+    }
+
+    .personalize{
+        flex-basis: 23%;
+    }
+}
+

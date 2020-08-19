@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest, UserUpdateRequest};
+use App\Http\Requests\{AvatarRequest, LocationRequest, UserPhoneRequest, UserRegistrationRequest};
 use App\Services\{LocationService, SettingService, UserService};
 use App\Transactions;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Hash, Validator};
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\User;
 
 class UserController extends Controller
 {
@@ -20,7 +20,8 @@ class UserController extends Controller
         LocationService $location,
         Transactions $transactions,
         SettingService $settings
-    ) {
+    )
+    {
         $this->userService = $userService;
         $this->locationService = $location;
         $this->settings = $settings;
@@ -51,6 +52,22 @@ class UserController extends Controller
         $user = $this->userService->register($data);
         $token = JWTAuth::fromUser($user);
         return $this->respondWithSuccess(['data' => compact('user', 'token')], 201);
+    }
+
+    public function webRegister(Request $request)
+    {
+        Validator::validate($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+            'phone' => 'required|numeric|unique:users',
+            'country' => 'sometimes|string',
+
+        ]);
+        $user = $this->userService->register($request->all());
+        \Auth::guard()->login($user);
+        return redirect('home')->with('success', 'Successfully Registered, Please verify your account');
     }
 
 
@@ -112,7 +129,6 @@ class UserController extends Controller
     }
 
 
-
     /**
      * Upload User Avatar
      * @param AvatarRequest $request
@@ -164,7 +180,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $this->respondWithError($validator->errors(), 400);
         }
-        $user = $this->userService->update($request->except(['password',  'image_url', 'uuid']));
+        $user = $this->userService->update($request->except(['password', 'image_url', 'uuid']));
         return $this->respondWithSuccess($user, 201);
     }
 

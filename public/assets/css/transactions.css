@@ -1,0 +1,391 @@
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-Bold';
+    src: url('../fonts/montserrat/Montserrat-Bold.otf')
+}
+
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf')
+}
+
+@font-face{
+    font-family: 'Copperplate Light';
+    src: url('../fonts/copperplate/OPTICopperplate-Light.otf')
+}
+
+body{
+    margin: 0;
+    background-color: #F0F0F0
+}
+
+button{
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    background-color: #F0F0F0;
+    min-height: 100vh;
+}
+
+.main{
+    width: 83%;
+    margin-left: 17%;
+    padding-bottom: 20px;
+    box-sizing: border-box
+}
+
+.content{
+    height: calc(100% - 70px);
+    padding: 30px 50px;
+    box-sizing: border-box;
+}
+
+.cards{
+    min-height: 148px;
+    width: 100%;
+    display: flex;
+    font-family: 'Montserrat-Regular', sans-serif;
+}
+
+.cards .header{
+    font-size: 14px;
+    margin: 11px 20px;
+}
+
+.cards .bold{
+    font-family: 'Montserrat-Bold';
+    font-size: 24px;
+    margin: 15px 20px;
+}
+
+.cards .light{
+    font-size: 10px;
+}
+
+.total-amount{
+    flex-basis: 22%;
+    border-radius: 3px;
+    background-color: white;
+    margin-right: 14px;
+    border: 1px solid #EAEAEA;
+}
+
+.materials-withdrawn{
+    flex-basis: 30%;
+    border-radius: 3px;
+    background-color: white;
+    margin-right: 14px;
+    border: 1px solid #EAEAEA;
+}
+
+.materials-left{
+    flex-basis: 30%;
+    border-radius: 3px;
+    background-color: white;
+    margin-right: 14px;
+    border: 1px solid #EAEAEA;
+}
+
+.add-plan{
+    flex-basis: 18%;
+    border-radius: 3px;
+    background-color: #502274;
+    border: 1px solid #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.add-plan p{
+    width: 90%;
+}
+
+.add-plan button{
+    background-color: transparent;
+    border: none;
+}
+
+.cards div span.line-h{
+    height: 1px;
+    background-color: #EAEAEA;
+    display: block;
+    width: 100%;
+}
+
+.cards div.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 17px 20px;
+    height: 80px;
+}
+
+.cards div.grid .light{
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.cards div.grid div:first-of-type{
+    border-right: 1px solid #EAEAEA;
+}
+
+.cards div.grid .bold{
+    margin: 0;
+}
+
+.cards div.grid div:last-of-type{
+    text-align: right;
+}
+
+.materials-withdrawn .bold{
+    color: #B21F1E;
+}
+
+.materials-left .bold{
+    color: #008000;
+}
+
+.download-pdf{
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin-top: 14px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #EAEAEA;
+}
+
+.download-pdf span{
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 12px;
+}
+
+.download-pdf span .line{
+    width: 30px;
+    height: 4px;
+    background-color: #502274;
+    display: inline-block;
+    position: absolute;
+    margin-top: 5px;
+}
+
+.download-pdf button{
+    border-radius: 3px;
+    background-color: transparent;
+    border: 1px solid #502274;
+    color: #502274;
+    width: 135px;
+    height: 25px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 12px;
+}
+
+.transactions{
+    font-family: 'Montserrat-Regular', sans-serif;
+    font-size: 12px;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: white;
+    margin-top: 14px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #EAEAEA;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.transactions__header{
+    color: black;
+}
+
+.transactions__header__small{
+    display: none;
+    text-align: center
+}
+
+.transaction,.transactions__header{
+    height: 44px;
+    display: grid;
+    grid-template-columns: 0.7fr repeat(4,1fr)
+}
+
+.transaction p,.transactions__header p{
+    padding-left: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.transaction p span.label{
+    display: none;
+    color: black;
+    margin-right: 20px;
+}
+
+.transaction p span.br{
+    display: block;
+}
+
+.transaction.deposit{
+    color: #008000;
+}
+
+.transactions__header p:not(:nth-of-type(1)){
+    text-align: center
+}
+
+.transaction p:not(:nth-of-type(1)){
+    text-align: center
+}
+
+.transaction.withdraw{
+    color: #B21F1E;
+}
+
+.transaction:nth-of-type(2n){
+    background-color: rgba(216, 216, 216, 0.29)
+}
+
+@media(max-width: 1300px){
+    .main{
+        width: 76%;
+        margin-left: 24%;
+    }
+    .cards{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 10px;
+    }
+    .total-amount,.materials-withdrawn,.materials-left,.add-plan{
+        margin: 0 auto;
+        width: 248px;
+    }
+    .content{
+        padding: 30px 20px;
+        padding-bottom: 0;
+    }
+    .transactions{
+        display: grid;
+        grid-template-rows: 1fr;
+    }
+    .transaction, .transactions__header{
+        height: unset;
+    }
+}
+
+@media(max-width: 1050px){
+    .cards{
+        height: unset
+    }
+    .cards div.grid{
+        grid-template-columns: 1fr;
+        height: unset;
+    }
+    .cards div.grid div:first-of-type{
+        border: none;
+        border-bottom: 1px solid #EAEAEA;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+    .cards div.grid div:last-of-type{
+        text-align: center;
+        margin-top: 10px
+    }
+    .cards .header,.cards .bold{
+        text-align: center;
+    }
+    .logout{
+        display: none;
+    }
+    .user-controls{
+        margin-right: 0px;
+    }
+}
+
+@media(max-width: 1000px){
+    .transactions{
+        padding: 0;
+        padding-bottom: 10px;
+    }
+    .transactions__header{
+        display: none;
+    }
+    .transaction{
+        display: block;
+        padding: 5px 0;
+    }
+    .transaction p:not(:nth-of-type(1)){
+        text-align: left
+    }
+    .transaction p span.label{
+        display: inline-block;
+    }
+    .transaction p{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-right: 5px;
+        margin: 5px 0;
+    }
+    .transactions__header__small{
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+@media(max-width: 800px){
+    .main{
+        width: 70%;
+        margin-left: 30%;
+    }
+}
+
+@media(max-width: 775px){
+    .cards{
+        grid-template-columns: 1fr;
+    }
+    .add-plan{
+        min-height: 220px;
+    }
+}
+
+@media(max-width: 768px){
+    .content{
+        margin-top: 70px;
+    }
+    .main{
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 575px){
+    .content{
+        padding: 30px 0 0;
+    }
+}

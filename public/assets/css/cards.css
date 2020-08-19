@@ -1,0 +1,343 @@
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf')
+}
+
+@font-face{
+    font-family: 'Copperplate Light';
+    src: url('../fonts/copperplate/OPTICopperplate-Light.otf')
+}
+
+@font-face{
+    font-family: 'Rubik Medium';
+    src: url('../fonts/Rubik/Rubik-Medium.ttf')
+}
+
+@font-face{
+    font-family: 'Rubik Regular';
+    src: url('../fonts/Rubik/Rubik-Regular.ttf')
+}
+
+body{
+    margin: 0;
+    background-color: #F0F0F0;
+}
+
+button{
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    background-color: #F0F0F0;
+    min-height: 100vh;
+}
+
+.main{
+    width: 83%;
+    margin-left: 17%;
+    padding-bottom: 20px;
+    box-sizing: border-box
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px 0px;
+    padding: 20px 50px 0;
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 35px;
+}
+
+.card{
+    width: 100%; 
+    max-width: 380px;
+    border-radius: 9px;
+    box-shadow: 5px 15px 16px rgba(0, 0, 0, 0.16);
+    height: 230px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 35px 35px 40px 30px;
+    box-sizing: border-box;
+    margin: auto;
+    color: white;
+    font-family: 'Copperplate Light';
+    position: relative;
+}
+
+.card.black{
+    background-color: #000000;
+}
+
+.card.light-green{
+    background-color: #8EC5AC
+}
+
+.card.blue{
+    background-color: #3C52DD
+}
+
+.card.dark-green{
+    background-color: #23B173;
+}
+
+.remove-card{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    opacity: 0;
+    transition: 300ms;
+}
+
+.card:hover .remove-card{
+    opacity: 1;
+}
+
+.remove-card-box{
+    position: absolute;
+    top: 36px;
+    right: 14px;
+    height: 150px;
+    width: 230px;
+    background-color: white;
+    border-radius: 3px;
+    padding: 23px 17px;
+    box-sizing: border-box;
+    display: none;
+    opacity: 0;
+    transition: 250ms;
+}
+
+.remove-card-box.active{
+    opacity: 1;
+}
+
+.remove-card-box__header{
+    font-size: 12px;
+    font-family: 'Montserrat Regular';
+    margin: 0 0 10px;
+    color: black;
+}
+
+.remove-card-box__description{
+    font-family: 'Montserrat Regular';
+    font-size: 8px;
+    color: #9B9B9B;
+    margin: 0 0 34px;
+}
+
+.remove-card__buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.remove-card__button{
+    outline: none;
+    font-family: 'Rubik Medium';
+    font-size: 12px;
+    width: 66px;
+    border-radius: 3px;
+    border: none;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    color: #502274;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.remove-card__button--bg-purple{
+    background-color: #502274;
+    color: white;
+    margin-left: 5px;
+}
+
+.card__brands{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__brands img:last-of-type{
+    width: 44px;
+}
+
+.card__numbers{
+    margin: 30px 0 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__numbers span{
+    font-size: 16px;
+}
+
+.card__details{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__details div{
+    display: flex;
+    flex-direction: column;
+}
+
+.card__details div p{
+    margin: 0;
+}
+
+.card__details div p:first-of-type{
+    font-size: 8px;
+    color: #9b9b9b
+}
+
+.card__details div p:last-of-type{
+    font-size: 14px;
+}
+
+.add-card{
+    width: 100%;
+    height: 230px;
+    padding: 66px 0 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: #502274;
+    border: 1px dashed #502274;
+    border-radius: 9px;
+    box-sizing: border-box;
+    max-width: 380px;
+    margin: auto;
+    font-family: 'Rubik Regular';
+    font-size: 20px;
+    flex-direction: column;
+}
+
+.add-card img{
+    height: 24px;
+    width: 24px;
+}
+
+@media(min-height: 700px) and (min-width: 800px) {
+    .cards{
+        margin-top: 100px;
+    }
+}
+
+@media(max-width: 1100px){
+    .cards{
+        grid-gap: 20px 10px;
+        padding: 20px 20px 0;
+    }
+}
+
+@media(max-width: 1300px){
+    .sidebar{
+        width: 20%;
+    }
+    .main{
+        width: 80%;
+        margin-left: 20%;
+    }
+    .cards{
+        padding: 20px 10px 0;
+        margin: 0;
+    }
+    .logout{
+        display: none;
+    }
+    .user-controls{
+        margin-right: 0px;
+    }
+}
+
+@media(max-width: 1000px){
+    .sidebar{
+        width: 30%;
+    }
+    .main{
+        width: 70%;
+        margin-left: 30%;
+        padding-bottom: 0;
+    }
+    .cards{
+        grid-template-columns: 1fr;
+    }
+    .links .link, .logout__link{
+        padding-left: 20%;
+    }
+}
+
+@media(max-width: 768px){
+    .sidebar.sidenav.active{
+        width: 50%;
+        box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+    .sidenav__container.active{
+        display: block;
+    }
+    .cards{
+        margin-top: 70px;
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+    .top{
+        position: fixed;
+        z-index: 10;
+    }
+    .sidebar{
+        display: none;
+    }
+    .main{
+        width: 100%;
+        margin: 0;
+    }
+    .sidenav-btn{
+        display: inline-block;
+    }
+    .top .back{
+        display: none;
+    }
+    .user-controls{
+        margin-right: 0;
+    }
+    .logo{
+        margin-left: 15%;
+    }
+    .links .link, .logout__link{
+        padding-left: 15%
+    }
+}
+
+@media(max-width: 575px){
+    .sidebar.sidenav.active{
+        width: 70%;
+    }
+    .card{
+        height: unset;
+    }
+    .card{
+        padding: 35px 20px 40px
+    }
+}

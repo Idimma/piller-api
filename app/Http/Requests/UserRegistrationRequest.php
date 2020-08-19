@@ -23,10 +23,8 @@ class UserRegistrationRequest extends BaseRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'phone'   => 'required|numeric|unique:users',
-            'bank_name' => 'sometimes|string',
-            'account_name' => 'sometimes|string',
-            'account_number' =>'sometimes|numeric',
-            'driving_license' => 'sometimes'
+            'country' => 'sometimes|string',
+
         ];
     }
 

@@ -1,0 +1,149 @@
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf')
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #F0F0F0;
+}
+
+.header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 3rem;
+}
+
+
+.header h2{
+    font-family: 'Montserrat-SemiBold';
+    font-size: 2rem;
+    color: #502274;
+}
+
+main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 5rem 10rem;
+    height: 100vh;
+    min-height: 100%;
+}
+
+.text-content{
+    width: 50%;
+}
+
+.text-content h1{
+    font-size: 2.4rem;
+    color: #000000;
+    font-family: 'Montserrat-SemiBold';
+    margin-bottom: 3rem;
+}
+
+.text-content p{
+    font-size: 1.6rem;
+    color: #000000;
+    font-family: 'Montserrat-Regular';
+    margin-bottom: 5rem;
+    line-height: 1.9;
+}
+
+.btn{
+    border: none;
+    padding: 1rem 3.5rem;
+    margin-right: 3rem;
+    font-family: 'Montserrat-Regular';
+    border-radius: 3px;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+a.btn{
+    text-decoration: none;
+    color: #502274;
+    border: 1px solid #502274;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+
+.refresh{
+    background-color: #502274;
+    color: #fff;
+}
+
+.error-img{
+    width: 50%;
+}
+
+.btn:hover{
+    transform: scale(1.02);
+}
+
+
+
+@media (max-width: 900px){
+    main{
+        padding: 5rem 6rem;
+    }
+    .error-img{
+        width: 40%;
+    }
+}
+
+
+@media (max-width: 769px){
+    .text-content{
+        width: 100%;
+        /* margin-top: -9rem; */
+    }
+    .error-img{
+        display: none;
+    }
+}
+
+@media(max-width: 575px){
+    main{
+        padding: 70px 3rem 4rem;
+    }
+    .text-content{
+        /* margin-top: -8rem; */
+    }
+    .btn{
+        display: block;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    a.btn{
+        text-align: center;
+    }
+
+}

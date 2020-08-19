@@ -1,0 +1,478 @@
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf');
+}
+
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf');
+}
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf');
+}
+
+@font-face{
+    font-family: 'Segoe UI-Regular';
+    src: url('../fonts/Segoe UI/Segoe UI.woff')
+}
+
+
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    color: #4A4A4A;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+input{
+    font-family: "Montserrat-Regular";
+    font-size: 1.2rem;
+}
+
+.btn{
+    border: none;
+    color: #fff;
+    font-family: "Montserrat-SemiBold";
+    background-color: #502274;
+    padding: 0.9rem 2.85rem;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    margin-bottom: 2.5rem;
+}
+.header__bar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    height: 50px;
+}
+
+.header__bar__name{
+    flex-basis: 30%;
+    background-color: #fff;
+    padding: 1.3rem;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px #00000010;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.header__bar__name h2{
+    color: #4a4a4a;
+    font-family: "Montserrat-SemiBold";
+    font-size: 12px;
+    box-sizing: border-box;
+    position: relative;
+    top: -2px;
+}
+.header__bar--optionHolder{
+    flex-basis: 30%;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px #00000010;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-right: 2rem;
+}
+.header--option{
+    color: #4A4A4A;
+    text-align: center;
+    padding: 1.5rem 2.5rem;
+    transition: all 0.5s ease;
+    position: relative;
+}
+.listHidden{
+    display: none;
+}
+
+.showList{
+    display: block;
+    -webkit-animation: show 0.5s ease 1 forwards;
+    -o-animation: show 0.5s ease 1 forwards;
+    animation: show 0.5s ease 1 forwards;
+}
+@keyframes show{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.header--option h2{
+    font-size: 1.3rem;
+    font-family: "Montserrat-Regular";
+}
+.bottom--bar{
+    height: 2px;
+    width: 100%;
+    transform: scale(0);
+    background-color: #502274;
+    opacity: 0;
+    transform-origin: center;
+    transition:  all 0.5s ease;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.header--option:hover .bottom--bar, .header--option-active .bottom--bar{
+    opacity: 1;
+    transform: scale(1);
+}
+.header--option:hover > h2, .header--option-active > h2 {
+    color: #000;
+}
+.border__bottom{
+    border-bottom: 2px solid #502274;
+    padding-bottom: 3px;
+    box-sizing: border-box;
+}
+.searchbar{
+    flex-basis: 68%;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px #00000010;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.search-image{
+    /*padding: 1.5rem;*/
+    height: 100%;
+    width: 14px;
+    justify-self: flex-start;
+    margin: 0 0.8rem;
+}
+.searchInput{
+    border: none;
+    /*height: 100%;*/
+    flex-basis: 95%;
+    outline: none;
+    color: #4a4a4a;
+    /*padding: 1.5rem;*/
+    margin-left: 5px;
+}
+/*syling the plans body*/
+
+.plans-body{
+    padding: 2rem 1.5rem;
+    background-color: #FFFFFF;
+    margin-top: 2rem;
+    box-shadow: 0.2rem 0.4rem 0.4rem #70707013;
+    height: 100%;
+    padding-bottom: 10rem;
+}
+
+span.Important{
+    margin-left: 1rem;
+}
+
+.paddingLeft{
+    padding-left: 6rem;
+}
+
+
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background-image: url("/assets/images/calendar.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 2000;
+    padding: 0.3rem;
+}
+
+
+/* Advanced plans Style */
+
+.plan-Header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-container{
+    text-align: left;
+    width: 20rem;
+}
+
+.detail-container-actions{
+    width: 10.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.detail-container-actions img{
+    border-radius: 50%;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.detail-container-actions img:hover{
+    background-color: rgba(155, 155, 155, 0.1);
+}
+
+.plan-Header .detail-container{
+    color: #4A4A4A;
+    font-family: 'Montserrat-Medium';
+    font-size: 1.2rem;
+}
+
+
+.plan-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+}
+
+.plan-group .detail-container{
+    color: #9B9B9B;
+    font-family: 'Montserrat-Regular';
+    font-size: 1rem;
+    padding: 1rem 0.5rem;
+}
+
+.plan-group:nth-child(2n){
+    background-color: rgba(216, 216, 216, 0.29);
+}
+
+.tag{
+    display: none;
+}
+
+.number-col{
+    width: 8rem;
+}
+
+
+
+.Add-Card-box{
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    min-height: 90%;
+    padding: 3rem 6rem;
+}
+
+.Add-Card-box .form-group-full{
+    margin-bottom: 1.5rem;
+}
+
+.Add-Card-box .form-group-full .form-group-header{
+    margin-bottom: 0.7rem;
+}
+
+.Add-Card-box .form-group-full .form-group-header h2{
+    margin-bottom: 0;
+}
+
+
+.Add-card-box-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+.Add-card-box-header h2{
+    color: #000;
+    font-family:"Montserrat-SemiBold";
+}
+
+.Add-Card-box button{
+    margin-top: 2rem;
+}
+
+.open{
+    padding: 1rem 1.5rem 1rem 0;
+    border-radius: 3px;
+    display: none;
+}
+
+.hidden-input{
+    display: none;
+}
+.x-button{
+    cursor: pointer;
+}
+
+
+/*styling the inputs*/
+.form-group-full label, .form-group-header{
+    font-family: 'Montserrat-medium';
+    color: #4A4A4A;
+    font-size: 0.8rem;
+}
+
+.form-input-full{
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+    outline: none;
+}
+
+.currency__input__div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.currencyHolder{
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    font-family: "Montserrat-Regular";
+    border: 1px solid #d8d8d8;
+    border-right: none;
+    display: flex;
+    align-items: center;
+}
+.currencyHolder img{
+    margin-left: 1.5rem;
+}
+
+.form-group-3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.third{
+    width: 30%;
+}
+
+
+
+
+/*Media Queries*/
+
+@media (max-width: 1300px){
+
+
+}
+
+
+@media (max-width: 1000px){
+    /* plan items */
+
+    .plans-body{
+        background-color: transparent;
+        box-shadow: none;
+        padding: 2rem 0;
+    }
+
+    .plan-Header{
+        display: none;
+    }
+
+    p.tag{
+        display: inline-block;
+        font-family: 'Montserrat-SemiBold';
+        color: #000000;
+        font-size: 1.2rem;
+        margin-right: 0.7rem;
+        margin-bottom: 0.7rem;
+
+    }
+
+    .plan-group{
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #FFFFFF;
+        margin-bottom: 5rem;
+        border-radius: 5px;
+        box-shadow: 0.2rem 0.3rem 0.3rem #70707010;
+        padding: 2rem;
+
+    }
+
+    .detail-container-actions{
+        align-self: flex-end;
+        margin-top: 1rem;
+    }
+
+    .plan-group:nth-child(2n){
+        background-color: #FFFFFF;
+    }
+
+    .detail-container{
+        flex-direction: row;
+        width: 100%;
+    }
+    .Add-Card-box{
+        width: 70%;
+    }
+    .header__bar{
+        flex-direction: column-reverse;
+    }
+    .header__bar__name{
+        width: 100%;
+        /*margin-bottom: 1rem;*/
+    }
+    .header__bar--optionHolder{
+        width: 100%;
+        margin-right: 0;
+    }
+    .searchbar{
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+
+@media (max-width: 768px){
+
+}
+
+@media (max-width: 575px){
+
+    .Add-Card-box{
+        width: 90%;
+    }
+
+}
+
+
+
+
+@media (max-width: 425px){
+
+}
+
+
+
+

@@ -1,0 +1,397 @@
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-SemiBold';
+    src: url('../fonts/montserrat/Montserrat-SemiBold.otf')
+}
+
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('../fonts/montserrat/Montserrat-Medium.otf')
+}
+
+@font-face{
+    font-family: 'Rubik Medium';
+    src: url('../fonts/Rubik/Rubik-Medium.ttf')
+}
+
+@font-face{
+    font-family: 'Rubik Regular';
+    src: url('../fonts/Rubik/Rubik-Regular.ttf')
+}
+
+body{
+    margin: 0;
+    background-color: #F0F0F0;
+}
+
+button{
+    cursor: pointer;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    background-color: #F0F0F0;
+    min-height: 100vh;
+}
+
+.main{
+    width: 83%;
+    margin-left: 17%;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo{
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 20px;
+    color: #502274;
+    margin: 30px auto 20px;
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+}
+
+.body{
+    padding-top: 50px;
+    box-sizing: border-box
+}
+
+.card-rules{
+    width: 620px;
+    margin: auto;
+    font-family: 'montserrat', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    line-height: 22px
+}
+
+.card-rules a{
+    color:#6C63FF;
+}
+
+.card-rules{
+    font-family: 'Montserrat-Semibold';
+    font-size: 18px;
+}
+
+.add-card{
+    color: #9B9B9B;
+    margin: 50px auto 0px;
+    text-align: center;
+    width: 200px;
+    font-family: 'Montserrat-Regular', sans-serif;
+    font-size: 15px;
+}
+
+.add-card-btn{
+    margin: 50px auto 45px;
+    display: flex;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+}
+
+.add-card-text{
+    font-size: 20px;
+    font-family: 'Montserrat-Regular', sans-serif;
+    width: 108px;
+    margin: 0 auto 100px;
+}
+
+.card-brands{
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto
+}
+
+form{
+    padding-left: 50px;
+    font-family: 'Montserrat-Medium', sans-serif
+}
+
+form .card-rules{
+    margin: 0 0 35px;
+    text-align: left;
+}
+
+.form-group{
+    margin-bottom: 35px;
+}
+
+.form-group *{
+    display: block;
+}
+
+.form-group label{
+    font-size: 12px;
+    font-family: 'Montserrat-Regular';
+    margin-bottom: 5px;
+}
+
+.form-group .required-star{
+    display: inline-block;
+    font-size: 17px;
+    color: #FF0000;
+    margin-left: 3px;
+}
+
+.form-group input{
+    width: 450px;
+    height: 40px;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+    padding-left: 10px;
+    font-family: 'Montserrat-Regular', sans-serif
+}
+
+.form-group input::placeholder{
+    font-size: 8px;
+    font-family: 'Montserrat-Medium', sans-serif;
+}
+
+.form-group.inline{
+    display: inline-block;
+    margin-right: 45px;
+}
+
+.form-group.inline input{
+    width: 200px;
+}
+
+.disclaimer{
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 10px;
+    color: #9B9B9B;
+    margin-bottom: 20px;
+}
+
+form button{ 
+    width: 160px;
+    height: 40px;
+    align-items: center;
+    text-align: center;
+    background-color: #502274;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: 'Rubik Medium', sans-serif;
+    color: white;
+    outline: none;
+    display: block;
+}
+
+.status-background{
+    width: 83%;
+    height: 100%;
+    position: fixed;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+}
+
+.success,.failure{
+    font-family: 'Montserrat-SemiBold',sans-serif;
+    font-size: 14px;
+    flex-direction: column;
+    padding-top: 50px;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+    transition: 500ms;
+    position: relative;
+    display: none;
+    width: 560px;
+    height: 415px;
+    transform: scale(0);
+}
+
+.status-background.status-success .success{
+    display: flex;
+}
+
+.status-background.status-failure .failure {
+    display: flex;
+}
+
+.modal.active{
+    transform: scale(1);
+}
+
+.close-modal{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: 300ms;
+}
+
+.modal img{
+    margin-top: 60px;
+}
+
+.close-modal img{
+    margin-top: 0;
+}
+
+.hide{
+    display: none;
+}
+
+.body{
+    padding-top: 50px;
+    box-sizing: border-box
+}
+
+.card-rules{
+    width: 620px;
+    margin: auto;
+    font-family: 'montserrat', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    line-height: 22px
+}
+
+.card-rules a{
+    color:#6C63FF;
+}
+
+.form-group *{
+    display: block;
+}
+
+.form-group small{
+    font-size: 8px;
+    font-family: 'Montserrat-Regular';
+    color: #9B9B9B;
+    margin-top: 5px;
+}
+
+@media(max-width: 1300px){
+    .main{
+        width: 76%;
+        margin-left: 24%;
+    }
+    .card-rules{
+        width: 90%;
+    }
+    .status-background{
+        width: 76%;
+    }
+    .logout{
+        display: none;
+    }
+    .user-controls{
+        margin-right: 0px;
+    }
+}
+
+@media(max-width: 1000px){
+    .status-background{
+        width: 70%;
+    }
+    .success.active{
+        width: 80%;
+    }
+    .links .link, .logout__link{
+        padding-left: 20%;
+    }
+    form{
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .main{
+        width: 70%;
+        margin-left: 30%;
+        padding-bottom: 0;
+    }
+}
+
+@media(max-width: 750px){
+    .body{
+        padding-top: 20px;
+    }
+    form .card-rules{
+        margin-bottom: 30px;
+    }
+    form{
+        padding-left: 30px;
+    }
+    .form-group input{
+        width: 90%;
+    }
+    .form-group.inline{
+        width: 44%;
+        margin-right: 0;
+    }
+    .form-group.inline input{
+        width: 100%;
+    }
+}
+
+@media(max-width: 768px){
+    .status-background{
+        width: 100%;
+    }
+    .top{
+        position: fixed;
+        z-index: 10;
+    }
+    .main{
+        width: 100%;
+        margin: 0;
+    }
+    .top .back{
+        display: none;
+    }
+    .user-controls{
+        margin-right: 0;
+    }
+    .logo{
+        margin-left: 15%;
+    }
+    .links .link, .logout__link{
+        padding-left: 15%;
+    }
+    .body{
+        margin-top: 70px;
+    }
+}
+
+@media(max-width: 768px) and (min-height: 700px){
+    .body{
+        margin-top: 120px   ;
+    }
+}
+
+@media(max-width: 575px){
+    .success.active{
+        width: 90%;
+        padding: 50px 10px;
+    }
+    .success.active p{
+        text-align: center;
+    }
+}

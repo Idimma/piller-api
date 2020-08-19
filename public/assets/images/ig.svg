@@ -1,0 +1,21 @@
+<svg id="Group_6" data-name="Group 6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.901" height="17.901" viewBox="0 0 17.901 17.901">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#405de6"/>
+      <stop offset="0.094" stop-color="#5851db"/>
+      <stop offset="0.197" stop-color="#833ab4"/>
+      <stop offset="0.305" stop-color="#c13584"/>
+      <stop offset="0.429" stop-color="#e1306c"/>
+      <stop offset="0.547" stop-color="#fd1d1d"/>
+      <stop offset="0.67" stop-color="#f56040"/>
+      <stop offset="0.788" stop-color="#f77737"/>
+      <stop offset="0.897" stop-color="#fcaf45"/>
+      <stop offset="1" stop-color="#ffdc80"/>
+    </linearGradient>
+  </defs>
+  <g id="instagram-logo">
+    <path id="Shape" d="M12.961,17.9H4.94A4.946,4.946,0,0,1,0,12.961V4.94A4.946,4.946,0,0,1,4.94,0h8.021A4.946,4.946,0,0,1,17.9,4.94v8.021A4.946,4.946,0,0,1,12.961,17.9ZM4.94,1.589A3.355,3.355,0,0,0,1.589,4.94v8.021A3.355,3.355,0,0,0,4.94,16.313h8.021a3.355,3.355,0,0,0,3.352-3.352V4.94a3.355,3.355,0,0,0-3.352-3.352Z" fill="url(#linear-gradient)"/>
+    <path id="Shape-2" data-name="Shape" d="M4.613,9.225A4.613,4.613,0,1,1,9.225,4.613,4.618,4.618,0,0,1,4.613,9.225Zm0-7.637A3.024,3.024,0,1,0,7.637,4.613,3.027,3.027,0,0,0,4.613,1.589Z" transform="translate(4.338 4.338)" fill="url(#linear-gradient)"/>
+    <path id="Path" d="M1.165,0A1.164,1.164,0,0,0,.342,1.988a1.164,1.164,0,0,0,1.646,0A1.165,1.165,0,0,0,1.165,0Z" transform="translate(12.592 2.991)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

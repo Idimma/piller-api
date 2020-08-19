@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
+use App\Plan;
 use App\Transactions;
 use App\User;
 
@@ -24,6 +24,25 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+    {
+        return view('pages.home');
+    }
+
+    public function dashboard()
+    {
+        return view('pages.dashboard');
+    }
+
+    public function noPlan()
+    {
+        return view('pages.no-plan');
+    }
+    public function cards()
+    {
+        return view('pages.cards');
+    }
+
+    public function indexAdmin()
     {
         $users = User::count();
 
@@ -69,9 +88,9 @@ class HomeController extends Controller
 
     public function tasks()
     {
-        $users = Task::get();
-        $type = 'Tasks';
-        return view('users', compact('users', 'type'));
+        $plans = Plan::get();
+        $type = 'Plans';
+        return view('plans', compact('plans', 'type'));
     }
 
     public function settings()
