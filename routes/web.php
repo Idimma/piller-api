@@ -19,6 +19,10 @@ Route::get('/', function () {
 Route::get('/login', function(){
     return redirect('https://dashboard.laybuy.app/login');
 });
+
+Route::get('/corporate', function(){
+    return redirect('https://dashboard.laybuy.app/cooperate/login');
+});
 Route::get('/register', function(){
     return redirect('https://dashboard.laybuy.app/register');
 });
@@ -52,8 +56,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('delete/{id}', 'UserController@deleteUser');
     });
 });
-
-
 
 Route::get('/about', function () {
     return view('about');
