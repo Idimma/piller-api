@@ -15,10 +15,22 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/login', function(){
+    return redirect('https://dashboard.laybuy.app/login');
+});
+Route::get('/register', function(){
+    return redirect('https://dashboard.laybuy.app/register');
+});
+Route::get('/password/reset', function(){
+    return redirect('https://dashboard.laybuy.app/password/reset');
+});
+Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/user/register', 'UserController@webRegister')->middleware('guest');
-Auth::routes();
-
+Route::group(['prefix' => 'admin'], function () {
+    Auth::routes();
+});
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
