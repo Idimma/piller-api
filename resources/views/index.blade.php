@@ -36,7 +36,9 @@
                 <nav class="navbar">
                     <ul class="nav-options">
                         <li class="nav-item">
-                            <a href="{{url('cooperate')}}" class="navlink">Cooperate </a>
+                            <a
+                                    href="https://dashboard.laybuy.app/cooperate/login"
+                                    class="navlink">Cooperate </a>
                         </li>
                         <li class="nav-item">
                             <a href="#howitworks" class="navlink">About</a>
@@ -48,10 +50,11 @@
                             <a href="#whysection" class="navlink">Why Stokkpiler</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('login')}}" class="navlink">Login</a>
+                            <a href="https://dashboard.laybuy.app/login" class="navlink">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('register')}}" class="navlink signup-btn btn">Sign Up</a>
+                            <a href="https://dashboard.laybuy.app/register"
+                               class="navlink signup-btn btn">Sign Up</a>
                         </li>
                     </ul>
                 </nav>

@@ -16,31 +16,27 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', function(){
-    return redirect('https://dashboard.laybuy.app/login');
-});
 
-Route::get('/corporate', function(){
-    return redirect('https://dashboard.laybuy.app/cooperate/login');
-});
-Route::get('/register', function(){
-    return redirect('https://dashboard.laybuy.app/register');
-});
 Route::get('/password/reset', function(){
     return redirect('https://dashboard.laybuy.app/password/reset');
 });
 Route::get('/logout', 'Auth\LoginController@logout');
+Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/user/register', 'UserController@webRegister')->middleware('guest');
 Route::group(['prefix' => 'admin'], function () {
-    Auth::routes();
+
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+    Route::get('/materials', 'HomeController@materials')->name('materials');
+    Route::get('/suppliers', 'HomeController@suppliers')->name('suppliers');
     Route::get('/no-plan', 'HomeController@noPlan')->name('no-plan');
     Route::get('/cards', 'HomeController@cards')->name('cards');
-    Route::get('/no-plan', 'HomeController@noPlan')->name('no-plan');
+    Route::get('/customers', 'HomeController@customers')->name('customers');
+    Route::get('/history', 'HomeController@history')->name('history');
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+    Route::get('/customer/{id}', 'HomeController@viewCustomer');
 
     Route::get('/transactions', 'HomeController@transactions')->name('transactions');
     Route::get('/reports', 'HomeController@reports')->name('reports');

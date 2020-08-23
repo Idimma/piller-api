@@ -25,18 +25,42 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        $users = User::get();
+        return view('pages.admin.dashboard', compact('users'));
+    }
+
+    public function materials()
+    {
+        $users = User::get();
+        return view('pages.admin.Materials', compact('users'));
+    }
+
+    public function suppliers()
+    {
+        return view('pages.admin.suppliers');
+    }
+
+    public function customers()
+    {
+        $users = User::get();
+        return view('pages.admin.customers', compact('users'));
     }
 
     public function dashboard()
     {
-        return view('pages.dashboard');
+        return view('pages.admin.dashboard');
     }
 
-    public function noPlan()
+    public function viewCustomer()
     {
-        return view('pages.no-plan');
+        return view('pages.admin.view-customer');
     }
+
+    public function history()
+    {
+        return view('pages.admin.history');
+    }
+
     public function cards()
     {
         return view('pages.cards');
@@ -95,6 +119,11 @@ class HomeController extends Controller
 
     public function settings()
     {
-        return view('settings');
+        return view('pages.settings');
+    }
+
+    public function editPlan()
+    {
+        return view('pages.editPlans');
     }
 }
