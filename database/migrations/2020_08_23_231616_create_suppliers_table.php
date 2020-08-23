@@ -15,6 +15,14 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->text('address')->nullable();
+            $table->text('note')->nullable();
+            $table->integer('local')->nullable();
+            $table->integer('international')->nullable();
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@
                         <h2><span class="border__bottom">ADD</span> SUPPLIERS </h2>
                         <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
                     </div>
-                    <form action="" class="Add-card-box-form Add-material">
+                    <form action="{{url('suppliers')}}" class="Add-card-box-form Add-material">
                         <div class="form-group-full">
                             <div class="form-group-header">
                                 <h2>Material Name</h2>
@@ -133,41 +133,49 @@
                     </div>
                 </div>
 
+                @forelse($suppliers as $mat)
+                    <div class="plan-group">
+                        <div class="detail-container number-col">
+                            <p class="tag">S/N :</p>
+                            <span class="response">{{$mat->id}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">List of materials:</p>
+                            <span class="response">{{$mat->name}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Supplier Name:</p>
+                            <span class="response">{{$mat->name}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Country:</p>
+                            <span class="response">{{$mat->country}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Local Rates (&#8358}: </p>
+                            <span class="response">{{number_format($mat->local,2 )}}</span>
 
-                <div class="plan-group">
-                    <div class="detail-container number-col">
-                        <p class="tag">S/N :</p>
-                        <span class="response">1</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Internationals Rates($): </p>
+                            <span class="response">{{number_format($mat->international,2 )}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Start Date: </p>
+                            <span class="response">{{$mat->created_at}}</span>
+                        </div>
+                        <div class="detail-container-actions">
+                            <a href="{{url('edit-plan', $mat)}}">
+                                <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
+                            </a>
+                            <a href="{{url('view-plan', $mat)}}">
+                                <img src="{{asset('assets/images/ios-trash.svg')}}" alt="">
+                            </a>
+                        </div>
                     </div>
-                    <div class="detail-container">
-                        <p class="tag">Supplier Name:</p>
-                        <span class="response">Alex Smith</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> List of materials: </p>
-                        <span class="response">Block, Cement</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Country: </p>
-                        <span class="response">
-                                            Kenya
-                                        </span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Start Date: </p>
-                        <span class="response">
-                                            14.09.2019 00:00
-                                        </span>
-                    </div>
-                    <div class="detail-container-actions">
-                        <a href="../editPlans.html">
-                            <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
-                        </a>
-                        <a href="../viewplan.html">
-                            <img src="{{asset('assets/images/ios-trash.svg')}}" alt="">
-                        </a>
-                    </div>
-                </div>
+                @empty
+                    <h3>Empty</h3>
+                @endforelse
             </div>
         </div>
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Material;
 use App\Plan;
+use App\Supplier;
 use App\Transactions;
 use App\User;
 
@@ -31,13 +33,14 @@ class HomeController extends Controller
 
     public function materials()
     {
-        $users = User::get();
-        return view('pages.admin.Materials', compact('users'));
+        $materials = Material::get();
+        return view('pages.admin.Materials', compact('materials'));
     }
 
     public function suppliers()
     {
-        return view('pages.admin.suppliers');
+        $suppliers = Supplier::get();
+        return view('pages.admin.suppliers', compact('suppliers'));
     }
 
     public function customers()

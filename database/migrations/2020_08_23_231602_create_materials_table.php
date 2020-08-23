@@ -15,6 +15,9 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->integer('local')->nullable();
+            $table->integer('international')->nullable();
             $table->timestamps();
         });
     }

@@ -30,7 +30,9 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/materials', 'HomeController@materials')->name('materials');
+    Route::post('/materials', 'MaterialController@create');
     Route::get('/suppliers', 'HomeController@suppliers')->name('suppliers');
+    Route::post('/supplier', 'SupplierController@create');
     Route::get('/no-plan', 'HomeController@noPlan')->name('no-plan');
     Route::get('/cards', 'HomeController@cards')->name('cards');
     Route::get('/customers', 'HomeController@customers')->name('customers');
