@@ -113,24 +113,12 @@
 
             <div class="plans-body">
                 <div class="plan-Header">
-                    <div class="detail-container number-col">
-                        S/N
-                    </div>
-                    <div class="detail-container">
-                        Supplier Name
-                    </div>
-                    <div class="detail-container">
-                        List of Materials
-                    </div>
-                    <div class="detail-container">
-                        Country
-                    </div>
-                    <div class="detail-container">
-                        Start Date
-                    </div>
-                    <div class="detail-container-actions">
-
-                    </div>
+                    <div class="detail-container number-col">S/N</div>
+                    <div class="detail-container">Supplier Name</div>
+                    <div class="detail-container">List of Materials</div>
+                    <div class="detail-container">Country</div>
+                    <div class="detail-container">Start Date</div>
+                    <div class="detail-container-actions"></div>
                 </div>
 
                 @forelse($suppliers as $mat)

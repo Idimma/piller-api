@@ -16,8 +16,9 @@
                     </button>
                 </div>
                 <ul class="card__list">
-                    <li class="card__list-item">Blocks</li>
-                    <li class="card__list-item">Cement</li>
+                    @foreach($materials as $material)
+                        <li class="card__list-item">{{$material->name}}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="card">
@@ -31,9 +32,9 @@
                     </button>
                 </div>
                 <ul class="card__list">
-                    <li class="card__list-item">Sammy Blocks</li>
-                    <li class="card__list-item">Sammy Cements</li>
-                    <li class="card__list-item">Iveco Cements</li>
+                    @foreach($suppliers as $supplier)
+                        <li class="card__list-item">{{$supplier->name}}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="card--center">
@@ -42,7 +43,7 @@
                 </p>
                 <img src="{{asset('assets/images/customers-graph.svg')}}" alt="">
                 <p class="card__number">
-                    3,000
+                    {{number_format($userCount, 0)}}
                 </p>
             </div>
             <div class="card--center">
@@ -51,7 +52,7 @@
                 </p>
                 <img src="{{asset('assets/images/transactions-graph.svg')}}" alt="">
                 <p class="card__number">
-                    34,982
+                    {{number_format(\App\Transactions::count(), 0)}}
                 </p>
             </div>
         </div>

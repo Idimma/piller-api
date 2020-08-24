@@ -27,8 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::get();
-        return view('pages.admin.dashboard', compact('users'));
+        $users = User::take(5)->get();
+        $userCount = User::count();
+//        $amount = Transactions::sum('amount');
+        $materials = Material::take(5)->get();
+        $suppliers = Supplier::take(5)->get();
+
+        return view('pages.admin.dashboard', compact('users', 'userCount',
+            'materials', 'suppliers'
+            ));
     }
 
     public function materials()
