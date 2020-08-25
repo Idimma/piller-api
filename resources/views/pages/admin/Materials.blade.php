@@ -25,13 +25,16 @@
                         <h2><span class="underline">ADD</span> MATERIAL</h2>
                         <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
                     </div>
-                    <form action="{{url('materials')}}" method="post" class="Add-card-box-form Add-material">
+                    <form action="{{url('materials')}}" method="post" id="add-material"
+                          class="Add-card-box-form Add-material">
                         @csrf
                         <div class="form-group-full">
                             <div class="form-group-header">
                                 <h2>Material Name</h2>
                             </div>
-                            <input name="name" type="text" class="form-input-full">
+                            <input name="name" id="name" type="text" class="form-input-full">
+                            <input name="method" id="method" hidden class="edit" value="post">
+                            <input name="id" id="id" class="edit" hidden>
                         </div>
                         <div class="form-group-full">
                             <div class="form-group-header">
@@ -42,7 +45,7 @@
                                     &#8358;
                                     <img src="{{asset('assets/images/arrow%20down.svg')}}" alt="">
                                 </div>
-                                <input type="number" name="local" class="form-input-full">
+                                <input type="number" id="local" name="local" class="form-input-full">
                             </div>
                         </div>
 
@@ -55,11 +58,13 @@
                                     $
                                     <img src="{{asset('assets/images/arrow%20down.svg')}}" alt="">
                                 </div>
-                                <input type="number" name="international" class="form-input-full">
+                                <input type="number" id="international" name="international" class="form-input-full">
                             </div>
                         </div>
+                        <div>
+                            <button type="submit" id="submit" style="margin: 10px auto; width: 50%" class="btn">Add</button>
+                        </div>
 
-                        <button type="submit" class="btn">Add</button>
                     </form>
                 </div>
             </div>
@@ -73,10 +78,11 @@
                 <div class="header__bar__name">
                     <h2><span class="border__bottom">MATE</span>RIALS</h2>
                 </div>
-                <div class="searchbar">
+                <form action="{{url('materials/search')}}" method="post" class="searchbar">
+                    @csrf
                     <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
-                    <input type="text" class="searchInput">
-                </div>
+                    <input type="text" name="query" class="searchInput">
+                </form>
             </div>
 
 
@@ -110,10 +116,10 @@
                             <span class="response">{{number_format($mat->international,2 )}}</span>
                         </div>
                         <div class="detail-container-actions">
-                            <a href="{{url('edit-plan', $mat)}}">
+                            <a href="#" onclick="editMaterial({{$mat}})">
                                 <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
                             </a>
-                            <a href="{{url('view-plan', $mat)}}">
+                            <a href="#" onclick="deleteMaterial({{$mat->id}})">
                                 <img src="{{asset('assets/images/ios-trash.svg')}}" alt="">
                             </a>
                         </div>
@@ -127,8 +133,32 @@
 </main>
 
 <script src="{{asset('assets/js/sliderAction.js')}}"></script>
-<script src="../../assets/js/withdraw.js"></script>
-<script src="../../assets/js/close-img.js"></script>
+<script src="{{asset('assets/js/withdraw.js')}}"></script>
+<script src="{{asset('assets/js/close-img.js')}}"></script>
+<script>
 
+    function deleteMaterial(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this material file!",
+            icon: "warning", buttons: true, dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location.href = '{{url('material/delete')}}/' + id
+            }
+        });
+    }
+
+    function editMaterial(object) {
+        document.getElementById('name').value = object.name;
+        document.getElementById('local').value = object.local;
+        document.getElementById('method').value = 'patch';
+        document.getElementById('id').value = object.id;
+        document.getElementById('submit').innerHTML = 'Submit';
+        document.getElementById('international').value = object.international;
+        addBtn.click()
+    }
+
+</script>
 </body>
 </html>

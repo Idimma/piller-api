@@ -437,7 +437,8 @@ span.Important{
         width: 70%;
     }
     .header__bar{
-        flex-direction: column-reverse;
+        flex-direction: column;
+        height: 120px;
     }
     .header__bar__name{
         width: 100%;
@@ -449,7 +450,7 @@ span.Important{
     }
     .searchbar{
         width: 100%;
-        margin-bottom: 2rem;
+        margin-top: 2rem;
     }
 }
 
