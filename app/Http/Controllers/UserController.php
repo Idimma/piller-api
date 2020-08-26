@@ -226,7 +226,8 @@ class UserController extends Controller
             return response()->file(storage_path('app/public/avatar/' . $url));
         } catch (\Throwable $th) {
             //throw $th;
-            return $this->respondWithError();
+//            return $this->respondWithError();
+            return response()->file(public_path('6.jpg'));
         }
     }
 

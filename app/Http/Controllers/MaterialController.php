@@ -39,7 +39,7 @@ class MaterialController extends Controller
 
     public function search()
     {
-        $materials = Material::where('name', 'LIKE', "%" . request()->query . "%")->get();
+        $materials = Material::where('name', 'LIKE', "%" . request()->search . "%")->get();
         return view('pages.admin.Materials', compact('materials'));
     }
 

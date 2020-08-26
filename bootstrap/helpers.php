@@ -3,7 +3,6 @@
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
-
 /**
  * Gets authenticated user
  * @return User model
@@ -13,8 +12,10 @@ function getUser()
     return JWTAuth::parseToken()->authenticate();
 }
 
-function linkActive($route){
-    return request()->is($route) ? 'active': '';
+function linkActive($route)
+{
+    $url = explode('/', request()->url());
+    return request()->is($route) || ($url[3] && $url[3] . 's' === $route) ? 'active' : '';
 }
 
 
@@ -28,11 +29,11 @@ function linkActive($route){
  * @return Distance in Kilometers
  */
 
-function getDistanceFromLatLon(float $lat1, float $lon1,  float $lat2,  float $lon2): float
+function getDistanceFromLatLon(float $lat1, float $lon1, float $lat2, float $lon2): float
 {
 
     $theta = $lon1 - $lon2;
-    $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+    $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
     $dist = acos($dist);
     $dist = rad2deg($dist);
     $miles = $dist * 60 * 1.1515;

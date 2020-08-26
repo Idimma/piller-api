@@ -3,12 +3,10 @@
 namespace App;
 
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Str;
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -34,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token', 'id'
     ];
 
-    protected $appends = ['avatar_url'];
+    protected $appends = ['avatar_url', 'name'];
 
     /**
      * The attributes that should be cast to native types.
@@ -47,8 +45,14 @@ class User extends Authenticatable implements JWTSubject
 
     function getAvatarUrlAttribute()
     {
-        $url = $this->image_url ?? '6.jpg';
-        return config('app.url') . '/avatar/' . $url;
+        return $this->image_url ? url('avatar', $this->image_url) : url('/6.jpg');
+    }
+
+
+    function getNameAttribute()
+    {
+
+        return $this->last_name . ' ' . $this->first_name;
     }
 
     public static function boot()
@@ -63,6 +67,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->getKey();
     }
+
     public function getJWTCustomClaims()
     {
         return [];
@@ -77,6 +82,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Plan', 'user_id', 'id');
     }
+
     public function plans()
     {
         return $this->hasMany('App\Plan', 'user_id', 'id');
@@ -145,6 +151,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Card', 'user_id', 'id');
     }
+
     public function transactions()
     {
         return $this->hasMany('App\Transactions', 'user_id', 'id');

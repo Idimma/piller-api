@@ -33,7 +33,7 @@
                                 <h2>Material Name</h2>
                             </div>
                             <input name="name" id="name" type="text" class="form-input-full">
-                            <input name="method" id="method" hidden class="edit" value="post">
+{{--                            <input name="method" id="method" hidden class="edit" value="post">--}}
                             <input name="id" id="id" class="edit" hidden>
                         </div>
                         <div class="form-group-full">
@@ -80,8 +80,8 @@
                 </div>
                 <form action="{{url('materials/search')}}" method="post" class="searchbar">
                     @csrf
-                    <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
-                    <input type="text" name="query" class="searchInput">
+                   <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
+                    <input type="text" name="search" class="searchInput">
                 </form>
             </div>
 

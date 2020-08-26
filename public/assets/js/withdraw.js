@@ -8,30 +8,31 @@ const submit = document.querySelector('.plans-submit');
 const addBtn = document.querySelector('.btn__add');
 const closeImg = document.querySelector('.close-img');
 
+if (addBtn)
+    addBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        if (overlayer === null) {
+            overlay.classList.add('show-form')
+        } else {
+            overlayer.classList.add('show-form')
+        }
+    });
+if (submit)
+    submit.addEventListener("click", (e) => {
+        e.preventDefault()
+        if (overlayer === null) {
+            overlay.classList.add('show-form')
+        } else {
+            overlayer.classList.add('show-form')
+        }
+    })
 
-addBtn.addEventListener("click", (e) => {
-	e.preventDefault()
-    if(overlayer === null){
-	    overlay.classList.add('show-form')
-    }else{
-    	overlayer.classList.add('show-form')
-    }
-});
-
-submit.addEventListener("click", (e) => {
-    e.preventDefault()
-    if(overlayer === null){
-	    overlay.classList.add('show-form')
-    }else{
-    	overlayer.classList.add('show-form')
-    }
-})
-
-confirmBtn.addEventListener("click", () => {
-    withdrawalTable.classList.add('hideConfirmation')
-    successImg.classList.add('showSuccess')
-    closeImg.classList.add('showSuccess')
-})
+if (confirmBtn)
+    confirmBtn.addEventListener("click", () => {
+        withdrawalTable.classList.add('hideConfirmation')
+        successImg.classList.add('showSuccess')
+        closeImg.classList.add('showSuccess')
+    })
 
 
 

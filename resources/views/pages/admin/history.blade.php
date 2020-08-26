@@ -21,8 +21,6 @@
     <div class="main-container">
         @include('partials.admin-topbar')
         <div class="main-body">
-
-
             <div class="header__bar">
                 <div class="header__bar--optionHolder">
                     <div class="header--option header--option-active" data-type="all">
@@ -38,10 +36,11 @@
                         <div class="bottom--bar"></div>
                     </div>
                 </div>
-                <div class="searchbar">
-                    <img src="../../assets/images/ios-search.svg" class="search-image" alt="">
-                    <input type="text" class="searchInput">
-                </div>
+                <form action="{{url('history/search')}}" method="post" class="searchbar">
+                    @csrf
+                    <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
+                    <input type="text" name="search" class="searchInput">
+                </form>
             </div>
 
 
@@ -56,26 +55,30 @@
                     <div class="detail-container">Amount</div>
                 </div>
 
+                @forelse($all as $cr)
+                    <div class="plan-group">
+                        <div class="detail-container number-col">
+                            <p class="tag">S/N :</p><span class="response">{{$cr->id}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Transaction ID</p><span class="response">{{$cr->reference}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Billing Date </p><span class="response">{{$cr->created_at}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Withdrawn Materials </p><span class="response">{{$cr->block}} Blocks, {{$cr->cement}} Cement Bags</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Amount </p><span class="response">{{$cr->amount}}</span>
+                        </div>
+                    </div>
+                @empty
+                    <div style="width: 100%" class=" text-center">
+                        <p>No request has been made </p>
+                    </div>
+                @endforelse
 
-                <div class="plan-group">
-                    <div class="detail-container number-col">
-                        <p class="tag">S/N :</p><span class="response">1</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">Transaction ID</p><span class="response">12343234567897AS</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Billing Date </p><span class="response">14.09.2019 00:00</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Withdrawn Materials </p>
-                        <span class="response">100 Blocks, 12 Cement Bags</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Amount </p>
-                        <span class="response">3000.00</span>
-                    </div>
-                </div>
             </div>
 
 
@@ -98,46 +101,30 @@
                 </div>
 
 
-                <div class="plan-group">
-                    <div class="detail-container number-col">
-                        <p class="tag">S/N :</p>
-                        <span class="response">1</span>
+                @forelse($credits as $cr)
+                    <div class="plan-group">
+                        <div class="detail-container number-col">
+                            <p class="tag">S/N :</p><span class="response">{{$cr->id}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Transaction ID</p><span class="response">{{$cr->reference}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Billing Date </p><span class="response">{{$cr->created_at}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Withdrawn Materials </p><span class="response">{{$cr->block}} Blocks, {{$cr->cement}} Cement Bags</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Amount </p><span class="response">{{$cr->amount}}</span>
+                        </div>
                     </div>
-                    <div class="detail-container">
-                        <p class="tag">Transaction ID</p>
-                        <span class="response">12343234567897AS</span>
+                @empty
+                    <div style="width: 100%" class=" text-center">
+                        <p>No Deposit request has been made </p>
                     </div>
-                    <div class="detail-container">
-                        <p class="tag"> Billing Date </p>
-                        <span class="response">14.09.2019 00:00</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Amount </p>
-                        <span class="response">3000.00</span>
-                    </div>
-                </div>
+                @endforelse
 
-
-                <div class="plan-group">
-                    <div class="detail-container number-col">
-                        <p class="tag">S/N :</p>
-                        <span class="response">2</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">Transaction ID</p>
-                        <span class="response">12343234567897AS</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Billing Date </p>
-                        <span class="response">14.09.2019 00:00</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Amount </p>
-                        <span class="response">
-                                            3000.00
-                                        </span>
-                    </div>
-                </div>
             </div>
 
 
@@ -159,49 +146,30 @@
                     </div>
                 </div>
 
+                @forelse($debits as $cr)
+                    <div class="plan-group">
+                        <div class="detail-container number-col">
+                            <p class="tag">S/N :</p><span class="response">{{$cr->id}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Transaction ID</p><span class="response">{{$cr->reference}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Billing Date </p><span class="response">{{$cr->created_at}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Withdrawn Materials </p><span class="response">{{$cr->block}} Blocks, {{$cr->cement}} Cement Bags</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Amount </p><span class="response">{{$cr->amount}}</span>
+                        </div>
+                    </div>
+                @empty
+                    <div style="width: 100%" class=" text-center">
+                        <p>No withdrawal request has been made </p>
+                    </div>
+                @endforelse
 
-                <div class="plan-group">
-                    <div class="detail-container number-col">
-                        <p class="tag">S/N :</p>
-                        <span class="response">1</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">Transaction ID</p>
-                        <span class="response">12343234567897AS</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Withdrawn Materials </p>
-                        <span class="response">
-                                            100 Blocks, 12 Cement Bags
-                                        </span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Withdrawal Date </p>
-                        <span class="response">14.09.2019 00:00</span>
-                    </div>
-                </div>
-
-
-                <div class="plan-group">
-                    <div class="detail-container number-col">
-                        <p class="tag">S/N :</p>
-                        <span class="response">2</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">Transaction ID</p>
-                        <span class="response">12343234567897AS</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Withdrawn Materials </p>
-                        <span class="response">
-                                            100 Blocks, 12 Cement Bags
-                                        </span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Withdrawal Date </p>
-                        <span class="response">14.09.2019 00:00</span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

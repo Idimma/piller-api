@@ -9,7 +9,7 @@ class Transactions extends Model
     //
     protected $table = 'transactions';
 
-    protected $fillable = ['user_id', 'plan_id', 'status', 'amount', 'reference', 'block', 'cement', 'completed'];
+    protected $fillable = ['user_id', 'plan_id', 'status', 'amount', 'reference', 'block', 'cement', 'completed', 'type'];
 
     // protected $with = ['total_paid', 'material_withdrawn', 'material_deposited'];
 

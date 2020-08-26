@@ -15,9 +15,10 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('avatar/{url}', 'UserController@getProfileImage');
 
 
-Route::get('/password/reset', function(){
+Route::get('/password/reset', function () {
     return redirect('https://dashboard.laybuy.app/password/reset');
 });
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -31,21 +32,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/materials', 'HomeController@materials')->name('materials');
     Route::post('/materials', 'MaterialController@create');
-    Route::post('/materials/{id}', 'MaterialController@update');
+//    Route::post('/materials/{id}', 'MaterialController@update');
     Route::get('/material/delete/{id}', 'MaterialController@delete');
-    Route::post('/material/search', 'MaterialController@search');
+    Route::post('/materials/search', 'MaterialController@search');
 
+    Route::post('profile/update', 'HomeController@updateProfile');
 
     Route::get('/suppliers', 'HomeController@suppliers')->name('suppliers');
-    Route::post('/supplier', 'SupplierController@create');
-    Route::post('/supplier/delete/{id}', 'SupplierController@delete');
-    Route::post('/supplier/search', 'SupplierController@search');
+    Route::post('/suppliers', 'SupplierController@create');
+    Route::get('/supplier/delete/{id}', 'SupplierController@delete');
+    Route::post('/suppliers/search', 'SupplierController@search');
+
+    Route::get('/settings', 'HomeController@settings')->name('settings');
+    Route::get('/settings/password', 'HomeController@settingsPassword');
+    Route::post('/settings/password', 'HomeController@updatePassword');
 
 
     Route::get('/no-plan', 'HomeController@noPlan')->name('no-plan');
     Route::get('/cards', 'HomeController@cards')->name('cards');
     Route::get('/customers', 'HomeController@customers')->name('customers');
     Route::get('/history', 'HomeController@history')->name('history');
+    Route::post('/history/search', 'HomeController@history')->name('history.search');
+
+
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/customer/{id}', 'HomeController@viewCustomer');
 
@@ -55,9 +64,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users', 'HomeController@users')->name('users');
     Route::get('/taskers', 'HomeController@taskers')->name('taskers');
     Route::get('/plans', 'HomeController@tasks')->name('plans');
-    Route::get('/settings', 'HomeController@settings')->name('settings');
+
+
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::put('/profile', 'ProfileController@update')->name('profile.update');
+
     Route::group(['prefix' => 'user'], function () {
         Route::get('/{id}', 'UserController@singleUser');
         Route::get('delete/{id}', 'UserController@deleteUser');
@@ -79,5 +90,4 @@ Route::get('shell/{string}', function ($command) {
     return 'Shell ' . $command . ' Completed';
 });
 
-Route::get('avatar/{url}', 'UserController@getProfileImage');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

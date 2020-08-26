@@ -7,6 +7,8 @@ use App\Plan;
 use App\Supplier;
 use App\Transactions;
 use App\User;
+use Hash;
+use Validator;
 
 class HomeController extends Controller
 {
@@ -35,7 +37,7 @@ class HomeController extends Controller
 
         return view('pages.admin.dashboard', compact('users', 'userCount',
             'materials', 'suppliers'
-            ));
+        ));
     }
 
     public function materials()
@@ -61,14 +63,34 @@ class HomeController extends Controller
         return view('pages.admin.dashboard');
     }
 
-    public function viewCustomer()
+    public function viewCustomer($uuid)
     {
-        return view('pages.admin.view-customer');
+        $customer = User::whereUuid($uuid)->firstOrFail();
+        $total = $customer->transactions->where('type', 'credit')->sum('amount');
+        $w = $customer->transactions->where('type', 'credit');
+        $withdrawn = ['block' => number_format($w->sum('block'), 2),
+            'cement' => number_format($w->sum('cement'), 2)];
+
+        $credits = $customer->transactions->where('type', 'credit');
+        $debits = $customer->transactions->where('type', 'debit');
+        return view('pages.admin.view-customer',
+            compact('customer', 'withdrawn', 'total', 'credits', 'debits'));
     }
 
     public function history()
     {
-        return view('pages.admin.history');
+        $credits = Transactions::where('type', 'credit')->get();
+        $debits = Transactions::where('type', 'debit')->get();
+        $all = Transactions::get();
+
+        if (request()->method() === 'post' && request()->search) {
+            $credits = Transactions::where('reference', 'LIKE', "%" . request()->search . "%")->where('type', 'credit')->get();
+            $debits = Transactions::where('reference', 'LIKE', "%" . request()->search . "%")->where('type', 'debit')->get();
+            $all = Transactions::where('reference', 'LIKE', "%" . request()->search . "%")->get();
+        }
+
+
+        return view('pages.admin.history', compact('all', 'debits', 'credits'));
     }
 
     public function cards()
@@ -132,8 +154,54 @@ class HomeController extends Controller
         return view('pages.settings');
     }
 
+    public function settingsPassword()
+    {
+        return view('pages.change-password');
+    }
+
+    public function updatePassword()
+    {
+        Validator::validate(request()->all(), [
+            'password' => 'required|string|confirmed',
+            'old_password' => 'required|string',
+        ]);
+        $user = auth()->user();
+        if (!password_verify(request()->old_password, $user->password)) {
+            return back()->with('error', 'Password doesnt match old password');
+        }
+        $user->update(['password' => Hash::make(request()->password)]);
+        return back()->with('success', 'Password Changed Successfully');
+
+    }
+
     public function editPlan()
     {
         return view('pages.editPlans');
+    }
+
+    public function updateProfile()
+    {
+        Validator::validate(request()->all(), [
+            'phone' => 'sometimes|min:11|numeric',
+            'first_name' => 'sometimes|string|max:255',
+            'last_name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255',
+            'bank_name' => 'sometimes|string',
+            'account_name' => 'sometimes|string',
+            'account_number' => 'sometimes|numeric',
+            'driving_license' => 'sometimes',
+            'country' => 'sometimes',
+            'avatar' => 'sometimes'
+        ]);
+
+        $user = auth()->user();
+        if (isset(request()->avatar)) {
+            $uploadedFile = request()->avatar;
+            $filename = $user->first_name . '-' . time() . '.' . $uploadedFile->getClientOriginalExtension();
+            $uploadedFile->move(storage_path('app/public/avatar'), $filename);
+            $user->update(['image_url' => $filename]);
+        }
+        $user->update(request()->except(['password', 'image_url', 'uuid']));
+        return back()->with('success', 'Profile Updated Successfully');
     }
 }

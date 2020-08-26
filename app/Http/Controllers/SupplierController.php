@@ -15,7 +15,7 @@ class SupplierController extends Controller
             'name' => 'required|string|max:255',
             'local' => 'required',
             'international' => 'required',
-            'city' => 'required', 'state' => 'required', 'country' => 'required', 'note' => 'somethings',
+            'city' => 'required', 'state' => 'required', 'country' => 'required', 'note' => 'sometimes',
         ]);
 
         if ($request->id) {
@@ -41,7 +41,7 @@ class SupplierController extends Controller
 
     public function search()
     {
-        $suppliers = Supplier::where('name', 'LIKE', "%" . request()->query . "%")->get();
+        $suppliers = Supplier::where('name', 'LIKE', "%" . request()->search . "%")->get();
         return view('pages.admin.suppliers', compact('suppliers'));
     }
 

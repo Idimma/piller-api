@@ -43,7 +43,8 @@
 
         </div>
         <a class="user" href="{{url('settings')}}">
-            <img src="{{asset('assets/images/user.svg')}}" alt="">
+            <img src="{{auth()->user()->avatar_url}}"
+                 height="36" width="36" style="border-radius: 30px; border: 1px #502274 solid" alt="">
         </a>
         <a class="logout" href="{{url('logout')}}">Logout</a>
     </div>
