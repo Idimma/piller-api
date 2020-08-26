@@ -42,7 +42,6 @@
         </p>
         <script src="{{asset('assets/js/login.js')}}"></script>
         <script src="{{asset('assets/js/Required-inputs.js')}}"></script>
-
     </div>
 </div>
 </body>

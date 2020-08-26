@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="main">
-        @include('partial.dash-header')
+        @include('partials.admin-topbar')
         <a class="new-plan" href='{{url('no-plan')}}'>
             New Plans
         </a>
@@ -117,35 +117,6 @@
                 </div>
             </div>
         </div>
-        <table class="rates bottom">
-            <tr>
-                <td>Rates</td>
-                <td>Block</td>
-                <td>Cement</td>
-            </tr>
-            <tr>
-                <td>Local</td>
-                <td>
-                    <img src="../assets/images/rate-down.svg">
-                    &#8358 1000
-                </td>
-                <td>
-                    <img src="../assets/images/rate-up.svg">
-                    &#8358 2000
-                </td>
-            </tr>
-            <tr>
-                <td>International</td>
-                <td>
-                    <img src="../assets/images/rate-down.svg">
-                    $2
-                </td>
-                <td>
-                    <img src="../assets/images/rate-up.svg">
-                    $2
-                </td>
-            </tr>
-        </table>
     </div>
 @stop
 @section('scripts')

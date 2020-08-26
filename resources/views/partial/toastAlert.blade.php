@@ -1,6 +1,9 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('css/toastify.min.css')}}">
+{{--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">--}}
+<script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
+{{--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>--}}
+{{--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--}}
+<script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         @if ($errors->any())
@@ -18,23 +21,4 @@
         Toastify({text: "{{ session('warning') }}", close: true, backgroundColor: 'orange'}).showToast();
         @endif
     });
-
-
-    //
-    // swal({
-    //     title: "Are you sure?",
-    //     text: "Once deleted, you will not be able to recover this imaginary file!",
-    //     icon: "warning",
-    //     buttons: true,
-    //     dangerMode: true,
-    // })
-    //     .then((willDelete) => {
-    //         if (willDelete) {
-    //             swal("Poof! Your imaginary file has been deleted!", {
-    //                 icon: "success",
-    //             });
-    //         } else {
-    //             swal("Your imaginary file is safe!");
-    //         }
-    //     });
 </script>

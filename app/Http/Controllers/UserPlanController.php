@@ -127,13 +127,14 @@ class UserPlanController extends Controller
         return $this->respondWithSuccess($this->planService->trackPlan($id));
     }
 
-    public function getMaterialWithdrawnAttribute()
+    public function normal()
     {
-        $trans = Transactions::where('type', 'debit')->get();
+        return view('pages.Add-normal-deposit-plan');
 
+    }
 
-
-
-        return ['blocks' => 0, 'cements' => 0];
+    public function oneTime()
+    {
+        return view('pages.Add-one-time-deposit-plan');
     }
 }

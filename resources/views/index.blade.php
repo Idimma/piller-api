@@ -36,9 +36,7 @@
                 <nav class="navbar">
                     <ul class="nav-options">
                         <li class="nav-item">
-                            <a
-                                    href="https://dashboard.laybuy.app/cooperate/login"
-                                    class="navlink">Cooperate </a>
+                            <a href="{{url('cooperate/login')}}" class="navlink">Cooperate </a>
                         </li>
                         <li class="nav-item">
                             <a href="#howitworks" class="navlink">About</a>
@@ -50,10 +48,10 @@
                             <a href="#whysection" class="navlink">Why Stokkpiler</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://dashboard.laybuy.app/login" class="navlink">Login</a>
+                            <a href="{{url('login')}}" class="navlink">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://dashboard.laybuy.app/register"
+                            <a href="{{url('register')}}"
                                class="navlink signup-btn btn">Sign Up</a>
                         </li>
                     </ul>
@@ -144,7 +142,7 @@
             </div>
             <div class="feature">
                 <div class="feature-image-container">
-                    <img class="feature-img top-right" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img top-right" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="feature-heading">
                     Withdrawal is simple
@@ -155,7 +153,7 @@
             </div>
             <div class="feature">
                 <div class="feature-image-container">
-                    <img class="feature-img bottom-left" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img bottom-left" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="feature-heading">
                     Coperate savings
@@ -166,7 +164,7 @@
             </div>
             <div class="feature">
                 <div class="feature-image-container">
-                    <img class="feature-img bottom-right" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img bottom-right" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="feature-heading">
                     Set a target
@@ -193,7 +191,7 @@
                         your name, email and phone number.
                     </p>
                 </div>
-                <img class="method-image" src="assets/images/undraw_podcast_q6p7.svg" alt="lady using laptop">
+                <img class="method-image" src="{{url('assets/images/undraw_podcast_q6p7.svg')}}" alt="lady using laptop">
             </div>
             <div class="method-group reverse">
                 <div class="method">
@@ -205,7 +203,7 @@
                         your name, email and phone number.
                     </p>
                 </div>
-                <img class="method-image push" src="assets/images/undraw_credit_card_payment_12va.svg"
+                <img class="method-image push" src="{{asset('assets/images/undraw_credit_card_payment_12va.svg')}}"
                      alt="woman hold credit card">
             </div>
             <div class="method-group">
@@ -243,7 +241,7 @@
         <div class="FAQs-body">
             <div class="faq">
                 <div class="feature-image-container">
-                    <img class="feature-img top-right" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img top-right" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="faq-heading">
                     Question 1
@@ -254,7 +252,7 @@
             </div>
             <div class="faq">
                 <div class="feature-image-container">
-                    <img class="feature-img top-left" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img top-left" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="faq-heading">
                     Question 2
@@ -265,7 +263,7 @@
             </div>
             <div class="faq">
                 <div class="feature-image-container">
-                    <img class="feature-img top-left" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img top-left" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="faq-heading">
                     Question 3
@@ -276,7 +274,7 @@
             </div>
             <div class="faq">
                 <div class="feature-image-container">
-                    <img class="feature-img top-right" src="assets/images/Path 373.svg" alt="">
+                    <img class="feature-img top-right" src="{{url('assets/images/Path 373.svg')}}" alt="">
                 </div>
                 <h2 class="faq-heading">
                     Question 4
@@ -343,7 +341,7 @@
                         <img src="assets/images/Orion_twitter.svg" alt="">
                     </a>
                     <a href="#" class="soc-link">
-                        <img src="assets/images/instagram-logo.svg" alt="" srcset="">
+                        <img src="{{asset('assets/images/instagram-logo.svg')}}" alt="" srcset="">
                     </a>
                     <!-- <a href="" class="soc-link"></a> -->
                 </div>

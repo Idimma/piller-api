@@ -27,15 +27,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
         $users = User::take(5)->get();
         $userCount = User::count();
-//        $amount = Transactions::sum('amount');
         $materials = Material::take(5)->get();
         $suppliers = Supplier::take(5)->get();
 
-        return view('pages.admin.dashboard', compact('users', 'userCount',
+        return view('pages.home', compact('users', 'userCount',
             'materials', 'suppliers'
         ));
     }
@@ -60,7 +60,17 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('pages.admin.dashboard');
+        return view('pages.dashboard');
+    }
+
+    public function noPlan()
+    {
+        return view('pages.no-plan');
+    }
+
+    public function noCard()
+    {
+        return view('pages.no-card');
     }
 
     public function viewCustomer($uuid)
@@ -146,7 +156,7 @@ class HomeController extends Controller
     {
         $plans = Plan::get();
         $type = 'Plans';
-        return view('plans', compact('plans', 'type'));
+        return view('pages.plans', compact('plans', 'type'));
     }
 
     public function settings()
