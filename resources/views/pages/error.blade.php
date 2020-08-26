@@ -25,7 +25,7 @@
                 <button class="refresh btn">
                     Refresh
                 </button>
-                <a href="../index.html" class="homepage-link btn">
+                <a href="{{url('/')}}" class="homepage-link btn">
                     Homepage
                 </a>
             </div>

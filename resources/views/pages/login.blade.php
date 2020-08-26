@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <a href="../index.html" class="logo">Stokkpile.com</a>
+    <a href="{{url('/')}}" class="logo">Stokkpile.com</a>
     <img src="{{asset('assets/images/woman-with-laptop.svg')}}" class="woman">
     <div class="login">
         <p class="login-header">Log In</p>
@@ -20,7 +20,7 @@
             <input type="email" name="email" placeholder="Email" required>
             <div class="password-div">
                 <input type="password" name="password" placeholder="Password" required>
-                <button type="button"><img src="../assets/images/eye.svg"></button>
+                <button type="button"><img src="{{asset('assets/images/eye.svg')}}"></button>
             </div>
             {{--                <div class="login-social">--}}
             {{--                    <p class="login-social-text">Or Log in with your social network</p>--}}
@@ -35,13 +35,13 @@
             <button type="submit" class="submit">Log In</button>
         </form>
         <a href="{{url('register')}}" class="sign-up">Sign Up</a>
-        <p class="forgot-password">Forgot your password? <a href="reset.html">Reset it</a></p>
+        <p class="forgot-password">Forgot your password? <a href="{{url('password/reset')}}">Reset it</a></p>
         <hr>
         <p class="terms-and-conditions">
             <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
         </p>
-        <script src="../assets/js/login.js"></script>
-        <script src="../assets/js/Required-inputs.js"></script>
+        <script src="{{asset('assets/js/login.js')}}"></script>
+        <script src="{{asset('assets/js/Required-inputs.js')}}"></script>
 
     </div>
 </div>

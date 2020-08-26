@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="../../index.html" class="logo">
+        <a href="{{url('/')}}" class="logo">
             Stokkpile.com
         </a>
         <img src="../../assets/images/woman-with-laptop.svg" class="woman">

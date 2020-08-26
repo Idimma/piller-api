@@ -9,13 +9,13 @@
     <title>Stokkpiler | View Plan</title>
 </head>
 <body>
-    
 
-    
-  
+
+
+
         <div class="sidenav__container">
             <div class="sidebar sidenav">
-                <a class="logo" href="../index.html">Stokkpile.com</a>
+                <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
                 <!--  -->
                 <div class="links">
                     <div class="link">
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="sidebar">
-            <a class="logo" href="../index.html">Stokkpile.com</a>
+            <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
             <div class="links">
                 <div class="link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="11.667" height="15" viewBox="0 0 11.667 15">
@@ -146,7 +146,7 @@
                    <div class="bar"></div>
                     <div class="bar"></div>
                     <div class="bar"></div>
-                </button>                        
+                </button>
                 <div class="back">
                     <img src="../assets/images/back.svg" alt="">
                     <a href="">Back</a>
@@ -301,7 +301,7 @@
                                         Amount (&#8358)
                                     </div>
                                 </div>
-        
+
                                 <div class="plan-group">
                                         <div class="detail-container">
                                             <p class="tag">S/N :</p>
@@ -313,7 +313,7 @@
                                         </div>
                                         <div class="detail-container">
                                                 <p class="tag"> Biling Date: </p>
-                                                <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                         </div>
                                         <div class="detail-container">
                                                 <p class="tag"> Amount (&#8358) </p>
@@ -322,8 +322,8 @@
                                                 </span>
                                         </div>
                                     </div>
-        
-        
+
+
                                     <div class="plan-group">
                                             <div class="detail-container">
                                                 <p class="tag">S/N :</p>
@@ -335,7 +335,7 @@
                                             </div>
                                             <div class="detail-container">
                                                     <p class="tag"> Biling Date: </p>
-                                                    <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                    <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                             </div>
                                             <div class="detail-container">
                                                     <p class="tag"> Amount (&#8358) </p>
@@ -344,8 +344,8 @@
                                                     </span>
                                             </div>
                                         </div>
-        
-                                        
+
+
                                         <div class="plan-group">
                                                 <div class="detail-container">
                                                     <p class="tag">S/N :</p>
@@ -357,7 +357,7 @@
                                                 </div>
                                                 <div class="detail-container">
                                                         <p class="tag"> Biling Date: </p>
-                                                        <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                        <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                                 </div>
                                                 <div class="detail-container">
                                                         <p class="tag"> Amount (&#8358) </p>
@@ -379,7 +379,7 @@
                                                     </div>
                                                     <div class="detail-container">
                                                             <p class="tag"> Biling Date: </p>
-                                                            <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                            <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                                     </div>
                                                     <div class="detail-container">
                                                             <p class="tag"> Amount (&#8358) </p>
@@ -401,7 +401,7 @@
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Biling Date: </p>
-                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Amount (&#8358) </p>
@@ -410,7 +410,7 @@
                                                                 </span>
                                                         </div>
                                                 </div>
-                                                
+
                                                 <div class="plan-group">
                                                         <div class="detail-container">
                                                             <p class="tag">S/N :</p>
@@ -422,7 +422,7 @@
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Biling Date: </p>
-                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Amount (&#8358) </p>
@@ -443,7 +443,7 @@
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Biling Date: </p>
-                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Amount (&#8358) </p>
@@ -464,7 +464,7 @@
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Biling Date: </p>
-                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span> 
+                                                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
                                                         </div>
                                                         <div class="detail-container">
                                                                 <p class="tag"> Amount (&#8358) </p>
@@ -473,7 +473,7 @@
                                                                 </span>
                                                         </div>
                                                 </div>
-                
+
                         </div>
                         <div class="plans-body invoice">
                             <div class="invoice-row invoice-row-header">
@@ -555,7 +555,7 @@
 
                     </div>
 
-                    
+
                 </div>
     </div>
     <div class="footer">
@@ -586,10 +586,10 @@
                                         <td>
                                             <img class="up-arrow" src="../assets/images/Group 38.svg" alt="">
                                             <h3>$2</h3>
-                                        </td> 
+                                        </td>
                                     </tr>
-        
-                                </table>            
+
+                                </table>
             </div>
         </div>
 

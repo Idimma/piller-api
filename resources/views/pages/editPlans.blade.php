@@ -9,12 +9,12 @@
     <title>Stokkpiler | Edit Plan</title>
 </head>
 <body>
-    
 
-    
+
+
         <div class="sidenav__container">
             <div class="sidebar sidenav">
-                <a class="logo" href="../index.html">Stokkpile.com</a>
+                <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
                 <!--  -->
                 <div class="links">
                     <div class="link">
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="sidebar">
-            <a class="logo" href="../index.html">Stokkpile.com</a>
+            <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
             <div class="links">
                 <div class="link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="11.667" height="15" viewBox="0 0 11.667 15">
@@ -145,7 +145,7 @@
                    <div class="bar"></div>
                     <div class="bar"></div>
                     <div class="bar"></div>
-                </button>                        
+                </button>
                 <div class="back">
                     <img src="../assets/images/back.svg" alt="">
                     <a href="">Back</a>
@@ -191,7 +191,7 @@
             </div>
 
 
-    
+
                 <div class="main-body">
                      <div class="overlay">
                         <div class="Add-Card-box">
@@ -201,10 +201,10 @@
                             </div>
                             <p class="invalid">Invalid Card, Please check if your card has expired</p>
                             <form action="" class="Add-card-box-form">
-                                
+
                             <div class="form-group-full">
                                 <div class="form-group-header">
-                                     <h2>Name your card</h2> 
+                                     <h2>Name your card</h2>
                                 </div>
                                 <input type="text" class="form-input-full" placeholder="Gtbank">
                                 <p class="additional-info">
@@ -213,7 +213,7 @@
                             </div>
                             <div class="form-group-full">
                                 <div class="form-group-header">
-                                     <h2>Name on card</h2> 
+                                     <h2>Name on card</h2>
                                 </div>
                                 <input type="text" class="form-input-full" placeholder="Samuel Fapoun">
                                 <p class="additional-info">
@@ -222,7 +222,7 @@
                             </div>
                             <div class="form-group-full">
                                 <div class="form-group-header">
-                                     <h2>Card Number</h2> 
+                                     <h2>Card Number</h2>
                                 </div>
                                 <input type="text" class="form-input-full credit-card" placeholder="1234-XXXX-XXXX-XXXX">
                                 <p class="additional-info">
@@ -231,13 +231,13 @@
                             </div>
                             <div class="form-group-half margin-right">
                                 <div class="form-group-header">
-                                     <h2>Expiry Date</h2> 
+                                     <h2>Expiry Date</h2>
                                 </div>
                                 <input type="date" class="form-input-full" placeholder="MM/YY">
                             </div>
                             <div class="form-group-half">
                                 <div class="form-group-header">
-                                     <h2>CVV</h2> 
+                                     <h2>CVV</h2>
                                 </div>
                                 <input type="text" class="form-input-full cvv" placeholder="...">
                             </div>
@@ -250,7 +250,7 @@
                         <div class="form-group-full">
                             <div class="form-group-header">
                                  <h2>Plan Name <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
-                                <img class="question-mark" src="" alt=""> 
+                                <img class="question-mark" src="" alt="">
                             </div>
                             <input type="text" class="form-input-full" value="Lagos House">
                         </div>
@@ -258,7 +258,7 @@
 
                         <div class="form-group-full">
                             <div class="form-group-header">
-                                 <h2>Deposit frequency  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2> 
+                                 <h2>Deposit frequency  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
                             </div>
                             <div class="special-dropdown">
                                 <div class="value-holder">
@@ -282,7 +282,7 @@
 
                         <div class="form-group-full">
                             <div class="form-group-header">
-                                 <h2>Auto Deposit  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span>  </h2> 
+                                 <h2>Auto Deposit  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span>  </h2>
                             </div>
                             <input type="text" class="form-input-full paddingLeft" value="20,000.00" >
                             <div class="currencySymbol">
@@ -301,7 +301,7 @@
                                 <div class="radio-group">
                                         <input type="radio" name="connected" id="Blocks">
                                         <label for="Blocks">Blocks only</label>
-                                </div>                            
+                                </div>
 
                                 <div class="radio-group">
                                         <input type="radio" name="connected" id="cement">
@@ -312,7 +312,7 @@
                                     <input type="radio" name="connected" id="both">
                                     <label for="both">both</label>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -324,14 +324,14 @@
                             <div class="units-of">
                                 <div class="half-groups">
                                         <label for="blocks-unit">Unit of Blocks</label>
-                                        <input type="number" min="1" id="blocks-unit" class="half-input" >        
+                                        <input type="number" min="1" id="blocks-unit" class="half-input" >
                                 </div>
-                               
+
                                 <div class="half-groups">
                                         <label for="cement-unit">Bags of Cement</label>
                                         <input type="number" min="1" id="cement-unit" class="half-input">
                                 </div>
-                            
+
                             </div>
                         </div>
 
@@ -343,7 +343,7 @@
                                 <div class="radio-group">
                                         <input type="radio" name="connected" id="active">
                                         <label for="Blocks">Active</label>
-                                </div>                            
+                                </div>
 
                                 <div class="radio-group">
                                         <input type="radio" name="connected" id="On hold">
@@ -353,21 +353,21 @@
                                 <div class="radio-group">
                                     <!-- Leave me alone i'm Important -->
                                 </div>
-                                
+
                             </div>
                         </div>
 
 
                         <div class="form-group-full">
                             <div class="form-group-header">
-                                 <h2>Next Deposit Date</h2> 
+                                 <h2>Next Deposit Date</h2>
                             </div>
                             <input type="date" class="form-input-full">
                         </div>
 
                         <div class="form-group-full">
                             <div class="form-group-header">
-                                 <h2>Change Debit Card<span class="Important"><img src="" alt=""></span> </h2> 
+                                 <h2>Change Debit Card<span class="Important"><img src="" alt=""></span> </h2>
                             </div>
                             <div class="special-dropdown">
                                 <div class="value-holder">
@@ -376,7 +376,7 @@
                                 </div>
                                 <div class="options-holder">
                                     <ul>
-                                        <li class="drop-down-option Add-card-Trigger">Add a card</li>                                            
+                                        <li class="drop-down-option Add-card-Trigger">Add a card</li>
                                         <li class="drop-down-option">Business</li>
 
                                     </ul>
@@ -418,10 +418,10 @@
                                         <td>
                                             <img class="up-arrow" src="../assets/images/Group 38.svg" alt="">
                                             <h3>$2</h3>
-                                        </td> 
+                                        </td>
                                     </tr>
-        
-                                </table>            
+
+                                </table>
             </div>
         </div>
 

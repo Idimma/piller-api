@@ -13,7 +13,7 @@
     <div class="container">
         <div class="sidenav__container">
             <div class="sidebar sidenav">
-                <a class="logo" href="../index.html">Stokkpile.com</a>
+                <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
 
                 <div class="links">
                     <div class="link">
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="sidebar">
-            <a class="logo" href="../index.html">Stokkpile.com</a>
+            <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
             <div class="links">
                 <div class="link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="11.667" height="15" viewBox="0 0 11.667 15">
@@ -303,7 +303,7 @@
                         </p>
                         <p><span class="label">Amount:</span> -</p>
                         <p><span class="label">Status:</span> Debit</p>
-                    </div>  
+                    </div>
                     <div class="transaction deposit">
                         <p><span class="label">Billing Date:</span> 14.09.2019   00:00</p>
                         <p><span class="label">Transaction ID:</span> 345648097657IF</p>

@@ -13,11 +13,11 @@
 
     <div class="container">
 
-        
+
 
         <div class="sidenav__container">
             <div class="sidebar sidenav">
-                <a class="logo" href="../index.html">Stokkpile.com</a>
+                <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
                 <!--  -->
                 <div class="links">
                     <div class="link">
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="sidebar">
-            <a class="logo" href="../index.html">Stokkpile.com</a>
+            <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
             <div class="links">
                 <div class="link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="11.667" height="15" viewBox="0 0 11.667 15">
@@ -156,7 +156,7 @@
                                     <th  class="top-cell" >Materials to be withdrawn</th>
                                     <th  class="top-cell right-cell" >Location</th>
                                     </tr>
-                                </thead>        
+                                </thead>
                                 <tbody class="rows">
                                  <tr>
                                      <td class="left-cell">Lagos House</td>
@@ -244,15 +244,15 @@
                                             <p>4, samuel Elegushi street, Lagos</p>
                                         </td>
                                  </tr>
- 
+
                                 </tbody>
 
                              </table>
                                 </div>
-                             
+
                             <button class="confirm">
                                 Confirm
-                            </button>   
+                            </button>
                         </div>
                         <div class="notify-img-container">
                             <img src="../assets/images/cancel.svg" class="close-img x-button" alt="">
@@ -269,7 +269,7 @@
                    <div class="bar"></div>
                     <div class="bar"></div>
                     <div class="bar"></div>
-                </button>                        
+                </button>
                 <div class="back">
                     <img src="../assets/images/back.svg" alt="">
                     <a href="">Back</a>
@@ -314,13 +314,13 @@
                 </div>
             </div>
 
-            
+
                         <div class="main-body">
                             <form action="" class="plans">
                                 <div class="form-group-full">
                                     <div class="form-group-header">
                                          <h2>Plan Name</h2>
-                                        <img class="question-mark" src="" alt=""> 
+                                        <img class="question-mark" src="" alt="">
                                     </div>
                                     <input type="text" class="form-input-full">
                                     <div class="checkbox-div">
@@ -338,13 +338,13 @@
                                         <div class="radio-group">
                                                 <input type="radio" name="connected" id="one">
                                                 <label for="one">One Location</label>
-                                        </div>                            
+                                        </div>
 
                                         <div class="radio-group">
                                                 <input type="radio" name="connected" id="various">
                                                 <label for="various">Various Locations</label>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="form-group-full">
@@ -354,14 +354,14 @@
                                     <div class="units-of">
                                         <div class="half-groups">
                                                 <label for="blocks-unit">Unit of Blocks</label>
-                                                <input type="number" min="1" id="blocks-unit" class="half-input" >        
+                                                <input type="number" min="1" id="blocks-unit" class="half-input" >
                                         </div>
-                                       
+
                                         <div class="half-groups">
                                                 <label for="cement-unit">Bags of Cement</label>
                                                 <input type="number" min="1" id="cement-unit" class="half-input">
                                         </div>
-                                    
+
                                     </div>
                                     <input type="text" class="form-input-full" placeholder="Type Your Address">
                                     <a href="/extra-location" class="add-location">
@@ -406,11 +406,11 @@
                                             <td>
                                                 <img class="up-arrow" src="../assets/images/Group 38.svg" alt="">
                                                 <h3>$2</h3>
-                                            </td> 
+                                            </td>
                                         </tr>
-                                    </table>            
+                                    </table>
                 </div>
-            </div>     
+            </div>
         </main>
     </div>
     <script src="../assets/js/withdraw.js"></script>
