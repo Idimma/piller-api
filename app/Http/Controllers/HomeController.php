@@ -140,9 +140,16 @@ class HomeController extends Controller
 
     public function transactions()
     {
-        $users = Transactions::get();
-        $type = 'Transactions';
-        return view('users', compact('users', 'type'));
+        $user = auth()->user();
+        $total = $user->transactions->where('type', 'credit')->sum('amount');
+
+        $credits = $user->transactions->where('type', 'credit');
+        $debits = $user->transactions->where('type', 'debit');
+        $withdrawn = ['block' => number_format($debits->sum('block'), 2),
+            'cement' => number_format($debits->sum('cement'), 2)];
+
+        return view('pages.transactions',
+            compact('user', 'withdrawn', 'total', 'credits', 'debits'));
     }
 
     public function reports()
@@ -162,6 +169,9 @@ class HomeController extends Controller
     public function settings()
     {
         return view('pages.settings');
+    } public function withdraw()
+    {
+        return view('pages.withdraw');
     }
 
     public function settingsPassword()

@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Stokkpiler | Your Profile</title>
-    @include('partial.toastAlert')
-    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/css/nav.css')}}">
+@extends('layouts.dashboard')
+@section('links')
     <link rel="stylesheet" href="{{asset('assets/css/settings.css')}}">
-</head>
-<body>
-<div class="container">
-    @include('partials.admin-sidebar')
+    <link rel="stylesheet" href="{{asset('assets/css/nav.css')}}">
+@endsection
+@section('content')
     <div class="main">
         @include('partials.admin-topbar')
+
         <div class="content">
             <div class="navigation">
                 <a class="category active" href="{{url('settings')}}">
@@ -91,9 +83,9 @@
                     </div>
                     <div class="form-group">
                         <label for="country">Country of Residence</label>
-                        <input type="text" id="country" value="{{auth()->user()->country}}" name="country" required>
+                        <input type="text" id="country" value="{{auth()->user()->country}}" name="country">
                     </div>
-                    <button type="submit">Update</button>
+                    <button type="submit">Updates</button>
                 </form>
                 <div class="page-links">
                     <button class="link-toggle">
@@ -115,41 +107,12 @@
                     </a>
                 </div>
             </div>
-            <table class="rates bottom">
-                <tr>
-                    <td>Rates</td>
-                    <td>Block</td>
-                    <td>Cement</td>
-                </tr>
-                <tr>
-                    <td>Local</td>
-                    <td>
-                        <img src="{{asset('assets/images/rate-down.svg')}}">
-                        &#8358 200
-                    </td>
-                    <td>
-                        <img src="{{asset('assets/images/rate-up.svg')}}">
-                        &#8358 2000
-                    </td>
-                </tr>
-                <tr>
-                    <td>International</td>
-                    <td>
-                        <img src="{{asset('assets/images/rate-down.svg')}}">
-                        $2
-                    </td>
-                    <td>
-                        <img src="{{asset('assets/images/rate-up.svg')}}">
-                        $2
-                    </td>
-                </tr>
-            </table>
+            @include('partials.bottom-rate2')
         </div>
     </div>
-</div>
-<script src="{{asset('assets/js/sidenav.js')}}"></script>
-<script src="{{asset('assets/js/settings.js')}}"></script>
-<script src="{{asset('assets/js/Required-inputs.js')}}"></script>
-
-</body>
-</html>
+@stop
+@section('scripts')
+    <script src="{{asset('assets/js/sidenav.js')}}"></script>
+    <script src="{{asset('assets/js/settings.js')}}"></script>
+{{--    <script src="{{asset('assets/js/Required-inputs.js')}}"></script>--}}
+@stop

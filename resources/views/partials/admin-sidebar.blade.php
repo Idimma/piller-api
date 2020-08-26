@@ -2,7 +2,7 @@
     <div class="sidebar sidenav">
         <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
         <div class="links">
-            <div class="link {{linkActive('home')}}">
+            <div class="link {{linkActive('admin/home')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="11.667" height="15" viewBox="0 0 11.667 15">
                     <g id="ios-business" transform="translate(0.5 0.5)">
                         <path id="Shape"
@@ -10,17 +10,17 @@
                               stroke="rgba(0,0,0,0)" stroke-width="1"></path>
                     </g>
                 </svg>
-                <a href="{{url('home')}}">Home</a>
+                <a href="{{url('admin/home')}}">Home</a>
             </div>
-            <div class="link {{linkActive('materials')}}">
+            <div class="link {{linkActive('admin/materials')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">
                     <path id="md-stats"
                           d="M83.5,64h2.333V78H83.5ZM80,73.917h2.333V78H80Zm7-2.333h2.333V78H87Zm3.5-3.5h2.333V78H90.5Z"
                           transform="translate(-80 -64)"></path>
                 </svg>
-                <a href="{{url('materials')}}">Materials</a>
+                <a href="{{url('admin/materials')}}">Materials</a>
             </div>
-            <div class="link {{linkActive('suppliers')}}">
+            <div class="link {{linkActive('admin/suppliers')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15">
                     <g id="ios-calculator" transform="translate(0.5 0.5)">
                     </g>
@@ -28,9 +28,9 @@
                           d="M8.919,14H1.081A1.08,1.08,0,0,1,0,12.923V1.077A1.08,1.08,0,0,1,1.081,0H8.919A1.08,1.08,0,0,1,10,1.077V12.923A1.08,1.08,0,0,1,8.919,14ZM7.7,8.347a.81.81,0,0,0-.811.807v2.692a.81.81,0,0,0,1.621,0V9.154A.81.81,0,0,0,7.7,8.347ZM5,11.038a.808.808,0,1,0,.81.807A.81.81,0,0,0,5,11.038Zm-2.7,0a.808.808,0,1,0,.81.807A.81.81,0,0,0,2.3,11.038ZM5,8.347a.807.807,0,1,0,.81.807A.81.81,0,0,0,5,8.347Zm-2.7,0a.807.807,0,1,0,.81.807A.81.81,0,0,0,2.3,8.347ZM7.7,5.654a.808.808,0,1,0,.81.807A.81.81,0,0,0,7.7,5.654Zm-2.7,0a.808.808,0,1,0,.81.807A.81.81,0,0,0,5,5.654Zm-2.7,0a.808.808,0,1,0,.81.807A.81.81,0,0,0,2.3,5.654ZM2.027,1.616a.54.54,0,0,0-.54.538V3.769a.54.54,0,0,0,.54.538H7.973a.54.54,0,0,0,.54-.538V2.154a.54.54,0,0,0-.54-.538Z"
                           stroke="rgba(0,0,0,0)" stroke-width="1"/>
                 </svg>
-                <a href="{{url('suppliers')}}">Suppliers</a>
+                <a href="{{url('admin/suppliers')}}">Suppliers</a>
             </div>
-            <div class="link {{linkActive('customers')}}">
+            <div class="link {{linkActive('admin/customers')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15.343" height="15.009" viewBox="0 0 15.343 15.009">
                     <g id="ios-send" transform="translate(0.499 0.511)">
                         <path id="Path"
@@ -38,9 +38,9 @@
                               transform="translate(0.001 0.001)" stroke="rgba(0,0,0,0)" stroke-width="1"/>
                     </g>
                 </svg>
-                <a href="{{url('customers')}}">Customers</a>
+                <a href="{{url('admin/customers')}}">Customers</a>
             </div>
-            <div class="link {{linkActive('history')}}">
+            <div class="link {{linkActive('admin/history')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14.98" height="14.981" viewBox="0 0 14.98 14.981">
                     <g id="wallet_1_" data-name="wallet (1)" transform="translate(0.5 0.5)">
                         <path id="Shape"
@@ -51,17 +51,17 @@
                               transform="translate(8.897 6.99)" stroke="rgba(0,0,0,0)" stroke-width="1"/>
                     </g>
                 </svg>
-                <a href="{{url('history')}}">History</a>
+                <a href="{{url('admin/history')}}">History</a>
             </div>
-            <div class="link {{linkActive('settings')}}">
+            <div class="link {{linkActive('admin/settings')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14.812" height="15.15" viewBox="0 0 14.812 15.15">
-                    <g id="ios-settings" transform="translate(0.585 0.592)">
+                    <g id="ios-admin/settings" transform="translate(0.585 0.592)">
                         <path id="Shape"
                               d="M5.186,13.968h0a6.924,6.924,0,0,1-2.027-.862,1.839,1.839,0,0,0-.363-2,1.733,1.733,0,0,0-1.95-.371A7.2,7.2,0,0,1,0,8.662,1.788,1.788,0,0,0,1.126,6.986,1.783,1.783,0,0,0,0,5.309a7.348,7.348,0,0,1,.839-2.08,1.681,1.681,0,0,0,.714.157,1.72,1.72,0,0,0,1.239-.524,1.834,1.834,0,0,0,.363-2A6.854,6.854,0,0,1,5.183,0,1.765,1.765,0,0,0,6.82,1.153,1.766,1.766,0,0,0,8.458,0a6.812,6.812,0,0,1,2.025.862,1.82,1.82,0,0,0,.362,2,1.721,1.721,0,0,0,1.954.367,7.21,7.21,0,0,1,.842,2.076,1.814,1.814,0,0,0,0,3.356,7.236,7.236,0,0,1-.842,2.076,1.733,1.733,0,0,0-1.95.371,1.822,1.822,0,0,0-.362,2,6.876,6.876,0,0,1-2.028.861,1.737,1.737,0,0,0-3.269,0Zm1.666-9.9a2.91,2.91,0,0,0,0,5.818,2.91,2.91,0,0,0,0-5.818Z"
                               stroke="rgba(0,0,0,0)" stroke-width="1"/>
                     </g>
                 </svg>
-                <a href="{{url('settings')}}">Settings</a>
+                <a href="{{url('admin/settings')}}">Settings</a>
             </div>
         </div>
         <a class="logout__link" href="{{url('logout')}}"><img src="{{asset('assets/images/logout.svg')}}"> Logout</a>
@@ -70,7 +70,7 @@
 <div class="sidebar">
     <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
     <div class="links">
-        <div class="link {{linkActive('home')}}">
+        <div class="link {{linkActive('admin/home')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="11.667" height="15" viewBox="0 0 11.667 15">
                 <g id="ios-business" transform="translate(0.5 0.5)">
                     <path id="Shape"
@@ -78,17 +78,17 @@
                           stroke="rgba(0,0,0,0)" stroke-width="1"></path>
                 </g>
             </svg>
-            <a href="{{url('home')}}">Home</a>
+            <a href="{{url('admin/home')}}">Home</a>
         </div>
-        <div class="link {{linkActive('materials')}}">
+        <div class="link {{linkActive('admin/materials')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">
                 <path id="md-stats"
                       d="M83.5,64h2.333V78H83.5ZM80,73.917h2.333V78H80Zm7-2.333h2.333V78H87Zm3.5-3.5h2.333V78H90.5Z"
                       transform="translate(-80 -64)"></path>
             </svg>
-            <a href="{{url('materials')}}">Materials</a>
+            <a href="{{url('admin/materials')}}">Materials</a>
         </div>
-        <div class="link {{linkActive('suppliers')}}">
+        <div class="link {{linkActive('admin/suppliers')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15">
                 <g id="ios-calculator" transform="translate(0.5 0.5)">
                 </g>
@@ -96,9 +96,9 @@
                       d="M8.919,14H1.081A1.08,1.08,0,0,1,0,12.923V1.077A1.08,1.08,0,0,1,1.081,0H8.919A1.08,1.08,0,0,1,10,1.077V12.923A1.08,1.08,0,0,1,8.919,14ZM7.7,8.347a.81.81,0,0,0-.811.807v2.692a.81.81,0,0,0,1.621,0V9.154A.81.81,0,0,0,7.7,8.347ZM5,11.038a.808.808,0,1,0,.81.807A.81.81,0,0,0,5,11.038Zm-2.7,0a.808.808,0,1,0,.81.807A.81.81,0,0,0,2.3,11.038ZM5,8.347a.807.807,0,1,0,.81.807A.81.81,0,0,0,5,8.347Zm-2.7,0a.807.807,0,1,0,.81.807A.81.81,0,0,0,2.3,8.347ZM7.7,5.654a.808.808,0,1,0,.81.807A.81.81,0,0,0,7.7,5.654Zm-2.7,0a.808.808,0,1,0,.81.807A.81.81,0,0,0,5,5.654Zm-2.7,0a.808.808,0,1,0,.81.807A.81.81,0,0,0,2.3,5.654ZM2.027,1.616a.54.54,0,0,0-.54.538V3.769a.54.54,0,0,0,.54.538H7.973a.54.54,0,0,0,.54-.538V2.154a.54.54,0,0,0-.54-.538Z"
                       stroke="rgba(0,0,0,0)" stroke-width="1"/>
             </svg>
-            <a href="{{url('suppliers')}}">Suppliers</a>
+            <a href="{{url('admin/suppliers')}}">Suppliers</a>
         </div>
-        <div class="link {{linkActive('customers')}}">
+        <div class="link {{linkActive('admin/customers')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="15.343" height="15.009" viewBox="0 0 15.343 15.009">
                 <g id="ios-send" transform="translate(0.499 0.511)">
                     <path id="Path"
@@ -106,9 +106,9 @@
                           transform="translate(0.001 0.001)" stroke="rgba(0,0,0,0)" stroke-width="1"/>
                 </g>
             </svg>
-            <a href="{{url('customers')}}">Customers</a>
+            <a href="{{url('admin/customers')}}">Customers</a>
         </div>
-        <div class="link {{linkActive('history')}}">
+        <div class="link {{linkActive('admin/history')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="14.98" height="14.981" viewBox="0 0 14.98 14.981">
                 <g id="wallet_1_" data-name="wallet (1)" transform="translate(0.5 0.5)">
                     <path id="Shape"
@@ -119,17 +119,17 @@
                           transform="translate(8.897 6.99)" stroke="rgba(0,0,0,0)" stroke-width="1"/>
                 </g>
             </svg>
-            <a href="{{url('history')}}">History</a>
+            <a href="{{url('admin/history')}}">History</a>
         </div>
-        <div class="link {{linkActive('settings')}}">
+        <div class="link {{linkActive('admin/settings')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="14.812" height="15.15" viewBox="0 0 14.812 15.15">
-                <g id="ios-settings" transform="translate(0.585 0.592)">
+                <g id="ios-admin/settings" transform="translate(0.585 0.592)">
                     <path id="Shape"
                           d="M5.186,13.968h0a6.924,6.924,0,0,1-2.027-.862,1.839,1.839,0,0,0-.363-2,1.733,1.733,0,0,0-1.95-.371A7.2,7.2,0,0,1,0,8.662,1.788,1.788,0,0,0,1.126,6.986,1.783,1.783,0,0,0,0,5.309a7.348,7.348,0,0,1,.839-2.08,1.681,1.681,0,0,0,.714.157,1.72,1.72,0,0,0,1.239-.524,1.834,1.834,0,0,0,.363-2A6.854,6.854,0,0,1,5.183,0,1.765,1.765,0,0,0,6.82,1.153,1.766,1.766,0,0,0,8.458,0a6.812,6.812,0,0,1,2.025.862,1.82,1.82,0,0,0,.362,2,1.721,1.721,0,0,0,1.954.367,7.21,7.21,0,0,1,.842,2.076,1.814,1.814,0,0,0,0,3.356,7.236,7.236,0,0,1-.842,2.076,1.733,1.733,0,0,0-1.95.371,1.822,1.822,0,0,0-.362,2,6.876,6.876,0,0,1-2.028.861,1.737,1.737,0,0,0-3.269,0Zm1.666-9.9a2.91,2.91,0,0,0,0,5.818,2.91,2.91,0,0,0,0-5.818Z"
                           stroke="rgba(0,0,0,0)" stroke-width="1"/>
                 </g>
             </svg>
-            <a href="{{url('settings')}}">Settings</a>
+            <a href="{{url('admin/settings')}}">Settings</a>
         </div>
     </div>
     <a class="logout__link" href="{{url('/logout')}}"><img src="{{asset('assets/images/logout.svg')}}"> Logout</a>

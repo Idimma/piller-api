@@ -9,6 +9,9 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 function getUser()
 {
+    if(auth()->check()){
+        return  auth()->user();
+    }
     return JWTAuth::parseToken()->authenticate();
 }
 
