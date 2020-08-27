@@ -19,9 +19,9 @@ class AdminMiddleware
         $userrole = getUser()->role->name;
         if ($userrole !== 'Admin') {
             if (auth()->check()) {
-                return redirect('home')->with('error', 'Not Authorised to access admin');
+//                return redirect('home')->with('error', 'Not Authorised to access admin');
             }
-            return response()->json(['error' => 'Not Authorised'], 401);
+//            return response()->json(['error' => 'Not Authorised'], 401);
         }
 
         return $next($request);

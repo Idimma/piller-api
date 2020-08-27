@@ -14,10 +14,10 @@
 <div class="container">
     @include('partials.admin-sidebar')
     <div class="main">
-        @include('partials.admin-topbar')
+        @include('partials.admin-topbar', ['type'=> 'admin'])
         <div class="content">
             <div class="navigation">
-                <a class="category active" href="{{url('settings')}}">
+                <a class="category active" href="{{url('admin/settings')}}">
                     <svg id="ios-person" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                         <path id="Path"
                               d="M19.99,19.495c-.375-1.656-2.516-2.464-3.255-2.724a24.272,24.272,0,0,0-2.714-.521,2.757,2.757,0,0,1-1.255-.578,10.97,10.97,0,0,1-.083-2.568,7.725,7.725,0,0,0,.594-1.13A14.577,14.577,0,0,0,13.714,10s.427,0,.578-.75a7.379,7.379,0,0,0,.385-1.745c-.031-.6-.359-.583-.359-.583a9.131,9.131,0,0,0,.354-2.672C14.719,2.109,13.042,0,10.005,0,6.927,0,5.286,2.109,5.333,4.25a9.525,9.525,0,0,0,.349,2.672s-.328-.016-.359.583A7.379,7.379,0,0,0,5.708,9.25c.146.75.578.75.578.75a14.577,14.577,0,0,0,.438,1.974,7.725,7.725,0,0,0,.594,1.13,10.97,10.97,0,0,1-.083,2.568,2.757,2.757,0,0,1-1.255.578,24.272,24.272,0,0,0-2.714.521c-.74.26-2.88,1.068-3.255,2.724A.416.416,0,0,0,.421,20H19.584A.415.415,0,0,0,19.99,19.495Z"
@@ -32,7 +32,7 @@
                         </p>
                     </div>
                 </a>
-                <a class="category" href="{{url('settings/password')}}">
+                <a class="category" href="{{url('admin/settings/password')}}">
                     <svg id="ios-key" xmlns="http://www.w3.org/2000/svg" width="19.954" height="20"
                          viewBox="0 0 19.954 20" fill="#9b9b9b">
                         <path id="Shape"
@@ -68,7 +68,7 @@
                             <!--Remove-->
                         </span>
                 </div>
-                <form method="post" enctype="multipart/form-data" action="{{url('profile/update')}}">
+                <form method="post" enctype="multipart/form-data" action="{{url('admin/profile/update')}}">
                     <input type="file" style="display:none" name="avatar" class="add-profile-picture">
                     <div class="form-group">
                         <label for="name">First Name</label>

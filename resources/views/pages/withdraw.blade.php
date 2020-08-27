@@ -126,7 +126,7 @@
         </div>
 
         <div class="main-container">
-            @include('partials.admin-topbar')
+            @include('partial.dash-header')
 
 
             <div class="main-body">

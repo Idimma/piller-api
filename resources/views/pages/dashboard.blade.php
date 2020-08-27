@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="main">
-        @include('partials.admin-topbar')
+        @include('partial.dash-header')
         <a class="new-plan" href='{{url('no-plan')}}'>
             New Plans
         </a>

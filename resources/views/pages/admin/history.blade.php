@@ -36,7 +36,7 @@
                         <div class="bottom--bar"></div>
                     </div>
                 </div>
-                <form action="{{url('history/search')}}" method="post" class="searchbar">
+                <form action="{{url('admin/history/search')}}" method="post" class="searchbar">
                     @csrf
                     <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
                     <input type="text" name="search" class="searchInput">

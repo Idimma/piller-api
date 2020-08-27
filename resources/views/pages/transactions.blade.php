@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="main">
-        @include('partials.admin-topbar')
+        @include('partial.dash-header')
         <div class="content">
             <div class="cards">
                 <div class="total-amount">

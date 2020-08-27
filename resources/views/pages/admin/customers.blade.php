@@ -31,14 +31,14 @@
                             <span><span class="label">Email:</span> {{$user->email}}</span>
                             <span><span class="label">Phone:</span> {{$user->phone}}</span>
                             <span><span class="label">Location:</span> {{$user->country}}</span>
-                            <a href="{{url('customer', $user->uuid)}}" class="customer-table__link">
+                            <a href="{{url('admin/customer', $user->uuid)}}" class="customer-table__link">
                                 <img src="{{asset('assets/images/eye.svg')}}" alt="password-icon">
                                 <span>View Details</span>
                             </a>
                         </div>
                     @empty
                         <div>
-                            <h3>Empty </h3>
+                            <h3>No Customer found </h3>
                         </div>
                     @endforelse
                 </div>

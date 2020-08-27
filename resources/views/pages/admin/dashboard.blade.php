@@ -82,7 +82,7 @@
                 </div>
             @empty
                 <div>
-                    <h3>Empty </h3>
+                    <h3>Empty  </h3>
                 </div>
             @endforelse
 

@@ -24,7 +24,7 @@
                         <h2><span class="border__bottom">ADD</span> SUPPLIERS </h2>
                         <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
                     </div>
-                    <form action="{{url('suppliers')}}" method="post" class="Add-card-box-form Add-material">
+                    <form action="{{url('admin/suppliers')}}" method="post" class="Add-card-box-form Add-material">
                         <div class="form-group-full">
                             <div class="form-group-header">
                                 <h2>Supplier Name</h2>
@@ -82,7 +82,7 @@
                                 <div class="form-group-header">
                                     <h2>Country</h2>
                                 </div>
-                                <input type="text" name="country" rows="5" id="country" class="form-input-full">
+                                <input type="text" name="country" row="5" id="country" class="form-input-full">
                             </div>
                         </div>
 
@@ -107,7 +107,7 @@
                 <div class="header__bar__name">
                     <h2><span class="border__bottom">SUPP</span>LIERS</h2>
                 </div>
-                <form action="{{url('suppliers/search')}}" method="post" class="searchbar">
+                <form action="{{url('admin/suppliers/search')}}" method="post" class="searchbar">
                     @csrf
                     <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
                     <input type="text" name="search" class="searchInput">
@@ -185,7 +185,7 @@
             icon: "warning", buttons: true, dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location.href = '{{url('supplier/delete')}}/' + id
+                window.location.href = '{{url('admin/supplier/delete')}}/' + id
             }
         });
     }

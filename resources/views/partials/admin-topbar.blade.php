@@ -42,7 +42,7 @@
         <div class="notifications">
 
         </div>
-        <a class="user" href="{{url('settings')}}">
+        <a class="user" href="{{url('admin/settings')}}">
             <img src="{{auth()->user()->avatar_url}}"
                  height="36" width="36" style="border-radius: 30px; border: 1px #502274 solid" alt="">
         </a>

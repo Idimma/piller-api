@@ -14,7 +14,7 @@
 <div class="cover-overlay"></div>
 <main>
     <div class="main-container">
-        @include('partials.admin-topbar')
+        @include('partial.dash-header')
 
 
         <div class="main-body">

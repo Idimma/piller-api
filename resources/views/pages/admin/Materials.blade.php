@@ -25,7 +25,7 @@
                         <h2><span class="underline">ADD</span> MATERIAL</h2>
                         <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
                     </div>
-                    <form action="{{url('materials')}}" method="post" id="add-material"
+                    <form action="{{url('admin/materials')}}" method="post" id="add-material"
                           class="Add-card-box-form Add-material">
                         @csrf
                         <div class="form-group-full">
@@ -78,7 +78,7 @@
                 <div class="header__bar__name">
                     <h2><span class="border__bottom">MATE</span>RIALS</h2>
                 </div>
-                <form action="{{url('materials/search')}}" method="post" class="searchbar">
+                <form action="{{url('admin/materials/search')}}" method="post" class="searchbar">
                     @csrf
                    <img src="{{asset('assets/images/ios-search.svg')}}" class="search-image" alt="">
                     <input type="text" name="search" class="searchInput">
@@ -144,7 +144,7 @@
             icon: "warning", buttons: true, dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location.href = '{{url('material/delete')}}/' + id
+                window.location.href = '{{url('admin/material/delete')}}/' + id
             }
         });
     }
@@ -152,7 +152,6 @@
     function editMaterial(object) {
         document.getElementById('name').value = object.name;
         document.getElementById('local').value = object.local;
-        document.getElementById('method').value = 'patch';
         document.getElementById('id').value = object.id;
         document.getElementById('submit').innerHTML = 'Submit';
         document.getElementById('international').value = object.international;
