@@ -38,46 +38,45 @@
                     <div class="detail-container">Next Deposit Date</div>
                     <div class="detail-container-actions"></div>
                 </div>
+                @forelse ($user->plans as $plan)
+                    <div class="plan-group">
+                        <div class="detail-container">
+                            <p class="tag">S/N :</p><span class="response">{{$plan->id}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Name:</p><span class="response">{{$plan->plan_name}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">Auto Deposits {&#8358}: </p><span class="response">{{$plan->deposit}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag">List Of Properties: </p>
+                            <span class="response">
+                            <p>{{$plan->block_target}} units of blocks</p>
+                            <p>{{$plan->cement_target}} bags of Cement</p>
+                        </span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Start Date: </p>
+                            <span class="response">{{$plan->started_at}}</span>
+                        </div>
+                        <div class="detail-container">
+                            <p class="tag"> Next Deposit Date: </p>
+                            <span class="response">{{$plan->next_deposit}}</span>
+                        </div>
+                        <div class="detail-container-actions">
+                            <a href="{{url('plan/edit', $plan)}}">
+                                <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
+                            </a>
+                            <a href="{{url('plan', $plan)}}">
+                                <img src="{{asset('assets/images/eye.svg')}}" alt="">
+                            </a>
+                        </div>
+                    </div>
 
-                <div class="plan-group">
-                    <div class="detail-container">
-                        <p class="tag">S/N :</p><span class="response">1</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">Name:</p><span class="response">Lagos House</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">Auto Deposits {&#8358}: </p><span class="response">50,000.00</span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag">List Of Properties: </p>
-                        <span class="response">
-                            <p>100 units of blocks</p>
-                            <p>50 bags of Cement</p>
-                        </span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Start Date: </p>
-                        <span class="response">
-                            12-jan-2019
-                        </span>
-                    </div>
-                    <div class="detail-container">
-                        <p class="tag"> Next Deposit Date: </p>
-                        <span class="response">
-                            12-jan-2019
-                        </span>
-                    </div>
-                    <div class="detail-container-actions">
-                        <a href="{{url('plan/edit')}}">
-                            <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
-                        </a>
-                        <a href="{{url('plan')}}">
-                            <img src="{{asset('assets/images/eye.svg')}}" alt="">
-                        </a>
-                    </div>
-                </div>
+                @empty
 
+                @endforelse
             </div>
         </div>
     </div>

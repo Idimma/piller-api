@@ -9,35 +9,72 @@
         <img src="{{asset('assets/images/back.svg')}}" alt="">
         <a href="">Back</a>
     </div>
-    <table class="rates">
-        <tr>
-            <td>Rates</td>
-            <td>Block</td>
-            <td>Cement</td>
+    {{--    @section('links')--}}
+    <style>
+
+        #toggled-element {
+            /*max-width: 250px;*/
+            /*overflow-x: scroll;*/
+
+        }
+
+        #toggled-element tr {
+            display: block;
+            float: left;
+        }
+
+        #toggled-element td {
+            display: block;
+            font-size: 10px;
+            font-family: 'Montserrat-Regular', sans-serif;
+            margin-right: 35px;
+        }
+
+        #toggled-element td:nth-of-type(1) {
+            font-weight: bold;
+            font-size: 12px;
+            font-family: 'Montserrat-SemiBold';
+        }
+
+        td .boldtext {
+            font-weight: bold;
+            /*font-size: 12px;*/
+            font-family: 'Montserrat-SemiBold';
+        }
+
+
+        @media(max-width: 575px){
+            #toggled-element{
+                display: none;
+            }
+        }
+        @media(min-width: 576px){
+            #toggled-element{
+                display: block;
+            }
+        }
+
+
+    </style>
+    {{--    @stop--}}
+
+    <table  id="toggled-element">
+        <tbody>
+        <tr class="boldtext">
+            <td>Material</td>
+            <td>Local Rate</td>
+            <td>International Rate</td>
         </tr>
-        <tr>
-            <td>Local</td>
-            <td>
-                <img src="{{asset('assets/images/rate-down.svg')}}" alt="">
-                &#8358 200
-            </td>
-            <td>
-                <img src="{{asset('assets/images/rate-up.svg')}}" alt="">
-                &#8358 2000
-            </td>
-        </tr>
-        <tr>
-            <td>International</td>
-            <td>
-                <img src="{{asset('assets/images/rate-down.svg')}}" alt="">
-                $2
-            </td>
-            <td>
-                <img src="{{asset('assets/images/rate-up.svg')}}" alt="">
-                $2
-            </td>
-        </tr>
+        @foreach(\App\Material::get() as $mat)
+            <tr>
+                <td style="font-weight: bold!important; font-size: 10px">{{$mat->name}}</td>
+                <td>&#8358 {{$mat->local}}</td>
+                <td>$ {{$mat->international}}</td>
+            </tr>
+        @endforeach
+        </tbody>
     </table>
+
     <div class="user-controls">
         <div class="notifications">
 

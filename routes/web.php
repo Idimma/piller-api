@@ -31,8 +31,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/settings/password', 'HomeController@updatePassword');
     Route::post('profile/update', 'HomeController@updateProfile');
     Route::get('/no-plan', 'HomeController@noPlan')->name('no-plan');
+    Route::get('/no-card', 'HomeController@noCard')->name('no-card');
     Route::get('/deposit/normal', 'UserPlanController@normal');
     Route::get('/deposit/one-time', 'UserPlanController@oneTime');
+    Route::get('/plan/edit/{id}', 'HomeController@editPlan');
+    Route::get('/plan/{id}', 'HomeController@viewPlan');
+
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('/', 'AdminController@index');

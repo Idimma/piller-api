@@ -147,6 +147,30 @@
     z-index: 1;
 }
 
+.clickable{
+    text-decoration: none;
+}
+#toggled-element tr {
+    display: block;
+    float: left;
+}
+
+#toggled-element td {
+    display: block;
+    font-family: 'Montserrat-Regular', sans-serif;
+    margin-right: 35px;
+}
+#toggled-element td:nth-of-type(1){
+    font-weight: bold;
+    font-size: 12px;
+    font-family: 'Montserrat-SemiBold';
+}
+td .boldtext{
+    font-weight: bold;
+    font-size: 12px;
+    font-family: 'Montserrat-SemiBold';
+}
+
 .main{
     /*padding-top: 70px;*/
 }
@@ -331,5 +355,20 @@
 @media(max-width: 575px){
     .sidebar.sidenav.active{
         width: 70%;
+    }
+
+    .mobile{
+        display: block;
+    }
+    .web{
+        display: none;
+    }
+}
+@media(min-width: 576px){
+    .mobile{
+        display: none;
+    }
+    .web{
+        display: block;
     }
 }

@@ -9,8 +9,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 function getUser()
 {
-    if(auth()->check()){
-        return  auth()->user();
+    if (auth()->check()) {
+        return auth()->user();
     }
     return JWTAuth::parseToken()->authenticate();
 }
@@ -19,6 +19,27 @@ function linkActive($route)
 {
     $url = explode('/', request()->url());
     return request()->is($route) || ($url[3] && $url[3] . 's' === $route) ? 'active' : '';
+}
+
+function array_random($arr, $num = 1)
+{
+    shuffle($arr);
+
+    $r = array();
+    for ($i = 0; $i < $num; $i++) {
+        $r[] = $arr[$i];
+    }
+    return $num == 1 ? $r[0] : $r;
+}
+
+function nf($num = 0, $d = 2)
+{
+    return number_format($num, $d);
+}
+
+function material()
+{
+    return \App\Material::get();
 }
 
 

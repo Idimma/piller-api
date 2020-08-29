@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar {{ $mobile ?? '' }}">
     <a class="logo" href="{{url('/')}}">Stokkpile.com</a>
     <div class="links">
         <div class="link  {{linkActive('home')}}">
@@ -19,7 +19,7 @@
             </svg>
             <a href="{{url('dashboard')}}">Dashboard</a>
         </div>
-        <div class="link  {{linkActive('plans')}}">
+        <div class="link  {{linkActive('plans')}} {{linkActive('no-plan')}} {{linkActive('deposit/normal')}} {{linkActive('deposit/one-time')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">
                 <path id="md-stats"
                       d="M83.5,64h2.333V78H83.5ZM80,73.917h2.333V78H80Zm7-2.333h2.333V78H87Zm3.5-3.5h2.333V78H90.5Z"
@@ -47,7 +47,7 @@
             </svg>
             <a href="{{url('withdraw')}}">Withdraw</a>
         </div>
-        <div class="link  {{linkActive('cards')}}">
+        <div class="link  {{linkActive('cards')}} {{linkActive('no-card')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="14.98" height="14.981" viewBox="0 0 14.98 14.981">
                 <g id="wallet_1_" data-name="wallet (1)" transform="translate(0.5 0.5)">
                     <path id="Shape"
@@ -60,7 +60,7 @@
             </svg>
             <a href="{{url('cards')}}">Cards</a>
         </div>
-        <div class="link  {{linkActive('settings')}}">
+        <div class="link  {{linkActive('settings')}} {{linkActive('settings/password')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="14.812" height="15.15" viewBox="0 0 14.812 15.15">
                 <g id="ios-settings" transform="translate(0.585 0.592)">
                     <path id="Shape"
@@ -71,6 +71,6 @@
             <a href="{{url('settings')}}">Settings</a>
         </div>
     </div>
-    <a class="logout__link" href="{{url('logout')}}"><img src="../assets/images/logout.svg"> Logout</a>
+    <a class="logout__link" href="{{url('logout')}}"><img src="{{asset('assets/images/logout.svg')}}"> Logout</a>
     <div class="cover-overlay"></div>
 </div>

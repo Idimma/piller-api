@@ -10,112 +10,46 @@
             New Plans
         </a>
         <div class="cards">
-            <div class="card brown">
-                <div class="header">
-                    Lagos House
-                </div>
-                <div class="content">
-                    <div class="content__properties">
-                        <p class="content__properties__header">List of Properties</p>
-                        <p class="content__properties__details">
-                            <span class="title">Units of Block</span>
-                            <span class="amount">1000/</span>
-                            <span class="target-amount">2000</span>
-                        </p>
-                        <p class="content__properties__details">
-                            <span class="title">Bags of Cement</span>
-                            <span class="amount">26/</span>
-                            <span class="target-amount">
-                                    100
-                                </span>
-                        </p>
+            @forelse ($user->plans->take(4) as $plan)
+                <a class="clickable" href="{{url('plan',$plan)}}">
+                    @php
+                        $colors = ['brown','pink', 'purple', 'orange', 'blue', 'yellow', 'green'];
+                    @endphp
+                    <div class="card {{array_random($colors)}}">
+                        <div class="header">
+                            {{$plan->plan_name}}
+                        </div>
+                        <div class="content">
+                            <div class="content__properties">
+                                <p class="content__properties__header">List of Properties</p>
+                                <p class="content__properties__details">
+                                    <span class="title">Units of Block</span>
+                                    <span class="amount">0/</span>
+                                    <span class="target-amount">{{$plan->block_target}}</span>
+                                </p>
+                                <p class="content__properties__details">
+                                    <span class="title">Bags of Cement</span>
+                                    <span class="amount">0/</span>
+                                    <span class="target-amount">{{$plan->cement_target}}</span>
+                                </p>
+                            </div>
+                            <div class="content__amount__deposited">
+                                <p class="content__amount__deposited__header">Amount deposited</p>
+                                <p class="amount">
+                                    ₦ {{nf($plan->deposit,0)}}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content__amount__deposited">
-                        <p class="content__amount__deposited__header">Amount deposited</p>
-                        <p class="amount">
-                            ₦10,000
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card blue">
-                <div class="header">
-                    America's House
-                </div>
-                <div class="content">
-                    <div class="content__properties">
-                        <p class="content__properties__header">List of Properties</p>
-                        <p class="content__properties__details">
-                            <span class="title">Units of Block</span>
-                            <span class="amount">1000/</span>
-                            <span class="target-amount">2000</span>
-                        </p>
-                        <p class="content__properties__details">
-                            <span class="title">Bags of Cement</span>
-                            <span class="amount">26/</span>
-                            <span class="target-amount">
-                                    100
-                                </span>
-                        </p>
-                    </div>
-                    <div class="content__amount__deposited">
-                        <p class="content__amount__deposited__header">Amount deposited</p>
-                        <p class="amount">₦10,000</p>
+                </a>
+            @empty
+                <div class="card">
+                    <div class="header">Empty Plan</div>
+                    <div class="content">
+                        NO PLAN COULD BE FOUND
                     </div>
                 </div>
-            </div>
-            <div class="card pink">
-                <div class="header">
-                    Kenya House
-                </div>
-                <div class="content">
-                    <div class="content__properties">
-                        <p class="content__properties__header">List of Properties</p>
-                        <p class="content__properties__details">
-                            <span class="title">Units of Block</span>
-                            <span class="amount">1000/</span>
-                            <span class="target-amount">2000</span>
-                        </p>
-                        <p class="content__properties__details">
-                            <span class="title">Bags of Cement</span>
-                            <span class="amount">26/</span>
-                            <span class="target-amount">
-                                    100
-                                </span>
-                        </p>
-                    </div>
-                    <div class="content__amount__deposited">
-                        <p class="content__amount__deposited__header">Amount deposited</p>
-                        <p class="amount">₦10,000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card green">
-                <div class="header">
-                    Kenya Office
-                </div>
-                <div class="content">
-                    <div class="content__properties">
-                        <p class="content__properties__header">List of Properties</p>
-                        <p class="content__properties__details">
-                            <span class="title">Units of Block</span>
-                            <span class="amount">1000/</span>
-                            <span class="target-amount">2000</span>
-                        </p>
-                        <p class="content__properties__details">
-                            <span class="title">Bags of Cement</span>
-                            <span class="amount">26/</span>
-                            <span class="target-amount">
-                                    100
-                                </span>
-                        </p>
-                    </div>
-                    <div class="content__amount__deposited">
-                        <p class="content__amount__deposited__header">Amount deposited</p>
-                        <p class="amount">₦10,000</p>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 @stop

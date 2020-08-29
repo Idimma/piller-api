@@ -60,7 +60,9 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('pages.dashboard');
+        $user = getUser();
+//        dd($user->plans);
+        return view('pages.dashboard', compact('user'));
     }
 
     public function noPlan()
@@ -86,35 +88,9 @@ class HomeController extends Controller
         return view('pages.admin.view-customer',
             compact('customer', 'withdrawn', 'total', 'credits', 'debits'));
     }
-
-    public function history()
-    {
-        $credits = Transactions::where('type', 'credit')->get();
-        $debits = Transactions::where('type', 'debit')->get();
-        $all = Transactions::get();
-
-        if (request()->method() === 'post' && request()->search) {
-            $credits = Transactions::where('reference', 'LIKE', "%" . request()->search . "%")->where('type', 'credit')->get();
-            $debits = Transactions::where('reference', 'LIKE', "%" . request()->search . "%")->where('type', 'debit')->get();
-            $all = Transactions::where('reference', 'LIKE', "%" . request()->search . "%")->get();
-        }
-
-
-        return view('pages.admin.history', compact('all', 'debits', 'credits'));
-    }
-
     public function cards()
     {
         return view('pages.cards');
-    }
-
-    public function indexAdmin()
-    {
-        $users = User::count();
-
-        $widget = ['users' => $users,];
-
-        return view('home', compact('widget'));
     }
 
     public function users()
@@ -161,15 +137,16 @@ class HomeController extends Controller
 
     public function tasks()
     {
-        $plans = Plan::get();
-        $type = 'Plans';
-        return view('pages.plans', compact('plans', 'type'));
+        $user = getUser();
+        return view('pages.plans', compact('user'));
     }
 
     public function settings()
     {
         return view('pages.settings');
-    } public function withdraw()
+    }
+
+    public function withdraw()
     {
         return view('pages.withdraw');
     }
@@ -197,6 +174,15 @@ class HomeController extends Controller
     public function editPlan()
     {
         return view('pages.editPlans');
+    }
+    public function viewPlan($id)
+    {
+        $plan = getUser()->plans->find($id);
+        if($plan) {
+            return view('pages.viewplan', compact('plan'));
+        }
+
+        return abort(404);
     }
 
     public function updateProfile()
