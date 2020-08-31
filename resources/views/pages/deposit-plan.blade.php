@@ -100,30 +100,33 @@
                         <input type="text" class="form-input-full" name="material_estimation"
                                placeholder="1000 Units of Blocks, 100 Bags of Cement">
                     </div>
-                    <div class="form-group-full">
-                        <div class="form-group-header">
-                            <h2>Deposit frequency <span class="Important"><img
-                                            src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span></h2>
-                        </div>
-                        <div class="special-dropdown">
-                            <div class="value-holder">
-                                <span class="Value-text">Daily</span>
-                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
+                    @if($plan_type === 'normal')
+                        <div class="form-group-full">
+                            <div class="form-group-header">
+                                <h2>Deposit frequency <span class="Important"><img
+                                                src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span></h2>
                             </div>
-                            <div class="options-holder">
-                                <ul>
-                                    <li class="drop-down-option">Daily</li>
-                                    <li class="drop-down-option">Weekly</li>
-                                    <li class="drop-down-option">Monthly</li>
-                                </ul>
+                            <div class="special-dropdown">
+                                <div class="value-holder">
+                                    <span class="Value-text">Daily</span>
+                                    <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
+                                </div>
+                                <div class="options-holder">
+                                    <ul>
+                                        <li class="drop-down-option">Daily</li>
+                                        <li class="drop-down-option">Weekly</li>
+                                        <li class="drop-down-option">Monthly</li>
+                                    </ul>
+                                </div>
+                                <input type="text" class="hidden-input" value="Daily" name="deposit_frequency">
                             </div>
-                            <input type="text" class="hidden-input" value="Daily" name="deposit_frequency">
+                            <p class="input-detail">Select how often you want to make a deposit</p>
+                            <!-- add special type of drop down -->
                         </div>
-                        <p class="input-detail">Select how often you want to make a deposit</p>
-                        <!-- add special type of drop down -->
-                    </div>
+
+                    @endif
                     <input hidden name="plan_status" value="PENDING">
-                    <input hidden name="plan_type" value="normal">
+                    <input hidden name="plan_type" value="{{$plan_type}}">
                     <div class="form-group-full">
                         <div class="form-group-header">
                             <h2>Choose Materials <span class="Important"><img

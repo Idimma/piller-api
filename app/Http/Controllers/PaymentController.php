@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Plan;
+use App\Services\PaystackService;
 use App\Transactions;
 use Illuminate\Http\Request;
-use App\Services\PaystackService;
-use Log;
 
 
 class PaymentController extends Controller
@@ -41,7 +41,7 @@ class PaymentController extends Controller
         }
 
         Transactions::create([
-            'user_id'=> $user->id,
+            'user_id' => $user->id,
             'type' => 'credit',
             'plan_id' => $request->plan_id,
             'completed' => true,
@@ -58,6 +58,46 @@ class PaymentController extends Controller
             'customer_code' => $response->data['customer']['customer_code'],
         ]);
         return $this->respondWithSuccess(['message' => 'Successfully added card']);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function validateCardTransaction(Request $request)
+    {
+        $response = $this->payment->verifyCardTransaction($request);
+        $user = getUser();
+        $plan_id =  $response->data['metadata']['plan_id'];
+        $transaction_id =  $response->data['metadata']['transaction_id'];
+
+        if (!$response->status) {
+            return redirect('plans')->with('error', $response->message);
+        }
+        if ($response->data['status'] !== 'success') {
+            return redirect('plans')->with('error', 'Transaction not completed');
+        }
+
+        $plan = Plan::find($plan_id);
+        $trans = Transactions::find($transaction_id);
+        if($trans){
+            $trans->completed = true ;
+            $trans->save();
+        }
+        if($plan){
+            $plan->plan_status = 'STARTED';
+            $plan->save();
+        }
+
+        $user->cards()->updateOrCreate([
+            'last_four' => $response->data['authorization']['last4'],
+            'customer_id' => $response->data['customer']['id'],
+            'authorization_code' => $response->data['authorization']['authorization_code'],
+            'customer_code' => $response->data['customer']['customer_code'],
+        ]);
+        return redirect('plan/' . $plan_id)
+            ->with('success', 'Successfully created')
+            ->with('alert', 'Successfully added card');
     }
 
 }

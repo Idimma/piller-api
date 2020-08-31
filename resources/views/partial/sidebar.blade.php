@@ -37,16 +37,16 @@
             </svg>
             <a href="{{url('transactions')}}">Transactions</a>
         </div>
-        <div class="link  {{linkActive('withdraw')}}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15.343" height="15.009" viewBox="0 0 15.343 15.009">
-                <g id="ios-send" transform="translate(0.499 0.511)">
-                    <path id="Path"
-                          d="M13.878.031.178,5.865a.3.3,0,0,0,.011.558L3.895,8.468A.609.609,0,0,0,4.578,8.4l7.307-6.154c.049-.04.164-.117.209-.073s-.026.157-.067.2L5.7,9.336a.571.571,0,0,0-.06.7l2.422,3.8a.318.318,0,0,0,.567-.007L14.3.436A.311.311,0,0,0,13.878.031Z"
-                          transform="translate(0.001 0.001)" stroke="rgba(0,0,0,0)" stroke-width="1"/>
-                </g>
-            </svg>
-            <a href="{{url('withdraw')}}">Withdraw</a>
-        </div>
+{{--        <div class="link  {{linkActive('withdraw')}}">--}}
+{{--            <svg xmlns="http://www.w3.org/2000/svg" width="15.343" height="15.009" viewBox="0 0 15.343 15.009">--}}
+{{--                <g id="ios-send" transform="translate(0.499 0.511)">--}}
+{{--                    <path id="Path"--}}
+{{--                          d="M13.878.031.178,5.865a.3.3,0,0,0,.011.558L3.895,8.468A.609.609,0,0,0,4.578,8.4l7.307-6.154c.049-.04.164-.117.209-.073s-.026.157-.067.2L5.7,9.336a.571.571,0,0,0-.06.7l2.422,3.8a.318.318,0,0,0,.567-.007L14.3.436A.311.311,0,0,0,13.878.031Z"--}}
+{{--                          transform="translate(0.001 0.001)" stroke="rgba(0,0,0,0)" stroke-width="1"/>--}}
+{{--                </g>--}}
+{{--            </svg>--}}
+{{--            <a href="{{url('withdraw')}}">Withdraw</a>--}}
+{{--        </div>--}}
         <div class="link  {{linkActive('cards')}} {{linkActive('no-card')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="14.98" height="14.981" viewBox="0 0 14.98 14.981">
                 <g id="wallet_1_" data-name="wallet (1)" transform="translate(0.5 0.5)">

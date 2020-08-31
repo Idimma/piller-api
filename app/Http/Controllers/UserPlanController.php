@@ -6,6 +6,7 @@ use App\Http\Requests\{PlanRequest, PlanReviewRequest, UpdatePlanRequest};
 use App\Services\PlanService;
 use App\Transactions;
 use Illuminate\Http\Request;
+use Paystack;
 
 
 class UserPlanController extends Controller
@@ -32,6 +33,79 @@ class UserPlanController extends Controller
         return $this->respondWithSuccess($response, 201);
     }
 
+    public function create(Request $request)
+    {
+        $deposit = 0;
+
+        if($request->play_type === 'normal'){
+           $deposit = 1;
+           if ($request->deposit_frequency === 'Monthly') {
+               $deposit = 30;
+           }
+           if ($request->deposit_frequency === 'Weekly') {
+               $deposit = 7;
+           }
+       }
+
+
+        $request->merge([
+            'cement_percent' => 100 - $request->block_percent,
+            'deposit_frequency' => $deposit,
+        ]);
+
+        \Validator::make(\request()->all(), [
+            'plan_type' => 'required|string',
+            'plan_name' => 'required|string',
+            'building_type' => 'required|string',
+            'material_estimation' => 'required',
+            'material_type' => 'required',
+            'cement_percentage' => 'required|numeric',
+            'block_percentage' => 'required|numeric',
+            'start_date' => 'required|date|after:now',
+            'block_target' => 'sometimes|string',
+            'cement_target' => 'sometimes|string',
+            'deposit' => 'required|numeric',
+            'deposit_frequency' => 'sometimes|string',
+            'country' => 'sometimes|string',
+        ]);
+
+        $plan = $this->planService->requestPlan(\request()->all());
+        $amount = $request->deposit * 100;
+        $ref = Paystack::genTranxRef();
+
+
+        $trans = Transactions::create([
+            'user_id' => $plan->user_id, 'type' => 'credit',
+            'plan_id' => $plan->id, 'completed' => false, 'reference' => $ref,
+            'block' => $request->block_target, 'cement' => $request->cement_target,
+            'amount' => $request->deposit,
+        ]);
+
+
+        $request->merge(
+            [
+                'amount' => $amount, //amount in kobo
+                'email' => getUser()->email,
+                'order_id' => $plan->id,
+                'orderID' => $plan->id,
+                'quantity' => 1,
+                'reference' => $ref,
+                'callback_url' => url('/payment/callback'),
+                'metadata' => json_encode([
+                    'custom_fields' => [
+                        ['display_name' => "Transaction ID", "variable_name" => "transaction_id", "value" => $trans->id],
+                        ['display_name' => "Plan ID", "variable_name" => "plan_id", "value" => $plan->id]
+                    ],
+                    'transaction_id' => $trans->id,
+                    'plan_id' => $plan->id,
+                ])
+            ]
+        );
+
+        return Paystack::getAuthorizationUrl()->redirectNow();
+
+    }
+
     /**
      * Gets Only Authenticated User Plans data
      * @return JsonResponse
@@ -40,6 +114,7 @@ class UserPlanController extends Controller
     {
         return $this->respondWithSuccess($this->planService->userPlans());
     }
+
     /**
      * Gets Only Authenticated User Plans data
      * @return JsonResponse
@@ -117,9 +192,10 @@ class UserPlanController extends Controller
         return $this->respondWithSuccess($plan);
     }
 
-    public function verifyPayment(){
+    public function verifyPayment()
+    {
 
-          return $this->respondWithSuccess([]);
+        return $this->respondWithSuccess([]);
     }
 
     public function trackPlan(int $id)
@@ -129,12 +205,15 @@ class UserPlanController extends Controller
 
     public function normal()
     {
-        return view('pages.Add-normal-deposit-plan');
+        $plan_type = 'normal';
+        return view('pages.deposit-plan', compact('plan_type'));
 
     }
 
     public function oneTime()
     {
-        return view('pages.Add-one-time-deposit-plan');
+        $plan_type = 'one-time';
+        return view('pages.deposit-plan', compact('plan_type'));
+//        return view('pages.Add-one-time-deposit-plan');
     }
 }

@@ -65,29 +65,24 @@
                     TRANSACTIONS
                 </p>
 
-
-                <div class="transaction deposit">
-                    <p><span class="label">Billing Date:</span> 14.09.2019 00:00</p>
-                    <p><span class="label">Transaction ID:</span> 345648097657IF</p>
-                    <p><span class="label">Materials Withdrawn:</span>- </p>
-                    <p><span class="label">Amount:</span> N2,000.00</p>
-                    <p><span class="label">Status:</span> Paid</p>
-                </div>
-
-                <div class="transaction withdraw">
-                    <p><span class="label">Billing Date</span> 14.09.2019 00:00</p>
-                    <p><span class="label">Transaction ID</span> 345648097657IF</p>
-                    <p>
-                        <span class="label">Materials Withdrawn:</span>
-                        <span>
-                                100 Bags of cement
-                                <span class="br"></span>
-                                7,000 Units of Blocks
-                            </span>
-                    </p>
-                    <p><span class="label">Amount:</span> -</p>
-                    <p><span class="label">Status:</span> Debit</p>
-                </div>
+                @forelse ($user->transactions as $tran)
+                    <div class="transaction {{$tran->type ==='credit' ? 'deposit' :'withdraw'}}">
+                        <p><span class="label">Billing Date:</span> {{$tran->created_at}}</p>
+                        <p><span class="label">Transaction ID:</span> {{$tran->reference}}</p>
+                        <p><span class="label">Materials Withdrawn:</span> {!! $tran->type ==='debit'?
+                        "<span>
+                                $tran->cement Bags of cement
+                                <span class='br'></span>
+                                  $tran->block Units of Blocks
+                            </span>"
+                        :'-'
+                        !!}</p>
+                        <p><span class="label">Amount:</span> N {{$tran->type ==='credit' ?  nf($tran->amount) : '-'}}</p>
+                        <p><span class="label">Status:</span> {{$tran->type ==='credit' ? 'Paid' :'Debit'}}</p>
+                    </div>
+                    @empty
+                        <h3>No Transaction Found</h3>
+                    @endforelse
             </div>
             @include('partials.bottom-rate2')
         </div>

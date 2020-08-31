@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Material;
-use App\Plan;
 use App\Supplier;
-use App\Transactions;
 use App\User;
 use Hash;
 use Validator;
@@ -88,6 +86,7 @@ class HomeController extends Controller
         return view('pages.admin.view-customer',
             compact('customer', 'withdrawn', 'total', 'credits', 'debits'));
     }
+
     public function cards()
     {
         return view('pages.cards');
@@ -148,7 +147,8 @@ class HomeController extends Controller
 
     public function withdraw()
     {
-        return view('pages.withdraw');
+        $user = getUser();
+        return view('pages.withdraw', compact('user'));
     }
 
     public function settingsPassword()
@@ -171,14 +171,20 @@ class HomeController extends Controller
 
     }
 
-    public function editPlan()
+    public function editPlan($id)
     {
-        return view('pages.editPlans');
+        $plan = getUser()->plans->find($id);
+        if ($plan) {
+            return view('pages.editPlans', compact('plan'));
+        }
+
+        return abort(404);
     }
+
     public function viewPlan($id)
     {
         $plan = getUser()->plans->find($id);
-        if($plan) {
+        if ($plan) {
             return view('pages.viewplan', compact('plan'));
         }
 

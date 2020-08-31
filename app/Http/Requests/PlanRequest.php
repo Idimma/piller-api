@@ -29,10 +29,8 @@ class PlanRequest extends BaseRequest
             'block_target'  => 'sometimes|string',
             'cement_target'  => 'sometimes|string',
             'deposit'   => 'required|numeric',
-            
             'deposit_frequency'  => 'sometimes|string',
             'country'  => 'sometimes|string',
-            
         ];
     }
 }

@@ -229,6 +229,7 @@ button{
     text-align: center
 }
 
+
 .transaction,.transactions__header{
     height: 44px;
     display: grid;
@@ -241,7 +242,11 @@ button{
     display: flex;
     align-items: center;
 }
-
+.transaction{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 14px;
+}
 .transaction p span.label{
     display: none;
     color: black;

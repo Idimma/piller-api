@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../assets/css/verifyNumber.css">
 </head>
 <body>
     <div class="notify-image-container">
         <img class="notify-img success-image" src="../assets/images/Group 51.svg" alt="success image">
-        <img src="../assets/images/cancel.svg" class="close-img x-button" alt="">
+        <img src="{{asset('assets/images/cancel.svg')}}" class="close-img x-button" alt="">
         <img src="../assets/images/Group 86.svg" alt="failed-img" class="notify-img failed-img">
     </div>
     <div class="overlay"></div>
@@ -42,10 +42,10 @@
         </main>
     </div>
 
-    <script src="../assets/js/verifyNumber.js"></script> 
+    <script src="../assets/js/verifyNumber.js"></script>
     <script src="../assets/js/Required-inputs.js"></script>
     <script src="../assets/js/close-img.js"></script>
-    
+
 </body>
 </html>
 

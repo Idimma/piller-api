@@ -36,6 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/deposit/one-time', 'UserPlanController@oneTime');
     Route::get('/plan/edit/{id}', 'HomeController@editPlan');
     Route::get('/plan/{id}', 'HomeController@viewPlan');
+    Route::post('/plan', 'UserPlanController@create');
+    Route::get('/payment/callback', 'PaymentController@validateCardTransaction');
 
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
@@ -117,5 +119,6 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 //Route::get('/about', function () {
 //    return view('about');
 //})->name('about');
-//Route::get('test', function () {
-//});
+Route::get('test', function () {
+    return \App\Plan::first();
+});

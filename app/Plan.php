@@ -10,7 +10,7 @@ class Plan extends Model
 {
     protected $fillable = [
         'user_id', 'start_date', 'deposit', 'plan_type', 'plan_name',
-        'building_type', 'material_estimation', 'material_type',
+        'building_type', 'material_estimation', 'material_type', 'plan_status',
         'cement_percentage', 'block_percentage', 'deposit_frequency',
         'block_target', 'cement_target', 'country',
     ];
@@ -42,9 +42,9 @@ class Plan extends Model
         return $this->hasOne('App\User', 'id', 'user_id');
     }
 
-    public function driver()
+    public function transactions()
     {
-        return $this->hasOne('App\User', 'id', 'driver_id');
+        return $this->hasMany('App\Transactions', 'plan_id', 'id');
     }
 
     public function status()

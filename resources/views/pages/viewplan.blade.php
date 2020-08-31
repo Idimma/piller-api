@@ -15,7 +15,7 @@
                     <div class="header-bar-options">
                         <div class="header-bar-option view">
                             <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
-                            <a  class="header-bar-option-link" href="{{url('plan/edit', $plan)}}">
+                            <a class="header-bar-option-link" href="{{url('plan/edit', $plan)}}">
                                 <p class="header-bar-option-text">Edit</p>
                             </a>
                         </div>
@@ -41,7 +41,7 @@
                                             Units of Block
                                         </p>
                                         <div class="unit-value">
-                                            2000
+                                            {{$plan->block_target}}
                                         </div>
                                     </div>
                                     <div class="unit-box margin-right">
@@ -49,12 +49,12 @@
                                             Bags of Cement
                                         </p>
                                         <div class="unit-value">
-                                            100
+                                            {{$plan->cement_target}}
                                         </div>
                                     </div>
                                 </div>
                                 <p class="deposit">Auto deposit amount <span class="green">
-                                            &#8358 50,000.00
+                                            &#8358 {{nf($plan->deposit)}}
                                     </span>
                                 </p>
                             </div>
@@ -65,7 +65,7 @@
                                         Deposit Frequency
                                     </p>
                                     <div class="unit-value">
-                                        Monthly
+                                        {{$plan->frequency}}
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                         Next Deposit Date
                                     </p>
                                     <div class="unit-value">
-                                        12-jan-2019
+                                        {{$plan->next_deposit_date}}
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                         Assigned Card
                                     </p>
                                     <div class="unit-value">
-                                        GTBank
+                                        {{$plan->card_bank}}
                                     </div>
                                 </div>
                             </div>
@@ -119,256 +119,112 @@
                             </div>
                         </div>
 
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">1.</span>
+                        @forelse($plan->transactions as $transaction)
+                            <div class="plan-group">
+                                <div class="detail-container">
+                                    <p class="tag">S/N :</p>
+                                    <span class="response">{{$transaction->id}}.</span>
+                                </div>
+                                <div class="detail-container">
+                                    <p class="tag">Transaction ID:</p>
+                                    <span class="response">{{$transaction->reference}}</span>
+                                </div>
+                                <div class="detail-container">
+                                    <p class="tag">Biling Date: </p>
+                                    <span class="response">{{$transaction->created_at}}</span>
+                                </div>
+                                <div class="detail-container">
+                                    <p class="tag">Blocks</p>
+                                    <span class="response">{{nf($transaction->block)}}</span>
+                                </div>
+                                <div class="detail-container">
+                                    <p class="tag">Cements </p>
+                                    <span class="response">{{nf($transaction->cement)}}</span>
+                                </div>
+                                <div class="detail-container">
+                                    <p class="tag"> Amount (&#8358) </p>
+                                    <span class="response"><h3>{{nf($transaction->amount)}}</h3></span>
+                                </div>
                             </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                    3,000.00
-                                                </span>
-                            </div>
-                        </div>
-
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">2.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                        3,000.00
-                                                    </span>
-                            </div>
-                        </div>
-
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">3.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                            3,000.00
-                                                        </span>
-                            </div>
-                        </div>
-
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">4.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                                3,000.00
-                                                            </span>
-                            </div>
-                        </div>
-
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">5.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                                    3,000.00
-                                                                </span>
-                            </div>
-                        </div>
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">6.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                                    3,000.00
-                                                                </span>
-                            </div>
-                        </div>
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">7.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                                    3,000.00
-                                                                </span>
-                            </div>
-                        </div>
-
-                        <div class="plan-group">
-                            <div class="detail-container">
-                                <p class="tag">S/N :</p>
-                                <span class="response">8.</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag">Transaction ID:</p>
-                                <span class="response">3456480975657IF</span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Biling Date: </p>
-                                <span class="response">14.09.2019<span class="time">00:00</span> </span>
-                            </div>
-                            <div class="detail-container">
-                                <p class="tag"> Amount (&#8358) </p>
-                                <span class="response">
-                                                                    3,000.00
-                                                                </span>
-                            </div>
-                        </div>
-
+                        @empty
+                            <h3>No Transaction found</h3>
+                        @endforelse
                     </div>
-                    <div class="plans-body invoice">
-                        <div class="invoice-row invoice-row-header">
-                            <div class="left-heading">
-                                <p class="additonal-info">Reciept for</p>
-                                <h2>Stokkpile</h2>
-                                <p class="additional-info">Building your fute house one step at a time</p>
-                            </div>
-                            <div class="right-heading">
-                                <h2>INVOICE</h2>
-                            </div>
-                        </div>
-                        <div class="invoice-row invoice-detail">
-                            <div class="exception">
-                                <p class="detail">
-                                    Transaction ID
-                                </p>
-                                <p class="value">
-                                    34567890973456
-                                </p>
-                            </div>
-                            <hr/>
-                        </div>
-                        <div class="invoice-row invoice-detail">
-                            <div class="exception">
-                                <p class="detail">
-                                    Billing Date & Time
-                                </p>
-                                <p class="value">
-                                    14.09.2019 01:00pm
-                                </p>
-                            </div>
-                            <hr/>
-                        </div>
-                        <div class="invoice-row invoice-detail">
-                            <div class="exception">
-                                <p class="detail">
-                                    Card Number
-                                </p>
-                                <p class="value">
-                                    012-xxx-789
-                                </p>
-                            </div>
-                            <hr/>
-                        </div>
-                        <div class="invoice-row invoice-detail">
-                            <div class="exception">
-                                <p class="detail">
-                                    Block Rate
-                                </p>
-                                <p class="value">
-                                    200
-                                </p>
-                            </div>
-                            <hr/>
-                        </div>
-                        <div class="invoice-row invoice-detail">
-                            <div class="exception">
-                                <p class="detail">
-                                    Cement Rate
-                                </p>
-                                <p class="value">
-                                    100
-                                </p>
-                            </div>
-                            <hr/>
-                        </div>
-                        <div class="invoice-row invoice-detail">
-                            <div class="exception">
-                                <p class="detail">
-                                    Amount Deposited
-                                </p>
-                                <p class="value value-price">
-                                    $ 3000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="plans-body invoice" >--}}
+{{--                        <div class="invoice-row invoice-row-header">--}}
+{{--                            <div class="left-heading">--}}
+{{--                                <p class="additonal-info">Reciept for</p>--}}
+{{--                                <h2>Stokkpile</h2>--}}
+{{--                                <p class="additional-info">Building your fute house one step at a time</p>--}}
+{{--                            </div>--}}
+{{--                            <div class="right-heading">--}}
+{{--                                <h2>INVOICE</h2>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="invoice-row invoice-detail">--}}
+{{--                            <div class="exception">--}}
+{{--                                <p class="detail">--}}
+{{--                                    Transaction ID--}}
+{{--                                </p>--}}
+{{--                                <p class="value">{{$plan->reference}}</p>--}}
+{{--                            </div>--}}
+{{--                            <hr/>--}}
+{{--                        </div>--}}
+{{--                        <div class="invoice-row invoice-detail">--}}
+{{--                            <div class="exception">--}}
+{{--                                <p class="detail">--}}
+{{--                                    Billing Date & Time--}}
+{{--                                </p>--}}
+{{--                                <p class="value">--}}
+{{--                                    {{$plan->reference}}--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <hr/>--}}
+{{--                        </div>--}}
+{{--                        <div class="invoice-row invoice-detail">--}}
+{{--                            <div class="exception">--}}
+{{--                                <p class="detail">--}}
+{{--                                    Card Number--}}
+{{--                                </p>--}}
+{{--                                <p class="value">--}}
+{{--                                    012-xxx-789--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <hr/>--}}
+{{--                        </div>--}}
+{{--                        <div class="invoice-row invoice-detail">--}}
+{{--                            <div class="exception">--}}
+{{--                                <p class="detail">--}}
+{{--                                    Block Rate--}}
+{{--                                </p>--}}
+{{--                                <p class="value">--}}
+{{--                                    200--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <hr/>--}}
+{{--                        </div>--}}
+{{--                        <div class="invoice-row invoice-detail">--}}
+{{--                            <div class="exception">--}}
+{{--                                <p class="detail">--}}
+{{--                                    Cement Rate--}}
+{{--                                </p>--}}
+{{--                                <p class="value">--}}
+{{--                                    100--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <hr/>--}}
+{{--                        </div>--}}
+{{--                        <div class="invoice-row invoice-detail">--}}
+{{--                            <div class="exception">--}}
+{{--                                <p class="detail">--}}
+{{--                                    Amount Deposited--}}
+{{--                                </p>--}}
+{{--                                <p class="value value-price">--}}
+{{--                                    $ 3000--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                 </div>
 
@@ -381,7 +237,7 @@
 
 @section('scripts')
     <script src="{{asset('assets/js/sliderAction.js')}}"></script>
-    <script src="{{asset('assets/js/viewplan.js')}}"></script>
+{{--    <script src="{{asset('assets/js/viewplan.js')}}"></script>--}}
     <script>
         function deleteMaterial(id) {
             swal({

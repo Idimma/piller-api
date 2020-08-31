@@ -83,7 +83,7 @@
                             <div class="value-holder">
                                 <span class="Value-text">Daily</span>
 
-                                <img src="../assets/images/dropDown.svg" alt="">
+                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
                             </div>
                             <div class="options-holder">
                                 <ul>
@@ -195,7 +195,7 @@
                         <div class="special-dropdown">
                             <div class="value-holder">
                                 <span class="Value-text">Add a card</span>
-                                <img src="../assets/images/dropDown.svg" alt="">
+                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
                             </div>
                             <div class="options-holder">
                                 <ul>

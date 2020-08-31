@@ -21,9 +21,8 @@ return [
 
         'allow_origins' => [
              '*',
-            'http://*.laybuy.app',
-            'https://*.laybuy.app',
             'http://localhost:*',
+            'http://127.0.0.1:*',
         ],
 
         'allow_methods' => [

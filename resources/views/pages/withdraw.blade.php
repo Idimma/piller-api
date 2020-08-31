@@ -10,7 +10,7 @@
             <div class="withdrawal-confirmation">
                 <div class="confirmation-header">
                     <h2><span class="underline">WITH</span>DRAWAL CONFIRMATION</h2>
-                    <img src="../assets/images/cancel.svg" class="x-button" alt="">
+                    <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
                 </div>
                 <div class="confirmation-body">
                     <table class="popup">
@@ -119,7 +119,7 @@
                 </button>
             </div>
             <div class="notify-img-container">
-                <img src="../assets/images/cancel.svg" class="close-img x-button" alt="">
+                <img src="{{asset('assets/images/cancel.svg')}}" class="close-img x-button" alt="">
                 <img src="../assets/images/Group 82.svg" alt="success-img" class="notify-img success-img">
                 <img src="../assets/images/Group 86.svg" alt="failed-img" class="notify-img failed-img">
             </div>
@@ -130,20 +130,31 @@
 
 
             <div class="main-body">
-                <form action="" class="plans">
+                <form action="{{url('withdraw')}}" method="post" class="plans">
+
+                    @csrf
                     <div class="form-group-full">
                         <div class="form-group-header">
                             <h2>Plan Name</h2>
                             <img class="question-mark" src="" alt="">
                         </div>
-                        <input type="text" class="form-input-full">
-                        <div class="checkbox-div">
-                            <input type="checkbox" id="checkMe">
-                            <label for="checkMe">
-                                Click here to schedule for material's delivery to your construction site by our pick up
-                                agents
-                            </label>
-                        </div>
+
+                        <select class="form-input-full" name="plan_id">
+                            @foreach($user->plans as $plan)
+                                <option value="{{$plan->id}}">{{$plan->plan_name}}</option>
+                            @endforeach
+                        </select>
+                        @empty($user->plans)
+                            <p>You don't have any plan, add to continue <a href="{{url('no-plan')}}">New Plan</a></p>
+                        @endempty
+                        {{--                        <input type="text" name="plan_id" hidden class="form-input-full">--}}
+                        {{--                        <div class="checkbox-div">--}}
+                        {{--                            <input type="checkbox" id="checkMe">--}}
+                        {{--                            <label for="checkMe">--}}
+                        {{--                                Click here to schedule for material's delivery to your construction site by our pick up--}}
+                        {{--                                agents--}}
+                        {{--                            </label>--}}
+                        {{--                        </div>--}}
                     </div>
                     <div class="form-group-full">
                         <div class="form-group-header">
@@ -151,12 +162,12 @@
                         </div>
                         <div class="select-group">
                             <div class="radio-group">
-                                <input type="radio" name="connected" id="one">
+                                <input type="radio" name="location_type" value="1" id="one">
                                 <label for="one">One Location</label>
                             </div>
 
                             <div class="radio-group">
-                                <input type="radio" name="connected" id="various">
+                                <input type="radio" name="location_type" value="2" id="various">
                                 <label for="various">Various Locations</label>
                             </div>
 
@@ -178,7 +189,12 @@
                             </div>
 
                         </div>
-                        <input type="text" class="form-input-full" placeholder="Type Your Address">
+                        <div class="location-list">
+                            <input type="text" autocomplete="false"
+                                   name="locations[]"
+                                   class="form-input-full" placeholder="Type Your Address">
+                        </div>
+
                         {{--                            <a href="/extra-location" class="add-location">--}}
                         {{--                                Add Another Address--}}
                         {{--                            </a>--}}

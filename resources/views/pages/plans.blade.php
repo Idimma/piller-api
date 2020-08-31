@@ -39,7 +39,7 @@
                     <div class="detail-container-actions"></div>
                 </div>
                 @forelse ($user->plans as $plan)
-                    <div class="plan-group">
+                    <div class="plan-group big-over" onclick="window.location.href = '{{url('plan', $plan)}}'">
                         <div class="detail-container">
                             <p class="tag">S/N :</p><span class="response">{{$plan->id}}</span>
                         </div>
@@ -65,9 +65,9 @@
                             <span class="response">{{$plan->next_deposit}}</span>
                         </div>
                         <div class="detail-container-actions">
-                            <a href="{{url('plan/edit', $plan)}}">
-                                <img src="{{asset('assets/images/ios-create.svg')}}" alt="">
-                            </a>
+                            {{--                            <a href="{{url('plan/edit', $plan)}}">--}}
+                            {{--                                <img src="{{asset('assets/images/ios-create.svg')}}" alt="">--}}
+                            {{--                            </a>--}}
                             <a href="{{url('plan', $plan)}}">
                                 <img src="{{asset('assets/images/eye.svg')}}" alt="">
                             </a>

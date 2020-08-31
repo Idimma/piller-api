@@ -13,7 +13,7 @@
                     <div class="Add-Card-box">
                         <div class="Add-card-box-header">
                             <h2> <span class="underline">ADD</span>CARD</h2>
-                            <img src="../assets/images/cancel.svg" class="x-button" alt="">
+                            <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
                         </div>
                         <p class="invalid">Invalid Card, Please check if your card has expired</p>
                         <form action="" class="Add-card-box-form">
@@ -66,7 +66,7 @@
                 <form action="/pages/" method="POST" class="NewPlanForm one-time-deposit-form show-form">
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Plan Name  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Plan Name  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                             <img class="question-mark" src="" alt="">
                         </div>
                         <input type="text" class="form-input-full">
@@ -84,7 +84,7 @@
                         <div class="special-dropdown">
                             <div class="value-holder">
                                 <span class="Value-text">Choose building type</span>
-                                <img src="../assets/images/dropDown.svg" alt="">
+                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
                             </div>
                             <div class="options-holder">
                                 <ul>
@@ -109,7 +109,7 @@
 
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Choose Materials   <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Choose Materials   <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <div class="select-group">
                             <div class="radio-group">
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Stokkpile target  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Stokkpile target  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <div class="units-of">
                             <div class="half-groups">
@@ -149,7 +149,7 @@
 
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Set priority for Building Materials  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Set priority for Building Materials  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <div class="slideContainer">
                             <div class="top-slider">
@@ -173,20 +173,20 @@
 
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>When is your start date?  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>When is your start date?  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <input type="date" class="form-input-full">
                     </div>
 
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Stockpile Country  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Stockpile Country  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <div class="special-dropdown">
                             <div class="value-holder">
                                 <span class="Value-text">Nigeria</span>
 
-                                <img src="../assets/images/dropDown.svg" alt="">
+                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
                             </div>
                             <div class="options-holder">
                                 <ul>
@@ -203,13 +203,13 @@
                     </div>
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Select Card  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Select Card  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <div class="special-dropdown">
                             <div class="value-holder">
                                 <span class="Value-text">Add a card</span>
 
-                                <img src="../assets/images/dropDown.svg" alt="">
+                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">
                             </div>
                             <div class="options-holder">
                                 <ul>
@@ -225,7 +225,7 @@
 
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Auto Deposit  <span class="Important"><img src="../assets/images/Reason for saving.svg" alt=""></span> </h2>
+                            <h2>Auto Deposit  <span class="Important"><img src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span> </h2>
                         </div>
                         <div class="wierdDiv">
                             <div class="currencySymbol">
