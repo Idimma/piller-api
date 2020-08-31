@@ -31,13 +31,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/settings/password', 'HomeController@updatePassword');
     Route::post('profile/update', 'HomeController@updateProfile');
     Route::get('/no-plan', 'HomeController@noPlan')->name('no-plan');
-    Route::get('/no-card', 'HomeController@noCard')->name('no-card');
+//    Route::get('/no-card', 'HomeController@noCard')->name('no-card');
     Route::get('/deposit/normal', 'UserPlanController@normal');
     Route::get('/deposit/one-time', 'UserPlanController@oneTime');
     Route::get('/plan/edit/{id}', 'HomeController@editPlan');
     Route::get('/plan/{id}', 'HomeController@viewPlan');
+    Route::post('/plan/{id}', 'UserPlanController@updatePlan');
     Route::post('/plan', 'UserPlanController@create');
+    Route::get('/card/add', 'UserPlanController@createCard');
+    Route::get('/card/remove/{id}', 'UserPlanController@removeCard');
+
+
     Route::get('/payment/callback', 'PaymentController@validateCardTransaction');
+    Route::get('/payment/add-card', 'PaymentController@addCard');
 
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
@@ -120,5 +126,11 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 //    return view('about');
 //})->name('about');
 Route::get('test', function () {
-    return \App\Plan::first();
+
+    $user = \App\User::find(1);
+    $card = $user->cards->first();
+
+//    dd($card);
+    $trans = (new \App\Services\PaystackService)->chargeCustomer("100000", $card->authorization_code, $user);
+    dd($trans);
 });

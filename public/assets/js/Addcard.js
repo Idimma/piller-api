@@ -11,7 +11,7 @@ cardInput.addEventListener("input", function(e){
             acc.push('')
         acc[Math.floor(i / 4)] += cur
         return acc
-    },[]).filter(val => val) 
+    },[]).filter(val => val)
     this.value = split.join('-')
 })
 
@@ -28,3 +28,4 @@ cvv.addEventListener("input", (e) => {
 	}
 
 })
+

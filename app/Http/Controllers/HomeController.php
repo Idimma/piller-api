@@ -89,7 +89,9 @@ class HomeController extends Controller
 
     public function cards()
     {
-        return view('pages.cards');
+        $user = getUser();
+        dd($user->cards->all());
+        return view('pages.cards', compact('user'));
     }
 
     public function users()

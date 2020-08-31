@@ -15,8 +15,9 @@ document.querySelector('#card-number').addEventListener('input', function(){
 });
 
 
-document.querySelector('#expiry-date').addEventListener('input', function(){
+document.getElementById('expiry-date').addEventListener('input', function(){
     const {value} = this;
+
     const split = value.split('/').join('').split('').reduce((acc,cur,i) => {
         if(!acc[Math.floor(i / 2)])
             acc.push('');

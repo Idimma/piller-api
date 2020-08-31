@@ -68,8 +68,8 @@ class PaymentController extends Controller
     {
         $response = $this->payment->verifyCardTransaction($request);
         $user = getUser();
-        $plan_id =  $response->data['metadata']['plan_id'];
-        $transaction_id =  $response->data['metadata']['transaction_id'];
+        $plan_id = $response->data['metadata']['plan_id'];
+        $transaction_id = $response->data['metadata']['transaction_id'];
 
         if (!$response->status) {
             return redirect('plans')->with('error', $response->message);
@@ -82,18 +82,23 @@ class PaymentController extends Controller
         $trans = Transactions::find($transaction_id);
         $card = $user->cards()->updateOrCreate([
             'last_four' => $response->data['authorization']['last4'],
+            'exp_year' => $response->data['authorization']['exp_year'],
+            'exp_month' => $response->data['authorization']['exp_month'],
+            'account_name' => $response->data['authorization']['account_name'],
+            'used' => true,
             'customer_id' => $response->data['customer']['id'],
             'authorization_code' => $response->data['authorization']['authorization_code'],
             'customer_code' => $response->data['customer']['customer_code'],
         ]);
-        if($trans){
+        if ($trans) {
             $trans->completed = true;
             $trans->card_id = $card->id;
             $trans->save();
         }
-        if($plan){
+        if ($plan) {
+            $next_deposit = now()->addDay($plan->deposit_frequency);
             $plan->plan_status = 'STARTED';
-            $plan->next_deposit_date = now();
+            $plan->next_deposit_date = $next_deposit;
             $plan->card_id = $card->id;
             $plan->save();
         }
@@ -102,5 +107,45 @@ class PaymentController extends Controller
             ->with('success', 'Successfully created')
             ->with('alert', 'Successfully added card');
     }
+
+    public function addCard(Request $request)
+    {
+        $response = $this->payment->verifyCardTransaction($request);
+        $user = getUser();
+        $transaction_id = $response->data['metadata']['transaction_id'];
+
+        if (!$response->status) {
+            return redirect('plans')->with('error', $response->message);
+        }
+        if ($response->data['status'] !== 'success') {
+            return redirect('plans')->with('error', 'Transaction not completed');
+        }
+
+        dd($response);
+
+        $trans = Transactions::find($transaction_id);
+
+        $card = $user->cards()->updateOrCreate([
+            'last_four' => $response->data['authorization']['last4'],
+            'exp_year' => $response->data['authorization']['exp_year'],
+            'exp_month' => $response->data['authorization']['exp_month'],
+            'account_name' => $response->data['authorization']['account_name'],
+            'used' => true,
+            'customer_id' => $response->data['customer']['id'],
+            'authorization_code' => $response->data['authorization']['authorization_code'],
+            'customer_code' => $response->data['customer']['customer_code'],
+        ]);
+
+        if ($trans) {
+            $trans->completed = true;
+            $trans->card_id = $card->id;
+            $trans->save();
+        }
+
+
+        return redirect('cards')
+            ->with('success', 'Successfully added card');
+    }
+
 
 }

@@ -9,60 +9,9 @@
         <div class="main-container">
             @include('partial.dash-header')
             <div class="main-body">
-                <div class="overlay">
-                    <div class="Add-Card-box">
-                        <div class="Add-card-box-header">
-                            <h2><span class="underline">ADD</span>CARD</h2>
-                            <img src="{{asset('assets/images/cancel.svg')}}" class="x-button" alt="">
-                        </div>
-                        <p class="invalid">Invalid Card, Please check if your card has expired</p>
-                        <form action="" class="Add-card-box-form">
-
-                            <div class="form-group-full">
-                                <div class="form-group-header">
-                                    <h2>Name your card</h2>
-                                </div>
-                                <input type="text" class="form-input-full" placeholder="Gtbank">
-                                <p class="additional-info">
-                                    Give your card a name to hep when making a transaction.
-                                </p>
-                            </div>
-                            <div class="form-group-full">
-                                <div class="form-group-header">
-                                    <h2>Name on card</h2>
-                                </div>
-                                <input type="text" class="form-input-full" placeholder="Samuel Fapoun">
-                                <p class="additional-info">
-                                    The name written on your Debit Card
-                                </p>
-                            </div>
-                            <div class="form-group-full">
-                                <div class="form-group-header">
-                                    <h2>Card Number</h2>
-                                </div>
-                                <input type="text" class="form-input-full credit-card"
-                                       placeholder="1234-XXXX-XXXX-XXXX">
-                                <p class="additional-info">
-                                    The bold number on your Debit Card
-                                </p>
-                            </div>
-                            <div class="form-group-half margin-right">
-                                <div class="form-group-header">
-                                    <h2>Expiry Date</h2>
-                                </div>
-                                <input type="date" class="form-input-full" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group-half">
-                                <div class="form-group-header">
-                                    <h2>CVV</h2>
-                                </div>
-                                <input type="text" class="form-input-full cvv" placeholder="...">
-                            </div>
-                            <button class="btn plans-submit">Add card</button>
-                        </form>
-                    </div>
-                </div>
+             @include('partials.add-card-modal')
                 <form action="{{url('plan', $plan)}}" method="POST" class="NewPlanForm">
+                    @csrf
                     <h1 class="planName">Lagos House</h1>
                     <div class="form-group-full">
                         <div class="form-group-header">
@@ -209,16 +158,16 @@
                                     @foreach( $user->cards as $card)
                                         <li class="drop-down-option">**** {{$card->last_four}}</li>
                                     @endforeach
-                                    <li class="drop-down-option Add-card-Trigger">Add a card</li>
+{{--                                    <li class="drop-down-option Add-card-Trigger">Add a card</li>--}}
 
                                 </ul>
                             </div>
-                            <input type="text" value="{{$plan->card_id}}" name="card_id" class="hidden-input" name="Card">
+                            <input type="text" value="{{$plan->card_id}}" name="card_id" class="hidden-input">
                         </div>
                         <!-- add special type of drop down -->
                     </div>
 
-                    <button class="btn plans-submit">Update</button>
+                    <button type="submit" class="btn plans-submit">Update</button>
                 </form>
             </div>
         </div>
@@ -226,6 +175,7 @@
 @stop
 @section('scripts')
     <script src="{{asset('assets/js/no-plans.js')}}"></script>
+    <script src="{{asset('assets/js/no-card.js')}}"></script>
     <script src="{{asset('assets/js/sliderAction.js')}}"></script>
     <script src="{{asset('assets/js/Required-inputs.js')}}"></script>
     <script src="{{asset('assets/js/close-img.js')}}"></script>

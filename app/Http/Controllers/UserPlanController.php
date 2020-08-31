@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\{PlanRequest, PlanReviewRequest, UpdatePlanRequest};
+use App\Plan;
 use App\Services\PlanService;
 use App\Transactions;
 use Illuminate\Http\Request;
@@ -37,15 +38,15 @@ class UserPlanController extends Controller
     {
         $deposit = 0;
 
-        if($request->play_type === 'normal'){
-           $deposit = 1;
-           if ($request->deposit_frequency === 'Monthly') {
-               $deposit = 30;
-           }
-           if ($request->deposit_frequency === 'Weekly') {
-               $deposit = 7;
-           }
-       }
+        if ($request->play_type === 'normal') {
+            $deposit = 1;
+            if ($request->deposit_frequency === 'Monthly') {
+                $deposit = 30;
+            }
+            if ($request->deposit_frequency === 'Weekly') {
+                $deposit = 7;
+            }
+        }
 
 
         $request->merge([
@@ -132,6 +133,17 @@ class UserPlanController extends Controller
         return $this->respondWithSuccess($plan);
     }
 
+    public function updatePlan(Request $planRequest, $plan_id)
+    {
+        $plan = getUser()->plans->find($plan_id);
+        if ($plan) {
+            $plan->update($planRequest->all());
+            return redirect('plan', $plan)->with('success', 'Plan successfully updated');
+        }
+        return redirect()->back()->with('error', 'An error occurred');
+
+    }
+
     public function delete($id)
     {
         $plan_id = \request()->plan_id ?? $id;
@@ -215,5 +227,62 @@ class UserPlanController extends Controller
         $plan_type = 'one-time';
         return view('pages.deposit-plan', compact('plan_type'));
 //        return view('pages.Add-one-time-deposit-plan');
+    }
+
+    public function createCard(Request $request)
+    {
+        $ref = Paystack::genTranxRef();
+        $user = getUser();
+        $trans = Transactions::create([
+            'user_id' => $user->id, 'type' => 'credit',
+            'completed' => false, 'reference' => $ref,
+            'block' => 0, 'cement' => 0,
+            'amount' => 100,
+        ]);
+
+        $request->merge(
+            [
+                'amount' => 10000, //amount in kobo
+                'email' => $user->email,
+                'quantity' => 1,
+                'reference' => $ref,
+                'callback_url' => url('/payment/add-card'),
+                'metadata' => json_encode([
+                    'custom_fields' => [
+                        ['display_name' => "Tran ID", "variable_name" => "tran_id", "value" => $trans->id],
+                        ['display_name' => "User ID", "variable_name" => "user_id", "value" => $user->id]
+                    ],
+                    'transaction_id' => $trans->id,
+                    'user_id' => $user->id,
+                ])
+            ]
+        );
+        return Paystack::getAuthorizationUrl()->redirectNow();
+    }
+
+    public function removeCard($id)
+    {
+        $user = getUser();
+        $card = $user->cards->find($id);
+        if ($card) {
+            $plans = Plan::where('card_id', $id)->get();
+            if ($plans) {
+                foreach ($plans as $plan) {
+                    $plan->card_id = null;
+                    $plan->save();
+                }
+            }
+            $trans = Transactions::where('card_id', $id)->get();
+            if ($trans) {
+                foreach ($trans as $tran) {
+                    $tran->card_id = null;
+                    $tran->save();
+                }
+            }
+            $card->delete();
+            return back()->with('success', 'Successfully Removed Card');
+        }
+
+        return back()->with('error', 'Card not found');
     }
 }
