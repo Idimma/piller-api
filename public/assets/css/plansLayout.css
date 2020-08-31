@@ -43,6 +43,9 @@ body{
     box-sizing: border-box;
     color: #4A4A4A;
 }
+.toastify{
+    font-size: 14px;
+}
 
 .container{
     width: 100%;

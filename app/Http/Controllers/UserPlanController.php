@@ -155,6 +155,26 @@ class UserPlanController extends Controller
 
     }
 
+    public function deletePlan($id, $password)
+    {
+        $user = getUser();
+        $plan = $user->plans->find($id);
+
+        if (!$plan) {
+            return back()->with('error', 'Plan does not exist');
+        }
+
+        if (!(\Hash::check($password, $user->password))) {
+            return back()->with('error', 'Enter your correct password');
+        }
+
+
+        $this->planService->delete($plan->id);
+        return redirect('plans')->with('success', 'Successfully Closed Plan');
+
+
+    }
+
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse|mixed

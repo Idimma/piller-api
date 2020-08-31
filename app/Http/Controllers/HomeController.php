@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Material;
 use App\Supplier;
+use App\Transactions;
 use App\User;
+use App\Withdrawal;
 use Hash;
 use Validator;
+use Request;
 
 class HomeController extends Controller
 {
@@ -90,7 +93,6 @@ class HomeController extends Controller
     public function cards()
     {
         $user = getUser();
-        dd($user->cards->all());
         return view('pages.cards', compact('user'));
     }
 
@@ -147,10 +149,55 @@ class HomeController extends Controller
         return view('pages.settings');
     }
 
-    public function withdraw()
+    public function withdraw($id)
     {
         $user = getUser();
-        return view('pages.withdraw', compact('user'));
+        $plan = $user->plans->find($id);
+        if ($plan) {
+            return view('pages.withdraw', compact('user', 'plan'));
+        }
+        return back()->with('error', 'Plan not found');
+    }
+
+    public function performWithdraw($id)
+    {
+        $request = request();
+        $user = getUser();
+        $plan = $user->plans->find($id);
+        if ($plan) {
+//            dd(request()->all());
+            $user = getUser();
+            if (Hash::check($request->password, $user->password) === false) {
+                return back()->with('error', 'Enter your current password correctly ');
+            }
+            $plan->block_target -= $request->block;
+            $plan->cement_target -= $request->cement;
+
+            $plan->save();
+            $withdrawal = Withdrawal::create([
+                'user_id' => $user->id,
+                'plan_id' => $plan->id,
+                'block_unit' => $request->block  ?? 0,
+                'cement_unit' => $request->cement ?? 0,
+                'location_type' => $request->location_type,
+                'address' => $request->locations[0]
+            ]);
+
+            $transaction = Transactions::create([
+                'user_id' => $user->id,
+                'type' => 'debit',
+                'plan_id' => $request->plan_id,
+                'completed' => true,
+                'reference' => uniqid('', true),
+                'block' => $request->block,
+                'cement' => $request->cement,
+                'amount' => 0,
+            ]);
+            return redirect('transactions')->with('success', 'Processing Transactions');
+
+            //  return view('pages.withdraw', compact('user', 'plan'));
+        }
+        return back()->with('error', 'Plan not found');
     }
 
     public function settingsPassword()
@@ -219,4 +266,6 @@ class HomeController extends Controller
         $user->update(request()->except(['password', 'image_url', 'uuid']));
         return back()->with('success', 'Profile Updated Successfully');
     }
+
+
 }

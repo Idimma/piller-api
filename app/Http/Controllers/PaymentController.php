@@ -80,16 +80,8 @@ class PaymentController extends Controller
 
         $plan = Plan::find($plan_id);
         $trans = Transactions::find($transaction_id);
-        $card = $user->cards()->updateOrCreate([
-            'last_four' => $response->data['authorization']['last4'],
-            'exp_year' => $response->data['authorization']['exp_year'],
-            'exp_month' => $response->data['authorization']['exp_month'],
-            'account_name' => $response->data['authorization']['account_name'],
-            'used' => true,
-            'customer_id' => $response->data['customer']['id'],
-            'authorization_code' => $response->data['authorization']['authorization_code'],
-            'customer_code' => $response->data['customer']['customer_code'],
-        ]);
+        $card = $this->saveCard($user, $response);
+
         if ($trans) {
             $trans->completed = true;
             $trans->card_id = $card->id;
@@ -121,30 +113,37 @@ class PaymentController extends Controller
             return redirect('plans')->with('error', 'Transaction not completed');
         }
 
-        dd($response);
-
         $trans = Transactions::find($transaction_id);
 
-        $card = $user->cards()->updateOrCreate([
-            'last_four' => $response->data['authorization']['last4'],
-            'exp_year' => $response->data['authorization']['exp_year'],
-            'exp_month' => $response->data['authorization']['exp_month'],
-            'account_name' => $response->data['authorization']['account_name'],
-            'used' => true,
-            'customer_id' => $response->data['customer']['id'],
-            'authorization_code' => $response->data['authorization']['authorization_code'],
-            'customer_code' => $response->data['customer']['customer_code'],
-        ]);
+        $card = $this->saveCard($user, $response);
 
         if ($trans) {
             $trans->completed = true;
             $trans->card_id = $card->id;
             $trans->save();
         }
+        return redirect('cards')->with('success', 'Successfully added card');
+    }
 
-
-        return redirect('cards')
-            ->with('success', 'Successfully added card');
+    /**
+     * @param \User $user
+     * @param \App\Services\JsonResponse $response
+     * @return mixed
+     */
+    public function saveCard($user, $response)
+    {
+        $card = $user->cards()->updateOrCreate([
+            'last_four' => $response->data['authorization']['last4'],
+            'exp_year' => $response->data['authorization']['exp_year'],
+            'exp_month' => $response->data['authorization']['exp_month'],
+            'bank' => $response->data['authorization']['bank'],
+            'account_name' => $response->data['authorization']['account_name'],
+            'used' => true,
+            'customer_id' => $response->data['customer']['id'],
+            'authorization_code' => $response->data['authorization']['authorization_code'],
+            'customer_code' => $response->data['customer']['customer_code'],
+        ]);
+        return $card;
     }
 
 

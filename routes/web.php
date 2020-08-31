@@ -24,7 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/plans', 'HomeController@tasks')->name('plans');
     Route::get('/transactions', 'HomeController@transactions')->name('transactions');
-    Route::get('/withdraw', 'HomeController@withdraw')->name('withdraw');
+    Route::get('plan/withdraw/{id}', 'HomeController@withdraw')->name('withdraw');
+    Route::post('plan/withdraw/{id}', 'HomeController@performWithdraw')->name('withdraw');
     Route::get('/cards', 'HomeController@cards')->name('cards');
     Route::get('/settings', 'HomeController@settings')->name('settings');
     Route::get('/settings/password', 'HomeController@settingsPassword');
@@ -37,7 +38,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/plan/edit/{id}', 'HomeController@editPlan');
     Route::get('/plan/{id}', 'HomeController@viewPlan');
     Route::post('/plan/{id}', 'UserPlanController@updatePlan');
+
     Route::post('/plan', 'UserPlanController@create');
+    Route::get('/plan/close/{id}/{password}', 'UserPlanController@deletePlan');
+
+
     Route::get('/card/add', 'UserPlanController@createCard');
     Route::get('/card/remove/{id}', 'UserPlanController@removeCard');
 
