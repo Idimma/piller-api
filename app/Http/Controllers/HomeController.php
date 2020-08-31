@@ -173,9 +173,10 @@ class HomeController extends Controller
 
     public function editPlan($id)
     {
+        $user = getUser();
         $plan = getUser()->plans->find($id);
         if ($plan) {
-            return view('pages.editPlans', compact('plan'));
+            return view('pages.editPlans', compact('plan', 'user'));
         }
 
         return abort(404);

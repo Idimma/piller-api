@@ -1,6 +1,6 @@
 :root{
     --sliderContainerWidth: 100%;
-    --thumbColor: #502274; 
+    --thumbColor: #502274;
     --thumbBorderRadius: 50%;
     --sliderBorderRadius: 4px;
     --colorMax: 0%;
@@ -52,7 +52,7 @@ body{
 
 .container{
     width: 100%;
-    height: 100%;      
+    height: 100%;
     /* display: flex;
     flex-direction: row;
     justify-content: center;
@@ -67,7 +67,7 @@ input{
 .header-bar{
     width: 100%;
     padding: 1.3rem 1.5rem;
-    background-color: #FFFFFF; 
+    background-color: #FFFFFF;
     border-radius: 3px;
     box-shadow: 0.2rem 0.2rem 0.3rem #70707010;
     margin-bottom: 2rem;
@@ -86,14 +86,16 @@ input{
     justify-content: space-between;
     align-items: center;
     /*height: 100%;*/
-    width: 7rem;
+    /*width: 7rem;*/
 }
 
 .header-bar-option{
     display: flex;
     flex-direction: column;
+    height: 100%;
     justify-content: space-between;
     align-items: center;
+    margin-left: 12px;
     transition: color 0.5s ease;
 }
 
@@ -405,8 +407,8 @@ h2.footer-heading{
 }
 
 .cancel{
-    cursor: pointer;    
-} 
+    cursor: pointer;
+}
 
 .invoice{
     display: none;
@@ -502,7 +504,7 @@ h2.footer-heading{
     .NewPlanForm{
         width: 60%;
     }
-    
+
     .view-body{
         flex-direction: column-reverse;
     }
@@ -525,7 +527,7 @@ h2.footer-heading{
     .plan-Header{
         display: none;
     }
-    
+
     p.tag{
         display: inline-block;
         font-family: 'Montserrat-SemiBold';
@@ -698,7 +700,7 @@ h2.footer-heading{
 
 
 @media(max-width: 425px){
-    
+
     .personalize{
         flex-basis: 23%;
     }

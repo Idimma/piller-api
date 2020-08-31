@@ -80,21 +80,24 @@ class PaymentController extends Controller
 
         $plan = Plan::find($plan_id);
         $trans = Transactions::find($transaction_id);
-        if($trans){
-            $trans->completed = true ;
-            $trans->save();
-        }
-        if($plan){
-            $plan->plan_status = 'STARTED';
-            $plan->save();
-        }
-
-        $user->cards()->updateOrCreate([
+        $card = $user->cards()->updateOrCreate([
             'last_four' => $response->data['authorization']['last4'],
             'customer_id' => $response->data['customer']['id'],
             'authorization_code' => $response->data['authorization']['authorization_code'],
             'customer_code' => $response->data['customer']['customer_code'],
         ]);
+        if($trans){
+            $trans->completed = true;
+            $trans->card_id = $card->id;
+            $trans->save();
+        }
+        if($plan){
+            $plan->plan_status = 'STARTED';
+            $plan->next_deposit_date = now();
+            $plan->card_id = $card->id;
+            $plan->save();
+        }
+
         return redirect('plan/' . $plan_id)
             ->with('success', 'Successfully created')
             ->with('alert', 'Successfully added card');

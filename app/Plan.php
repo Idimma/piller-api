@@ -23,14 +23,31 @@ class Plan extends Model
     use SoftDeletes;
 
 
-    public $appends = ['next_deposit_date'];
+    public $appends = ['next_deposit_date', 'frequency'];
 
-    public function getNextDepositDateAttribute(){
-
-
+    public function getNextDepositDateAttribute()
+    {
         return now();
     }
 
+    public function getFrequencyAttribute()
+    {
+        if ($this->deposit_frequency == 1) {
+            return 'Daily';
+        }
+        if ($this->deposit_frequency == 7) {
+            return 'Weekily';
+        }
+        if ($this->deposit_frequency == 30) {
+            return 'Monthly';
+        }
+        return "Once";
+    }
+
+    public function card()
+    {
+        return $this->hasOne('App\Card', 'id', 'card_id') ?? collect(['last_four' => 'Add Card']);
+    }
 
     public function destinations()
     {
@@ -45,31 +62,5 @@ class Plan extends Model
     public function transactions()
     {
         return $this->hasMany('App\Transactions', 'plan_id', 'id');
-    }
-
-    public function status()
-    {
-        return $this->hasOne('App\TripStatusMessage', 'id', 'status_id');
-    }
-
-    public function getTripByStatus(int $id)
-    {
-        return $this->where('status_id', $id)->with('destinations', 'user', 'driver')->latest();
-    }
-
-    public function getBulkTripByStatus(array $ids)
-    {
-        return $this->whereIn('status_id', $ids)->with('destinations', 'user', 'driver')->latest();
-
-    }
-
-    public function reviews()
-    {
-        return $this->hasMany('App\TripDetail', 'trip_id', 'id');
-    }
-
-    public function stages()
-    {
-        return $this->hasMany('App\TripStage', 'trip_id', 'id');
     }
 }
