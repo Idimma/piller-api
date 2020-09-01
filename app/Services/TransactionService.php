@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Notification;
 use Log;
 
-class PlanService
+class TransactionService
 {
 
     private $location, $plan, $user, $planDetail, $plan_stage;
