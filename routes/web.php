@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/plan/edit/{id}', 'HomeController@editPlan');
     Route::get('/plan/{id}', 'HomeController@viewPlan');
     Route::post('/plan/{id}', 'UserPlanController@updatePlan');
+    Route::get('plan/fund/{id}/{amount}/{password}', 'UserPlanController@addFund');
 
     Route::post('/plan', 'UserPlanController@create');
     Route::get('/plan/close/{id}/{password}', 'UserPlanController@deletePlan');

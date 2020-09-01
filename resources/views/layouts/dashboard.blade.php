@@ -13,7 +13,6 @@
 @include('partial.sidebar-mobile')
 @include('partial.sidebar')
 @yield('content')
-{{--</div>--}}
 <script src="{{asset('assets/js/sidenav.js')}}"></script>
 @yield('scripts')
 </body>

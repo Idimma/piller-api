@@ -15,7 +15,10 @@
 
     @include('partial.sidebar-mobile')
     @include('partial.sidebar')
+
     <div class="main">
+        <div class="cover-overlay"></div>
+
         @include('partial.dash-header')
         @include('partials.add-card-modal')
 

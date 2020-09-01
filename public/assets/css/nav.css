@@ -345,7 +345,7 @@ td .boldtext{
         display: none;
     }
     .top {
-        position: fixed;
+        position: relative;
         top: 0;
         left: 0;
         z-index: 10;

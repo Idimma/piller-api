@@ -21,7 +21,7 @@
                         </div>
                         <div class="header-bar-option view">
                             <img src="{{asset('assets/images/add-purple.svg')}}" style="margin-bottom: 2px " alt="">
-                            <a class="header-bar-option-link" href="{{url('plan/fund', $plan)}}">
+                            <a class="header-bar-option-link" href="#" onclick="addFunds({{$plan->id}})">
                                 <p class="header-bar-option-text">Add Funds</p>
                             </a>
                         </div>
@@ -101,16 +101,18 @@
                                         Assigned Card
                                     </p>
                                     <div class="unit-value">
-                                        {{$plan->card_bank}}
+                                        {{$plan->card ? $plan->card->bank : ''}}
                                     </div>
                                 </div>
                             </div>
 
                         </div>
 
-                        <button class="btn">
-                            Cash Out
-                        </button>
+                        <a href="{{url('plan/withdraw', $plan)}}">
+                            <button class="btn">
+                                Cash Out
+                            </button>
+                        </a>
 
                         <p class="warning">
                             When you cash out Stokkpile buys the materials accumuated at a 40% percent discount rate.
@@ -253,6 +255,38 @@
     <script src="{{asset('assets/js/sliderAction.js')}}"></script>
     {{--    <script src="{{asset('assets/js/viewplan.js')}}"></script>--}}
     <script>
+
+        function addFunds(id) {
+            swal({
+                title: "Add Funds?",
+                text: 'Enter the amount you want to add',
+                content: "input",
+                icon: "success", button: {text: "Submit", closeModal: true,},
+            }).then((amount) => {
+                if (amount) {
+                    swal({
+                        text: 'Enter your password to authenticate your closure',
+                        content: "input",
+                        button: {text: "Submit", closeModal: false,},
+                    }).then((password) => {
+                        if (password) {
+                            return window.location.href = '{{url('plan/fund')}}/' + id + '/' + amount + '/' + password
+                        } else {
+                            return Toastify({
+                                text: 'Password box can not be empty',
+                                close: true, backgroundColor: 'red'
+                            }).showToast();
+                        }
+                    });
+                } else {
+                   return  Toastify({
+                        text: 'Amount box can not be empty',
+                        close: true, backgroundColor: 'red'
+                    }).showToast();
+                }
+            });
+        }
+
         function closePlan(id) {
             swal({
                 title: "Are you sure?",
@@ -268,8 +302,10 @@
                         if (password) {
                             window.location.href = '{{url('plan/close')}}/' + id + '/' + password
                         } else {
-                            Toastify({text: 'Password box can not be empty',
-                                close: true, backgroundColor: 'red'}).showToast();
+                            Toastify({
+                                text: 'Password box can not be empty',
+                                close: true, backgroundColor: 'red'
+                            }).showToast();
                         }
                     });
                 }

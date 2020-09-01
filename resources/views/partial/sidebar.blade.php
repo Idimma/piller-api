@@ -72,5 +72,5 @@
         </div>
     </div>
     <a class="logout__link" href="{{url('logout')}}"><img src="{{asset('assets/images/logout.svg')}}"> Logout</a>
-    <div class="cover-overlay"></div>
+{{--    <div class="cover-overlay"></div>--}}
 </div>

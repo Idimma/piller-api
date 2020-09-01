@@ -8,12 +8,12 @@
         @include('partial.dash-header')
         <div class="content">
             <div class="cards">
-                <div class="total-amount">
+                <div class="total-amount mobile-90">
                     <p class="header">Total Amount Deposited</p>
                     <span class="line-h"></span>
                     <p class="bold">N{{number_format($total, 2)}}</p>
                 </div>
-                <div class="materials-withdrawn">
+                <div class="materials-withdrawn mobile-90">
                     <p class="header">Materials Withdrawn</p>
                     <span class="line-h"></span>
                     <div class="grid">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="materials-left">
+                <div class="materials-left mobile-90">
                     <p class="header">Materials Left</p>
                     <span class="line-h"></span>
                     <div class="grid">
@@ -41,19 +41,19 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{url('no-plan')}}" class="add-plan">
+                <a href="{{url('no-plan')}}" class="add-plan mobile-90">
                     <button style="padding-bottom: 10px"><img src="{{asset('assets/images/ios-add.svg')}}"></button>
                     <p>Create a deposit plan</p>
                 </a>
             </div>
-            <div class="download-pdf">
+            <div class="download-pdf mobile-90">
                     <span>
                         RECENT TRANSACTIONS
                         <span class="line"></span>
                     </span>
                 <button>Download (PDF)</button>
             </div>
-            <div class="transactions">
+            <div class="transactions mobile-90">
                 <div class="transactions__header">
                     <p>Billing Date</p>
                     <p>Transaction ID</p>
@@ -68,7 +68,7 @@
                 @forelse ($user->transactions as $tran)
                     <div class="transaction {{$tran->type ==='credit' ? 'deposit' :'withdraw'}}">
                         <p><span class="label">Billing Date:</span> {{$tran->created_at}}</p>
-                        <p><span class="label">Transaction ID:</span> {{$tran->reference}}</p>
+                        <p class="mobile-overflow"><span class="label">Transaction ID:</span> {{$tran->reference}}</p>
                         <p><span class="label">Materials Withdrawn:</span> {!! $tran->type ==='debit'?
                         "<span>
                                 $tran->cement Bags of cement

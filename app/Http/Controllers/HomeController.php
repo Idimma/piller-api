@@ -41,23 +41,6 @@ class HomeController extends Controller
         ));
     }
 
-    public function materials()
-    {
-        $materials = Material::get();
-        return view('pages.admin.Materials', compact('materials'));
-    }
-
-    public function suppliers()
-    {
-        $suppliers = Supplier::get();
-        return view('pages.admin.suppliers', compact('suppliers'));
-    }
-
-    public function customers()
-    {
-        $users = User::get();
-        return view('pages.admin.customers', compact('users'));
-    }
 
     public function dashboard()
     {
@@ -189,8 +172,8 @@ class HomeController extends Controller
                 'plan_id' => $request->plan_id,
                 'completed' => true,
                 'reference' => uniqid('', true),
-                'block' => $request->block,
-                'cement' => $request->cement,
+                'block' => $request->block ?? 0,
+                'cement' => $request->cement ?? 0,
                 'amount' => 0,
             ]);
             return redirect('transactions')->with('success', 'Processing Transactions');

@@ -167,10 +167,57 @@ class UserPlanController extends Controller
         if (!(\Hash::check($password, $user->password))) {
             return back()->with('error', 'Enter your correct password');
         }
-
-
         $this->planService->delete($plan->id);
         return redirect('plans')->with('success', 'Successfully Closed Plan');
+    }
+
+
+    public function addFund($id, $amount, $password)
+    {
+        $user = getUser();
+        $plan = $user->plans->find($id);
+
+        if (!$plan) {
+            return back()->with('error', 'Plan does not exist');
+        }
+
+        if (!(\Hash::check($password, $user->password))) {
+            return back()->with('error', 'Enter your correct password');
+        }
+        \Validator::make(['amount' => $amount], [
+            'amount', 'required|number'
+        ]);
+
+        $amount *= 100;
+        $ref = Paystack::genTranxRef();
+
+        $trans = Transactions::create([
+            'user_id' => $plan->user_id, 'type' => 'credit',
+            'plan_id' => $plan->id, 'completed' => false, 'reference' => $ref,
+            'block' => 0, 'cement' => 0,
+            'amount' => $amount / 100,
+        ]);
+
+        \request()->merge(
+            [
+                'amount' => $amount, //amount in kobo
+                'email' => getUser()->email,
+                'order_id' => $plan->id,
+                'orderID' => $plan->id,
+                'quantity' => 1,
+                'reference' => $ref,
+                'callback_url' => url('/payment/callback'),
+                'metadata' => json_encode([
+                    'custom_fields' => [
+                        ['display_name' => "Transaction ID", "variable_name" => "transaction_id", "value" => $trans->id],
+                        ['display_name' => "Plan ID", "variable_name" => "plan_id", "value" => $plan->id]
+                    ],
+                    'transaction_id' => $trans->id,
+                    'plan_id' => $plan->id,
+                ])
+            ]
+        );
+        return Paystack::getAuthorizationUrl()->redirectNow();
 
 
     }

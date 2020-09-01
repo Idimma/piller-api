@@ -36,7 +36,7 @@
                 <nav class="navbar">
                     <ul class="nav-options">
                         <li class="nav-item">
-                            <a href="{{url('cooperate/login')}}" class="navlink">Cooperate </a>
+                            <a href="{{url('login')}}" class="navlink">Cooperate </a>
                         </li>
                         <li class="nav-item">
                             <a href="#howitworks" class="navlink">About</a>

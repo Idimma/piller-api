@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/nav.css')}}">
 @endsection
 @section('content')
+    <div class="cover-overlay"></div>
+
     <div class="main">
         @include('partial.dash-header')
         <a class="new-plan" href='{{url('no-plan')}}'>

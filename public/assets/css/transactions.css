@@ -277,6 +277,16 @@ button{
     background-color: rgba(216, 216, 216, 0.29)
 }
 
+@media(max-width: 580px){
+    .mobile-90{
+        width: 90% !important;
+        margin: 10px auto 0;
+    }
+    .mobile-overflow{
+        overflow-wrap: anywhere;
+    }
+}
+
 @media(max-width: 1300px){
     .main{
         width: 76%;
