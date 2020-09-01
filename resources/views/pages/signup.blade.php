@@ -11,47 +11,6 @@
 </head>
 <body>
 
-{{--<div class="mobile-nav">--}}
-{{--    <ul class="mobile-nav-list">--}}
-{{--        <li class="mobile-nav-item"><a href="#whysection" class="mobile-nav-link">Why Stokkpiler</a></li>--}}
-{{--        <li class="mobile-nav-item"><a href="#howitworks" class="mobile-nav-link">How it works</a></li>--}}
-{{--        <li class="mobile-nav-item"><a href="#contactus" class="mobile-nav-link">Contact us</a></li>--}}
-{{--        <li class="mobile-nav-item"><a href="{{url('login')}}" class="mobile-nav-link">Login</a></li>--}}
-{{--    </ul>--}}
-{{--</div>--}}
-{{--<div class="heading-top">--}}
-{{--    <div class="logo">--}}
-{{--        <a href="#">Stokkpile.com</a>--}}
-{{--    </div>--}}
-{{--    <div class="hamburger">--}}
-{{--        <span class="hamburger-child"></span>--}}
-{{--        <span class="hamburger-child"></span>--}}
-{{--        <span class="hamburger-child"></span>--}}
-{{--    </div>--}}
-{{--    <nav class="navbar">--}}
-{{--        <ul class="nav-options">--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="{{url('cooperate')}}" class="navlink">Cooperate </a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="#howitworks" class="navlink">About</a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="#whysection" class="navlink">How it works?</a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="#whysection" class="navlink">Why Stokkpiler</a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="{{url('login')}}" class="navlink">Login</a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a href="{{url('register')}}" class="navlink signup-btn btn">Sign Up</a>--}}
-{{--            </li>--}}
-{{--        </ul>--}}
-{{--    </nav>--}}
-{{--</div>--}}
-
 
 <div class="container">
 
@@ -75,7 +34,7 @@
                     <div class="input-div">
                         <input type="text" name="country" value="{{old('country')}}" id="country" placeholder="Country" disabled>
                         <button type="button" class="select__options-toggle-btn">
-                            <img src="../assets/images/arrow-down-grey.svg">
+                            <img src="{{asset('assets/images/arrow-down-grey.svg')}}">
                         </button>
                     </div>
                     <ul class="select-options programs" data-target="country">
@@ -83,16 +42,16 @@
                             <button type="button">Nigeria</button>
                         </li>
                         <li class="select-option">
-                            <button type="button">Nigeria</button>
+                            <button type="button">U.S</button>
                         </li>
                         <li class="select-option">
-                            <button type="button">Nigeria</button>
+                            <button type="button">Ghana</button>
                         </li>
                         <li class="select-option">
-                            <button type="button">Nigeria</button>
+                            <button type="button">England</button>
                         </li>
                         <li class="select-option">
-                            <button type="button">Nigeria</button>
+                            <button type="button">Kenya</button>
                         </li>
                     </ul>
                 </div>
