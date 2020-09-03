@@ -55,11 +55,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('/', 'AdminController@index');
         Route::get('/home', 'AdminController@index')->name('home');
+
         Route::get('/materials', 'AdminController@materials')->name('materials');
         Route::post('/materials', 'MaterialController@create');
-//    Route::post('/materials/{id}', 'MaterialController@update');
         Route::get('/material/delete/{id}', 'MaterialController@delete');
         Route::post('/materials/search', 'MaterialController@search');
+
+        Route::get('/building', 'AdminController@building')->name('building');
+        Route::post('/building', 'BuildingController@create');
+        Route::get('/building/delete/{id}', 'BuildingController@delete');
+        Route::post('/building/search', 'BuildingController@search');
 
         Route::post('profile/update', 'AdminController@updateProfile');
 

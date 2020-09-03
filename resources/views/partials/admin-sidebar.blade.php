@@ -12,6 +12,14 @@
                 </svg>
                 <a href="{{url('admin/home')}}">Home</a>
             </div>
+            <div class="link {{linkActive('admin/building')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">
+                    <path id="md-stats"
+                          d="M83.5,64h2.333V78H83.5ZM80,73.917h2.333V78H80Zm7-2.333h2.333V78H87Zm3.5-3.5h2.333V78H90.5Z"
+                          transform="translate(-80 -64)"></path>
+                </svg>
+            <a href="{{url('admin/building')}}">Building Types</a>
+            </div>
             <div class="link {{linkActive('admin/materials')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">
                     <path id="md-stats"
@@ -79,6 +87,14 @@
                 </g>
             </svg>
             <a href="{{url('admin/home')}}">Home</a>
+        </div>
+        <div class="link {{linkActive('admin/building')}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">
+                <path id="md-stats"
+                      d="M83.5,64h2.333V78H83.5ZM80,73.917h2.333V78H80Zm7-2.333h2.333V78H87Zm3.5-3.5h2.333V78H90.5Z"
+                      transform="translate(-80 -64)"></path>
+            </svg>
+            <a href="{{url('admin/building')}}">Building Type</a>
         </div>
         <div class="link {{linkActive('admin/materials')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="12.833" height="14" viewBox="0 0 12.833 14">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Building;
 use App\Http\Requests\{LocationRequest, UserRegistrationRequest};
 use App\Material;
 use App\Plan;
@@ -52,6 +53,11 @@ class AdminController extends Controller
     {
         $materials = Material::get();
         return view('pages.admin.Materials', compact('materials'));
+    }
+    public function building()
+    {
+        $buildings = Building::get();
+        return view('pages.admin.building', compact('buildings'));
     }
 
     public function suppliers()

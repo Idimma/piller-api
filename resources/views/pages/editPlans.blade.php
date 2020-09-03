@@ -12,7 +12,7 @@
              @include('partials.add-card-modal')
                 <form action="{{url('plan', $plan)}}" method="POST" class="NewPlanForm">
                     @csrf
-                    <h1 class="planName">Lagos House</h1>
+                    <h1 class="planName">{{$plan->plan_name}}</h1>
                     <div class="form-group-full">
                         <div class="form-group-header">
                             <h2>Plan Name <span class="Important">

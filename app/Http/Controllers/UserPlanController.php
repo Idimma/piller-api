@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Building;
 use App\Http\Requests\{PlanRequest, PlanReviewRequest, UpdatePlanRequest};
 use App\Plan;
 use App\Services\PlanService;
@@ -285,15 +286,16 @@ class UserPlanController extends Controller
     public function normal()
     {
         $plan_type = 'normal';
-        return view('pages.deposit-plan', compact('plan_type'));
+        $buildings = Building::get();
+        return view('pages.deposit-plan', compact('plan_type', 'buildings'));
 
     }
 
     public function oneTime()
     {
         $plan_type = 'one-time';
-        return view('pages.deposit-plan', compact('plan_type'));
-//        return view('pages.Add-one-time-deposit-plan');
+        $buildings = Building::get();
+        return view('pages.deposit-plan', compact('plan_type', 'buildings'));
     }
 
     public function createCard(Request $request)

@@ -84,9 +84,13 @@
                             </div>
                             <div class="options-holder">
                                 <ul>
-                                    <li class="drop-down-option">Building Type 1</li>
-                                    <li class="drop-down-option">Building Type 2</li>
-                                    <li class="drop-down-option">Building Type 3</li>
+                                    @forelse($buildings as $b)
+                                        <li class="drop-down-option">{{$b->title}}</li>
+                                    @empty
+                                        <li class="drop-down-option">2 Bedroom Bungalow</li>
+                                        <li class="drop-down-option">Student's Hostel Bungalow</li>
+                                        <li class="drop-down-option">2 Bedroom Double Flats</li>
+                                    @endforelse
                                 </ul>
                             </div>
                             <input type="text" class="hidden-input" name="building_type">
@@ -104,7 +108,8 @@
                         <div class="form-group-full">
                             <div class="form-group-header">
                                 <h2>Deposit frequency <span class="Important"><img
-                                                src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span></h2>
+                                                src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span>
+                                </h2>
                             </div>
                             <div class="special-dropdown">
                                 <div class="value-holder">
@@ -185,7 +190,8 @@
                             </div>
                             <div class="sliderContainerInner">
                                 <div class="sliderBackground"></div>
-                                <input name="block_percent" type="range" min="0" max="100" value=0 class="slider" id="myRange">
+                                <input name="block_percent" type="range" min="0" max="100" value=0 class="slider"
+                                       id="myRange">
                             </div>
                             <div class="bottom-slider">
                                 <span class="left">units of blocks</span>
@@ -227,28 +233,28 @@
                         <!-- add special type of drop down -->
                     </div>
 
-{{--                    <div class="form-group-full">--}}
-{{--                        <div class="form-group-header">--}}
-{{--                            <h2>Select Card <span class="Important"><img--}}
-{{--                                            src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span></h2>--}}
-{{--                        </div>--}}
-{{--                        <div class="special-dropdown">--}}
-{{--                            <div class="value-holder">--}}
-{{--                                <span class="Value-text">Add a card</span>--}}
+                    {{--                    <div class="form-group-full">--}}
+                    {{--                        <div class="form-group-header">--}}
+                    {{--                            <h2>Select Card <span class="Important"><img--}}
+                    {{--                                            src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span></h2>--}}
+                    {{--                        </div>--}}
+                    {{--                        <div class="special-dropdown">--}}
+                    {{--                            <div class="value-holder">--}}
+                    {{--                                <span class="Value-text">Add a card</span>--}}
 
-{{--                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">--}}
-{{--                            </div>--}}
-{{--                            <div class="options-holder">--}}
-{{--                                <ul>--}}
-{{--                                    <li class="drop-down-option Add-card-Trigger">Add a card</li>--}}
-{{--                                    <li class="drop-down-option">Business</li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                            <input type="text" class="hidden-input" name="Card">--}}
-{{--                            <p class="input-detail">Kindly choose a pre-registered Debit Card</p>--}}
-{{--                        </div>--}}
-{{--                        <!-- add special type of drop down -->--}}
-{{--                    </div>--}}
+                    {{--                                <img src="{{asset('assets/images/dropDown.svg')}}" alt="">--}}
+                    {{--                            </div>--}}
+                    {{--                            <div class="options-holder">--}}
+                    {{--                                <ul>--}}
+                    {{--                                    <li class="drop-down-option Add-card-Trigger">Add a card</li>--}}
+                    {{--                                    <li class="drop-down-option">Business</li>--}}
+                    {{--                                </ul>--}}
+                    {{--                            </div>--}}
+                    {{--                            <input type="text" class="hidden-input" name="Card">--}}
+                    {{--                            <p class="input-detail">Kindly choose a pre-registered Debit Card</p>--}}
+                    {{--                        </div>--}}
+                    {{--                        <!-- add special type of drop down -->--}}
+                    {{--                    </div>--}}
 
                     <div class="form-group-full">
                         <div class="form-group-header">
