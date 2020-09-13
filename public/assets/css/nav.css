@@ -147,9 +147,6 @@
     z-index: 1;
 }
 
-.clickable{
-    text-decoration: none;
-}
 #toggled-element tr {
     display: block;
     float: left;

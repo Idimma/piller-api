@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/plans', 'HomeController@tasks')->name('plans');
+    Route::get('/send-otp', 'HomeController@otp');
+    Route::post('/withdraw', 'HomeController@doWithdraw');
     Route::get('/transactions', 'HomeController@transactions')->name('transactions');
     Route::get('plan/withdraw/{id}', 'HomeController@withdraw')->name('withdraw');
     Route::post('plan/withdraw/{id}', 'HomeController@performWithdraw')->name('withdraw');
@@ -42,12 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/plan', 'UserPlanController@create');
     Route::get('/plan/close/{id}/{password}', 'UserPlanController@deletePlan');
-
-
     Route::get('/card/add', 'UserPlanController@createCard');
     Route::get('/card/remove/{id}', 'UserPlanController@removeCard');
-
-
     Route::get('/payment/callback', 'PaymentController@validateCardTransaction');
     Route::get('/payment/add-card', 'PaymentController@addCard');
 

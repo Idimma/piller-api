@@ -21,19 +21,7 @@
                             <th class="top-cell right-cell">Location</th>
                         </tr>
                         </thead>
-                        <tbody class="rows">
-                        <tr>
-                            <td class="left-cell">{{$plan->plan_name}}</td>
-                            <td>
-                                <p><span id="block"></span> Bags of Cement</p>
-                                <p><span id="cement"></span> Units of Blocks</p>
-                            </td>
-                            <td class="right-cell">
-                                <p id="address"></p>
-                            </td>
-                        </tr>
-
-
+                        <tbody id="location-display" class="rows">
 
                         </tbody>
 
@@ -56,33 +44,14 @@
 
 
             <div class="main-body">
-                <form id="myForm" action="{{url('plan/withdraw', $plan)}}" method="post" class="plans">
+                <form id="withdrawal-form" action="{{url('plan/withdraw', $plan)}}" method="post" class="plans">
 
                     @csrf
                     <div class="form-group-full">
                         <div class="form-group-header">
-                            <h2>Plan Name</h2>
-                            <img class="question-mark" src="" alt="">
+                            <h2>Plan Name: {{$plan->plan_name}}</h2>
                         </div>
                         <input name="plan_id" value="{{$plan->id}}" hidden/>
-                        <input value="{{$plan->plan_name}}" class="form-input-full"/>
-
-                        {{--                        <select class="form-input-full" name="plan_id">--}}
-                        {{--                            @foreach($user->plans as $plan)--}}
-                        {{--                                <option value="{{$plan->id}}">{{$plan->plan_name}}</option>--}}
-                        {{--                            @endforeach--}}
-                        {{--                        </select>--}}
-                        {{--                        @empty($user->plans)--}}
-                        {{--                            <p>You don't have any plan, add to continue <a href="{{url('no-plan')}}">New Plan</a></p>--}}
-                        {{--                        @endempty--}}
-                        {{--                        <input type="text" name="plan_id" hidden class="form-input-full">--}}
-                        {{--                        <div class="checkbox-div">--}}
-                        {{--                            <input type="checkbox" id="checkMe">--}}
-                        {{--                            <label for="checkMe">--}}
-                        {{--                                Click here to schedule for material's delivery to your construction site by our pick up--}}
-                        {{--                                agents--}}
-                        {{--                            </label>--}}
-                        {{--                        </div>--}}
                     </div>
                     <div class="form-group-full">
                         <div class="form-group-header">
@@ -90,52 +59,55 @@
                         </div>
                         <div class="select-group">
                             <div class="radio-group">
-                                <input type="radio" onchange="showAddLocation(this, true)" name="location_type" value="1" id="one">
+                                <input type="radio" onchange="showAddLocation(this, true)" name="location_type"
+                                       value="1" id="one">
                                 <label for="one">One Location</label>
                             </div>
 
-                            <div class="radio-group">
-                                <input type="radio" onchange="showAddLocation(this)" name="location_type" value="2"
+                            <div class="radio-group align-items-center d-flex">
+                              <label><input type="radio" onchange="showAddLocation(this)"
+                                       name="location_type" value="2"
                                        id="various">
-                                <label for="various">Various Locations</label>
+                                <label for="various py-0 px-2">Various Locations</label>
                             </div>
 
                         </div>
                     </div>
-                    <div class="form-group-full">
-                        <div class="form-group-header">
-                            <h2>Location</h2>
-                        </div>
-                        <div class="units-of">
-                            <div class="half-groups">
+
+                    <h2>Location(s) and Units to withdraw</h2>
+
+                    <div class="card bg-transparent mb-3">
+                        <input type="text" autocomplete="false"
+                               name="locations[]" aria-autocomplete="false"
+                               onchange="document.getElementById('address').innerHTML = this.value"
+                               class="form-input-full"
+                               placeholder="Type Your Address">
+
+                        <div class="d-flex mt-3 ">
+                            <div class="d-flex flex-column half-groups mr-2 flex-grow-1">
                                 <label for="blocks-unit">Unit of Blocks</label>
-                                <input type="number" name="block" onchange="document.getElementById('block').innerHTML = this.value" min="1" id="blocks-unit" class="half-input">
+                                <input type="number" name="block[]" class="half-input w-100">
                             </div>
 
-                            <div class="half-groups">
+                            <div class="d-flex flex-column ml-2 flex-grow-1">
                                 <label for="cement-unit">Bags of Cement</label>
-                                <input type="number" onchange="document.getElementById('cement').innerHTML = this.value"
-                                       min="1" id="cement-unit" name="cement" class="half-input">
+                                <input type="number" min="1" name="cement[]"
+                                       class="half-input w-100">
                             </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div id="location-list" hidden>
 
                         </div>
-                        <div id="location-list">
-                            <input type="text" autocomplete="false"
-                                   name="locations[]" onchange="document.getElementById('address').innerHTML = this.value"
-                                   class="form-input-full" placeholder="Type Your Address">
-                        </div>
 
-                        <a href="#" onclick="addLocation()" hidden id="add-location">
+                        <a href="#" class="mt-5" onclick="addLocation()" style="margin: 10px 2px" hidden
+                           id="add-location">
                             Add Another Address
                         </a>
                     </div>
-                    <div class="form-group-full">
-                        <div class="form-group-header">
-                            <h2>Password</h2>
-                        </div>
-                        <input type="password" name="password" class="form-input-full">
-                    </div>
-                    <button class="btn plans-submit">Submit</button>
+
+                    <button type="submit" class="btn mt-5">Submit</button>
                 </form>
             </div>
         </div>
@@ -144,53 +116,157 @@
 @stop
 
 @section('scripts')
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/withdraw.js')}}"></script>
+    <script src="{{asset('assets/js/sliderAction.js')}}"></script>
+    <script src="{{asset('assets/js/close-img.js')}}"></script>
     <script>
 
+        if (confirmBtn)
+            confirmBtn.addEventListener("click", () => {
+                Toastify({text: 'Sending Progress', close: true, backgroundColor: 'blue'}).showToast();
+                fetch('{{url('/send-otp')}}', formData).then(() => {
+                    Toastify({
+                        text: 'OTP Sent successfully',
+                        close: true, backgroundColor: 'green'
+                    }).showToast();
+                }).catch((error) => {
+                    Toastify({
+                        text: 'Could not send OTP',
+                        close: true, backgroundColor: 'red'
+                    }).showToast();
+                });
+                swal({
+                    text: 'Enter your OTP to authenticate your withdrawal',
+                    content: "input",
+                    button: {text: "Submit", closeModal: false,},
+                }).then((password) => {
+                    if (password) {
+                        const formData = new FormData(form);
+                        formData.append('otp', password);
+                        fetch('{{url('withdraw')}}', {method: 'post', mode: 'no-cors', body: formData}).then(() => {
+                            withdrawalTable.classList.add('hideConfirmation');
+                            successImg.classList.add('showSuccess');
+                            closeImg.classList.add('showSuccess')
+                        }).catch((error) => {
+                            withdrawalTable.classList.add('hideConfirmation')
+                            failedImg.classList.add('showSuccess')
+                            closeImg.classList.add('showSuccess')
+                        });
+                        {{--return window.location.href = '{{url('plan/fund')}}/' + id + '/' + amount + '/' + password--}}
+
+
+                    } else {
+                        return Toastify({
+                            text: 'OTP box can not be empty',
+                            close: true, backgroundColor: 'red'
+                        }).showToast();
+                    }
+                });
+
+
+            })
+
+
         function showAddLocation(param, state) {
-            if(state){
-                counter = 1;
-                renderLocation()
+            if (state) {
                 document.getElementById('add-location').hidden = true;
+                document.getElementById('location-list').hidden = true;
                 return
             }
             if (!param.checked) {
                 document.getElementById('add-location').hidden = true;
+                document.getElementById('location-list').hidden = true;
+
             }
             if (param.checked) {
                 document.getElementById('add-location').hidden = false;
-            }
-        }
+                document.getElementById('location-list').hidden = false;
 
-        let counter = 1;
-
-        function renderLocation() {
-            const list = document.getElementById('location-list');
-            list.innerHTML = '';
-            const loc = `<input type="text" autocomplete="false"
-                                  name="locations[]"
-                                   class="form-input-full" style="margin-top: 10px" placeholder="Type Your Address">`
-            for (let i = 0; i < counter; i++) {
-                list.innerHTML += loc;
             }
         }
 
         function addLocation() {
-            counter++;
-            renderLocation();
+            const list = document.getElementById('location-list');
+            const id = 'loc-' + Math.random().toString().replace('0.', '');
+            const view = `<div  id="${id}" class="card bg-transparent mb-3">
+                            <div class="d-flex">
+                                <input type="text" autocomplete="false"
+                                       name="locations[]" aria-autocomplete="false"
+                                    onchange="document.getElementById('address').innerHTML = this.value"
+                                   class="form-input-full"
+                                   style="flex: auto; margin-right: 5px"
+                                   placeholder="Type Your Address">
+                                   <img src="{{asset('assets/images/cancel.svg')}}"
+                                   onclick="removeLocation('${id}')" class="x-button" alt="">
+                            </div>
+
+                            <div class="d-flex mt-3 ">
+                                <div class="d-flex flex-column half-groups mr-2 flex-grow-1">
+                                    <label for="blocks-unit">Unit of Blocks</label>
+                                    <input type="number" name="block[]" min="1" class="half-input w-100">
+                                </div>
+
+                                <div class="d-flex flex-column ml-2 flex-grow-1">
+                                    <label for="cement-unit">Bags of Cement</label>
+                                    <input type="number" min="1" name="cement[]" class="half-input w-100">
+                                </div>
+                            </div>
+                        </div>
+`;
+            const div = document.createElement("div");
+            div.innerHTML = view;
+            list.appendChild(div);
         }
 
-        function removeLocation() {
-            counter -= 1;
-            if (counter < 1) counter = 1;
-            renderLocation();
+        function removeLocation(id) {
+            const view = document.getElementById(id);
+            view.parentNode.removeChild(view)
         }
 
+        const form = document.querySelector('#withdrawal-form');
+        let withdraws = [];
+
+
+        if (form) {
+            form.addEventListener("submit", function (e) {
+                e.preventDefault()
+                if (overlayer === null) {
+                    overlay.classList.add('show-form')
+                } else {
+                    overlayer.classList.add('show-form')
+                }
+                const loc_display = document.getElementById('location-display')
+
+                const formData = new FormData(form);
+                formData.getAll('locations[]').forEach((location, index) => {
+                    withdraws.push({
+                        location,
+                        block: formData.getAll('block[]')[index] || 0,
+                        cement: formData.getAll('cement[]')[index] || 0,
+                    });
+
+                    if (location) {
+                        const view = document.createElement("tr")
+                        view.innerHTML = `
+                            <td class="left-cell">{{$plan->plan_name}}</td>
+                            <td>
+                                <p><span>${formData.getAll('block[]')[index] || 0}</span> Bags of Cement</p>
+                                <p><span>${formData.getAll('cement[]')[index] || 0}</span> Units of Blocks</p>
+                            </td>
+                            <td class="right-cell">
+                                <p>${location}</p>
+                            </td>`;
+
+                        loc_display.appendChild(view)
+                    }
+                })
+
+            })
+        }
 
     </script>
-    <script src="{{asset('assets/js/withdraw.js')}}"></script>
-    <script src="{{asset('assets/js/sliderAction.js')}}"></script>
-    {{--    <script src="{{asset('assets/js/Required-inputs.js')}}"></script>--}}
-    <script src="{{asset('assets/js/close-img.js')}}"></script>
+
 
 @stop
 

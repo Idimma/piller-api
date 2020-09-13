@@ -19,7 +19,13 @@
     src: url('../fonts/Segoe UI/Segoe UI.woff')
 }
 
-
+.card{
+    padding: 15px 10px;
+    /*background-color: #fcfffc;*/
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 5px 1px 6px rgba(0, 0, 0, 0.16);
+}
 
 
 
@@ -52,7 +58,7 @@ body{
 
 .container{
     width: 100%;
-    height: 100%;      
+    height: 100%;
     /* display: flex;
     flex-direction: row;
     justify-content: center;
@@ -94,7 +100,7 @@ body{
 
 .confirmation-header h2{
     color: #000;
-    font-family:"Montserrat-SemiBold"; 
+    font-family:"Montserrat-SemiBold";
 }
 
 .underline{
@@ -142,8 +148,8 @@ table.popup tr{
     padding: 0.8rem 2rem;
     width: 100%;
     display: flex;
-    align-items: center; 
-    justify-content: space-between; 
+    align-items: center;
+    justify-content: space-between;
 }
 
 table.popup tr:nth-child(2n){
@@ -166,7 +172,7 @@ td{
 }
 .popup th{
     flex-basis: 33.3%;
-    text-align: left;   
+    text-align: left;
 }
 
 
@@ -245,7 +251,7 @@ td{
 .main-body{
     padding: 6rem 5rem;
     width: 100%;
-    
+
 }
 
 .plans{
@@ -342,7 +348,7 @@ form input{
     background-color: #502274;
     border: none;
     color: #FFFFFF;
-    padding: 1rem 3.5rem; 
+    padding: 1rem 3.5rem;
     border-radius: 3px;
     font-size: 1rem;
     font-family: 'Montserrat-Medium';
@@ -427,7 +433,7 @@ form input{
 
 .showFailed{
     opacity: 0;
-    display: block;  
+    display: block;
     animation: displayImage 1s ease 1s 1 forwards;
 }
 
@@ -556,7 +562,7 @@ h2.footer-heading{
     .main-body{
         padding: 8rem 6rem;
     }
-    
+
 }
 
 @media (max-width: 1000px){
@@ -682,7 +688,7 @@ h2.footer-heading{
         width: 70%;
     }
 
-    
+
     .plans{
         width: 100%;
     }

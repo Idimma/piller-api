@@ -12,11 +12,11 @@
     {{--    @section('links')--}}
     <style>
 
-        #toggled-element {
-            /*max-width: 250px;*/
-            /*overflow-x: scroll;*/
+        /*#toggled-element {*/
+        /*    !*max-width: 250px;*!*/
+        /*    !*overflow-x: scroll;*!*/
 
-        }
+        /*}*/
 
         #toggled-element tr {
             display: block;
@@ -45,7 +45,7 @@
 
         @media(max-width: 575px){
             #toggled-element{
-                display: none;
+                /*display: none;*/
             }
         }
         @media(min-width: 576px){
@@ -58,22 +58,24 @@
     </style>
     {{--    @stop--}}
 
-    <table  id="toggled-element">
-        <tbody>
-        <tr class="boldtext">
-            <td>Material</td>
-            <td>Local Rate</td>
-            <td>International Rate</td>
-        </tr>
-        @foreach(\App\Material::get() as $mat)
-            <tr>
-                <td style="font-weight: bold!important; font-size: 10px">{{$mat->name}}</td>
-                <td>&#8358 {{$mat->local}}</td>
-                <td>$ {{$mat->international}}</td>
+    <div>
+        <table  id="toggled-element">
+            <tbody>
+            <tr class="boldtext">
+                <td>Material</td>
+                <td>Local Rate</td>
+                <td>International Rate</td>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            @foreach(\App\Material::take(2)->get() as $mat)
+                <tr>
+                    <td style="font-weight: bold!important; font-size: 10px">{{$mat->name}}</td>
+                    <td>&#8358 {{$mat->local}}</td>
+                    <td>$ {{$mat->international}}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
     <div class="user-controls">
         <div class="notifications">

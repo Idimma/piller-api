@@ -12,7 +12,8 @@ class BuildingController extends Controller
     {
         Validator::validate($request->all(), [
             'title' => 'required|string|max:255',
-            'description' => 'required',
+            'cement' => 'required',
+            'block' => 'required',
         ]);
 
         if ($request->id) {
@@ -28,7 +29,8 @@ class BuildingController extends Controller
     {
         Validator::validate($request->all(), [
             'title' => 'required|string|max:255',
-            'description' => 'required',
+            'cement' => 'required',
+            'block' => 'required',
         ]);
         $material = Building::find($request->id);
         $material->update($request->all());

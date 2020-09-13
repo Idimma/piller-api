@@ -1,47 +1,73 @@
 const slideBar = (e) => {
 
     // main js
-    
+
     const AddPlan = document.querySelector(".add-plan-image");
     const depositOptions = document.querySelector(".choose-deposit-option")
     const AddcardTrigger = document.querySelectorAll(".Add-card-Trigger")
-    const overlay = document.querySelector(".overlay")
+    const overlay = document.querySelector(".overlay");
 
-    const EmptyDiv = document.querySelector(".empty-div")
+    const EmptyDiv = document.querySelector(".empty-div");
     const listOfSpecialInputs = document.querySelectorAll(".special-dropdown")
 
     if (AddPlan !== null) {
         AddPlan.addEventListener("click", (e) => {
             AddPlan.style.display = "none"
             depositOptions.classList.add("show-form-flex")
-        })    
+        })
     }
 
 
     AddcardTrigger.forEach(trigger => {
         trigger.addEventListener("click", (e) => {
             overlay.classList.add('show-form')
-        })  
+        })
     })
-
-
 
 
     listOfSpecialInputs.forEach((input) => {
         input.addEventListener("click", (e) => {
-            input.firstElementChild.firstElementChild.textContent =  e.target.textContent;
-            input.lastElementChild.value = e.target.textContent
-            console.log(input.lastElementChild)
+            input.firstElementChild.firstElementChild.textContent = e.target.textContent;
+            input.lastElementChild.value = e.target.textContent;
+
+            if (input.lastElementChild.name === 'country') {
+                const country = e.target.textContent.toLowerCase();
+                let money = '$';
+                if (country === 'nigeria') {
+                    money = '₦';
+                }
+                if (country === 'ghana') {
+                    money = '₵';
+                }
+                if (country === 'kenya') {
+                    money = 'KSh';
+                }
+                if (country === 'britain') {
+                    money = '£';
+                }
+                document.getElementById('currency').innerHTML = money
+            }
+
+            if (input.lastElementChild.name === 'building_type') {
+                getBuildingTypes().forEach(({title, description}) => {
+                    if (title === e.target.textContent) {
+                        document.getElementById('estimation').value = description;
+                        document.getElementById('estimation').text = description
+                    }
+                });
+
+            }
+
         })
     })
-
 
 
     function listener(elm, listeners, cb) {
         let events = listeners.split(" ").filter(a => a).join("").split(",")
         events.forEach(event => {
-            if(elm !== null){
-            elm.addEventListener(event, cb)}
+            if (elm !== null) {
+                elm.addEventListener(event, cb)
+            }
         })
     }
 
@@ -56,13 +82,10 @@ const slideBar = (e) => {
         updateSlider(sliderValue)
     })
 
-   
-
-
 
     const updateSlider = (val) => {
         document.documentElement.style.setProperty("--colorMax", `${val}%`)
-        currentPercent.textContent = `${val}%` 
+        currentPercent.textContent = `${val}%`
         leftOver.textContent = `${100 - val}%`
     }
 }

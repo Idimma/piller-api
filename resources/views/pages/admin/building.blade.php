@@ -37,11 +37,27 @@
                         </div>
                         <div class="form-group-full">
                             <div class="form-group-header">
-                                <h2>Building Type Description</h2>
+                                <h2>Building Type Estimation</h2>
                             </div>
 
-                            <textarea id="description" name="description" rows="5"
-                                      class="form-input-full"></textarea>
+                            {{--                            <textarea id="description" name="description" rows="5"--}}
+                            {{--                                      class="form-input-full"></textarea>--}}
+
+
+                            <div class="units-of">
+                                <div class="half-groups">
+                                    <label for="blocks-unit">Unit of Blocks</label>
+                                    <input type="number" min="1" name="block" id="block"
+                                           class="half-input">
+                                </div>
+
+                                <div class="half-groups">
+                                    <label for="cement-unit">Bags of Cement</label>
+                                    <input type="number" min="1" name="cement" id="cement"
+                                           class="half-input">
+                                </div>
+
+                            </div>
                         </div>
 
                         <div>
@@ -74,7 +90,7 @@
                 <div class="plan-Header">
                     <div class="detail-container number-col">S/N</div>
                     <div class="detail-container">Title</div>
-                    <div class="detail-container">Description</div>
+                    <div class="detail-container">Estimate</div>
                     <div class="detail-container-actions"></div>
                 </div>
                 @forelse($buildings as $mat)
@@ -88,7 +104,7 @@
                             <span class="response">{{$mat->title}}</span>
                         </div>
                         <div class="detail-container">
-                            <p class="tag">Description: </p>
+                            <p class="tag">Estimate: </p>
                             <span class="response">{{$mat->description}}</span>
                         </div>
                         <div class="detail-container-actions">
@@ -127,7 +143,8 @@
 
     function editBuilding(object) {
         document.getElementById('title').value = object.title;
-        document.getElementById('description').value = object.description;
+        document.getElementById('cement').value = object.cement;
+        document.getElementById('block').value = object.block;
         document.getElementById('id').value = object.id;
         document.getElementById('submit').innerHTML = 'Submit';
         addBtn.click()

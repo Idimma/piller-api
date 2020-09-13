@@ -8,8 +8,8 @@ use App\Transactions;
 use App\User;
 use App\Withdrawal;
 use Hash;
-use Validator;
 use Request;
+use Validator;
 
 class HomeController extends Controller
 {
@@ -39,6 +39,71 @@ class HomeController extends Controller
         return view('pages.home', compact('users', 'userCount',
             'materials', 'suppliers'
         ));
+    }
+
+    public function otp()
+    {
+        try {
+            $user = auth()->user();
+            $user->otp = rand(700007, 999999);
+            $user->save();
+            //TODO send sms
+            //TODO send mail
+
+
+            return request()->json(['message', 'sent']);
+        } catch (\Exception $e) {
+            return request()->json(['message', 'error'], 404);
+        }
+    }
+
+    public function doWithdraw(Request $request)
+    {
+        try {
+//            $user = auth()->user();
+//            $withdraw = Withdrawal::create($request->all());
+//
+////            $request = request();
+            $user = getUser();
+            $plan = $user->plans->find($request->plan_id);
+            if ($plan) {
+                if (Hash::check($request->password, $user->password) === false) {
+                    return back()->with('error', 'Enter your current password correctly ');
+                }
+                $plan->block_target -= $request->block;
+                $plan->cement_target -= $request->cement;
+
+                $plan->save();
+                $withdrawal = Withdrawal::create([
+                    'user_id' => $user->id,
+                    'plan_id' => $plan->id,
+                    'block_unit' => $request->block ?? 0,
+                    'cement_unit' => $request->cement ?? 0,
+                    'location_type' => $request->location_type,
+                    'address' => $request->locations
+                ]);
+
+                $transaction = Transactions::create([
+                    'user_id' => $user->id,
+                    'type' => 'debit',
+                    'plan_id' => $request->plan_id,
+                    'completed' => true,
+                    'reference' => uniqid('', true),
+                    'block' => $request->block ?? 0,
+                    'cement' => $request->cement ?? 0,
+                    'amount' => 0,
+                ]);
+                return request()->json(['message', 'success']);
+
+//                return redirect('transactions')->with('success', 'Processing Transactions');
+                //  return view('pages.withdraw', compact('user', 'plan'));
+            }
+            return request()->json(['message', 'error'], 404);
+
+            //TODO send mail
+        } catch (Exception $e) {
+            return request()->json(['message', 'error'], 500);
+        }
     }
 
 
@@ -160,7 +225,7 @@ class HomeController extends Controller
             $withdrawal = Withdrawal::create([
                 'user_id' => $user->id,
                 'plan_id' => $plan->id,
-                'block_unit' => $request->block  ?? 0,
+                'block_unit' => $request->block ?? 0,
                 'cement_unit' => $request->cement ?? 0,
                 'location_type' => $request->location_type,
                 'address' => $request->locations[0]

@@ -76,3 +76,4 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::post('/', 'ChatController@sendMessage');
     });
 });
+

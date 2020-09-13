@@ -13,9 +13,9 @@
         </a>
         <div class="cards">
             @forelse ($user->plans->take(4) as $plan)
-                <a class="clickable" href="{{url('plan',$plan)}}">
+                <a style="text-decoration: none; text-transform: none" href="{{url('plan',$plan)}}">
                     @php
-                        $colors = ['brown','pink', 'purple', 'orange', 'blue', 'yellow', 'green'];
+                        $colors = ['brown','pink', 'orange', 'blue', 'green'];
                     @endphp
                     <div class="card {{array_random($colors)}}">
                         <div class="header">

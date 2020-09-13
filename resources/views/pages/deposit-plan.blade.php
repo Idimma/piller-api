@@ -101,7 +101,7 @@
                         <div class="form-group-header">
                             <h2>Estimation of materials needed</h2>
                         </div>
-                        <input type="text" class="form-input-full" name="material_estimation"
+                        <input disabled type="text" class="form-input-full" id="estimation" name="material_estimation"
                                placeholder="1000 Units of Blocks, 100 Bags of Cement">
                     </div>
                     @if($plan_type === 'normal')
@@ -224,12 +224,16 @@
                                     <li class="drop-down-option">Nigeria</li>
                                     <li class="drop-down-option">Ghana</li>
                                     <li class="drop-down-option">Kenya</li>
-
+                                    <li class="drop-down-option">US</li>
+                                    <li class="drop-down-option">Britain</li>
+                                    <li class="drop-down-option">Others</li>
                                 </ul>
                             </div>
-                            <input type="text" class="hidden-input" value="Nigeria" name="country">
-                            <p class="input-detail">Kindly choose a Stokkpile country</p>
+                            <input type="text" class="hidden-input" onchange="selectCurrency(this)" value="Nigeria"
+                                   name="country">
+
                         </div>
+                        <p class="input-detail">Kindly choose a Stokkpile country</p>
                         <!-- add special type of drop down -->
                     </div>
 
@@ -262,10 +266,11 @@
                                             src="{{asset('assets/images/Reason for saving.svg')}}" alt=""></span></h2>
                         </div>
                         <div class="wierdDiv">
-                            <div class="currencySymbol">
-                                $
+                            <div id="currency" class="currencySymbol text-center">
+                                {{currency()}}
                             </div>
-                            <input type="text" name="deposit" class="form-input-full wierdInput">
+                            <input type="number" name="deposit" style="flex: auto"
+                                   class="form-input-full  right-radius wierdInput">
                         </div>
                         <p class="input-detail">The amount you want to deposit according to your deposit frequency</p>
                     </div>
@@ -278,11 +283,16 @@
     </main>
 @stop
 @section('scripts')
+    <script>
+        function getBuildingTypes() {
+            return  {!! \App\Building::get()->toJson() !!}
+        }
+    </script>
     <script src="{{asset('assets/js/no-plans.js')}}"></script>
     <script src="{{asset('assets/js/sliderAction.js')}}"></script>
     <script src="{{asset('assets/js/Required-inputs.js')}}"></script>
-    <script src="{{asset('assets/js/Addcard.js')}}"></script>
     <script src="{{asset('assets/js/close-img.js')}}"></script>
+
 @stop
 
 

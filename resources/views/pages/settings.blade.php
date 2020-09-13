@@ -49,8 +49,10 @@
                 </p>
                 <div class="image-box">
                     <div class="current-image">
-                        <img src="{{auth()->user()->avatar_url}}"
-                             height="80" width="80" style="border-radius: 80px; border: 1px #502274 solid"
+                        <img src="{{auth()->user()->avatar_url}}" id="avatar"
+                             height="80" width="80"
+                             style="border-radius: 80px; cursor: pointer; border: 1px #502274 solid"
+                             onclick="document.querySelector('.add-profile-picture').click()"
                              class="profile-picture">
                         <button class="change-image" onclick="document.querySelector('.add-profile-picture').click()">
                             <img src="{{asset('assets/images/change-prof-picture.svg')}}">
@@ -61,7 +63,8 @@
                         </span>
                 </div>
                 <form method="post" enctype="multipart/form-data" action="{{url('profile/update')}}">
-                    <input type="file" style="display:none" name="avatar" class="add-profile-picture">
+                    <input type="file" style="display:none" name="avatar" onchange="readURL(this);"
+                           class="add-profile-picture">
                     <div class="form-group">
                         <label for="name">First Name</label>
                         <input type="text" value="{{auth()->user()->first_name}}" id="first_name" name="first_name"
@@ -112,7 +115,20 @@
     </div>
 @stop
 @section('scripts')
-    <script src="{{asset('assets/js/sidenav.js')}}"></script>
     <script src="{{asset('assets/js/settings.js')}}"></script>
-{{--    <script src="{{asset('assets/js/Required-inputs.js')}}"></script>--}}
+    <script>
+        function readURL(input) {
+            const avatar = document.getElementById('avatar');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    avatar.setAttribute('src', e.target.result)
+                };
+                reader.readAsDataURL(input.files[0]);
+            }else{
+                avatar.setAttribute('src', "{{auth()->user()->avatar_url}}");
+            }
+        }
+    </script>
+    {{--    <script src="{{asset('assets/js/Required-inputs.js')}}"></script>--}}
 @stop

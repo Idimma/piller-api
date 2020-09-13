@@ -64,3 +64,25 @@ function getDistanceFromLatLon(float $lat1, float $lon1, float $lat2, float $lon
 
     return ($miles * 1.609344);
 }
+
+function currency($country = '')
+{
+
+    if (!auth()->check()) {
+        return '$';
+    }
+    if ($country === '') {
+        $country = strtolower(auth()->user()->country);
+    }
+    if ($country === 'nigeria') {
+        return '₦';
+    }
+    if ($country === 'ghana') {
+        return '₵';
+    }
+    if ($country === 'kenya') {
+        return 'KSh';
+    }
+    return '$';
+
+}

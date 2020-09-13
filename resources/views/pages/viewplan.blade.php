@@ -110,13 +110,13 @@
 
                         <a href="{{url('plan/withdraw', $plan)}}">
                             <button class="btn">
-                                Cash Out
+                                Withdraw from Material
                             </button>
                         </a>
 
-                        <p class="warning">
-                            When you cash out Stokkpile buys the materials accumuated at a 40% percent discount rate.
-                        </p>
+{{--                        <p class="warning">--}}
+{{--                            When you cash out Stokkpile buys the materials accumuated at a 40% percent discount rate.--}}
+{{--                        </p>--}}
                     </div>
 
                     <div class="plans-body list">
