@@ -12,7 +12,7 @@
             New Plans
         </a>
         <div class="cards">
-            @forelse ($user->plans->take(4) as $plan)
+            @forelse ($user->plans->take(4)  as $plan)
                 <a style="text-decoration: none; text-transform: none" href="{{url('plan',$plan)}}">
                     @php
                         $colors = ['brown','pink', 'orange', 'blue', 'green'];
@@ -45,9 +45,9 @@
                     </div>
                 </a>
             @empty
-                <div class="card">
-                    <div class="header">Empty Plan</div>
-                    <div class="content">
+                <div class="card p-3 pb-3" style="color: black; height: 1">
+                    <h3 >Empty Plan</h3>
+                    <div >
                         NO PLAN COULD BE FOUND
                     </div>
                 </div>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/settings.css')}}">
 </head>
 <body>
-<div class="container">
+<div class="">
     @include('partials.admin-sidebar')
     <div class="main">
         @include('partials.admin-topbar', ['type'=> 'admin'])

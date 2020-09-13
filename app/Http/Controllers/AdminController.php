@@ -165,7 +165,7 @@ class AdminController extends Controller
 
     public function settings()
     {
-        return view('pages.settings');
+        return view('pages.admin.settings');
     }
 
     public function settingsPassword()

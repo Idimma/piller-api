@@ -8,12 +8,11 @@
     </title>
     @include('partial.toastAlert')
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-
     <link rel="stylesheet" href="{{asset('assets/css/dashboard-admin.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/nav.css')}}">
 </head>
 <body>
-<div class="container">
+<div class="    ">
     @include('partials.admin-sidebar')
     <div class="main">
         @include('partials.admin-topbar')
