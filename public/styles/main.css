@@ -1,0 +1,483 @@
+/*!*************** U8 Font *****************!*/
+/*@font-face {*/
+/*    font-family: "U8-Bold";*/
+/*    src: url("https://www.piggyvest.com/fonts/U8-Bold/U8-Bold.ttf") format("opentype");*/
+/*}*/
+
+/*!*************** U8 Font *****************!*/
+
+/*@font-face {*/
+/*    font-family: "CircularStd";*/
+/*    src: url("https://www.piggyvest.com/fonts/CircularStd-Book.otf") format("opentype");*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: "CircularStd";*/
+/*    font-style: italic;*/
+/*    src: url("https://www.piggyvest.com/fonts/CircularStd-BookItalic.otf") format("opentype");*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: "CircularStd";*/
+/*    font-weight: bold;*/
+/*    src: url("https://www.piggyvest.com/fonts/CircularStd-Bold.otf") format("opentype");*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: "centurygothicbold";*/
+/*    font-weight: bold;*/
+/*    src: url("https://www.piggyvest.com/fonts/centurygothicbold.ttf") format("opentype");*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: "CircularStd";*/
+/*    font-weight: bold;*/
+/*    src: url("https://www.piggyvest.com/fonts/CircularStd-Bold.otf") format("opentype");*/
+/*}*/
+
+
+
+body {
+    /*font-family: 'CircularStd', sans-serif;*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* font-family: 'centurygothicbold', 'U8', sans-serif; */
+    /*font-family: 'U8-Bold', sans-serif;*/
+}
+
+.story .card {
+    border-radius: 25px;
+}
+
+/*
+@font-face{
+    font-family:poppins;
+    font-style:normal;
+    font-weight:300;
+    src:local('Poppins Light'),local('Poppins-Light'),url(https://www.piggyvest.com/fonts/poppins300.woff2) format('woff2');
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215
+    }
+@font-face{
+    font-family:poppins;
+    font-style:normal;
+    font-weight:400;
+    src:local('Poppins Regular'),local('Poppins-Regular'),url(https://www.piggyvest.com/fonts/poppins400.woff2) format('woff2');
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215;
+}
+@font-face{
+    font-family:poppins;
+    font-style:normal;
+    font-weight:700;
+    src:local('Poppins SemiBold'),local('Poppins-SemiBold'),url(https://www.piggyvest.com/fonts/poppins600.woff2) format('woff2');
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215;
+}
+
+body{
+    font-family:poppins,sans-serif,Arial,Helvetica,sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family:poppins,sans-serif,Arial,Helvetica,sans-serif;
+}
+*/
+/*
+body {
+    font-family: 'Varela Round', sans-serif;
+}
+*/
+.inputcontrol {
+    color: #444;
+}
+
+
+
+.container {
+    margin: 0 auto;
+    max-width: 1310px;
+    padding: 40px 0;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+.minicontainer {
+    max-width: 980px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        font-size: 12px;
+    }
+}
+
+/*
+.container {
+    width: 100%;
+    max-width: 1310px;
+}
+
+
+.minicontainer{
+    max-width: 980px;
+}
+*/
+.scrolled .logo-alt,
+.alt-nav .logo-alt {
+    max-width: 180px;
+}
+
+.bluecolor,
+.content h1,
+.header h1,
+h2 {
+    color: #083E9E !important;
+}
+
+@media (max-width: 600px) {
+    .page-content section {
+        padding: 10px;
+    }
+
+    .page-content .card {
+        padding: 10px;
+    }
+}
+
+.scrolled,
+.alt-nav,
+.navwhite {
+    box-shadow: none;
+}
+
+.nav-icon .line1,
+.white-nav-icon .line1,
+.blue-nav-icon .line1,
+.nav-icon .line2,
+.white-nav-icon .line2,
+.blue-nav-icon .line2,
+.nav-icon .line3,
+.white-nav-icon .line3,
+.blue-nav-icon .line3,
+.nav-icon .signin-modal .closeslide .line2,
+.signin-modal .closeslide .nav-icon .line2,
+.white-nav-icon .signin-modal .closeslide .line2,
+.signin-modal .closeslide .white-nav-icon .line2,
+.blue-nav-icon .signin-modal .closeslide .line2,
+.signin-modal .closeslide .blue-nav-icon .line2,
+.nav-icon .register .closeslide .line2,
+.register .closeslide .nav-icon .line2,
+.white-nav-icon .register .closeslide .line2,
+.register .closeslide .white-nav-icon .line2,
+.blue-nav-icon .register .closeslide .line2,
+.register .closeslide .blue-nav-icon .line2 {
+    background: #144499 !important;
+}
+
+.mainheroholder {
+    background-image: url(https://storage.googleapis.com/piggybankservice.appspot.com/statics/woman-header-min.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+    padding-bottom: 130px;
+}
+
+.main-header {
+    width: 100%;
+    padding-bottom: 0px;
+    background: none;
+    background-color: none;
+    background-blend-mode: multiply;
+    -webkit-clip-path: none;
+    clip-path: none;
+    background-size: cover;
+    color: #144499;
+    position: relative;
+    overflow: hidden;
+    z-index: 500;
+}
+
+
+
+.minicontainer {
+    max-width: 980px;
+}
+
+
+.bluecolor {
+    color: #144499;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.ashcolor {
+    color: #444;
+}
+
+.intro-text h1 {
+    font-size: 50px;
+    line-height: 55px;
+    letter-spacing: -2px;
+}
+
+.cards-icon {
+    height: 25px;
+    display: block;
+    margin-top: 50px;
+}
+
+
+.grayback {
+    background: #fbfbfb;
+}
+
+
+.rightimage {
+    position: absolute;
+    height: calc(644.67px);
+    right: -20px;
+    top: 100px;
+    text-align: center;
+    -webkit-transform: rotate(10deg);
+    transform: rotate(0deg);
+    transition: all 300ms ease-in-out;
+    z-index: 600;
+}
+
+
+.rightimage img {
+    width: 100%;
+}
+
+
+.securealertbox {
+    display: table;
+    text-align: left;
+    max-width: 700px;
+}
+
+
+.securealertbox>div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.securealertbox>.imagepart {
+    width: 100px;
+}
+
+
+.securealertbox>.imagepart>img {
+    width: 100%;
+}
+
+
+.securealertbox>.textpart {
+    padding-left: 30px;
+}
+
+.securealertbox .textheader {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.securealertbox .textinfo {
+    font-size: 14px;
+}
+
+
+.why_p_box {
+    display: table;
+    margin: 60px 0px;
+}
+
+
+.why_p_box>div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.why_p_box>div {
+    display: table-cell;
+}
+
+
+.why_p_box>div:first-child {
+    width: 70%;
+    padding-right: 30px;
+}
+
+
+.why_p_box>div:last-child img {
+    width: 100%;
+}
+
+.pointspart {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.pheader {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.pheader .fa {
+    margin-right: 10px;
+}
+
+.pinfo {
+    font-size: 14px;
+}
+
+.piconenabled .pinfo {
+    margin-left: 34px;
+}
+
+.piconenabled .pheader .fa {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.feature-text {
+    margin-top: 15%;
+}
+
+.featuremonth-text {
+    margin-top: 50px;
+}
+
+.feature-text h2 {
+    font-size: 30px;
+}
+
+.feature-text p {
+    font-size: 16px;
+    line-height: 30px;
+    color: #444;
+}
+
+.feature .feature-image img {
+    width: 100%;
+    box-shadow: none;
+}
+
+.howtostart h3 {
+    font-size: 20px;
+}
+
+.stories {
+    background-image: none;
+}
+
+.spaceout {
+    padding: 100px 0px;
+}
+
+.partners_image {
+    width: 90%;
+    max-width: 900px;
+}
+
+._outfeature_box {
+    margin-bottom: 10px;
+    padding: 30px 30px;
+    border-radius: 10px;
+    text-align: left;
+    background-position: 160% 180%;
+    background-repeat: no-repeat;
+    background-size: 60%;
+}
+
+._outfeature_box img {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+._outfeature_box h3 {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+._outfeature_box p {
+    font-size: 14px;
+    line-height: 22px;
+    color: #616161;
+}
+
+.savingsfeature {
+    border: 1px solid #e3ecff;
+}
+
+.investfeature {
+    border: 1px solid #eadfff;
+}
+
+.investfeature h3 {
+    color: #674498;
+}
+
+.investcontent h1 {
+    color: #674498;
+}
+
+
+@media (max-width: 600px) {
+    ._mobilecenter {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+
+    .mainheroholder {
+        background-image: none;
+        padding-bottom: 50px;
+        text-align: left;
+    }
+
+
+    .intro-text h1 {
+        font-size: 30px;
+        line-height: 48px;
+    }
+
+    .feature-text h2 {
+        font-size: 18px;
+    }
+
+    .feature-text p {
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .securealertbox .textheader {
+        font-size: 16px;
+        margin-bottom: 3px;
+    }
+
+    .securealertbox .textinfo {
+        font-size: 11px;
+        line-height: 18px;
+    }
+
+
+    .feature .feature-text {
+        text-align: left;
+    }
+
+
+    .featuremonth-text {
+        text-align: center !important;
+    }
+
+}

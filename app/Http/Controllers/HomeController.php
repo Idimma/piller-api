@@ -77,8 +77,8 @@ class HomeController extends Controller
                 $withdrawal = Withdrawal::create([
                     'user_id' => $user->id,
                     'plan_id' => $plan->id,
-                    'block_unit' => $request->block ?? 0,
-                    'cement_unit' => $request->cement ?? 0,
+                    'blocks' => $request->block ?? 0,
+                    'cements' => $request->cement ?? 0,
                     'location_type' => $request->location_type,
                     'address' => $request->locations
                 ]);
